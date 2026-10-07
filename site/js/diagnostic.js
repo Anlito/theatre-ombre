@@ -2,6 +2,7 @@
 import { SerialLink, WebSerialTransport, serialSupport } from './serial.js';
 import { PINS } from './protocol.js';
 import { icon, hydrateIcons } from './icons.js';
+import { setupFirmwareDialog } from './ui/firmware.js';
 
 hydrateIcons();
 
@@ -135,6 +136,9 @@ link.subscribe(({ state, error }) => {
   if (error) addCheck('carte', false, 'Carte Arduino', error);
 });
 
+// Carte sans le bon programme : on propose de l'installer depuis cette page.
+const firmware = setupFirmwareDialog({ link, showMessage: (t) => ($('board-msg').textContent = t) });
+
 $('btn-connect').addEventListener('click', async () => {
   if (link.connected) return link.disconnect();
   if (!serial.ok) return addCheck('carte', false, 'Carte Arduino', serial.error);
@@ -144,8 +148,9 @@ $('btn-connect').addEventListener('click', async () => {
       "Aucune carte choisie. Si la liste était vide : câble USB, ou pilote CH340 manquant sur ce poste (droits administrateur nécessaires pour l'installer).");
   }
   $('board-msg').textContent = 'Connexion… (2 secondes)';
-  await link.connect(new WebSerialTransport(port));
+  const r = await link.connect(new WebSerialTransport(port));
   $('board-msg').textContent = '';
+  if (r.needsFirmware) firmware.offer(port);
 });
 
 async function order(promise) {

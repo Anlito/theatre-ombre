@@ -22,6 +22,7 @@ import { setupCablage } from './ui/cablage.js';
 import { hydrateIcons, icon } from './icons.js';
 import { LedColors } from './led-colors.js';
 import { setupGuide } from './ui/guide.js';
+import { setupFirmwareDialog } from './ui/firmware.js';
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -89,6 +90,8 @@ link.subscribe(({ state, error }) => {
 
 // --- Connexion à la carte : clic sur la pastille -> rappel du câblage -> choix du port --------
 const connectDialog = $('connect-dialog');
+// Carte sans le bon programme (autre projet) : on propose de l'installer.
+const firmware = setupFirmwareDialog({ link, showMessage, hideMessage });
 function openConnect() {
   const connected = link.connected;
   $('connect-title').textContent = connected ? 'Carte connectée' : 'Connecter la carte';
@@ -122,7 +125,8 @@ $('btn-connect').addEventListener('click', async () => {
     return;
   }
   showMessage('Connexion à la carte… (2 secondes, la carte redémarre)', 'info');
-  await link.connect(new WebSerialTransport(port));
+  const r = await link.connect(new WebSerialTransport(port));
+  if (r.needsFirmware) firmware.offer(port);
 });
 
 // --- Tout éteindre ------------------------------------------------------------------

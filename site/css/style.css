@@ -832,3 +832,10 @@ body.is-start .guide-btn { display: none; }
 .guide-step[data-state="en-cours"] { padding: 6px; }
 .guide-step[data-state="en-cours"] .guide-title { font-size: 1rem; }
 .team-names { max-width: 200px; }
+
+/* --- Installation du programme sur la carte ----------------------------------------- */
+.firmware-progress { height: 12px; margin: 12px 0 4px; border-radius: 6px; }
+.firmware-progress > span { width: 0; transition: width .2s; }
+.firmware-status { min-height: 1.5em; margin: 8px 0 0; font-weight: 600; }
+.firmware-status[data-kind="error"] { color: var(--rouge); }
+.firmware-status[data-kind="ok"] { color: var(--vert); }

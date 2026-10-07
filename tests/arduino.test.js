@@ -5,13 +5,14 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import * as Blockly from 'blockly';
 import { defineBlocks } from '../site/js/blocks/definitions.js';
 import { generateArduino } from '../site/js/blocks/arduino.js';
 import { PROGRAMMES, CHARACTERS, SOUNDS } from './programmes-types.js';
+import { parseHex } from '../site/js/flasher.js';
 
 defineBlocks(Blockly, { characters: () => CHARACTERS, sounds: () => SOUNDS, ledPins: () => [9, 10, 11, 12] });
 const ctx = {
@@ -125,6 +126,12 @@ for (const fqbn of ['arduino:avr:uno', 'arduino:avr:nano']) {
   });
 }
 
-test('le programme fixe theatre_ombre.ino compile (Uno)', { ...compileOpts, timeout: 300_000 }, () => {
-  execFileSync(cli, ['compile', '--fqbn', 'arduino:avr:uno', join('arduino', 'theatre_ombre')], { stdio: 'pipe' });
+// Le site installe lui-même ce programme sur la carte (site/firmware/theatre_ombre.hex) :
+// le fichier doit correspondre au .ino actuel.
+test('le programme fixe theatre_ombre.ino compile (Uno) et le .hex du site est à jour', { ...compileOpts, timeout: 300_000 }, () => {
+  const out = mkdtempSync(join(tmpdir(), 'theatre-fw-'));
+  execFileSync(cli, ['compile', '--fqbn', 'arduino:avr:uno', '--output-dir', out, join('arduino', 'theatre_ombre')], { stdio: 'pipe' });
+  const fresh = parseHex(readFileSync(join(out, 'theatre_ombre.ino.hex'), 'utf8'));
+  const site = parseHex(readFileSync(join('site', 'firmware', 'theatre_ombre.hex'), 'utf8'));
+  assert.deepEqual([...site], [...fresh], 'site/firmware/theatre_ombre.hex est périmé : lancer « npm run firmware »');
 });

@@ -46,6 +46,15 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 - [ ] Bouton **Tout éteindre** : LED éteintes, son coupé, programme arrêté.
 - [ ] Bloc « attendre 10 secondes » en cours → **Stop** : la suite ne s'exécute pas.
 
+## 5 bis. Carte venant d'un autre projet (installation depuis le site)
+
+- [ ] Téléverser un autre programme sur la carte (ex. *Fichier → Exemples → Basics → Blink*, ou un projet mBlock), fermer l'IDE / mBlock.
+- [ ] Dans l'outil : **Carte · Connecter** → la fenêtre « Installer le programme sur la carte » s'ouvre.
+- [ ] **Installer le programme** : la barre avance, puis « Programme installé : la carte est prête » et la pastille Carte passe au vert (moins de 10 s).
+- [ ] Une LED du programme s'allume bien ensuite.
+- [ ] Même essai depuis `diagnostic.html`.
+- [ ] (Nano clone) Même essai avec une Nano « Old Bootloader » : l'installation réussit aussi (un peu plus longue).
+
 ## 6. Spectacle (jalon 1)
 
 - [ ] « Lancer le spectacle » : plein écran, nom du personnage en grand, « Tout éteindre » visible.
@@ -79,7 +88,7 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 - [ ] Cliquer sur un bloc : ses lignes s'éclairent ; cliquer sur une ligne : son bloc est sélectionné.
 - [ ] « Télécharger le fichier .ino » puis l'ouvrir dans l'IDE Arduino : **Vérifier** réussit (Uno et Nano).
 - [ ] Essai autonome (facultatif) : téléverser, taper `Loup` dans le Moniteur série → la LED s'allume.
-  Puis **re-téléverser `theatre_ombre.ino`** et vérifier que l'outil reparle à la carte.
+  Puis **Carte · Connecter → Installer le programme** et vérifier que l'outil reparle à la carte.
 
 ## 10. Mode professeur
 

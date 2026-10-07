@@ -19,8 +19,8 @@ export const MSG = {
     "La carte est déjà utilisée par un autre programme (IDE Arduino, autre onglet…). Ferme-le, puis réessaie.",
   openFailed: "Impossible d'ouvrir la carte. Débranche et rebranche le câble USB, puis réessaie.",
   noPong:
-    "La carte ne répond pas. Vérifie que le programme « theatre_ombre.ino » a bien été téléversé (demande au professeur).",
-  badVersion: "Le programme de la carte n'est pas à jour. Demande au professeur de téléverser theatre_ombre.ino.",
+    "La carte n'a pas le programme du Théâtre d'ombre (elle a sans doute servi à un autre projet). Clique sur « Carte · Connecter » pour l'installer.",
+  badVersion: "Le programme de la carte n'est pas à jour. Clique sur « Carte · Connecter » pour installer le bon programme.",
   unplugged: 'La carte a été débranchée. Rebranche le câble USB, puis clique sur « Connecter l’Arduino ».',
   silent: 'La carte ne répond plus. Vérifie le câble USB.',
 };
@@ -95,12 +95,12 @@ export class SerialLink {
     if (!reply || reply.type !== 'pong') {
       await this.closeTransport();
       this.setState('deconnectee', MSG.noPong);
-      return { ok: false, error: MSG.noPong };
+      return { ok: false, error: MSG.noPong, needsFirmware: true };
     }
     if (reply.version !== P.PROTOCOL_VERSION) {
       await this.closeTransport();
       this.setState('deconnectee', MSG.badVersion);
-      return { ok: false, error: MSG.badVersion };
+      return { ok: false, error: MSG.badVersion, needsFirmware: true };
     }
     this.lastPong = this.now();
     this.stopTicker = this.ticker(() => this.heartbeat(), PING_EVERY_MS);

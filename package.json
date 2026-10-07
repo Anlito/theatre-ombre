@@ -9,7 +9,8 @@
     "vendor": "node tools/vendor.mjs",
     "start": "node tools/serve.mjs",
     "sons": "node tools/make-sounds.mjs",
-    "captures": "node tools/captures.mjs"
+    "captures": "node tools/captures.mjs",
+    "firmware": "node tools/firmware.mjs"
   },
   "devDependencies": {
     "@breezystack/lamejs": "^1.2.7",
@@ -17,6 +18,7 @@
     "@tensorflow/tfjs": "^4.22.0",
     "blockly": "^13.3.0",
     "js-interpreter": "^6.0.2",
-    "puppeteer-core": "^25.12.0"
+    "puppeteer-core": "^25.12.0",
+    "serialport": "^13.0.0"
   }
 }

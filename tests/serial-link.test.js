@@ -67,6 +67,7 @@ test('carte sans le bon programme : message clair', async () => {
   const r = await link.connect(transport);
   assert.equal(r.ok, false);
   assert.equal(r.error, MSG.noPong);
+  assert.equal(r.needsFirmware, true, 'le site proposera d’installer le programme');
   assert.equal(link.state, 'deconnectee');
 });
 

@@ -37,8 +37,8 @@ Au niveau 3, le panneau « Code C++ » se met à jour à chaque modification ; u
 un clic sur une ligne sélectionne son bloc. Boutons « Copier le code » et « Télécharger le fichier .ino ».
 Ce code est une **traduction pédagogique** : en classe, c'est toujours le programme en blocs qui s'exécute
 (« en direct »). Pour un essai « autonome », on téléverse le .ino avec l'IDE Arduino et on tape le nom d'un
-personnage dans le Moniteur série (la carte n'a pas de webcam) ; il faut ensuite **re-téléverser
-`theatre_ombre.ino`** pour que l'outil fonctionne de nouveau.
+personnage dans le Moniteur série (la carte n'a pas de webcam) ; au retour dans l'outil, « Carte · Connecter »
+propose de réinstaller le programme du Théâtre d'ombre.
 
 Au niveau 2, une zone **Messages** (bloc « écrire ») et une zone **Variables** s'affichent sous les blocs,
 et un bloc incomplet est **entouré de rouge** : le programme ne démarre pas tant qu'il n'est pas complété.
@@ -85,7 +85,21 @@ patte courte (−) de chaque LED ── rail − de la breadboard ── un fil 
 - Le **~** signale une broche qui sait faire varier la luminosité (niveau 2) : 9, 10 et 11 oui, 12 non.
 - **Jamais les broches 0 et 1** (câble USB) : l'outil et la carte les refusent.
 
-## Téléverser le programme de la carte (une seule fois par carte)
+## Le programme de la carte : installé par le site
+
+La carte doit contenir le programme fixe `theatre_ombre.ino` (il traduit les ordres du site : « allume la broche 9 »…).
+**Le site l'installe lui-même** : si la carte a servi à un autre projet (mBlock, IDE Arduino…), « Carte · Connecter »
+ouvre la fenêtre **« Installer le programme sur la carte »** ; un clic, environ 3 secondes (un peu plus sur une
+Nano « Old Bootloader »), puis la carte se connecte. Rien à installer sur l'ordinateur, aucun serveur :
+le programme déjà compilé est rangé dans le site (`site/firmware/theatre_ombre.hex`), et le site parle au
+bootloader de la carte comme l'IDE Arduino. Cartes acceptées : Uno et Nano (ATmega328P) ; une autre carte est refusée
+sans rien écrire. La même installation est proposée dans `diagnostic.html`.
+
+- Si `theatre_ombre.ino` est modifié un jour : `npm run firmware` refait le fichier du site
+  (un test vérifie qu'il est à jour).
+- Essai sur une vraie carte sans navigateur : `node tools/installer-carte.mjs COM14` (même code que le site).
+
+### Ou avec l'IDE Arduino (solution de secours)
 
 1. Ouvrir `arduino/theatre_ombre/theatre_ombre.ino` avec l'IDE Arduino.
 2. Choisir la carte (Arduino Uno ou Nano) et le port, puis **Téléverser**.
@@ -94,7 +108,7 @@ patte courte (−) de chaque LED ── rail − de la breadboard ── un fil 
    `PING` → `PONG v1` ; `D 9 1` → la LED 1 s'allume ; sans rien taper, elle s'éteint après 3 s.
 4. **Fermer l'IDE Arduino** avant d'utiliser le site (sinon le port est occupé).
 
-Ensuite, les élèves n'ont plus jamais rien à téléverser.
+Ensuite, les élèves n'ont rien à téléverser.
 
 **Fin de séance** (à reporter sur la fiche « Règles de sécurité et fin de séance ») :
 **Tout éteindre → Déconnecter → débrancher le câble USB.** Il n'est plus nécessaire de téléverser
