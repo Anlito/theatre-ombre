@@ -138,24 +138,29 @@ Puis ouvrir <http://localhost:8080> dans Chrome ou Edge.
 - `comprendre-ia.html` : **cours « Comprendre l'IA »** (imprimable).
 - `cablage.html` : **câblage des LED** (imprimable).
 
-## Publier le site (GitHub Pages, gratuit)
+## Site en ligne (GitHub Pages)
 
-On publie **uniquement le dossier `site/`**, tel quel (aucune compilation).
+**Adresse pour les élèves : <https://anlito.github.io/theatre-ombre/>**
 
-1. Créer un compte sur <https://github.com>, puis un dépôt **public** (ex. `theatre-ombre`).
-2. Dans le dépôt : **Add file → Upload files**, glisser **le contenu** du dossier `site/`
-   (les fichiers et dossiers qu'il contient, pas le dossier lui-même), puis **Commit changes**.
-3. **Settings → Pages** : *Source* = « Deploy from a branch », branche `main`, dossier `/ (root)`, **Save**.
-4. Après 1 à 2 minutes, le site est en ligne à `https://VOTRE-NOM.github.io/theatre-ombre/` (en https).
+- Diagnostic d'un poste : <https://anlito.github.io/theatre-ombre/diagnostic.html>
+- Cours « Comprendre l'IA » : <https://anlito.github.io/theatre-ombre/comprendre-ia.html>
+- Câblage imprimable : <https://anlito.github.io/theatre-ombre/cablage.html>
+- Dépôt (code source) : <https://github.com/Anlito/theatre-ombre>
 
-Pour une mise à jour : refaire l'étape 2 avec les fichiers modifiés.
+Seul le dossier `site/` est publié. À chaque envoi sur la branche `main`, le site se met à jour tout seul
+en 1 à 2 minutes (onglet **Actions** du dépôt, workflow « Publier le site », `.github/workflows/pages.yml`).
 
-> Avant la séance, ouvrez cette adresse **sur un poste élève** avec `diagnostic.html` :
+**Mettre à jour le site** (par exemple après une modification de `site/config.js`) :
+
+- en ligne : sur le dépôt GitHub, ouvrir le fichier, cliquer sur le crayon ✎, modifier, puis **Commit changes** ;
+- ou depuis ce dossier : `git add -A`, `git commit -m "…"`, `git push`.
+
+> Le dépôt est **public** : tout le monde peut y lire le code professeur (`2534`) et voir la photo du montage.
+> Ce code évite seulement les changements par erreur ; ce n'est pas une vraie sécurité.
+
+> Avant la séance, ouvrez `diagnostic.html` **sur un poste élève** :
 > le réseau du collège peut bloquer certains sites. Si c'est le cas, demandez au service informatique
-> d'autoriser l'adresse, ou utilisez la copie locale de secours.
-
-Autre possibilité : Cloudflare Pages (« Upload assets » en glissant le dossier `site/`), mais les adresses
-`*.pages.dev` sont plus souvent filtrées dans les établissements.
+> d'autoriser `anlito.github.io`, ou utilisez la copie locale de secours (`Lancer le site.cmd`).
 
 ## Risques à vérifier sur un poste élève (avant la recette)
 
