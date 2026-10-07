@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagnostic du poste — Théâtre d'ombre</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .diag { max-width: 52rem; margin: 0 auto; }
+    .check { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.2rem 0.6rem; padding: 0.7rem 0; border-bottom: 1px solid var(--bord); }
+    .check-icon { font-size: 1.4rem; }
+    .check-detail { grid-column: 2; color: var(--texte-doux); }
+    .row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0.6rem 0; }
+    select { font: inherit; min-height: 48px; padding: 0 0.6rem; border-radius: var(--rayon); border: 2px solid var(--bord); }
+    video { width: 320px; max-width: 100%; border-radius: var(--rayon); background: #000; }
+    textarea { width: 100%; min-height: 9rem; font: 0.95rem/1.4 Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <header class="topbar"><h1 class="brand"><img class="logo" src="img/logo.svg" alt="" width="36" height="36"> Diagnostic du poste</h1></header>
+  <main class="diag">
+    <section class="screen">
+      <h2>1. Vérifications automatiques</h2>
+      <div id="checks"></div>
+    </section>
+
+    <section class="screen" style="margin-top:1rem">
+      <h2>2. Webcam</h2>
+      <div class="row"><button id="btn-cam" class="btn btn-primary"><span data-icon="webcam"></span>Tester la webcam</button></div>
+      <video id="video" autoplay muted playsinline hidden></video>
+    </section>
+
+    <section class="screen" style="margin-top:1rem">
+      <h2>3. IA (modèle MobileNet)</h2>
+      <div class="row"><button id="btn-model" class="btn btn-primary"><span data-icon="ia"></span>Charger l'IA</button></div>
+    </section>
+
+    <section class="screen" style="margin-top:1rem">
+      <h2>4. Carte Arduino et LED</h2>
+      <p>Le programme <code>theatre_ombre.ino</code> doit avoir été téléversé une fois sur la carte.</p>
+      <div class="row">
+        <button id="btn-connect" class="btn btn-primary"><span data-icon="carte"></span>Connecter l'Arduino</button>
+        <label>Broche <select id="pin"></select></label>
+        <button id="btn-on" class="btn btn-secondary" disabled><span data-icon="led"></span>Allumer</button>
+        <button id="btn-off" class="btn btn-secondary" disabled>Éteindre</button>
+        <button id="btn-alloff" class="btn btn-danger" disabled><span data-icon="eteindre"></span>Tout éteindre</button>
+      </div>
+      <p id="board-msg" role="status"></p>
+      <p id="board-help" class="note"><span data-icon="info"></span><span>Si la carte ne répond pas : vérifiez le câble USB, puis cliquez de nouveau sur « Connecter l'Arduino ».
+        Si la liste des ports est vide, il manque peut-être le pilote de la carte (puce CH340) : demandez au service informatique.</span></p>
+    </section>
+
+    <section class="screen" style="margin-top:1rem">
+      <h2>5. Résultat à transmettre</h2>
+      <p>Copiez ce texte et envoyez-le au professeur (ou au service informatique).</p>
+      <textarea id="report" readonly></textarea>
+      <div class="row"><button id="btn-copy" class="btn btn-secondary"><span data-icon="copier"></span>Copier le résultat</button></div>
+    </section>
+  </main>
+
+  <script type="module" src="js/diagnostic.js"></script>
+</body>
+</html>

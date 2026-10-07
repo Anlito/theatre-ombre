@@ -1,0 +1,7 @@
+# Dépendances (recréées par « npm install » puis « npm run vendor »)
+node_modules/
+# Outils installés sur le poste de développement (gros exécutables)
+tools/arduino-cli/
+tools/gh/
+# Réglages propres à ce poste
+.claude/

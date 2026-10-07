@@ -1,0 +1,2 @@
+MobileNet v2 (alpha 0.5, 224) — Google, TensorFlow Hub. Licence Apache 2.0.
+https://tfhub.dev/google/imagenet/mobilenet_v2_050_224/classification/2

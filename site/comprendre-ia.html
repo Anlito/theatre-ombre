@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comprendre l'IA — Théâtre d'ombre augmenté</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cours { max-width: 56rem; margin: 0 auto; padding: 1rem; }
+    .cours section { background: var(--carte); border: 2px solid var(--bord); border-radius: var(--rayon); padding: 1rem 1.4rem; margin-bottom: 1rem; }
+    .cours h2 { display: flex; gap: 0.6rem; align-items: center; }
+    .num { display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: 50%; background: var(--bleu); color: #fff; font-size: 1.2rem; flex: none; }
+    .retenir { border-left: 6px solid var(--vert); background: var(--vert-clair); padding: 0.6rem 1rem; border-radius: 6px; font-weight: 600; }
+    .attention { border-left: 6px solid var(--orange); background: var(--orange-clair); padding: 0.6rem 1rem; border-radius: 6px; }
+    figure { margin: 0.8rem 0; }
+    figcaption { color: var(--texte-doux); font-size: 0.95rem; text-align: center; margin-top: 0.3rem; }
+    svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+    svg text { font-family: "Segoe UI", system-ui, sans-serif; }
+    .quiz details { border: 2px solid var(--bord); border-radius: 8px; padding: 0.5rem 0.8rem; margin: 0.5rem 0; }
+    .quiz summary { cursor: pointer; font-weight: 600; }
+    .lexique { display: grid; grid-template-columns: max-content 1fr; gap: 0.4rem 1rem; }
+    .lexique dt { font-weight: 700; }
+    .lexique dd { margin: 0; }
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 700px) { .compare { grid-template-columns: 1fr; } .lexique { grid-template-columns: 1fr; } }
+    @media print { .topbar, .no-print { display: none; } .cours section { break-inside: avoid; border-color: #999; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="brand"><img class="logo" src="img/logo.svg" alt="" width="36" height="36"> Comprendre l'IA qui reconnaît nos personnages</h1>
+    <div class="actions no-print">
+      <button class="btn btn-secondary" type="button" onclick="print()"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg>Imprimer</button>
+    </div>
+  </header>
+
+  <main class="cours">
+
+    <section>
+      <h2><span class="num">1</span> Pour l'ordinateur, une image, ce sont des nombres</h2>
+      <p>La webcam découpe l'image en milliers de petits carrés : les <strong>pixels</strong>.
+        Chaque pixel est un nombre qui dit s'il est clair ou foncé (et de quelle couleur).
+        Une ombre noire sur un écran blanc, c'est donc un grand tableau de nombres : des « 0 » là où il y a l'ombre, des « 255 » là où c'est clair.</p>
+      <figure>
+        <svg viewBox="0 0 760 240" role="img" aria-label="Une silhouette agrandie : chaque carré est un pixel avec un nombre">
+          <g id="grille"></g>
+          <text x="440" y="66" font-size="20" font-weight="700">Ce que voit l'élève :</text>
+          <text x="440" y="96" font-size="18">une silhouette</text>
+          <text x="440" y="146" font-size="20" font-weight="700">Ce que reçoit l'ordinateur :</text>
+          <text x="440" y="176" font-size="18">des nombres de 0 à 255</text>
+        </svg>
+        <figcaption>Une silhouette agrandie : chaque case est un pixel. 0 = noir (ombre), 255 = blanc (écran).</figcaption>
+      </figure>
+      <p class="retenir">L'ordinateur ne « voit » pas un loup : il reçoit seulement des nombres.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">2</span> MobileNet résume l'image en une « empreinte »</h2>
+      <p>Comparer directement des milliers de pixels ne marche pas bien : si le personnage bouge d'un centimètre, presque tous les pixels changent.
+        On utilise donc <strong>MobileNet</strong>, un <strong>réseau de neurones</strong> déjà entraîné par des chercheurs sur plus d'un million de photos.
+        Il a appris à repérer des choses utiles : des bords, des pointes, des courbes, des formes…</p>
+      <p>MobileNet transforme chaque image en une liste de <strong>1 280 nombres</strong> : son <strong>empreinte</strong>
+        (on dit aussi ses <strong>caractéristiques</strong>). Deux images qui se ressemblent ont des empreintes proches.</p>
+      <figure>
+        <svg viewBox="0 0 640 150" role="img" aria-label="Image, puis MobileNet, puis 1280 nombres">
+          <defs><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#4a5261"/></marker></defs>
+          <rect x="10" y="25" width="120" height="90" rx="8" fill="#f2efe6" stroke="#4a5261" stroke-width="2"/>
+          <path d="M45 105 L60 50 L72 70 L88 45 L100 105 Z" fill="#111"/>
+          <text x="70" y="140" font-size="16" text-anchor="middle">Image (pixels)</text>
+          <line x1="140" y1="70" x2="200" y2="70" stroke="#4a5261" stroke-width="3" marker-end="url(#fl)"/>
+          <rect x="210" y="20" width="180" height="100" rx="12" fill="#e6eefb" stroke="#1f5fbf" stroke-width="2"/>
+          <text x="300" y="60" font-size="20" font-weight="700" text-anchor="middle">MobileNet</text>
+          <text x="300" y="84" font-size="15" text-anchor="middle">réseau de neurones</text>
+          <text x="300" y="107" font-size="15" text-anchor="middle">déjà entraîné</text>
+          <line x1="400" y1="70" x2="460" y2="70" stroke="#4a5261" stroke-width="3" marker-end="url(#fl)"/>
+          <rect x="470" y="25" width="160" height="90" rx="8" fill="#fff" stroke="#4a5261" stroke-width="2"/>
+          <text x="550" y="55" font-size="15" text-anchor="middle" font-family="Consolas, monospace">0.12  0.00  1.87</text>
+          <text x="550" y="77" font-size="15" text-anchor="middle" font-family="Consolas, monospace">0.43  2.05  0.00</text>
+          <text x="550" y="99" font-size="15" text-anchor="middle" font-family="Consolas, monospace">… (1 280 nombres)</text>
+          <text x="550" y="140" font-size="16" text-anchor="middle">Empreinte</text>
+        </svg>
+      </figure>
+      <p class="retenir">L'IA ne compare pas les images elles-mêmes : elle compare leurs empreintes.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">3</span> Apprendre, c'est mémoriser des exemples</h2>
+      <p>Quand vous gardez le bouton « Ajouter des photos » enfoncé, l'outil calcule l'empreinte de chaque photo et la range
+        dans la <strong>catégorie</strong> du personnage. Ces photos sont les <strong>exemples d'entraînement</strong>.</p>
+      <p>Ici, l'apprentissage est <strong>instantané</strong> : l'IA ne fait que mémoriser. Elle ne « sait » pas ce qu'est un loup ;
+        elle sait seulement à quoi ressemblaient <em>vos</em> photos de loup.</p>
+      <p class="retenir">L'IA apprend uniquement à partir des exemples qu'on lui donne. De mauvais exemples donnent une mauvaise IA.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">4</span> Reconnaître : les 10 plus proches votent</h2>
+      <p>Pour une nouvelle image, l'IA cherche les <strong>10 photos d'entraînement</strong> dont l'empreinte ressemble le plus à la sienne.
+        Chacune <strong>vote</strong> pour son personnage. Cette méthode s'appelle <strong>KNN</strong>
+        (« k plus proches voisins », ici k = 10).</p>
+      <p>La <strong>confiance</strong>, c'est la part des votes : 8 votes sur 10 → confiance de 80 %.</p>
+      <figure>
+        <svg viewBox="0 0 700 300" role="img" aria-label="Des points pour chaque photo ; la nouvelle image est entourée de ses 10 plus proches voisins, 8 loups et 2 rois">
+          <rect x="1" y="1" width="698" height="298" rx="10" fill="#fafbfc" stroke="#c9ced8"/>
+          <g id="nuage"></g>
+          <circle cx="225" cy="140" r="62" fill="none" stroke="#1f5fbf" stroke-width="3" stroke-dasharray="8 5"/>
+          <path d="M225 125 l4.5 9.5 10.5 1.5 -7.5 7.5 1.8 10.5 -9.3 -5 -9.3 5 1.8 -10.5 -7.5 -7.5 10.5 -1.5z" fill="#ffcc00" stroke="#111" stroke-width="1.5"/>
+          <text x="225" y="258" font-size="16" text-anchor="middle" fill="#1f5fbf" font-weight="700">10 plus proches : 8 ▲ loup, 2 ■ roi</text>
+          <text x="225" y="280" font-size="16" text-anchor="middle" fill="#1f5fbf" font-weight="700">→ « Loup », confiance 80 %</text>
+          <g font-size="16">
+            <path d="M470 40 l8 14 h-16z" fill="#a86500"/><text x="490" y="54">photo de loup</text>
+            <rect x="463" y="70" width="14" height="14" fill="#2e7d32"/><text x="490" y="83">photo de roi</text>
+            <circle cx="470" cy="106" r="7" fill="#9aa1ad"/><text x="490" y="111">photo du fond vide</text>
+            <path d="M470 128 l4 8 9 1 -6.5 6.5 1.5 9 -8 -4.5 -8 4.5 1.5 -9 -6.5 -6.5 9 -1z" fill="#ffcc00" stroke="#111"/><text x="490" y="146">image actuelle</text>
+          </g>
+          <text x="470" y="200" font-size="14" fill="#4a5261">Plus deux points sont proches,</text>
+          <text x="470" y="222" font-size="14" fill="#4a5261">plus les images se ressemblent.</text>
+        </svg>
+        <figcaption>Chaque point est une photo d'entraînement, placée selon son empreinte (simplifiée en 2 dimensions).</figcaption>
+      </figure>
+      <p>Dans l'outil, le panneau <strong>« 🔍 L'IA compare avec… »</strong> de l'étape 1 montre en direct ces 10 photos : regardez qui vote !</p>
+    </section>
+
+    <section>
+      <h2><span class="num">5</span> Pourquoi prendre beaucoup de photos, et variées ?</h2>
+      <p>Pendant le spectacle, le personnage ne sera jamais exactement à la même place : plus près, plus loin, penché, à gauche…
+        Son empreinte change un peu à chaque fois.</p>
+      <div class="compare">
+        <figure>
+          <svg viewBox="0 0 300 200" role="img" aria-label="Une seule photo de loup : l'image actuelle, loup penché, est plus proche d'une photo de roi">
+            <rect x="1" y="1" width="298" height="198" rx="10" fill="#fafbfc" stroke="#c9ced8"/>
+            <path d="M70 70 l9 16 h-18z" fill="#a86500"/>
+            <rect x="170" y="110" width="14" height="14" fill="#2e7d32"/><rect x="200" y="90" width="14" height="14" fill="#2e7d32"/><rect x="190" y="140" width="14" height="14" fill="#2e7d32"/>
+            <path d="M150 115 l4 8 9 1 -6.5 6.5 1.5 9 -8 -4.5 -8 4.5 1.5 -9 -6.5 -6.5 9 -1z" fill="#ffcc00" stroke="#111"/>
+            <text x="150" y="185" font-size="15" text-anchor="middle" fill="#b3261e" font-weight="700">1 seule photo → « Roi » ✗</text>
+          </svg>
+          <figcaption>Le loup penché ne ressemble pas assez à l'unique photo de loup.</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 300 200" role="img" aria-label="Beaucoup de photos de loup sous plusieurs angles : l'image actuelle est entourée de loups">
+            <rect x="1" y="1" width="298" height="198" rx="10" fill="#fafbfc" stroke="#c9ced8"/>
+            <g fill="#a86500">
+              <path d="M70 70 l9 16 h-18z"/><path d="M95 60 l9 16 h-18z"/><path d="M110 95 l9 16 h-18z"/><path d="M130 120 l9 16 h-18z"/>
+              <path d="M85 110 l9 16 h-18z"/><path d="M140 85 l9 16 h-18z"/><path d="M160 130 l9 16 h-18z"/><path d="M120 140 l9 16 h-18z"/>
+            </g>
+            <rect x="215" y="110" width="14" height="14" fill="#2e7d32"/><rect x="240" y="90" width="14" height="14" fill="#2e7d32"/><rect x="230" y="140" width="14" height="14" fill="#2e7d32"/>
+            <path d="M150 115 l4 8 9 1 -6.5 6.5 1.5 9 -8 -4.5 -8 4.5 1.5 -9 -6.5 -6.5 9 -1z" fill="#ffcc00" stroke="#111"/>
+            <text x="150" y="185" font-size="15" text-anchor="middle" fill="#1e7a3c" font-weight="700">30 photos variées → « Loup » ✓</text>
+          </svg>
+          <figcaption>Les photos variées « couvrent » toutes les positions du loup.</figcaption>
+        </figure>
+      </div>
+      <p>C'est pour ça que l'outil demande <strong>au moins 15 photos</strong> et en conseille <strong>30</strong>, prises sous plusieurs angles et distances.</p>
+      <p class="attention">⚠️ Attention aux photos ratées : si une main ou un bâton apparaît sur les photos du loup, l'IA peut apprendre « la main = loup ».
+        Supprimez-les (clic sur la vignette).</p>
+    </section>
+
+    <section>
+      <h2><span class="num">6</span> Pourquoi une catégorie « Fond vide » ?</h2>
+      <p>L'IA choisit <strong>toujours</strong> la catégorie la plus ressemblante parmi celles qu'elle connaît.
+        Elle ne sait pas dire « il n'y a rien » si on ne lui a jamais montré à quoi ressemble « rien ».</p>
+      <p>Sans « Fond vide », un écran vide serait reconnu comme le personnage le plus proche… et sa LED s'allumerait toute seule !
+        Avec « Fond vide », l'écran vide a ses propres exemples : il gagne le vote, et l'outil ne déclenche aucune réaction.</p>
+      <p class="retenir">Une IA ne connaît que les catégories qu'on lui a apprises. Il faut aussi lui apprendre le cas « personne ».</p>
+      <p>Même chose pour un personnage qui a moins de 15 photos : l'outil ne l'utilise pas encore, donc l'IA le confond avec le personnage connu qui lui ressemble le plus.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">7</span> Seuil de confiance et stabilité : éviter les erreurs</h2>
+      <ul>
+        <li><strong>Seuil de confiance (80 %)</strong> : si l'IA hésite (par exemple 6 votes loup, 4 votes roi = 60 %), elle ne déclare rien. Sur les barres de confiance, le seuil est le petit trait noir.</li>
+        <li><strong>Stabilité (5 images de suite)</strong> : l'IA analyse environ 10 images par seconde. Un personnage n'est « vu » que s'il est reconnu 5 fois de suite, soit environ une demi-seconde.
+          Sans ça, les LED clignoteraient à chaque petite erreur.</li>
+      </ul>
+      <p>Ces deux réglages sont un compromis : plus on est exigeant, moins il y a d'erreurs… mais plus la réaction est lente.</p>
+    </section>
+
+    <section>
+      <h2><span class="num">8</span> Les limites de l'IA</h2>
+      <ul>
+        <li><strong>Elle dépend de ses données</strong> : si on a fait toutes les photos avec la lumière allumée, elle se trompera peut-être lumière éteinte.</li>
+        <li><strong>Elle ne comprend rien</strong> : elle compare des nombres. Une autre forme pointue pourrait être prise pour le loup.</li>
+        <li><strong>Elle peut se tromper</strong> : c'est pour ça qu'on mesure ses résultats (nombre de bonnes reconnaissances sur 20 passages).</li>
+        <li><strong>Vie privée</strong> : ici, tout reste dans l'ordinateur ; aucune image n'est envoyée sur Internet. On photographie les silhouettes, pas les visages.</li>
+      </ul>
+    </section>
+
+    <section class="quiz">
+      <h2><span class="num">?</span> Mini-quiz</h2>
+      <details><summary>1. Pour l'ordinateur, qu'est-ce qu'une image ?</summary>
+        <p>Un tableau de nombres (les pixels), de 0 (noir) à 255 (blanc).</p></details>
+      <details><summary>2. Pourquoi faut-il prendre le personnage sous plusieurs angles ?</summary>
+        <p>Parce que l'IA compare avec ses exemples : s'ils sont tous pareils, une position nouvelle ne ressemblera à aucun d'eux.</p></details>
+      <details><summary>3. Que se passe-t-il si on oublie la catégorie « Fond vide » ?</summary>
+        <p>L'écran vide est reconnu comme le personnage le plus ressemblant : une LED s'allume alors qu'il n'y a personne.</p></details>
+      <details><summary>4. L'IA dit « Loup, confiance 70 % » et le seuil est de 80 %. Que fait l'outil ?</summary>
+        <p>Rien : l'IA n'est pas assez sûre d'elle, aucune réaction n'est déclenchée.</p></details>
+      <details><summary>5. Une photo du loup montre aussi la main de l'élève. Quel est le risque ?</summary>
+        <p>L'IA peut associer la main au loup et reconnaître « loup » dès qu'une main apparaît. Il faut supprimer cette photo.</p></details>
+    </section>
+
+    <section>
+      <h2><span class="num">📖</span> Lexique</h2>
+      <dl class="lexique">
+        <dt>Pixel</dt><dd>Petit carré d'une image numérique, codé par un nombre.</dd>
+        <dt>Intelligence artificielle (IA)</dt><dd>Programme capable d'accomplir une tâche (ici reconnaître une image) en apprenant à partir d'exemples.</dd>
+        <dt>Réseau de neurones</dt><dd>Programme formé de nombreux calculs simples reliés entre eux, inspiré (de loin) du cerveau. MobileNet en est un.</dd>
+        <dt>Empreinte / caractéristiques</dt><dd>Liste de nombres qui résume une image ; des images semblables ont des empreintes proches.</dd>
+        <dt>Catégorie</dt><dd>Ce que l'IA doit reconnaître : un personnage, ou « Fond vide ».</dd>
+        <dt>Exemple d'entraînement</dt><dd>Une photo donnée à l'IA pour qu'elle apprenne une catégorie.</dd>
+        <dt>Entraînement</dt><dd>Étape où l'on donne des exemples à l'IA.</dd>
+        <dt>KNN (k plus proches voisins)</dt><dd>Méthode qui cherche les k exemples les plus ressemblants et les fait voter.</dd>
+        <dt>Confiance</dt><dd>À quel point l'IA est sûre d'elle (part des votes, en %).</dd>
+        <dt>Seuil</dt><dd>Confiance minimale pour que l'outil réagisse.</dd>
+      </dl>
+    </section>
+  </main>
+
+  <script>
+    // Grille de pixels : une petite silhouette dessinée en nombres.
+    (function () {
+      const motif = [
+        '000000000000',
+        '000010000100',
+        '000011001100',
+        '000011111100',
+        '000111111100',
+        '000111111110',
+        '001111111110',
+        '001111111110',
+        '011111111111',
+      ];
+      const g = document.getElementById('grille');
+      const taille = 34;
+      motif.forEach((ligne, y) => [...ligne].forEach((c, x) => {
+        const ombre = c === '1';
+        const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        r.setAttribute('x', 10 + x * taille); r.setAttribute('y', 10 + y * 24);
+        r.setAttribute('width', taille - 1); r.setAttribute('height', 23);
+        r.setAttribute('fill', ombre ? '#111' : '#f2efe6');
+        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        t.setAttribute('x', 10 + x * taille + taille / 2); t.setAttribute('y', 10 + y * 24 + 16);
+        t.setAttribute('font-size', '11'); t.setAttribute('text-anchor', 'middle');
+        t.setAttribute('fill', ombre ? '#fff' : '#4a5261');
+        t.textContent = ombre ? '0' : '255';
+        g.append(r, t);
+      }));
+    })();
+
+    // Nuage de points du schéma KNN (positions fixes).
+    (function () {
+      const g = document.getElementById('nuage');
+      const ns = 'http://www.w3.org/2000/svg';
+      const loups = [[190, 110], [205, 150], [240, 120], [215, 175], [250, 155], [180, 140], [230, 95], [260, 130], [120, 90], [150, 60]];
+      const rois = [[268, 168], [235, 190], [320, 170], [340, 200], [360, 150], [305, 205], [330, 120]];
+      const fonds = [[340, 40], [370, 62], [398, 36], [352, 86], [402, 80], [318, 66]];
+      for (const [x, y] of loups) { const p = document.createElementNS(ns, 'path'); p.setAttribute('d', `M${x} ${y - 9} l8 14 h-16z`); p.setAttribute('fill', '#a86500'); g.append(p); }
+      for (const [x, y] of rois) { const r = document.createElementNS(ns, 'rect'); r.setAttribute('x', x - 7); r.setAttribute('y', y - 7); r.setAttribute('width', 14); r.setAttribute('height', 14); r.setAttribute('fill', '#2e7d32'); g.append(r); }
+      for (const [x, y] of fonds) { const c = document.createElementNS(ns, 'circle'); c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 7); c.setAttribute('fill', '#9aa1ad'); g.append(c); }
+    })();
+  </script>
+</body>
+</html>

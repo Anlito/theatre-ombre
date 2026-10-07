@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>body{margin:0;background:#DCD8D0}a{color:#1F4E99}a:hover{color:#163A73}</style>
+</helmet>
+<section style="display:flex;flex-direction:column;gap:32px;padding:64px;font-family:'Segoe UI',system-ui,sans-serif">
+<div style="display:flex;flex-direction:column;gap:6px;max-width:1366px">
+<div style="font-size:32px;font-weight:700;color:#1E1A16">Théâtre d'ombre augmenté — identité visuelle, 2 directions</div>
+<div style="font-size:18px;color:#4A4038">Polices système uniquement · thème discret sur les écrans de travail · contrastes WCAG calculés · barre du haut tenue en 1366 px. Choisissez <a href="#1a">1a</a> ou <a href="#1b">1b</a> avant les maquettes d'écrans.</div>
+</div>
+<div style="display:flex;gap:64px;align-items:flex-start;width:max-content">
+
+<!-- ============ 1a ============ -->
+<div id="1a" style="width:1366px;flex:none;display:flex;flex-direction:column;gap:44px;background:#F7F1E5;color:#1E1A16;font-size:16px;line-height:1.45;padding-bottom:56px;box-shadow:0 2px 12px rgba(40,30,20,.15)">
+<div style="display:flex;align-items:center;gap:16px;padding:40px 48px 0">
+<div style="background:#1E1A16;color:#F7F1E5;font-weight:700;font-size:20px;padding:6px 14px;border-radius:6px">1a</div>
+<div style="display:flex;flex-direction:column">
+<div style="font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:700">Papier &amp; lanterne</div>
+<div style="color:#5C5247">Tout l'outil sur papier crème, encre presque noire, titres à empattements (Georgia). La lanterne (ambre) marque le focus ; le rideau n'apparaît qu'au Spectacle.</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Logo et icône d'onglet</div>
+<div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap">
+<svg width="120" height="120" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<svg width="48" height="48" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<svg width="16" height="16" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:12px;background:#241E1A;padding:12px 20px;border-radius:10px">
+<svg width="36" height="36" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#F7F1E5">Théâtre d'ombre augmenté</div>
+</div>
+<div style="color:#5C5247;max-width:340px">La silhouette du loup des captures, posée sur le disque de lumière de l'écran. Lisible à 16 px (onglet).</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Palette (variables existantes de style.css)</div>
+<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#F7F1E5;border:1px solid #D9CCB6"></div><b>--fond</b><span style="color:#5C5247">#F7F1E5 · texte 15,4:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#FFFDF8;border:1px solid #D9CCB6"></div><b>--carte</b><span style="color:#5C5247">#FFFDF8 · doux 7,5:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#1E1A16"></div><b>--texte</b><span style="color:#5C5247">#1E1A16</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#5C5247"></div><b>--texte-doux</b><span style="color:#5C5247">#5C5247 · 6,8:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#D9CCB6"></div><b>--bord</b><span style="color:#5C5247">#D9CCB6</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#EFE7D8"></div><b>--gris-clair</b><span style="color:#5C5247">#EFE7D8</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#241E1A"></div><b>--nuit</b><span style="color:#5C5247">#241E1A · blanc 16,5:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#1F4E99"></div><b>--bleu</b><span style="color:#5C5247">#1F4E99 · blanc 8,1:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#163A73"></div><b>--bleu-fonce</b><span style="color:#5C5247">#163A73 · 11,1:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#B3261E"></div><b>--rouge</b><span style="color:#5C5247">#B3261E · blanc 6,5:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#8C1D17"></div><b>--rouge-fonce</b><span style="color:#5C5247">#8C1D17 · survol</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#2E6B30"></div><b>--vert</b><span style="color:#5C5247">#2E6B30 · blanc 6,4:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#E3F0DF"></div><b>--vert-clair</b><span style="color:#5C5247">#E3F0DF · vert 5,5:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#8A4F00"></div><b>--orange</b><span style="color:#5C5247">#8A4F00 · 5,6:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#FBEBCB"></div><b>--orange-clair</b><span style="color:#5C5247">#FBEBCB</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#E9C46A"></div><b>--or</b><span style="color:#5C5247">#E9C46A · sur nuit 9,9:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#8E1B24"></div><b>--velours</b><span style="color:#5C5247">#8E1B24 · scène</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:linear-gradient(90deg,#4A0D13,#B42A35)"></div><b>--velours-ombre / -clair</b><span style="color:#5C5247">#4A0D13 / #B42A35</span></div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;padding:0 48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Typographie (système)</div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#5C5247">Titre 28</span><span style="font-family:Georgia,serif;font-size:28px;font-weight:700">1. Entraîner l'IA</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#5C5247">Sous-titre 20</span><span style="font-family:Georgia,serif;font-size:20px;font-weight:700">Je vois : Loup</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#5C5247">Texte 16</span><span>Photographiez l'écran du théâtre sans personnage.</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#5C5247">Bouton 16/600</span><span style="font-weight:600">Ajouter des photos</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#5C5247">Code 16</span><span style="font-family:Consolas,'Courier New',monospace">digitalWrite(9, HIGH);</span></div>
+<div style="color:#5C5247">Titres : Georgia, "Times New Roman", serif · Texte : "Segoe UI", system-ui, sans-serif · Code : Consolas, monospace.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Rayons, ombres, espaces</div>
+<div style="display:flex;gap:16px;align-items:center">
+<div style="width:72px;height:56px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:6px"></div>
+<div style="width:72px;height:56px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px;box-shadow:0 1px 0 #D9CCB6,0 3px 8px rgba(60,40,20,.10)"></div>
+<div style="width:72px;height:56px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:999px"></div>
+</div>
+<div style="color:#5C5247">--rayon 10px (cartes) · 6px (boutons, champs) · 999px (pastilles). Ombre unique « feuille posée » : 0 1px 0 bord + 0 3px 8px brun 10 %.</div>
+<div style="display:flex;gap:8px;align-items:flex-end"><div style="width:4px;height:4px;background:#8A4F00"></div><div style="width:8px;height:8px;background:#8A4F00"></div><div style="width:12px;height:12px;background:#8A4F00"></div><div style="width:16px;height:16px;background:#8A4F00"></div><div style="width:24px;height:24px;background:#8A4F00"></div><div style="width:32px;height:32px;background:#8A4F00"></div><span style="color:#5C5247">4 · 8 · 12 · 16 · 24 · 32</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Icônes (SVG maison, trait 2 px, licence libre)</div>
+<div style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px">
+<sc-for list="{{ icons }}" as="it" hint-placeholder-count="32">
+<div style="display:flex;align-items:center;gap:10px;padding:10px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:8px;color:#1E1A16">
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="{{ it.d }}"></path></svg>
+<span style="font-size:16px;line-height:1.15">{{ it.label }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700;padding:0 48px">Barre du haut — 1366 px, sur une seule ligne</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:10px;height:60px;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBEBCB;color:#8A4F00;border:2px solid #FBEBCB;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · à connecter</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #5C5247;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.equipe }}"></path></svg><b>Léa, Tom, Inès</b><span style="width:8px;height:8px;border-radius:50%;background:#E9C46A"></span><span style="color:#E9C46A">non enregistré</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #5C5247"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:60px;padding:0 16px;background:#FFFDF8;border-bottom:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;border-radius:6px;color:#2E6B30;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#E3F0DF"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span>Entraîner</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:6px;background:#1F4E99;color:#FFFFFF;font-weight:700"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#FFFFFF;color:#1F4E99">2</span>Programmer</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;border-radius:6px;color:#1E1A16;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #5C5247">3</span>Spectacle</div>
+<div style="flex:1"></div>
+<span style="color:#5C5247;font-weight:600">Niveau</span>
+<div style="display:flex;border:2px solid #D9CCB6;border-radius:6px;overflow:hidden">
+<div style="padding:0 12px;height:40px;display:flex;align-items:center">1 · Premiers pas</div>
+<div style="padding:0 12px;height:40px;display:flex;align-items:center;border-left:2px solid #D9CCB6">2 · Boucles et conditions</div>
+<div style="padding:0 12px;height:40px;display:flex;align-items:center;gap:6px;background:#EAF0FA;color:#163A73;font-weight:700;border-left:2px solid #1F4E99"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>3 · Code Arduino</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#2E6B30;color:#FFFFFF;font-weight:700"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 260px 260px;gap:24px;padding:0 48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:8px;color:#1E1A16">
+<div><b>Bande 1 (sombre, fixe) :</b> logo, les 3 pastilles, menu équipe, aide, Tout éteindre. Elle ne change jamais d'un écran à l'autre.</div>
+<div><b>Bande 2 (papier) :</b> les 3 étapes + les commandes de l'écran en cours (ici niveau et Démarrer). Elle remplace la ligne « 2. Programmer · Niveau » actuelle : on ne perd pas de hauteur.</div>
+<div><b>Carte · à connecter</b> est cliquable : elle remplace le bouton « Connecter l'Arduino ».</div>
+<div>Le nom du site n'est pas répété dans la barre : le logo suffit (le nom figure dans l'onglet et à l'écran Démarrage). Largeur occupée en bande 1 : ≈ 1 130 px sur 1 366.</div>
+</div>
+<div style="display:flex;flex-direction:column;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px;box-shadow:0 1px 0 #D9CCB6,0 6px 16px rgba(60,40,20,.14);padding:6px">
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border-radius:6px;background:#EFE7D8;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.enregistrer }}"></path></svg>Enregistrer</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ouvrir }}"></path></svg>Ouvrir / nouveau</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.renommer }}"></path></svg>Changer les prénoms</div>
+</div>
+<div style="display:flex;flex-direction:column;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px;box-shadow:0 1px 0 #D9CCB6,0 6px 16px rgba(60,40,20,.14);padding:6px">
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg>Aide</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.cours }}"></path></svg>Comprendre l'IA</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.led }}"></path></svg>Câblage des LED</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.diagnostic }}"></path></svg>Diagnostic du poste</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Boutons — états</div>
+<div style="display:grid;grid-template-columns:130px repeat(5,minmax(0,1fr));gap:14px 16px;align-items:center">
+<span></span><b>Normal</b><b>Survol</b><b>Focus clavier</b><b>Actif (appuyé)</b><b>Désactivé</b>
+<span style="color:#5C5247">Principal</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#163A73;color:#FFF;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:600;box-shadow:0 0 0 2px #F7F1E5,0 0 0 5px #8A4F00"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#163A73;color:#FFF;font-weight:600;box-shadow:inset 0 3px 0 rgba(0,0,0,.25);transform:translateY(1px)"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#E4DACA;color:#5C5247;font-weight:600;border:2px dashed #B8A98F"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<span style="color:#5C5247">Secondaire</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#EAF0FA;border:2px solid #163A73;color:#163A73;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600;box-shadow:0 0 0 2px #F7F1E5,0 0 0 5px #8A4F00"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#D6E2F5;border:2px solid #163A73;color:#163A73;font-weight:600;transform:translateY(1px)"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#EFE7D8;border:2px dashed #B8A98F;color:#5C5247;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<span style="color:#5C5247">Démarrer</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#2E6B30;color:#FFF;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#23521F;color:#FFF;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#2E6B30;color:#FFF;font-weight:600;box-shadow:0 0 0 2px #F7F1E5,0 0 0 5px #8A4F00"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#FFFDF8;border:2px solid #2E6B30;color:#2E6B30;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.stop }}"></path></svg>Arrêter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#E4DACA;color:#5C5247;font-weight:600;border:2px dashed #B8A98F"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<span style="color:#5C5247">Tout éteindre</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#B3261E;color:#FFF;font-weight:700"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#8C1D17;color:#FFF;font-weight:700"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#B3261E;color:#FFF;font-weight:700;box-shadow:0 0 0 2px #F7F1E5,0 0 0 5px #8A4F00"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#8C1D17;color:#FFF;font-weight:700;box-shadow:inset 0 3px 0 rgba(0,0,0,.3);transform:translateY(1px)"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<span style="color:#5C5247">Jamais désactivé</span>
+</div>
+<div style="color:#5C5247">Focus clavier : double anneau papier + ambre foncé (#8A4F00, 5,6:1 sur le fond), visible même vidéoprojeté. Désactivé : contour en pointillés en plus de la couleur.</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding:0 48px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Pastilles d'état</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;padding:16px;background:#241E1A;border-radius:10px">
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBEBCB;color:#8A4F00"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · à connecter</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#EFE7D8;color:#1E1A16"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · simulée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBE4E1;color:#B3261E"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.attention }}"></path></svg><b>Webcam</b> · refusée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBEBCB;color:#8A4F00"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · à entraîner</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+</div>
+<div style="color:#5C5247">Vert = ça marche, ambre = à faire, rouge = problème. Le mot porte toujours l'information ; l'icône d'alerte remplace l'icône d'objet en cas d'erreur.</div>
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700;margin-top:8px">Champ texte</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#5C5247">Normal</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #D9CCB6;border-radius:6px;background:#FFFDF8;color:#5C5247">ex. Loup</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#5C5247">Focus</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #1E1A16;border-radius:6px;background:#FFFDF8;box-shadow:0 0 0 3px #E9C46A">Sorcière|</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#5C5247">Erreur</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #B3261E;border-radius:6px;background:#FFFDF8">Loup</div><div style="display:flex;align-items:center;gap:6px;color:#B3261E"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.attention }}"></path></svg>Ce personnage existe déjà.</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#5C5247">Désactivé</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px dashed #D9CCB6;border-radius:6px;background:#EFE7D8;color:#5C5247">verrouillé par le professeur</div></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Carte personnage</div>
+<div style="display:flex;flex-direction:column;gap:12px;padding:16px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px;box-shadow:0 1px 0 #D9CCB6,0 3px 8px rgba(60,40,20,.10)">
+<div style="display:flex;gap:14px;align-items:center">
+<div style="width:72px;height:72px;border-radius:8px;background:radial-gradient(circle at 50% 45%,#FFF8E6,#E8D6A8);display:flex;align-items:flex-end;justify-content:center;flex:none"><svg width="60" height="60" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg></div>
+<div style="display:flex;flex-direction:column;gap:2px;flex:1">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">Loup</div>
+<div style="display:flex;align-items:center;gap:6px;color:#2E6B30;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>22 photos · prêt (30 conseillées)</div>
+<div style="height:8px;border-radius:4px;background:#EFE7D8;overflow:hidden"><div style="width:73%;height:100%;background:#2E6B30"></div></div>
+</div>
+<div style="display:flex;gap:6px">
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #D9CCB6;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.renommer }}"></path></svg></div>
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #D9CCB6;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.vider }}"></path></svg></div>
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #D9CCB6;border-radius:6px;color:#B3261E"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.supprimer }}"></path></svg></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:10px;height:52px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:600"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.photo }}"></path></svg>Ajouter des photos <span style="font-weight:400">(garder appuyé)</span></div>
+</div>
+<div style="color:#5C5247">Une vignette-silhouette identifie le personnage d'un coup d'œil ; les actions rares passent en icônes 44 px (avec infobulle Renommer / Vider / Supprimer).</div>
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700;margin-top:8px">Confiance et « Pourquoi ? »</div>
+<div style="display:grid;grid-template-columns:100px minmax(0,1fr) 56px;gap:8px 12px;align-items:center">
+<span>Fond vide</span><div style="height:16px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span>0 %</span>
+<b style="color:#2E6B30">✓ Loup</b><div style="height:16px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6;overflow:hidden"><div style="width:100%;height:100%;background:#2E6B30"></div></div><b>100 %</b>
+</div>
+<div style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;background:#FBEBCB;border-radius:6px;color:#1E1A16"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#8A4F00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg><b>Pourquoi au moins 15 photos, et variées ?</b><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;margin-left:auto"><path d="{{ ic.chevron }}"></path></svg></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:0 48px">
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Catégories de blocs (texte blanc)</div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px">
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#965A00;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Événements</div><span style="color:#5C5247">#965A00 · 5,6:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#2E7D32;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">LED et sons</div><span style="color:#5C5247">#2E7D32 · 5,1:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#2F64B0;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Contrôle</div><span style="color:#5C5247">#2F64B0 · 5,9:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#00756A;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Opérateurs</div><span style="color:#5C5247">#00756A · 5,6:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#B8175A;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Variables</div><span style="color:#5C5247">#B8175A · 6,3:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#6A3FA0;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">IA</div><span style="color:#5C5247">#6A3FA0 · 7,4:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#52616B;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Affichage</div><span style="color:#5C5247">#52616B · 6,4:1</span></div>
+</div>
+<div style="color:#5C5247">Les couleurs actuelles passent déjà AA (Événements juste à 4,6:1). Proposition : légèrement assombrir Événements, Contrôle, Opérateurs, Variables et Affichage pour garder de la marge au vidéoprojecteur. Même teinte, mêmes familles.</div>
+</div>
+</div>
+
+<!-- ============ 1b ============ -->
+<div id="1b" style="width:1366px;flex:none;display:flex;flex-direction:column;gap:44px;background:#F3F4F7;color:#14171F;font-size:16px;line-height:1.45;padding-bottom:56px;box-shadow:0 2px 12px rgba(20,20,40,.15)">
+<div style="display:flex;flex-direction:column">
+<div style="height:10px;background:radial-gradient(circle at 12px -2px,#A3162B 9px,transparent 10px) 0 0/24px 10px repeat-x,#5A0A17"></div>
+<div style="display:flex;align-items:center;gap:16px;padding:30px 48px 0">
+<div style="background:#1A1424;color:#F2B630;font-weight:700;font-size:20px;padding:6px 14px;border-radius:6px">1b</div>
+<div style="display:flex;flex-direction:column">
+<div style="font-size:32px;font-weight:700">Coulisses</div>
+<div style="color:#4A5163">Surfaces de travail blanches et neutres, en-tête « nuit de scène » bordé d'un lambrequin de velours. L'or des projecteurs marque l'étape en cours et le focus. Sans-serif partout ; l'empattement est réservé à la plaque du Spectacle.</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-size:24px;font-weight:700">Logo et icône d'onglet</div>
+<div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap">
+<svg width="120" height="120" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="14" style="fill:#1A1424"></rect><path d="M2 16a14 14 0 0 1 14-14h68a14 14 0 0 1 14 14v6H2z" style="fill:#A3162B"></path><polygon points="50,22 18,90 82,90" style="fill:#F2B630;opacity:.9"></polygon><polygon points="28,90 36,62 48,55 52,38 58,47 64,35 66,56 78,60 70,66 76,90" style="fill:#1A1424"></polygon></svg>
+<svg width="48" height="48" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="14" style="fill:#1A1424"></rect><path d="M2 16a14 14 0 0 1 14-14h68a14 14 0 0 1 14 14v6H2z" style="fill:#A3162B"></path><polygon points="50,22 18,90 82,90" style="fill:#F2B630;opacity:.9"></polygon><polygon points="28,90 36,62 48,55 52,38 58,47 64,35 66,56 78,60 70,66 76,90" style="fill:#1A1424"></polygon></svg>
+<svg width="16" height="16" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="14" style="fill:#1A1424"></rect><path d="M2 16a14 14 0 0 1 14-14h68a14 14 0 0 1 14 14v6H2z" style="fill:#A3162B"></path><polygon points="50,22 18,90 82,90" style="fill:#F2B630;opacity:.9"></polygon><polygon points="28,90 36,62 48,55 52,38 58,47 64,35 66,56 78,60 70,66 76,90" style="fill:#1A1424"></polygon></svg>
+<div style="display:flex;align-items:center;gap:12px;background:#1A1424;padding:12px 20px;border-radius:10px">
+<svg width="36" height="36" viewBox="0 0 100 100"><rect x="2" y="2" width="96" height="96" rx="14" style="fill:#1A1424;stroke:#4A3F5C;stroke-width:4"></rect><path d="M2 16a14 14 0 0 1 14-14h68a14 14 0 0 1 14 14v6H2z" style="fill:#A3162B"></path><polygon points="50,22 18,90 82,90" style="fill:#F2B630;opacity:.9"></polygon><polygon points="28,90 36,62 48,55 52,38 58,47 64,35 66,56 78,60 70,66 76,90" style="fill:#1A1424"></polygon></svg>
+<div style="font-size:20px;font-weight:700;color:#FFFFFF">Théâtre d'ombre augmenté</div>
+</div>
+<div style="color:#4A5163;max-width:340px">Bandeau de rideau, faisceau de projecteur, loup en ombre : les trois signes du Spectacle dans un carré.</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-size:24px;font-weight:700">Palette (variables existantes de style.css)</div>
+<div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px">
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#F3F4F7;border:1px solid #CDD2DC"></div><b>--fond</b><span style="color:#4A5163">#F3F4F7 · texte 16,3:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#FFFFFF;border:1px solid #CDD2DC"></div><b>--carte</b><span style="color:#4A5163">#FFFFFF · doux 7,9:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#14171F"></div><b>--texte</b><span style="color:#4A5163">#14171F</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#4A5163"></div><b>--texte-doux</b><span style="color:#4A5163">#4A5163 · 7,2:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#CDD2DC"></div><b>--bord</b><span style="color:#4A5163">#CDD2DC</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#E3E6EC"></div><b>--gris-clair</b><span style="color:#4A5163">#E3E6EC</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#1A1424"></div><b>--nuit</b><span style="color:#4A5163">#1A1424 · blanc 18:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#2D4FB8"></div><b>--bleu</b><span style="color:#4A5163">#2D4FB8 · blanc 7,2:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#1F3A8F"></div><b>--bleu-fonce</b><span style="color:#4A5163">#1F3A8F · 10,2:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#C62828"></div><b>--rouge</b><span style="color:#4A5163">#C62828 · blanc 5,6:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#9A1C1C"></div><b>--rouge-fonce</b><span style="color:#4A5163">#9A1C1C · survol</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#1E7B34"></div><b>--vert</b><span style="color:#4A5163">#1E7B34 · blanc 5,3:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#DDF1E1"></div><b>--vert-clair</b><span style="color:#4A5163">#DDF1E1 · vert 5,5:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#954A00"></div><b>--orange</b><span style="color:#4A5163">#954A00 · 5,5:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#FFE9D2"></div><b>--orange-clair</b><span style="color:#4A5163">#FFE9D2</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#F2B630"></div><b>--or</b><span style="color:#4A5163">#F2B630 · sur nuit 9,8:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:#A3162B"></div><b>--velours</b><span style="color:#4A5163">#A3162B · lambrequin</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:56px;border-radius:8px;background:linear-gradient(90deg,#5A0A17,#C8263C)"></div><b>--velours-ombre / -clair</b><span style="color:#4A5163">#5A0A17 / #C8263C</span></div>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;padding:0 48px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font-size:24px;font-weight:700">Typographie (système)</div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#4A5163">Titre 28</span><span style="font-size:28px;font-weight:700;letter-spacing:-.01em">1. Entraîner l'IA</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#4A5163">Sous-titre 20</span><span style="font-size:20px;font-weight:700">Je vois : Loup</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#4A5163">Texte 16</span><span>Photographiez l'écran du théâtre sans personnage.</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#4A5163">Bouton 16/600</span><span style="font-weight:600">Ajouter des photos</span></div>
+<div style="display:flex;align-items:baseline;gap:16px"><span style="width:110px;color:#4A5163">Plaque scène</span><span style="font-family:Georgia,serif;font-size:28px;font-weight:700;color:#B07A00">Sur scène : Loup</span></div>
+<div style="color:#4A5163">Texte et titres : "Segoe UI", system-ui, sans-serif · Scène uniquement : Georgia · Code : Consolas, monospace.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font-size:24px;font-weight:700">Rayons, ombres, espaces</div>
+<div style="display:flex;gap:16px;align-items:center">
+<div style="width:72px;height:56px;background:#FFF;border:1px solid #CDD2DC;border-radius:6px"></div>
+<div style="width:72px;height:56px;background:#FFF;border:1px solid #CDD2DC;border-radius:12px;box-shadow:0 1px 2px rgba(20,23,31,.10),0 2px 6px rgba(20,23,31,.06)"></div>
+<div style="width:72px;height:56px;background:#FFF;border:1px solid #CDD2DC;border-radius:999px"></div>
+</div>
+<div style="color:#4A5163">--rayon 12px (cartes) · 6px (boutons, champs) · 999px (pastilles). Ombre légère et froide, une seule.</div>
+<div style="display:flex;gap:8px;align-items:flex-end"><div style="width:4px;height:4px;background:#2D4FB8"></div><div style="width:8px;height:8px;background:#2D4FB8"></div><div style="width:12px;height:12px;background:#2D4FB8"></div><div style="width:16px;height:16px;background:#2D4FB8"></div><div style="width:24px;height:24px;background:#2D4FB8"></div><div style="width:32px;height:32px;background:#2D4FB8"></div><span style="color:#4A5163">4 · 8 · 12 · 16 · 24 · 32</span></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-size:24px;font-weight:700">Icônes (même jeu, trait 2 px)</div>
+<div style="display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:10px">
+<sc-for list="{{ icons }}" as="it" hint-placeholder-count="32">
+<div style="display:flex;align-items:center;gap:10px;padding:10px;background:#FFFFFF;border:1px solid #CDD2DC;border-radius:8px;color:#14171F">
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="{{ it.d }}"></path></svg>
+<span style="font-size:16px;line-height:1.15">{{ it.label }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font-size:24px;font-weight:700;padding:0 48px">Barre du haut — 1366 px, sur une seule ligne</div>
+<div style="display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:10px;height:60px;padding:0 16px;background:#1A1424;color:#FFFFFF">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="14" style="fill:#1A1424;stroke:#4A3F5C;stroke-width:4"></rect><path d="M2 16a14 14 0 0 1 14-14h68a14 14 0 0 1 14 14v6H2z" style="fill:#A3162B"></path><polygon points="50,22 18,90 82,90" style="fill:#F2B630;opacity:.9"></polygon><polygon points="28,90 36,62 48,55 52,38 58,47 64,35 66,56 78,60 70,66 76,90" style="fill:#1A1424"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FFE9D2;color:#954A00;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · à connecter</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#DDF1E1;color:#1E6B2E;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#DDF1E1;color:#1E6B2E;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #4A3F5C;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.equipe }}"></path></svg><b>Léa, Tom, Inès</b><span style="width:8px;height:8px;border-radius:50%;background:#F2B630"></span><span style="color:#F2B630">non enregistré</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #4A3F5C"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#C62828;color:#FFFFFF;font-weight:700;white-space:nowrap;box-shadow:0 0 0 2px #FFFFFF"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="height:8px;background:radial-gradient(circle at 10px -2px,#A3162B 7px,transparent 8px) 0 0/20px 8px repeat-x,#F3F4F7"></div>
+<div style="display:flex;align-items:center;gap:8px;height:56px;padding:0 16px;background:#FFFFFF;border-bottom:1px solid #CDD2DC">
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;color:#1E6B2E;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#DDF1E1"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span>Entraîner</div>
+<div style="width:28px;height:2px;background:#1E7B34"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:999px;background:#1A1424;color:#FFFFFF;font-weight:700"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#F2B630;color:#1A1424">2</span>Programmer</div>
+<div style="width:28px;height:2px;background:#CDD2DC"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;color:#14171F;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #4A5163">3</span>Spectacle</div>
+<div style="flex:1"></div>
+<span style="color:#4A5163;font-weight:600">Niveau</span>
+<div style="display:flex;gap:4px;padding:3px;background:#E3E6EC;border-radius:8px">
+<div style="padding:0 12px;height:38px;display:flex;align-items:center;border-radius:6px">1 · Premiers pas</div>
+<div style="padding:0 12px;height:38px;display:flex;align-items:center;border-radius:6px">2 · Boucles et conditions</div>
+<div style="padding:0 12px;height:38px;display:flex;align-items:center;gap:6px;border-radius:6px;background:#FFFFFF;color:#1F3A8F;font-weight:700;box-shadow:0 1px 2px rgba(20,23,31,.2)"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>3 · Code Arduino</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#1E7B34;color:#FFFFFF;font-weight:700"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 260px 260px;gap:24px;padding:0 48px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div><b>Même organisation que 1a</b> (bande fixe + bande d'étapes) ; ce qui change, c'est l'habillage : la bande sombre est la « salle », le lambrequin rouge fait le lien avec l'écran Spectacle.</div>
+<div>L'étape en cours ressemble à un projecteur allumé (pastille or sur nuit) ; les étapes faites sont reliées par un trait vert.</div>
+<div><b>Tout éteindre</b> est cerclé de blanc pour se détacher du fond sombre.</div>
+</div>
+<div style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #CDD2DC;border-radius:12px;box-shadow:0 6px 16px rgba(20,23,31,.16);padding:6px">
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px;border-radius:6px;background:#E3E6EC;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.enregistrer }}"></path></svg>Enregistrer</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ouvrir }}"></path></svg>Ouvrir / nouveau</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.renommer }}"></path></svg>Changer les prénoms</div>
+</div>
+<div style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #CDD2DC;border-radius:12px;box-shadow:0 6px 16px rgba(20,23,31,.16);padding:6px">
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg>Aide</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.cours }}"></path></svg>Comprendre l'IA</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.led }}"></path></svg>Câblage des LED</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.diagnostic }}"></path></svg>Diagnostic du poste</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:16px;padding:0 48px">
+<div style="font-size:24px;font-weight:700">Boutons — états</div>
+<div style="display:grid;grid-template-columns:130px repeat(5,minmax(0,1fr));gap:14px 16px;align-items:center">
+<span></span><b>Normal</b><b>Survol</b><b>Focus clavier</b><b>Actif (appuyé)</b><b>Désactivé</b>
+<span style="color:#4A5163">Principal</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#2D4FB8;color:#FFF;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#1F3A8F;color:#FFF;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#2D4FB8;color:#FFF;font-weight:600;box-shadow:0 0 0 3px #F2B630,0 0 0 5px #1A1424"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#1F3A8F;color:#FFF;font-weight:600;box-shadow:inset 0 3px 0 rgba(0,0,0,.25);transform:translateY(1px)"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#E3E6EC;color:#4A5163;font-weight:600;border:2px dashed #A9B0BE"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+<span style="color:#4A5163">Secondaire</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#FFF;border:2px solid #2D4FB8;color:#2D4FB8;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#EBEFFA;border:2px solid #1F3A8F;color:#1F3A8F;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#FFF;border:2px solid #2D4FB8;color:#2D4FB8;font-weight:600;box-shadow:0 0 0 3px #F2B630,0 0 0 5px #1A1424"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#D5DDF4;border:2px solid #1F3A8F;color:#1F3A8F;font-weight:600;transform:translateY(1px)"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#F3F4F7;border:2px dashed #A9B0BE;color:#4A5163;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<span style="color:#4A5163">Démarrer</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#1E7B34;color:#FFF;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#175F28;color:#FFF;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#1E7B34;color:#FFF;font-weight:600;box-shadow:0 0 0 3px #F2B630,0 0 0 5px #1A1424"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#FFF;border:2px solid #1E7B34;color:#1E6B2E;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.stop }}"></path></svg>Arrêter</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#E3E6EC;color:#4A5163;font-weight:600;border:2px dashed #A9B0BE"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+<span style="color:#4A5163">Tout éteindre</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#C62828;color:#FFF;font-weight:700"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#9A1C1C;color:#FFF;font-weight:700"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#C62828;color:#FFF;font-weight:700;box-shadow:0 0 0 3px #F2B630,0 0 0 5px #1A1424"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:6px;background:#9A1C1C;color:#FFF;font-weight:700;box-shadow:inset 0 3px 0 rgba(0,0,0,.3);transform:translateY(1px)"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+<span style="color:#4A5163">Jamais désactivé</span>
+</div>
+<div style="color:#4A5163">Focus clavier : anneau or + liseré nuit, lisible sur blanc comme sur l'en-tête sombre. Désactivé : contour en pointillés en plus de la couleur.</div>
+</div>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;padding:0 48px">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-size:24px;font-weight:700">Pastilles d'état</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px;padding:16px;background:#1A1424;border-radius:12px">
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FFE9D2;color:#954A00"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · à connecter</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#DDF1E1;color:#1E6B2E"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3E6EC;color:#14171F"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · simulée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FDE7E7;color:#B02020"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.attention }}"></path></svg><b>Webcam</b> · refusée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FFE9D2;color:#954A00"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · à entraîner</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#DDF1E1;color:#1E6B2E"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+</div>
+<div style="color:#4A5163">Mêmes règles que 1a : le mot porte l'état, l'icône d'alerte signale l'erreur.</div>
+<div style="font-size:24px;font-weight:700;margin-top:8px">Champ texte</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#4A5163">Normal</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #CDD2DC;border-radius:6px;background:#FFF;color:#4A5163">ex. Loup</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#4A5163">Focus</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #1A1424;border-radius:6px;background:#FFF;box-shadow:0 0 0 3px #F2B630">Sorcière|</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#4A5163">Erreur</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #C62828;border-radius:6px;background:#FFF">Loup</div><div style="display:flex;align-items:center;gap:6px;color:#B02020"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.attention }}"></path></svg>Ce personnage existe déjà.</div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span style="color:#4A5163">Désactivé</span><div style="height:44px;display:flex;align-items:center;padding:0 12px;border:2px dashed #CDD2DC;border-radius:6px;background:#E3E6EC;color:#4A5163">verrouillé par le professeur</div></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="font-size:24px;font-weight:700">Carte personnage</div>
+<div style="display:flex;flex-direction:column;gap:12px;padding:16px;background:#FFFFFF;border:1px solid #CDD2DC;border-radius:12px;box-shadow:0 1px 2px rgba(20,23,31,.10),0 2px 6px rgba(20,23,31,.06)">
+<div style="display:flex;gap:14px;align-items:center">
+<div style="width:72px;height:72px;border-radius:10px;background:radial-gradient(circle at 50% 40%,#FFF6DA,#E7D3A0);border:3px solid #1A1424;display:flex;align-items:flex-end;justify-content:center;flex:none"><svg width="58" height="58" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#14171F"></polygon></svg></div>
+<div style="display:flex;flex-direction:column;gap:2px;flex:1">
+<div style="font-size:22px;font-weight:700">Loup</div>
+<div style="display:flex;align-items:center;gap:6px;color:#1E6B2E;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>22 photos · prêt (30 conseillées)</div>
+<div style="height:8px;border-radius:4px;background:#E3E6EC;overflow:hidden"><div style="width:73%;height:100%;background:#1E7B34"></div></div>
+</div>
+<div style="display:flex;gap:6px">
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #CDD2DC;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.renommer }}"></path></svg></div>
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #CDD2DC;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.vider }}"></path></svg></div>
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #CDD2DC;border-radius:6px;color:#C62828"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.supprimer }}"></path></svg></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:10px;height:52px;border-radius:6px;background:#2D4FB8;color:#FFF;font-weight:600"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.photo }}"></path></svg>Ajouter des photos <span style="font-weight:400">(garder appuyé)</span></div>
+</div>
+<div style="color:#4A5163">La vignette a un cadre « nuit » comme l'écran du Spectacle : chaque personnage est une petite scène.</div>
+<div style="font-size:24px;font-weight:700;margin-top:8px">Confiance et « Pourquoi ? »</div>
+<div style="display:grid;grid-template-columns:100px minmax(0,1fr) 56px;gap:8px 12px;align-items:center">
+<span>Fond vide</span><div style="height:16px;border-radius:999px;background:#E3E6EC"></div><span>0 %</span>
+<b style="color:#1E6B2E">✓ Loup</b><div style="height:16px;border-radius:999px;background:#E3E6EC;overflow:hidden"><div style="width:100%;height:100%;background:#1E7B34"></div></div><b>100 %</b>
+</div>
+<div style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;background:#FFFFFF;border:2px solid #F2B630;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#954A00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg><b>Pourquoi au moins 15 photos, et variées ?</b><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;margin-left:auto"><path d="{{ ic.chevron }}"></path></svg></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding:0 48px">
+<div style="font-size:24px;font-weight:700">Catégories de blocs (texte blanc)</div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px">
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#965A00;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Événements</div><span style="color:#4A5163">#965A00 · 5,6:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#2E7D32;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">LED et sons</div><span style="color:#4A5163">#2E7D32 · 5,1:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#2F64B0;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Contrôle</div><span style="color:#4A5163">#2F64B0 · 5,9:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#00756A;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Opérateurs</div><span style="color:#4A5163">#00756A · 5,6:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#B8175A;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Variables</div><span style="color:#4A5163">#B8175A · 6,3:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#6A3FA0;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">IA</div><span style="color:#4A5163">#6A3FA0 · 7,4:1</span></div>
+<div style="display:flex;flex-direction:column;gap:4px"><div style="height:48px;border-radius:12px;background:#52616B;color:#FFF;font-weight:700;display:flex;align-items:center;padding:0 12px">Affichage</div><span style="color:#4A5163">#52616B · 6,4:1</span></div>
+</div>
+<div style="color:#4A5163">Identiques à 1a : les catégories sont indépendantes de la direction choisie.</div>
+</div>
+</div>
+
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const IC = {
+  carte: ["M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4", "Carte (🔌)"],
+  webcam: ["M12 3a7 7 0 1 0 0 14a7 7 0 1 0 0-14zM12 7a3 3 0 1 0 0 6a3 3 0 1 0 0-6zM8 21h8M12 17v4", "Webcam (📷)"],
+  ia: ["M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z", "IA (🧠)"],
+  led: ["M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z", "LED (💡)"],
+  son: ["M4 9h4l5-4v14l-5-4H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12", "Son (🔊)"],
+  photo: ["M3 8h4l2-3h6l2 3h4v11H3zM12 10a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7z", "Photo (📸)"],
+  supprimer: ["M4 7h16M10 3h4M6 7l1 14h10l1-14M10 11v6M14 11v6", "Supprimer (🗑️)"],
+  renommer: ["M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4", "Renommer (✏️)"],
+  vider: ["M4 15l9-9l6 6l-8 8H8zM9 10l6 6M12 20h8", "Vider"],
+  spectacle: ["M3 3h18M4 3c0 7 2 13 6 17M20 3c0 7-2 13-6 17M3 21h18", "Spectacle (🎬)"],
+  enregistrer: ["M5 3h11l3 3v15H5zM8 3v5h7V3M8 21v-7h8v7", "Enregistrer"],
+  ouvrir: ["M3 6h6l2 2h10v11H3z", "Ouvrir"],
+  aide: ["M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01", "Aide"],
+  eteindre: ["M12 3v9M7 6.3a7.5 7.5 0 1 0 10 0", "Tout éteindre"],
+  ajouter: ["M12 5v14M5 12h14", "Ajouter"],
+  masquer: ["M3 12s3.5-6 9-6c1.6 0 3 .5 4.2 1.2M21 12s-3.5 6-9 6c-1.6 0-3-.5-4.2-1.2M4 20L20 4M9.5 14.5a3.5 3.5 0 0 1 5-5", "Masquer"],
+  pleinecran: ["M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5", "Plein écran"],
+  lecture: ["M7 4l13 8-13 8z", "Démarrer"],
+  stop: ["M6 6h12v12H6z", "Arrêter"],
+  cours: ["M4 5c3-1 6-1 8 1c2-2 5-2 8-1v14c-3-1-6-1-8 1c-2-2-5-2-8-1zM12 6v14", "Cours"],
+  ok: ["M5 12.5l4.5 4.5L19 7", "Prêt"],
+  attention: ["M12 3l10 18H2zM12 10v5M12 18v.01", "Erreur"],
+  info: ["M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 11v6M12 7.5v.01", "Info"],
+  personnage: ["M12 3a4 4 0 1 0 0 8a4 4 0 1 0 0-8zM4 21c1-4.5 4-7 8-7s7 2.5 8 7z", "Personnage"],
+  equipe: ["M9 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7zM2 20c.8-4 3.5-6 7-6s6.2 2 7 6zM16 4.5a3.2 3.2 0 0 1 0 6M18 14c2 .8 3.4 2.8 4 6", "Équipe"],
+  cadenas: ["M6 11h12v10H6zM8.5 11V7.5a3.5 3.5 0 0 1 7 0V11", "Verrouillé"],
+  copier: ["M9 9h11v11H9zM5 15H4V4h11v1", "Copier"],
+  telecharger: ["M12 4v11M7 10l5 5 5-5M4 20h16", "Télécharger"],
+  fermer: ["M6 6l12 12M18 6L6 18", "Fermer"],
+  chevron: ["M6 9l6 6 6-6", "Menu"],
+  prof: ["M2 9l10-5 10 5-10 5zM6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6", "Professeur"],
+  diagnostic: ["M3 12h4l2-6 4 12 2-6h6", "Diagnostic"]
+};
+class Component extends DCLogic {
+  renderVals() {
+    const ic = {}; const icons = [];
+    for (const k in IC) { ic[k] = IC[k][0]; icons.push({ d: IC[k][0], label: IC[k][1] }); }
+    return { ic, icons };
+  }
+}
+</script>
+</body>
+</html>

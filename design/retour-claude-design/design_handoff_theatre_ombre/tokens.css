@@ -1,0 +1,44 @@
+/* Théâtre d'ombre augmenté — direction 1a « Papier & lanterne »
+   À coller en tête de site/css/style.css (mêmes noms de variables). Contrastes WCAG indiqués. */
+:root{
+  /* Surfaces et texte */
+  --fond:#F7F1E5;          /* texte 15,4:1 */
+  --carte:#FFFDF8;         /* texte-doux 7,5:1 */
+  --texte:#1E1A16;
+  --texte-doux:#5C5247;    /* 6,8:1 sur --fond */
+  --bord:#D9CCB6;
+  --gris-clair:#EFE7D8;
+  --nuit:#241E1A;          /* blanc 16,5:1 — bande du haut */
+  /* Actions */
+  --bleu:#1F4E99;          /* blanc 8,1:1 */
+  --bleu-fonce:#163A73;    /* blanc 11,1:1 — survol, actif */
+  --bleu-pale:#EAF0FA;     /* nouveau : survol bouton secondaire */
+  --rouge:#B3261E;         /* blanc 6,5:1 — Tout éteindre */
+  --rouge-fonce:#8C1D17;
+  --rouge-clair:#FBE4E1;   /* nouveau : fond pastille erreur, rouge 5,4:1 */
+  --vert:#2E6B30;          /* blanc 6,4:1 */
+  --vert-clair:#E3F0DF;    /* vert 5,5:1 */
+  --orange:#8A4F00;        /* 5,6:1 sur --orange-clair ; aussi anneau de focus */
+  --orange-clair:#FBEBCB;
+  /* Scène du spectacle */
+  --velours:#8E1B24;
+  --velours-clair:#B42A35;
+  --velours-ombre:#4A0D13;
+  --or:#E9C46A;            /* 9,9:1 sur --nuit */
+  /* Forme */
+  --rayon:10px;            /* cartes */
+  --rayon-petit:6px;       /* boutons, champs */
+  --ombre:0 1px 0 var(--bord),0 3px 8px rgba(60,40,20,.10);
+  --focus:0 0 0 2px var(--fond),0 0 0 5px var(--orange);
+  /* Espaces : 4 8 12 16 24 32 */
+  --police:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --police-titre:Georgia,"Times New Roman",serif;
+  --police-code:Consolas,"Courier New",monospace;
+  --hauteur-cible:44px;
+}
+:focus-visible{outline:none;box-shadow:var(--focus)}
+button:disabled{border-style:dashed}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Catégories Blockly proposées (texte blanc ≥ 5:1) :
+   Événements #965A00 · LED et sons #2E7D32 · Contrôle #2F64B0 · Opérateurs #00756A
+   Variables #B8175A · IA #6A3FA0 · Affichage #52616B */

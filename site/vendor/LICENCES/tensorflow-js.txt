@@ -1,0 +1,2 @@
+TensorFlow.js (@tensorflow/tfjs) et @tensorflow-models/mobilenet — Google LLC.
+Licence Apache 2.0 : https://www.apache.org/licenses/LICENSE-2.0

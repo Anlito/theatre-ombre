@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>body{margin:0;background:#DCD8D0}a{color:#1F4E99}a:hover{color:#163A73}</style>
+</helmet>
+<section style="display:flex;flex-direction:column;gap:56px;padding:64px;width:max-content;font-family:'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.4;color:#1E1A16">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font-family:Georgia,serif;font-size:32px;font-weight:700">Direction 1a — écrans prioritaires, 1366 × 768</div>
+<div style="font-size:18px;color:#4A4038">Démarrage · 1. Entraîner · 2. Programmer niveau 3. Les autres écrans suivront une fois ceux-ci validés.</div>
+</div>
+
+<div style="font-family:Georgia,serif;font-size:26px;font-weight:700;padding-top:8px;border-top:2px solid #B8A98F">Lot 2 — Niveau 1, Aide, Spectacle, Mode professeur</div>
+
+<!-- ===== 05 Niveau 1 ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="05 Programmer niveau 1" style="width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #5C5247;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.equipe }}"></path></svg><b>Léa, Tom, Inès</b><span style="display:flex;align-items:center;gap:4px;color:#A6D49F"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>enregistré</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #5C5247"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:60px;flex:none;padding:0 16px;background:#FFFDF8;border-bottom:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;color:#2E6B30;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#E3F0DF"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span>Entraîner</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:6px;background:#1F4E99;color:#FFFFFF;font-weight:700"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#FFFFFF;color:#1F4E99">2</span>Programmer</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #5C5247">3</span>Spectacle</div>
+<div style="flex:1"></div>
+<span style="color:#5C5247;font-weight:600">Niveau</span>
+<div style="display:flex;border:2px solid #D9CCB6;border-radius:6px;overflow:hidden">
+<div style="padding:0 12px;height:40px;display:flex;align-items:center;gap:6px;background:#EAF0FA;color:#163A73;font-weight:700;border-right:2px solid #1F4E99"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>1 · Premiers pas</div>
+<div style="padding:0 12px;height:40px;display:flex;align-items:center">2 · Boucles et conditions</div>
+<div style="padding:0 12px;height:40px;display:flex;align-items:center;border-left:2px solid #D9CCB6">3 · Code Arduino</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#FFFDF8;border:2px solid #2E6B30;color:#2E6B30;font-weight:700"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.stop }}"></path></svg>Arrêter</div>
+<span style="display:flex;align-items:center;gap:6px;color:#2E6B30;font-weight:700;white-space:nowrap"><span style="width:12px;height:12px;border-radius:50%;background:#2E6B30"></span>en marche</span>
+</div>
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px;padding:12px 16px 16px">
+<div style="display:flex;flex-direction:column;gap:10px;min-height:0">
+<div style="position:relative;height:240px;flex:none;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#FFF8E6,#EAD7A6);display:flex;align-items:flex-end;justify-content:center;border:1px solid #D9CCB6">
+<svg width="180" height="180" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg>
+<div style="position:absolute;top:8px;right:8px;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg></div>
+<div style="position:absolute;top:8px;left:8px;display:flex;align-items:center;height:44px;padding:0 10px;border-radius:6px;background:#FFFDF8;border:2px solid #D9CCB6;font-weight:600">Réduire</div>
+</div>
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700;color:#2E6B30">Je vois : Loup</div>
+<div style="display:grid;grid-template-columns:90px minmax(0,1fr) 50px;gap:4px 10px;align-items:center">
+<span>Fond vide</span><div style="height:14px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span style="text-align:right">0 %</span>
+<b style="color:#2E6B30">✓ Loup</b><div style="height:14px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6;overflow:hidden"><div style="height:100%;background:#2E6B30"></div></div><b style="text-align:right">100 %</b>
+<span>Sorcière</span><div style="height:14px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span style="text-align:right">0 %</span>
+<span>Roi</span><div style="height:14px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span style="text-align:right">0 %</span>
+</div>
+<div style="height:1px;background:#D9CCB6;margin:2px 0"></div>
+<div style="display:flex;align-items:baseline;justify-content:space-between"><b>Ce que la carte a reçu</b><a href="#" style="color:#1F4E99">Brancher les LED ?</a></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px">
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;background:#FBEBCB;border:2px solid #E9C46A;font-weight:700"><span style="width:14px;height:14px;border-radius:50%;background:#F5B700;box-shadow:0 0 6px #F5B700"></span>9 · allumée</div>
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;border:2px solid #D9CCB6;color:#5C5247"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #5C5247;box-sizing:border-box"></span>10 · éteinte</div>
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;border:2px solid #D9CCB6;color:#5C5247"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #5C5247;box-sizing:border-box"></span>11 · éteinte</div>
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;border:2px solid #D9CCB6;color:#5C5247"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #5C5247;box-sizing:border-box"></span>12 · éteinte</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px dashed #B8A98F;background:#FFFDF8"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.son }}"></path></svg><b>Sons</b><span style="color:#5C5247">· Tonnerre, Rire</span><span style="margin-left:auto;color:#1F4E99;font-weight:600">+ mp3 / wav</span></div>
+</div>
+<div style="display:flex;border:1px solid #D9CCB6;border-radius:10px;overflow:hidden;background:#FFFDF8">
+<div style="width:156px;flex:none;display:flex;flex-direction:column;padding:8px 0;background:#EFE7D8;border-right:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#965A00"></span>Événements</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#2E7D32"></span>LED et sons</div>
+<div style="display:flex;align-items:center;gap:10px;height:44px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#2F64B0"></span>Contrôle</div>
+</div>
+<div style="flex:1;position:relative;background:radial-gradient(circle,#D9CCB6 1px,transparent 1.5px) 0 0/20px 20px,#FFFDF8;color:#FFFFFF;font-weight:700">
+<div style="position:absolute;left:60px;top:60px;display:flex;flex-direction:column;align-items:flex-start">
+<div style="height:48px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#965A00;border-radius:22px 22px 6px 6px">quand je vois <span style="padding:0 8px;border-radius:10px;background:#764600">Loup ▾</span></div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px">allumer la LED broche <span style="padding:0 8px;border-radius:10px;background:#1F5F23">9 ▾</span></div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px">jouer le son <span style="padding:0 8px;border-radius:10px;background:#1F5F23">Tonnerre ▾</span></div>
+</div>
+<div style="position:absolute;left:470px;top:60px;display:flex;flex-direction:column;align-items:flex-start">
+<div style="height:48px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#965A00;border-radius:22px 22px 6px 6px">quand je vois <span style="padding:0 8px;border-radius:10px;background:#764600">Roi ▾</span></div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px">allumer la LED broche <span style="padding:0 8px;border-radius:10px;background:#1F5F23">10 ▾</span></div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2F64B0;border-radius:6px">attendre <span style="padding:0 10px;border-radius:12px;background:#FFF;color:#1E1A16">2</span> secondes</div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px">éteindre la LED broche <span style="padding:0 8px;border-radius:10px;background:#1F5F23">10 ▾</span></div>
+</div>
+<div style="position:absolute;left:60px;top:300px;display:flex;flex-direction:column;align-items:flex-start">
+<div style="height:48px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#965A00;border-radius:22px 22px 6px 6px">quand je ne vois plus <span style="padding:0 8px;border-radius:10px;background:#764600">Loup ▾</span></div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px">éteindre la LED broche <span style="padding:0 8px;border-radius:10px;background:#1F5F23">9 ▾</span></div>
+</div>
+<div style="position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px">
+<div style="width:44px;height:44px;border-radius:50%;background:#FFFDF8;border:2px solid #D9CCB6;display:flex;align-items:center;justify-content:center;color:#1E1A16"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.ajouter }}"></path></svg></div>
+<div style="width:44px;height:44px;border-radius:50%;background:#FFFDF8;border:2px solid #D9CCB6;display:flex;align-items:center;justify-content:center;color:#1E1A16"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="M5 12h14"></path></svg></div>
+<div style="width:44px;height:44px;border-radius:50%;background:#FFFDF8;border:2px solid #D9CCB6;display:flex;align-items:center;justify-content:center;color:#5C5247"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.supprimer }}"></path></svg></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">05 · 2. Programmer, niveau 1</div>
+<div>1. Colonne webcam ouverte mais resserrée à 340 px, sans défilement : webcam, confiance, LED reçues, sons.</div>
+<div>2. État du programme à côté du bouton : « Arrêter » + pastille « en marche » (mot + couleur).</div>
+<div>3. Pastille équipe : « enregistré » avec coche une fois le fichier sauvegardé.</div>
+<div>4. Le dépôt de sons devient une ligne ; un clic ouvre le sélecteur de fichiers.</div>
+<div>5. Le niveau 2 suit la même grille, avec le panneau Messages / Variables du niveau 3 sous les blocs.</div>
+</div>
+</div>
+
+<!-- ===== 08 Aide ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="08 Aide" style="position:relative;width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;background:#F7F1E5;color:#241E1A"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="flex:1;background:#FFFDF8"></div>
+<div style="position:absolute;left:0;right:0;top:60px;bottom:0;background:rgba(36,30,26,.55)"></div>
+<div style="position:absolute;top:68px;right:16px;width:720px;height:692px;display:flex;flex-direction:column;background:#FFFDF8;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.35);overflow:hidden">
+<div style="display:flex;align-items:center;gap:12px;height:64px;flex:none;padding:0 12px 0 24px;border-bottom:1px solid #D9CCB6">
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#8A4F00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg>
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700;flex:1">Aide</div>
+<div style="display:flex;border:2px solid #D9CCB6;border-radius:6px;overflow:hidden">
+<div style="padding:0 12px;height:36px;display:flex;align-items:center">Niveau 1</div>
+<div style="padding:0 12px;height:36px;display:flex;align-items:center;background:#EAF0FA;color:#163A73;font-weight:700;border-left:2px solid #1F4E99;border-right:2px solid #1F4E99">Niveau 2</div>
+<div style="padding:0 12px;height:36px;display:flex;align-items:center">Niveau 3</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #D9CCB6"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.fermer }}"></path></svg></div>
+</div>
+<div style="flex:1;min-height:0;overflow:auto;padding:14px 24px;display:flex;flex-direction:column;gap:8px;line-height:1.35">
+<div style="font-family:Georgia,serif;font-size:21px;font-weight:700">Niveau 2 · Boucles et conditions</div>
+<div>C'est un <b>autre programme</b> que celui du niveau 1 : en changeant de niveau, chacun retrouve le sien.</div>
+<div style="display:flex;flex-direction:column;gap:5px">
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 10px;border-radius:8px;background:#965A00;color:#FFF;font-weight:700">quand le programme démarre</span><span>Tout part de là (il n'y a plus « quand je vois »).</span></div>
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 10px;border-radius:8px;background:#2F64B0;color:#FFF;font-weight:700">répéter indéfiniment</span><span>pour que le programme surveille l'IA en boucle.</span></div>
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 10px;border-radius:8px;background:#2F64B0;color:#FFF;font-weight:700">si … alors … sinon</span><span>choisir une action selon une condition, par exemple « si je vois Loup ? ».</span></div>
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 10px;border-radius:8px;background:#00756A;color:#FFF;font-weight:700">Opérateurs</span><span>comparer (=, ≠, &lt;, &gt;) et combiner (et, ou, non). Exemple : « si personnage vu = Loup <i>et</i> confiance de Loup &gt; 80 ».</span></div>
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 10px;border-radius:8px;background:#B8175A;color:#FFF;font-weight:700">Variables</span><span>une boîte qui garde un nombre, par exemple un compteur de passages.</span></div>
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 10px;border-radius:8px;background:#52616B;color:#FFF;font-weight:700">écrire</span><span>affiche un message sous les blocs, pour comprendre ce que fait le programme.</span></div>
+<div style="display:flex;gap:10px;align-items:baseline"><span style="flex:none;padding:0 8px;border-radius:8px;border:3px solid #B3261E;font-weight:700">bloc entouré de rouge</span><span>il est incomplet : remplis la case vide avant de démarrer.</span></div>
+</div>
+<div style="font-family:Georgia,serif;font-size:21px;font-weight:700;margin-top:4px">Mini-lexique</div>
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 16px">
+<b>Catégorie</b><span>Un personnage que l'IA doit reconnaître (ex. « Loup »). « Fond vide » = personne.</span>
+<b>Exemple</b><span>Une photo donnée à l'IA pour qu'elle apprenne une catégorie.</span>
+<b>Confiance</b><span>À quel point l'IA est sûre d'elle, en %. 100 % = certaine.</span>
+<b>Broche</b><span>Une des prises numérotées de la carte Arduino (2 à 13) où l'on branche une LED.</span>
+</div>
+</div>
+<div style="display:flex;align-items:center;gap:12px;height:72px;flex:none;padding:0 24px;border-top:1px solid #D9CCB6;background:#F7F1E5">
+<svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#1F4E99;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.cours }}"></path></svg><a href="#" style="color:#1F4E99;font-weight:600">Comprendre comment l'IA reconnaît les personnages</a>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;height:44px;padding:0 20px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:700">J'ai compris</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">08 · Aide</div>
+<div>1. Panneau latéral à droite : les blocs restent visibles à gauche pendant la lecture.</div>
+<div>2. Les emojis du texte sont remplacés par de mini-blocs aux couleurs des catégories : l'élève reconnaît ce qu'il cherchera dans la palette.</div>
+<div>3. Onglets de niveau en tête ; le niveau en cours est ouvert par défaut. La consigne « carte qui ne répond pas » passe dans Diagnostic.</div>
+<div>4. Pied fixe : lien vers le cours + « J'ai compris ».</div>
+</div>
+</div>
+
+<!-- ===== 09 Spectacle fermé ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="09 Spectacle rideau fermé" style="width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #5C5247;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.equipe }}"></path></svg><b>Léa, Tom, Inès</b><span style="display:flex;align-items:center;gap:4px;color:#A6D49F"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>enregistré</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #5C5247"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:60px;flex:none;padding:0 16px;background:#FFFDF8;border-bottom:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;color:#2E6B30;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#E3F0DF"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span>Entraîner</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;color:#2E6B30;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#E3F0DF"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span>Programmer</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:6px;background:#1F4E99;color:#FFFFFF;font-weight:700"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#FFFFFF;color:#1F4E99">3</span>Spectacle</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#1F4E99;color:#FFFFFF;font-weight:700"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.pleinecran }}"></path></svg>Lancer le spectacle (plein écran)</div>
+</div>
+<div style="flex:1;min-height:0;padding:16px;display:flex">
+<div style="flex:1;position:relative;display:flex;flex-direction:column;border-radius:10px;overflow:hidden;background:#241E1A">
+<div style="height:72px;flex:none;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#B42A35,#8E1B24 70%,#4A0D13);border-bottom:3px solid #E9C46A;font-family:Georgia,serif;font-size:32px;font-weight:700;color:#E9C46A;letter-spacing:.04em">Le théâtre d'ombre de Léa, Tom, Inès</div>
+<div style="height:14px;flex:none;background:radial-gradient(circle at 14px 0,#8E1B24 12px,transparent 13px) 0 0/28px 14px repeat-x"></div>
+<div style="flex:1;margin-top:-14px;background:repeating-linear-gradient(90deg,#4A0D13 0,#8E1B24 22px,#B42A35 40px,#8E1B24 58px,#4A0D13 80px);display:flex;align-items:center;justify-content:center">
+<div style="width:2px;position:absolute;top:86px;bottom:0;left:50%;background:#2A070B"></div>
+<div style="position:relative;display:flex;align-items:center;gap:12px;padding:16px 26px;border-radius:10px;background:#241E1A;border:2px solid #E9C46A;color:#F7F1E5;font-size:20px;font-weight:600"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#E9C46A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.pleinecran }}"></path></svg>Cliquez sur « Lancer le spectacle » pour ouvrir le rideau</div>
+</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">09 · 3. Spectacle, rideau fermé</div>
+<div>1. Les deux actions montent dans la bande des étapes ; « Lancer le spectacle » est le seul bouton plein.</div>
+<div>2. Le fronton porte le nom de l'équipe dès cet écran (aujourd'hui seulement en plein écran).</div>
+<div>3. Rideau en dégradés CSS, sans image : léger à afficher.</div>
+<div>4. Le message central est une plaque nuit et or, pour qu'il ne se perde pas dans le velours.</div>
+</div>
+</div>
+
+<!-- ===== 10 Spectacle plein écran ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="10 Spectacle plein écran" style="position:relative;width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#140F0C;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="height:56px;flex:none;display:flex;align-items:center;gap:10px;padding:0 16px;background:#140F0C;color:#F7F1E5">
+<div style="font-family:Georgia,serif;font-size:20px;font-weight:700;flex:1">3. Spectacle</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:6px;border:2px solid #5C5247;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:6px;border:2px solid #5C5247;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.pleinecran }}"></path></svg>Quitter le plein écran</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="flex:1;position:relative;margin:0 12px 12px;border-radius:8px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#2E2219,#170F0B 70%)">
+<div style="position:absolute;left:0;right:0;top:0;height:66px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#B42A35,#8E1B24 70%,#4A0D13);border-bottom:3px solid #E9C46A;font-family:Georgia,serif;font-size:32px;font-weight:700;color:#E9C46A;letter-spacing:.04em;z-index:2">Le théâtre d'ombre de Léa, Tom, Inès</div>
+<div style="position:absolute;left:0;right:0;top:69px;height:14px;background:radial-gradient(circle at 14px 0,#8E1B24 12px,transparent 13px) 0 0/28px 14px repeat-x;z-index:2"></div>
+<div style="position:absolute;left:0;top:60px;bottom:0;width:170px;background:repeating-linear-gradient(90deg,#4A0D13 0,#8E1B24 20px,#B42A35 36px,#8E1B24 52px,#4A0D13 72px);border-radius:0 0 60% 0/0 0 12% 0"></div>
+<div style="position:absolute;left:0;top:380px;width:150px;height:12px;border-radius:6px;background:linear-gradient(180deg,#F3D58A,#B88A2E)"></div>
+<div style="position:absolute;right:0;top:60px;bottom:0;width:170px;background:repeating-linear-gradient(90deg,#4A0D13 0,#8E1B24 20px,#B42A35 36px,#8E1B24 52px,#4A0D13 72px);border-radius:0 0 0 60%/0 0 0 12%"></div>
+<div style="position:absolute;right:0;top:380px;width:150px;height:12px;border-radius:6px;background:linear-gradient(180deg,#F3D58A,#B88A2E)"></div>
+<div style="position:absolute;left:330px;top:96px;width:706px;height:100px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))">
+<div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:6px">
+<div style="width:40px;height:28px;border-radius:6px 6px 14px 14px;background:#3A322B;border:2px solid #5C5247;display:flex;align-items:flex-end;justify-content:center"><div style="width:26px;height:10px;border-radius:0 0 13px 13px;background:#FFE08A;box-shadow:0 0 14px 4px #FFD25A"></div></div>
+<div style="font-weight:700;color:#FFFFFF">LED 1 · allumée</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+<div style="width:40px;height:28px;border-radius:6px 6px 14px 14px;background:#3A322B;border:2px solid #5C5247;display:flex;align-items:flex-end;justify-content:center"><div style="width:26px;height:10px;border-radius:0 0 13px 13px;background:#1E1A16"></div></div>
+<div style="color:#D9CCB6">LED 2 · éteinte</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+<div style="width:40px;height:28px;border-radius:6px 6px 14px 14px;background:#3A322B;border:2px solid #5C5247;display:flex;align-items:flex-end;justify-content:center"><div style="width:26px;height:10px;border-radius:0 0 13px 13px;background:#1E1A16"></div></div>
+<div style="color:#D9CCB6">LED 3 · éteinte</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+<div style="width:40px;height:28px;border-radius:6px 6px 14px 14px;background:#3A322B;border:2px solid #5C5247;display:flex;align-items:flex-end;justify-content:center"><div style="width:26px;height:10px;border-radius:0 0 13px 13px;background:#1E1A16"></div></div>
+<div style="color:#D9CCB6">LED 4 · éteinte</div>
+</div>
+</div>
+<div style="position:absolute;left:340px;top:130px;width:160px;height:420px;background:linear-gradient(180deg,rgba(255,214,110,.45),rgba(255,214,110,0) 85%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);z-index:1"></div>
+<div style="position:absolute;left:383px;top:180px;width:600px;height:390px;box-sizing:border-box;border:10px solid #5A3E26;border-radius:4px;background:radial-gradient(ellipse at 40% 40%,#FFF8E6,#F3E2B8 60%,#E2CC98);display:flex;align-items:flex-end;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.5)">
+<svg width="300" height="300" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#14100D"></polygon></svg>
+</div>
+<div style="position:absolute;left:503px;top:586px;width:360px;height:96px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:linear-gradient(180deg,#2E2219,#1A120D);border:3px solid #E9C46A;box-shadow:0 0 0 1px #6B5323,0 6px 20px rgba(0,0,0,.5)">
+<div style="color:#E9C46A;font-size:16px;letter-spacing:.1em;text-transform:uppercase">Sur scène</div>
+<div style="font-family:Georgia,serif;font-size:48px;font-weight:700;line-height:1;color:#F3D58A">Loup</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">10 · Spectacle plein écran</div>
+<div>1. Écran conservé et peaufiné : rideaux avec plis, embrasses dorées, lambrequin festonné.</div>
+<div>2. Projecteurs dessinés (boîtier + lentille) ; le faisceau prend la couleur de la LED. Chaque projecteur garde son mot « allumée / éteinte ».</div>
+<div>3. Plaque « Sur scène » : petit titre en capitales or, nom en grand. Elle passe à « Sur scène : personne » pour le fond vide.</div>
+<div>4. Barre minimale en haut : pastille Carte, Masquer, Quitter, Tout éteindre toujours là.</div>
+<div>5. Ouverture du rideau : glissement de 0,8 s, coupé si prefers-reduced-motion.</div>
+</div>
+</div>
+
+<!-- ===== 11 Mode professeur ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="11 Mode professeur" style="position:relative;width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="flex:1;background:#FFFDF8"></div>
+<div style="position:absolute;left:0;right:0;top:60px;bottom:0;background:rgba(36,30,26,.55)"></div>
+<div style="position:absolute;left:283px;top:96px;width:800px;display:flex;flex-direction:column;background:#FFFDF8;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.35);overflow:hidden">
+<div style="display:flex;align-items:center;gap:12px;height:64px;padding:0 12px 0 24px;border-bottom:1px solid #D9CCB6">
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.prof }}"></path></svg>
+<div style="font-family:Georgia,serif;font-size:24px;font-weight:700;flex:1">Réglages du professeur</div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #D9CCB6"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.fermer }}"></path></svg></div>
+</div>
+<div style="display:grid;grid-template-columns:240px minmax(0,1fr);gap:16px 24px;align-items:center;padding:20px 24px">
+<b>Niveau des blocs</b>
+<div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border:2px solid #D9CCB6;border-radius:6px;background:#FFFDF8">1 · Premiers pas<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<b>Changement de niveau</b>
+<div style="display:flex;align-items:center;gap:10px;min-height:44px"><span style="width:26px;height:26px;flex:none;border-radius:4px;border:2px solid #1F4E99;background:#1F4E99;display:flex;align-items:center;justify-content:center;color:#FFF"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span><span>Verrouiller le niveau (les élèves ne peuvent pas le changer)</span></div>
+<b>Seuil de confiance</b>
+<div style="display:flex;align-items:center;gap:14px"><div style="position:relative;flex:1;height:8px;border-radius:4px;background:#EFE7D8"><div style="width:80%;height:100%;border-radius:4px;background:#1F4E99"></div><div style="position:absolute;left:80%;top:50%;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:#FFFDF8;border:3px solid #1F4E99;box-sizing:border-box"></div></div><b style="width:56px">80 %</b></div>
+<b>Images de suite avant « je vois »</b>
+<div style="display:flex;align-items:center;gap:12px"><div style="width:100px;height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #D9CCB6;border-radius:6px;box-sizing:border-box">5</div><span style="color:#5C5247">plus haut = plus stable, mais plus lent</span></div>
+<div style="display:flex;flex-direction:column;align-self:start;padding-top:10px"><b>Broches des LED</b><span style="color:#5C5247">4 au maximum · ~ = intensité réglable</span></div>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+<div style="display:flex;flex-direction:column;gap:4px"><span>LED 1</span><div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border:2px solid #D9CCB6;border-radius:6px">9 ~<svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.chevron }}"></path></svg></div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span>LED 2</span><div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border:2px solid #D9CCB6;border-radius:6px">10 ~<svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.chevron }}"></path></svg></div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span>LED 3</span><div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border:2px solid #D9CCB6;border-radius:6px">11 ~<svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.chevron }}"></path></svg></div></div>
+<div style="display:flex;flex-direction:column;gap:4px"><span>LED 4</span><div style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border:2px solid #D9CCB6;border-radius:6px">12<svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.chevron }}"></path></svg></div></div>
+</div>
+</div>
+<div style="margin:0 24px;padding:12px 14px;display:flex;gap:10px;background:#EFE7D8;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;margin-top:2px"><path d="{{ ic.info }}"></path></svg><span>Ces réglages s'appliquent au projet ouvert et deviennent ceux de cet ordinateur pour les nouveaux projets. Pour tous les postes : modifier <code style="font-family:Consolas,monospace">config.js</code> sur le site.</span></div>
+<div style="display:flex;gap:10px;padding:20px 24px">
+<div style="display:flex;align-items:center;height:44px;padding:0 20px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:700">Appliquer</div>
+<div style="display:flex;align-items:center;height:44px;padding:0 16px;border-radius:6px;border:2px solid #1F4E99;color:#1F4E99;font-weight:600">Revenir à config.js</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;height:44px;padding:0 16px;border-radius:6px;border:2px solid #D9CCB6;font-weight:600">Fermer</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">11 · Mode professeur</div>
+<div>1. Sobre : une grille libellé / réglage, rien de décoratif.</div>
+<div>2. L'aide « (4 au maximum, ~ = intensité réglable) » passe à 16 px sous le libellé.</div>
+<div>3. Ajout d'une phrase d'effet sous « Images de suite » ; à valider avec vous.</div>
+<div>4. « Fermer » est écarté à droite des deux actions qui modifient les réglages.</div>
+</div>
+</div>
+
+<div style="font-family:Georgia,serif;font-size:26px;font-weight:700;padding-top:8px;border-top:2px solid #B8A98F">Lot 1 — validé</div>
+
+<!-- ===== 01 Démarrage ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="01 Démarrage" style="width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBEBCB;color:#8A4F00;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · à connecter</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBEBCB;color:#8A4F00;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · à entraîner</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #5C5247"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:600px minmax(0,1fr);gap:56px;align-items:center;padding:0 72px">
+<div style="display:flex;flex-direction:column;background:#241E1A;border-radius:10px;padding:14px;box-shadow:0 1px 0 #D9CCB6,0 10px 30px rgba(60,40,20,.25)">
+<div style="height:14px;border-radius:4px 4px 0 0;background:radial-gradient(circle at 10px -3px,#B42A35 8px,transparent 9px) 0 0/20px 14px repeat-x,#8E1B24"></div>
+<div style="height:420px;background:radial-gradient(ellipse at 50% 42%,#FFF8E6 0%,#F3E2B8 55%,#DFC892 100%);display:flex;align-items:flex-end;justify-content:center;gap:28px;padding-bottom:0">
+<svg width="130" height="190" viewBox="0 0 100 140"><polygon points="28,140 42,78 32,74 54,6 62,74 54,78 72,140" style="fill:#1E1A16"></polygon></svg>
+<svg width="200" height="230" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg>
+<svg width="120" height="200" viewBox="0 0 100 160"><path d="M30 160V76h6V52l8 10 6-14 6 14 8-10v24h6v84z" style="fill:#1E1A16"></path></svg>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="font-family:Georgia,serif;font-size:40px;font-weight:700;line-height:1.1">Théâtre d'ombre augmenté</div>
+<div style="font-size:18px;color:#5C5247">Apprenez à une IA à reconnaître vos personnages, puis faites réagir les lumières de la scène.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font-weight:600">Écrivez les prénoms de l'équipe (ils servent à nommer votre fichier) :</div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+<div style="height:48px;display:flex;align-items:center;padding:0 12px;border:2px solid #D9CCB6;border-radius:6px;background:#FFFDF8">Léa</div>
+<div style="height:48px;display:flex;align-items:center;padding:0 12px;border:2px solid #D9CCB6;border-radius:6px;background:#FFFDF8">Tom</div>
+<div style="height:48px;display:flex;align-items:center;padding:0 12px;border:2px solid #1E1A16;border-radius:6px;background:#FFFDF8;box-shadow:0 0 0 3px #E9C46A">Inès|</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px">
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:700;font-size:18px"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Nouveau projet</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ouvrir }}"></path></svg>Ouvrir notre projet (.json)</div>
+</div>
+<div style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px">
+<svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:#8A4F00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none"><path d="{{ ic.enregistrer }}"></path></svg>
+<div style="display:flex;flex-direction:column;flex:1"><b>Reprendre le dernier travail</b><span style="color:#5C5247">Le dernier travail est une copie de secours gardée sur cet ordinateur : elle ne remplace pas votre fichier.</span></div>
+<div style="display:flex;align-items:center;height:44px;padding:0 14px;border-radius:6px;border:2px solid #D9CCB6;font-weight:600;white-space:nowrap">Reprendre</div>
+</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">01 · Démarrage</div>
+<div>1. L'accueil pose l'univers : écran de théâtre éclairé, lambrequin rouge, les trois silhouettes des captures. C'est le seul écran de travail qui montre le rideau.</div>
+<div>2. Plus de fenêtre posée sur un écran vide : le formulaire occupe la page.</div>
+<div>3. « Reprendre » devient une ligne distincte, avec la mise en garde juste à côté.</div>
+<div>4. Pastilles et « Tout éteindre » déjà présents ; les étapes apparaissent après « Nouveau projet ».</div>
+</div>
+</div>
+
+<!-- ===== 02 Entraîner ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="02 Entraîner" style="width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#FBEBCB;color:#8A4F00;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · à connecter</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #5C5247;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.equipe }}"></path></svg><b>Léa, Tom, Inès</b><span style="width:8px;height:8px;border-radius:50%;background:#E9C46A"></span><span style="color:#E9C46A">non enregistré</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #5C5247"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:60px;flex:none;padding:0 16px;background:#FFFDF8;border-bottom:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:6px;background:#1F4E99;color:#FFFFFF;font-weight:700"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#FFFFFF;color:#1F4E99">1</span>Entraîner</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #5C5247">2</span>Programmer</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #5C5247">3</span>Spectacle</div>
+<div style="flex:1"></div>
+<span style="font-weight:600">Nouveau personnage</span>
+<div style="width:200px;height:44px;display:flex;align-items:center;padding:0 12px;border:2px solid #D9CCB6;border-radius:6px;background:#FFFDF8;color:#5C5247;box-sizing:border-box">ex. Loup</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ajouter }}"></path></svg>Ajouter</div>
+</div>
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:580px minmax(0,1fr);gap:20px;padding:16px">
+<div style="display:flex;flex-direction:column;gap:12px;min-height:0">
+<div style="position:relative;height:420px;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#FFF8E6,#EAD7A6);display:flex;align-items:flex-end;justify-content:center;border:1px solid #D9CCB6">
+<svg width="300" height="300" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg>
+<div style="position:absolute;top:12px;left:12px;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border-radius:999px;background:#241E1A;color:#F7F1E5;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:#E9C46A"></span>Webcam en direct</div>
+<div style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.masquer }}"></path></svg>Masquer l'image</div>
+</div>
+<div style="display:flex;align-items:baseline;justify-content:space-between"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700;color:#2E6B30">Je vois : Loup</div><div style="display:flex;align-items:center;gap:6px;color:#1F4E99;font-weight:600">L'IA compare avec…<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg></div></div>
+<div style="display:grid;grid-template-columns:110px minmax(0,1fr) 56px;gap:6px 12px;align-items:center">
+<span>Fond vide</span><div style="height:16px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span style="text-align:right">0 %</span>
+<b style="color:#2E6B30">✓ Loup</b><div style="height:16px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6;overflow:hidden"><div style="height:100%;width:100%;background:#2E6B30"></div></div><b style="text-align:right">100 %</b>
+<span>Sorcière</span><div style="height:16px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span style="text-align:right">0 %</span>
+<span>Roi</span><div style="height:16px;border-radius:4px;background:#EFE7D8;border:1px solid #D9CCB6"></div><span style="text-align:right">0 %</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;min-height:0">
+<div style="display:flex;flex-direction:column;gap:12px;padding:16px;background:#FFFDF8;border:2px solid #1F4E99;border-radius:10px;box-shadow:0 1px 0 #D9CCB6,0 3px 8px rgba(60,40,20,.10)">
+<div style="display:flex;gap:14px;align-items:center">
+<div style="width:72px;height:72px;border-radius:8px;background:radial-gradient(circle at 50% 45%,#FFF8E6,#E8D6A8);display:flex;align-items:flex-end;justify-content:center;flex:none"><svg width="60" height="60" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg></div>
+<div style="display:flex;flex-direction:column;gap:2px;flex:1">
+<div style="display:flex;align-items:baseline;gap:10px"><div style="font-family:Georgia,serif;font-size:24px;font-weight:700">Loup</div><span style="color:#1F4E99;font-weight:600">personnage en cours</span></div>
+<div style="display:flex;align-items:center;gap:6px;color:#2E6B30;font-weight:600"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>22 photos · prêt (30 conseillées)</div>
+<div style="height:8px;border-radius:4px;background:#EFE7D8;overflow:hidden"><div style="width:73%;height:100%;background:#2E6B30"></div></div>
+</div>
+<div style="display:flex;gap:6px">
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #D9CCB6;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.renommer }}"></path></svg></div>
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #D9CCB6;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.vider }}"></path></svg></div>
+<div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #D9CCB6;border-radius:6px;color:#B3261E"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.supprimer }}"></path></svg></div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:6px;background:#1F4E99;color:#FFF;font-weight:700;font-size:18px"><svg width="24" height="24" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.photo }}"></path></svg>Ajouter des photos <span style="font-weight:400;font-size:16px">(garder appuyé)</span></div>
+<div style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px">
+<sc-for list="{{ ten }}" as="t" hint-placeholder-count="10"><div style="aspect-ratio:1;border-radius:4px;background:radial-gradient(circle at 50% 40%,#FFF8E6,#E8D6A8);display:flex;align-items:flex-end;justify-content:center"><svg width="70%" height="70%" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg></div></sc-for>
+</div>
+<div style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;background:#FBEBCB;border-radius:6px"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#8A4F00;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg><b>Pourquoi au moins 15 photos, et variées ?</b><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;margin-left:auto;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg></div>
+</div>
+<div style="display:flex;flex-direction:column;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px">
+<div style="display:flex;align-items:center;gap:12px;height:58px;padding:0 12px;border-bottom:1px solid #EFE7D8">
+<div style="width:40px;height:40px;border-radius:6px;background:radial-gradient(circle at 50% 45%,#FFF8E6,#E8D6A8);border:1px solid #D9CCB6"></div>
+<b style="width:120px">Fond vide</b><span style="display:flex;align-items:center;gap:6px;color:#2E6B30;flex:1"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>22 photos · prêt</span><span style="color:#5C5247">écran sans personnage</span><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#5C5247;stroke-width:2.2;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+</div>
+<div style="display:flex;align-items:center;gap:12px;height:58px;padding:0 12px;border-bottom:1px solid #EFE7D8">
+<div style="width:40px;height:40px;border-radius:6px;background:radial-gradient(circle at 50% 45%,#FFF8E6,#E8D6A8);display:flex;align-items:flex-end;justify-content:center"><svg width="30" height="36" viewBox="0 0 100 140"><polygon points="28,140 42,78 32,74 54,6 62,74 54,78 72,140" style="fill:#1E1A16"></polygon></svg></div>
+<b style="width:120px">Sorcière</b><span style="display:flex;align-items:center;gap:6px;color:#2E6B30;flex:1"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>22 photos · prêt</span><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#5C5247;stroke-width:2.2;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+</div>
+<div style="display:flex;align-items:center;gap:12px;height:58px;padding:0 12px">
+<div style="width:40px;height:40px;border-radius:6px;background:radial-gradient(circle at 50% 45%,#FFF8E6,#E8D6A8);display:flex;align-items:flex-end;justify-content:center"><svg width="24" height="36" viewBox="0 0 100 160"><path d="M30 160V76h6V52l8 10 6-14 6 14 8-10v24h6v84z" style="fill:#1E1A16"></path></svg></div>
+<b style="width:120px">Roi</b><span style="display:flex;align-items:center;gap:6px;color:#8A4F00;flex:1"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.attention }}"></path></svg>8 photos · pas assez (15 minimum)</span><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#5C5247;stroke-width:2.2;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">02 · 1. Entraîner</div>
+<div>1. Ordre de lecture : webcam (gauche) → personnage en cours (droite, cadre bleu, gros bouton photo). Le reste est replié.</div>
+<div>2. Un seul personnage ouvert à la fois. Les autres sont des lignes de 58 px : vignette, nom, état en mots. Un clic ouvre la ligne.</div>
+<div>3. « Nouveau personnage » monte dans la bande des étapes : il reste visible sans faire défiler.</div>
+<div>4. « Masquer l'image » et l'état « en direct » passent sur la webcam ; le « Pourquoi ? » est replié par défaut.</div>
+<div>5. Rien ne défile en 1366 × 768 avec 4 personnages.</div>
+</div>
+</div>
+
+<!-- ===== 03 Programmer niveau 3 ===== -->
+<div style="display:flex;gap:32px;align-items:flex-start">
+<div data-screen-label="03 Programmer niveau 3" style="width:1366px;height:768px;flex:none;display:flex;flex-direction:column;background:#F7F1E5;overflow:hidden;box-shadow:0 2px 12px rgba(40,30,20,.18)">
+<div style="display:flex;align-items:center;gap:10px;height:60px;flex:none;padding:0 16px;background:#241E1A;color:#F7F1E5">
+<svg width="36" height="36" viewBox="0 0 100 100" style="flex:none"><rect x="2" y="2" width="96" height="96" rx="20" style="fill:#241E1A;stroke:#5C5247;stroke-width:4"></rect><circle cx="50" cy="52" r="38" style="fill:#F3E2B8"></circle><polygon points="24,86 33,52 47,44 52,22 60,35 67,19 70,42 86,47 74,55 84,86" style="fill:#1E1A16"></polygon></svg>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#EFE7D8;color:#1E1A16;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.carte }}"></path></svg><b>Carte</b> · simulée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg><b>Webcam</b> · connectée</div>
+<div style="display:flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:999px;background:#E3F0DF;color:#2E6B30;white-space:nowrap"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ia }}"></path></svg><b>IA</b> · prête</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #5C5247;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.equipe }}"></path></svg><b>Léa, Tom, Inès</b><span style="width:8px;height:8px;border-radius:50%;background:#E9C46A"></span><span style="color:#E9C46A">non enregistré</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.chevron }}"></path></svg></div>
+<div style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:6px;border:2px solid #5C5247"><svg width="22" height="22" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#B3261E;color:#FFFFFF;font-weight:700;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.eteindre }}"></path></svg>Tout éteindre</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:60px;flex:none;padding:0 16px;background:#FFFDF8;border-bottom:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;color:#2E6B30;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#E3F0DF"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg></span>Entraîner</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 8px;border-radius:6px;background:#1F4E99;color:#FFFFFF;font-weight:700"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#FFFFFF;color:#1F4E99">2</span>Programmer</div>
+<svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:#D9CCB6;stroke-width:2.4;stroke-linecap:round;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 8px;font-weight:600"><span style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:2px solid #5C5247">3</span>Spectacle</div>
+<div style="flex:1"></div>
+<span style="color:#5C5247;font-weight:600">Niveau</span>
+<div style="display:flex;border:2px solid #D9CCB6;border-radius:6px;overflow:hidden">
+<div style="padding:0 12px;height:40px;display:flex;align-items:center">1 · Premiers pas</div>
+<div style="padding:0 12px;height:40px;display:flex;align-items:center;border-left:2px solid #D9CCB6">2 · Boucles et conditions</div>
+<div style="padding:0 12px;height:40px;display:flex;align-items:center;gap:6px;background:#EAF0FA;color:#163A73;font-weight:700;border-left:2px solid #1F4E99"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.ok }}"></path></svg>3 · Code Arduino</div>
+</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;background:#2E6B30;color:#FFFFFF;font-weight:700"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:currentColor;stroke:currentColor;stroke-width:2;stroke-linejoin:round"><path d="{{ ic.lecture }}"></path></svg>Démarrer</div>
+</div>
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:12px 16px 16px">
+<div style="display:flex;align-items:center;gap:16px;height:64px;flex:none;padding:0 10px 0 6px;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px">
+<div style="width:72px;height:52px;border-radius:6px;background:radial-gradient(ellipse at 50% 40%,#FFF8E6,#EAD7A6);display:flex;align-items:flex-end;justify-content:center;flex:none"><svg width="40" height="40" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100" style="fill:#1E1A16"></polygon></svg></div>
+<div style="font-family:Georgia,serif;font-size:20px;font-weight:700;color:#2E6B30;white-space:nowrap">Je vois : Loup <span style="font-family:'Segoe UI',sans-serif;font-size:16px">100 %</span></div>
+<div style="width:1px;height:40px;background:#D9CCB6"></div>
+<span style="font-weight:600;white-space:nowrap">Ce que la carte a reçu</span>
+<div style="display:flex;gap:6px">
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;background:#FBEBCB;border:2px solid #E9C46A;font-weight:700"><span style="width:14px;height:14px;border-radius:50%;background:#F5B700;box-shadow:0 0 6px #F5B700"></span>9 · allumée</div>
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;border:2px solid #D9CCB6;color:#5C5247"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #5C5247;box-sizing:border-box"></span>10 · éteinte</div>
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;border:2px solid #D9CCB6;color:#5C5247"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #5C5247;box-sizing:border-box"></span>11</div>
+<div style="display:flex;align-items:center;gap:6px;height:40px;padding:0 10px;border-radius:6px;border:2px solid #D9CCB6;color:#5C5247"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #5C5247;box-sizing:border-box"></span>12</div>
+</div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;border:2px solid #D9CCB6;font-weight:600;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.son }}"></path></svg>Sons (2)</div>
+<div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 12px;border-radius:6px;background:#FFFDF8;border:2px solid #1F4E99;color:#1F4E99;font-weight:600;white-space:nowrap"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.webcam }}"></path></svg>Agrandir la webcam</div>
+</div>
+<div style="flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:12px">
+<div style="display:flex;border:1px solid #D9CCB6;border-radius:10px;overflow:hidden;background:#FFFDF8">
+<div style="width:156px;flex:none;display:flex;flex-direction:column;padding:8px 0;background:#EFE7D8;border-right:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#965A00"></span>Événements</div>
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#2E7D32"></span>LED et sons</div>
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#2F64B0"></span>Contrôle</div>
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#00756A"></span>Opérateurs</div>
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#B8175A"></span>Variables</div>
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#6A3FA0"></span>IA</div>
+<div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 10px"><span style="width:6px;height:26px;border-radius:3px;background:#52616B"></span>Affichage</div>
+</div>
+<div style="flex:1;position:relative;background:radial-gradient(circle,#D9CCB6 1px,transparent 1.5px) 0 0/20px 20px,#FFFDF8;padding:24px 28px;color:#FFFFFF;font-weight:700">
+<div style="display:inline-flex;flex-direction:column;align-items:flex-start">
+<div style="height:48px;display:flex;align-items:center;padding:0 16px;background:#965A00;border-radius:22px 22px 6px 6px">quand le programme démarre</div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#B8175A;border-radius:6px">définir <span style="padding:2px 10px;border-radius:12px;background:#8E1248">passages ▾</span> à <span style="padding:2px 12px;border-radius:12px;background:#FFF;color:#1E1A16">0</span></div>
+<div style="display:flex;flex-direction:column;background:#2F64B0;border-radius:6px;padding-bottom:16px">
+<div style="height:42px;display:flex;align-items:center;padding:0 14px">répéter indéfiniment</div>
+<div style="margin-left:18px;display:flex;flex-direction:column;background:#255290;border-radius:6px 0 0 6px;padding:0 0 12px">
+<div style="height:46px;display:flex;align-items:center;gap:8px;padding:0 12px">si <span style="display:flex;align-items:center;gap:6px;height:32px;padding:0 14px;background:#6A3FA0;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%)">je vois <span style="padding:0 8px;border-radius:10px;background:#52307E">Loup ▾</span> ?</span></div>
+<div style="display:flex;gap:10px;align-items:flex-start;padding-left:12px"><span style="width:44px;padding-top:10px">faire</span>
+<div style="display:flex;flex-direction:column">
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px;box-shadow:0 0 0 3px #E9C46A,0 0 0 5px #1E1A16">allumer la LED broche <span style="padding:0 8px;border-radius:10px;background:#1F5F23">9 ▾</span></div>
+<div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#52616B;border-radius:6px;margin-top:4px">écrire <span style="padding:2px 10px;border-radius:12px;background:#6A3FA0">personnage vu</span> à l'écran</div>
+</div></div>
+<div style="display:flex;gap:10px;align-items:center;padding:8px 0 0 12px"><span style="width:44px">sinon</span><div style="height:42px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#2E7D32;border-radius:6px">éteindre la LED broche <span style="padding:0 8px;border-radius:10px;background:#1F5F23">9 ▾</span></div></div>
+</div>
+</div>
+</div>
+<div style="position:absolute;right:12px;bottom:12px;display:flex;flex-direction:column;gap:6px">
+<div style="width:44px;height:44px;border-radius:50%;background:#FFFDF8;border:2px solid #D9CCB6;display:flex;align-items:center;justify-content:center;color:#1E1A16"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="{{ ic.ajouter }}"></path></svg></div>
+<div style="width:44px;height:44px;border-radius:50%;background:#FFFDF8;border:2px solid #D9CCB6;display:flex;align-items:center;justify-content:center;color:#1E1A16"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round"><path d="M5 12h14"></path></svg></div>
+<div style="width:44px;height:44px;border-radius:50%;background:#FFFDF8;border:2px solid #D9CCB6;display:flex;align-items:center;justify-content:center;color:#5C5247"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.supprimer }}"></path></svg></div>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;min-height:0">
+<div style="flex:1;min-height:0;display:flex;flex-direction:column;background:#241E1A;color:#F7F1E5;border-radius:10px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:8px;padding:8px 8px 8px 14px">
+<b style="font-size:18px">Code C++ (Arduino)</b>
+<span style="display:flex;align-items:center;gap:4px;color:#D9CCB6"><svg width="16" height="16" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.cadenas }}"></path></svg>lecture seule</span>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;gap:6px;height:44px;padding:0 10px;border-radius:6px;border:2px solid #5C5247"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.copier }}"></path></svg>Copier</div>
+<div style="display:flex;align-items:center;gap:6px;height:44px;padding:0 10px;border-radius:6px;border:2px solid #5C5247"><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.telecharger }}"></path></svg>.ino</div>
+</div>
+<div style="flex:1;min-height:0;font-family:Consolas,'Courier New',monospace;font-size:16px;line-height:24px;padding:4px 0;overflow:hidden">
+<sc-for list="{{ code }}" as="l" hint-placeholder-count="10">
+<div style="display:flex;background:{{ l.bg }};border-left:4px solid {{ l.bar }}"><span style="width:40px;flex:none;text-align:right;padding-right:12px;color:#A89A88">{{ l.n }}</span><span style="white-space:pre;color:{{ l.c }}">{{ l.t }}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;background:#3A322B"><svg width="20" height="20" viewBox="0 0 24 24" style="fill:none;stroke:#E9C46A;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="{{ ic.aide }}"></path></svg><span>« En direct » ou « autonome » : quelle différence ?</span><svg width="18" height="18" viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;margin-left:auto;transform:rotate(-90deg)"><path d="{{ ic.chevron }}"></path></svg></div>
+</div>
+<div style="height:150px;flex:none;display:flex;flex-direction:column;background:#FFFDF8;border:1px solid #D9CCB6;border-radius:10px;overflow:hidden">
+<div style="display:flex;align-items:center;border-bottom:1px solid #D9CCB6">
+<div style="display:flex;align-items:center;gap:6px;height:44px;padding:0 14px;font-weight:700;border-bottom:3px solid #1F4E99">Messages</div>
+<div style="display:flex;align-items:center;gap:6px;height:44px;padding:0 14px;color:#5C5247">Variables <span style="padding:0 8px;border-radius:999px;background:#EFE7D8;color:#1E1A16">1</span></div>
+<div style="flex:1"></div>
+<div style="display:flex;align-items:center;height:36px;padding:0 10px;margin-right:6px;border-radius:6px;border:2px solid #D9CCB6">Effacer</div>
+</div>
+<div style="padding:6px 14px;font-family:Consolas,monospace;line-height:26px">
+<div><span style="color:#5C5247">19:09:40</span>  Loup</div>
+<div><span style="color:#5C5247">19:09:40</span>  Loup</div>
+<div><span style="color:#5C5247">19:09:41</span>  Loup</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="width:380px;display:flex;flex-direction:column;gap:12px;padding-top:8px">
+<div style="font-family:Georgia,serif;font-size:22px;font-weight:700">03 · 2. Programmer, niveau 3</div>
+<div>1. La colonne webcam devient une bande de 64 px : vignette, « Je vois », LED reçues, sons. « Agrandir la webcam » rouvre la colonne (niveaux 1 et 2 l'ont ouverte par défaut).</div>
+<div>2. Zone de blocs : ≈ 640 × 470 px, contre ≈ 360 px de large aujourd'hui.</div>
+<div>3. Le code reste à côté des blocs ; la ligne liée au bloc cliqué est marquée par une barre or et un fond, pas seulement une couleur de texte.</div>
+<div>4. Messages et Variables partagent un panneau à onglets.</div>
+<div>5. Le texte d'introduction du panneau code passe dans l'Aide ; les deux boutons sont raccourcis (Copier, .ino).</div>
+</div>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const IC={carte:"M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4",webcam:"M12 3a7 7 0 1 0 0 14a7 7 0 1 0 0-14zM12 7a3 3 0 1 0 0 6a3 3 0 1 0 0-6zM8 21h8M12 17v4",ia:"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z",led:"M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z",son:"M4 9h4l5-4v14l-5-4H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12",photo:"M3 8h4l2-3h6l2 3h4v11H3zM12 10a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7z",supprimer:"M4 7h16M10 3h4M6 7l1 14h10l1-14M10 11v6M14 11v6",renommer:"M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4",vider:"M4 15l9-9l6 6l-8 8H8zM9 10l6 6M12 20h8",enregistrer:"M5 3h11l3 3v15H5zM8 3v5h7V3M8 21v-7h8v7",ouvrir:"M3 6h6l2 2h10v11H3z",aide:"M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01",eteindre:"M12 3v9M7 6.3a7.5 7.5 0 1 0 10 0",ajouter:"M12 5v14M5 12h14",masquer:"M3 12s3.5-6 9-6c1.6 0 3 .5 4.2 1.2M21 12s-3.5 6-9 6c-1.6 0-3-.5-4.2-1.2M4 20L20 4M9.5 14.5a3.5 3.5 0 0 1 5-5",lecture:"M7 4l13 8-13 8z",ok:"M5 12.5l4.5 4.5L19 7",attention:"M12 3l10 18H2zM12 10v5M12 18v.01",equipe:"M9 4a3.5 3.5 0 1 0 0 7a3.5 3.5 0 1 0 0-7zM2 20c.8-4 3.5-6 7-6s6.2 2 7 6zM16 4.5a3.2 3.2 0 0 1 0 6M18 14c2 .8 3.4 2.8 4 6",cadenas:"M6 11h12v10H6zM8.5 11V7.5a3.5 3.5 0 0 1 7 0V11",copier:"M9 9h11v11H9zM5 15H4V4h11v1",telecharger:"M12 4v11M7 10l5 5 5-5M4 20h16",chevron:"M6 9l6 6 6-6",fermer:"M6 6l12 12M18 6L6 18",pleinecran:"M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5",stop:"M6 6h12v12H6z",cours:"M4 5c3-1 6-1 8 1c2-2 5-2 8-1v14c-3-1-6-1-8 1c-2-2-5-2-8-1zM12 6v14",info:"M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18zM12 11v6M12 7.5v.01",prof:"M2 9l10-5 10 5-10 5zM6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6"};
+const CODE=[
+ ["41","",0],["42","// loop() : répétée sans arrêt",1],["43","void loop() {",2],["44","  ecouter();",0],
+ ["45","  // répéter indéfiniment",1],["46","  if (jeVois(\"Loup\")) {",2],["47","    digitalWrite(9, HIGH);",3],
+ ["48","    Serial.println(personnageVu());",0],["49","  } else {",2],["50","    digitalWrite(9, LOW);",0],
+ ["51","  }",0],["52","}",0]];
+class Component extends DCLogic {
+  renderVals() {
+    const code = CODE.map(([n,t,k]) => ({ n, t, c: k===1?"#B8A98F":k===2?"#E9C46A":"#F7F1E5", bg: k===3?"#4A3D24":"transparent", bar: k===3?"#E9C46A":"transparent" }));
+    return { ic: IC, code, ten: Array.from({length:10},(_,i)=>i) };
+  }
+}
+</script>
+</body>
+</html>

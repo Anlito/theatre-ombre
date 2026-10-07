@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Câblage des LED — Théâtre d'ombre augmenté</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cours { max-width: 60rem; margin: 0 auto; padding: 1rem; }
+    .cours section { background: var(--carte); border: 2px solid var(--bord); border-radius: var(--rayon); padding: 1rem 1.4rem; margin-bottom: 1rem; }
+    .cours img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto; border: 1px solid var(--bord); }
+    figure { margin: 0.8rem 0; }
+    figcaption { color: var(--texte-doux); text-align: center; margin-top: 0.3rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid var(--bord); padding: 0.5rem 0.8rem; text-align: left; }
+    th { background: var(--gris-clair); }
+    .pin-num { font-weight: 800; font-size: 1.2rem; }
+    .retenir { border-left: 6px solid var(--vert); background: var(--vert-clair); padding: 0.6rem 1rem; border-radius: 6px; }
+    .attention { border-left: 6px solid var(--rouge); background: #fde7e5; padding: 0.6rem 1rem; border-radius: 6px; }
+    ol li { margin: 0.35rem 0; }
+    @media print { .topbar, .no-print { display: none; } .cours section { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="brand"><img class="logo" src="img/logo.svg" alt="" width="36" height="36"> Câblage des LED</h1>
+    <div class="actions no-print"><button class="btn btn-secondary" type="button" onclick="print()"><svg class="ico" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z"/></svg>Imprimer</button></div>
+  </header>
+  <main class="cours">
+    <section>
+      <h2>Les broches à utiliser</h2>
+      <p>Branchez <strong>une LED par personnage</strong> (4 au maximum), sur les broches indiquées par votre professeur :</p>
+      <table>
+        <thead><tr><th>LED</th><th>Broche de l'Arduino</th><th>Personnage (à compléter)</th></tr></thead>
+        <tbody id="pins"></tbody>
+      </table>
+      <p>Dans le bloc « 💡 allumer la LED broche … », choisissez le <strong>numéro de broche</strong> où votre LED est branchée.</p>
+    </section>
+
+    <section>
+      <h2>Le schéma</h2>
+      <figure>
+        <img src="img/cablage-schema.png" alt="Schéma : Arduino Uno, breadboard et 3 LED. Fils de couleur des broches 9, 10 et 11 vers les LED, pattes courtes vers le rail moins de la breadboard, un fil noir du rail moins vers GND.">
+        <figcaption>Chaque LED : broche → patte longue (+). Patte courte (−) → rail − de la breadboard. Un seul fil noir du rail − vers GND.</figcaption>
+      </figure>
+      <ol>
+        <li>Un fil de couleur relie la <strong>broche</strong> de l'Arduino à la <strong>patte longue (+)</strong> de la LED.</li>
+        <li>La <strong>patte courte (−)</strong> de chaque LED rejoint le <strong>rail − (bleu)</strong> de la breadboard.</li>
+        <li>Un seul <strong>fil noir</strong> relie le rail − à une broche <strong>GND</strong> de l'Arduino : c'est la masse commune.</li>
+        <li>Chaque LED a sa <strong>résistance de 220 Ω</strong> (déjà intégrée si vous utilisez les modules LED de la classe).</li>
+      </ol>
+      <p class="retenir">Le signe <strong>~</strong> à côté d'un numéro (3, 5, 6, 9, 10, 11) veut dire que la broche peut aussi régler la luminosité : utile au niveau 2.</p>
+    </section>
+
+    <section>
+      <h2>Le montage réel</h2>
+      <figure>
+        <img src="img/cablage-photo.jpg" alt="Photo du montage : trois modules LED rouge, bleu et vert, une breadboard et une carte Arduino sur un support noir." loading="lazy">
+        <figcaption>Montage de la classe : 3 modules LED, breadboard et carte Arduino.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Sécurité</h2>
+      <p class="attention">⚠️ Ne branchez <strong>jamais</strong> rien sur les broches <strong>0 et 1</strong> : elles servent au câble USB. L'outil les refuse.</p>
+      <ul>
+        <li>On câble <strong>câble USB débranché</strong>, puis on fait vérifier le montage par le professeur.</li>
+        <li>Fin de séance : <strong>Tout éteindre → Déconnecter → débrancher le câble USB</strong>.</li>
+        <li>Si le câble est débranché ou la page fermée, la carte éteint toutes les LED d'elle-même en moins de 3 secondes.</li>
+      </ul>
+    </section>
+  </main>
+  <script type="module">
+    import { CONFIG } from './config.js';
+    import { initialSettings } from './js/settings.js';
+    import { PWM_PINS } from './js/protocol.js';
+    // Les broches viennent des réglages du professeur (config.js ou mode professeur de ce poste).
+    const { ledPins } = initialSettings(CONFIG, location.search);
+    document.getElementById('pins').innerHTML = ledPins
+      .map((p, i) => `<tr><td>LED ${i + 1}</td><td><span class="pin-num">${p}${PWM_PINS.includes(p) ? ' ~' : ''}</span></td><td></td></tr>`)
+      .join('');
+  </script>
+</body>
+</html>

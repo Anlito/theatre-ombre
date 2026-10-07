@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Théâtre d'ombre augmenté</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-step="entrainer" data-niveau="1" class="is-start">
+
+  <!-- ===== Bande 1 : logo, états, équipe, aide, Tout éteindre (toujours visible) ===== -->
+  <header class="band1">
+    <img class="logo" src="img/logo.svg" alt="Théâtre d'ombre augmenté" width="36" height="36">
+    <div class="status" aria-label="État du système">
+      <button class="pill" id="pill-board" type="button" data-state="off" title="Connecter la carte Arduino">
+        <span class="pill-icon" data-icon="carte" data-size="18" data-stroke="2.2"></span>
+        <b class="pill-label">Carte</b><span class="pill-word">Connecter</span>
+      </button>
+      <span class="pill" id="pill-camera" data-state="off">
+        <span class="pill-icon" data-icon="webcam" data-size="18" data-stroke="2.2"></span>
+        <b class="pill-label">Webcam</b><span class="pill-word">à connecter</span>
+      </span>
+      <span class="pill" id="pill-model" data-state="off">
+        <span class="pill-icon" data-icon="ia" data-size="18" data-stroke="2.2"></span>
+        <b class="pill-label">IA</b><span class="pill-word">pas chargée</span>
+      </span>
+    </div>
+    <span class="spacer"></span>
+
+    <button id="guide-btn" class="menu-btn guide-btn" type="button" aria-controls="guide-panel" title="Que faire maintenant ? Les étapes dans l'ordre">
+      <span data-icon="ok"></span><b>Que faire ?</b><span id="guide-count" class="guide-count">0/11</span>
+    </button>
+
+    <div class="menu team-menu">
+      <button id="team-menu-btn" class="menu-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Projet de l'équipe">
+        <span data-icon="equipe"></span>
+        <b id="team-names" class="team-names">Équipe</b>
+        <span id="save-state" class="save-state" data-dirty="false"></span>
+        <span class="chev" data-icon="chevron" data-size="18"></span>
+      </button>
+      <div class="menu-list" role="menu" hidden>
+        <button role="menuitem" id="btn-save" type="button"><span data-icon="enregistrer"></span>Enregistrer <kbd>Ctrl+S</kbd></button>
+        <button role="menuitem" id="btn-project" type="button"><span data-icon="ouvrir"></span>Ouvrir / nouveau</button>
+        <button role="menuitem" id="btn-rename-team" type="button"><span data-icon="renommer"></span>Changer les prénoms</button>
+      </div>
+    </div>
+
+    <div class="menu help-menu">
+      <button id="help-menu-btn" class="menu-btn icon-only" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Aide et ressources" title="Aide et ressources">
+        <span data-icon="aide" data-size="22"></span>
+      </button>
+      <div class="menu-list menu-right" role="menu" hidden>
+        <button role="menuitem" id="btn-help" type="button"><span data-icon="aide"></span>Aide de cet écran</button>
+        <a role="menuitem" href="comprendre-ia.html" target="_blank" rel="noopener"><span data-icon="cours"></span>Comprendre l'IA</a>
+        <button role="menuitem" id="btn-cablage-menu" type="button"><span data-icon="led"></span>Câblage des LED</button>
+        <a role="menuitem" href="diagnostic.html" target="_blank" rel="noopener"><span data-icon="diagnostic"></span>Diagnostic du poste</a>
+      </div>
+    </div>
+
+    <button id="btn-all-off" class="btn btn-danger" type="button" title="Éteint les LED, arrête les sons et le programme">
+      <span data-icon="eteindre" data-stroke="2.4"></span>Tout éteindre
+    </button>
+  </header>
+
+  <!-- ===== Bande 2 : étapes + commandes de l'écran affiché ===== -->
+  <nav class="band2" aria-label="Étapes">
+    <div class="steps">
+      <button class="step" data-step="entrainer" type="button" aria-current="step">
+        <span class="step-num">1</span> Entraîner
+      </button>
+      <span class="step-sep" data-icon="chevron" data-size="18" data-stroke="2.4"></span>
+      <button class="step" data-step="programmer" type="button">
+        <span class="step-num">2</span> Programmer
+      </button>
+      <span class="step-sep" data-icon="chevron" data-size="18" data-stroke="2.4"></span>
+      <button class="step" data-step="spectacle" type="button">
+        <span class="step-num">3</span> Spectacle
+      </button>
+    </div>
+    <span class="spacer"></span>
+
+    <form id="new-category" class="screen-actions" data-for="entrainer">
+      <label for="new-category-name">Nouveau personnage</label>
+      <input id="new-category-name" type="text" maxlength="20" placeholder="ex. Loup" autocomplete="off">
+      <button class="btn btn-secondary" type="submit"><span data-icon="ajouter"></span>Ajouter</button>
+    </form>
+
+    <div class="screen-actions" data-for="programmer">
+      <div id="level-switch" class="level-switch" role="radiogroup" aria-label="Niveau de programmation">
+        <span class="level-label">Niveau</span>
+        <div class="segments">
+          <button type="button" role="radio" data-level="1" title="Réagir quand l'IA voit un personnage">1 · Premiers pas</button>
+          <button type="button" role="radio" data-level="2" title="Un autre programme, avec boucles, conditions et variables">2 · Boucles et conditions</button>
+          <button type="button" role="radio" data-level="3" title="Le programme du niveau 2, avec son code C++ à côté">3 · Code Arduino</button>
+        </div>
+        <span id="level-lock" class="level-lock" hidden><span data-icon="cadenas" data-size="18"></span>choisi par le professeur</span>
+      </div>
+      <button id="btn-run" class="btn btn-go" type="button">Démarrer</button>
+      <span id="run-state" class="run-state" data-running="false"></span>
+    </div>
+
+    <div class="screen-actions" data-for="spectacle">
+      <button id="btn-show-video" class="btn btn-secondary" type="button"><span data-icon="masquer"></span>Masquer l'image</button>
+      <button id="btn-show-start" class="btn btn-primary" type="button"><span data-icon="pleinecran"></span>Lancer le spectacle (plein écran)</button>
+    </div>
+  </nav>
+
+  <div id="banner" class="banner" role="alert" hidden>
+    <span class="banner-icon" data-icon="info"></span>
+    <span id="banner-text"></span>
+    <button id="banner-close" class="banner-close icon-btn" type="button" aria-label="Fermer le message" title="Fermer"><span data-icon="fermer"></span></button>
+  </div>
+
+  <main>
+    <!-- Panneau webcam : un seul, déplacé dans l'écran affiché (.camera-slot) -->
+    <div id="camera-panel" class="camera-panel">
+      <div class="video-wrap">
+        <video id="video" autoplay muted playsinline></video>
+        <div id="video-msg" class="video-msg">Webcam éteinte.</div>
+        <span class="live-badge"><span class="live-dot"></span>Webcam en direct</span>
+        <button id="btn-hide-video" class="btn btn-secondary btn-overlay" type="button" aria-pressed="false"><span data-icon="masquer"></span><span class="label">Masquer l'image</span></button>
+      </div>
+      <div class="row camera-row">
+        <button id="btn-camera" class="btn btn-primary" type="button"><span data-icon="webcam"></span>Activer la webcam</button>
+        <label id="camera-choice" hidden>Webcam :
+          <select id="camera-select"></select>
+        </label>
+      </div>
+      <p id="seen-label" class="seen" aria-live="polite"></p>
+      <div id="bars" class="bars" aria-label="Confiance de l'IA pour chaque personnage"></div>
+      <details class="neighbours-box">
+        <summary>L'IA compare avec… <small>(les 10 photos les plus ressemblantes votent)</small><span class="chev" data-icon="chevron" data-size="18"></span></summary>
+        <div id="neighbours" class="neighbours"></div>
+      </details>
+    </div>
+
+    <!-- ===== 1. Entraîner ===== -->
+    <section id="screen-entrainer" class="screen" data-screen="entrainer">
+      <div class="train-layout">
+        <div class="camera-slot"></div>
+        <div id="categories" class="categories"></div>
+      </div>
+    </section>
+
+    <!-- ===== 2. Programmer ===== -->
+    <section id="screen-programmer" class="screen" data-screen="programmer" hidden>
+      <!-- Niveau 3 (ou webcam réduite) : bande d'état compacte -->
+      <div id="cam-strip" class="cam-strip" hidden>
+        <video id="strip-video" class="strip-video" autoplay muted playsinline aria-hidden="true"></video>
+        <p id="strip-seen" class="strip-seen"></p>
+        <span class="strip-sep"></span>
+        <span class="strip-title">Ce que la carte a reçu</span>
+        <div id="strip-leds" class="strip-leds"></div>
+        <span class="spacer"></span>
+        <button id="btn-strip-sons" class="btn btn-neutral" type="button"><span data-icon="son"></span><span class="label">Sons</span></button>
+        <button id="btn-strip-cablage" class="btn btn-neutral" type="button"><span data-icon="led"></span>Câblage</button>
+        <button id="btn-cam-expand" class="btn btn-secondary" type="button"><span data-icon="webcam"></span>Agrandir la webcam</button>
+      </div>
+
+      <div id="program-layout" class="program-layout">
+        <aside class="program-side">
+          <button id="btn-cam-collapse" class="btn btn-neutral btn-collapse" type="button" title="Réduire la colonne webcam">Réduire</button>
+          <div class="camera-slot"></div>
+          <div class="side-sep"></div>
+          <div class="leds-head">
+            <h3>Ce que la carte a reçu</h3>
+            <button id="btn-cablage" class="btn btn-secondary btn-cablage" type="button" title="Où brancher les LED (broches 9, 10, 11, 12)">
+              <span data-icon="led"></span>Câblage des LED
+            </button>
+          </div>
+          <div class="board-panel" id="board-panel" aria-label="Broches de la carte"></div>
+          <div id="sound-drop" class="sound-line" title="Déposez ici des fichiers mp3 ou wav">
+            <button id="btn-sounds" class="sound-open" type="button">
+              <span data-icon="son"></span><b>Sons</b> · <span id="sound-summary" class="sound-summary"></span>
+            </button>
+            <label class="sound-add" for="sound-file">+ mp3 / wav</label>
+            <input id="sound-file" class="visually-hidden" type="file" accept=".mp3,.wav,audio/mpeg,audio/wav" multiple>
+          </div>
+        </aside>
+
+        <div class="program-main">
+          <div class="code-row">
+            <div id="blockly" class="blockly-area"></div>
+            <aside class="cpp-panel only-level3" aria-label="Code C++ généré">
+              <div class="cpp-head">
+                <h3>Code C++ (Arduino)</h3>
+                <span class="cpp-ro"><span data-icon="cadenas" data-size="16"></span>lecture seule</span>
+                <span class="spacer"></span>
+                <button id="btn-cpp-copy" class="btn btn-dark" type="button"><span data-icon="copier"></span>Copier</button>
+                <button id="btn-cpp-download" class="btn btn-dark" type="button" title="Télécharger le fichier .ino"><span data-icon="telecharger"></span>.ino</button>
+              </div>
+              <ol id="cpp-code" class="cpp-code"></ol>
+              <details class="cpp-explain">
+                <summary><span data-icon="aide" data-size="18"></span>« En direct » ou « autonome » : quelle différence ?<span class="chev" data-icon="chevron" data-size="18"></span></summary>
+                <p><strong>En direct</strong> (ce que fait l'outil) : la carte garde son programme fixe et <em>obéit à l'ordinateur</em>,
+                  qui lui envoie des ordres par le câble. Le câble doit rester branché ; si on le débranche, tout s'éteint.</p>
+                <p><strong>Autonome</strong> : on téléverse ce code dans la carte avec l'IDE Arduino. La carte
+                  <em>garde le programme en mémoire</em> et l'exécute seule, même après un redémarrage.
+                  Mais elle n'a pas de webcam : pour l'essayer, ouvrez le Moniteur série (115200 bauds) et tapez le nom
+                  d'un personnage, par exemple <code>Loup</code>.</p>
+                <p>Après un essai autonome, le professeur doit téléverser de nouveau <code>theatre_ombre.ino</code>
+                  pour que l'outil puisse reparler à la carte.</p>
+              </details>
+            </aside>
+          </div>
+          <div class="program-output only-level2">
+            <div class="output-tabs" role="tablist">
+              <button id="tab-messages" class="output-tab" role="tab" type="button" aria-selected="true" aria-controls="messages">Messages</button>
+              <button id="tab-variables" class="output-tab" role="tab" type="button" aria-selected="false" aria-controls="variables">Variables <span id="var-count" class="count">0</span></button>
+              <span class="spacer"></span>
+              <button id="btn-clear-messages" class="btn btn-neutral btn-small" type="button">Effacer</button>
+            </div>
+            <ol id="messages" class="messages" role="tabpanel" aria-live="polite"></ol>
+            <div id="variables" class="variables" role="tabpanel" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. Spectacle ===== -->
+    <section id="screen-spectacle" class="screen" data-screen="spectacle" hidden>
+      <!-- Barre visible seulement en plein écran -->
+      <div class="stage-bar only-fullscreen">
+        <h2>3. Spectacle</h2>
+        <span class="spacer"></span>
+        <span id="stage-board-pill" class="pill" data-state="off"><span class="pill-icon" data-icon="carte" data-size="18" data-stroke="2.2"></span><b class="pill-label">Carte</b><span class="pill-word">à connecter</span></span>
+        <button id="btn-show-video-fs" class="btn btn-dark" type="button"><span data-icon="masquer"></span><span class="label">Masquer l'image</span></button>
+        <button id="btn-show-exit" class="btn btn-dark" type="button"><span data-icon="pleinecran"></span>Quitter le plein écran</button>
+        <button id="btn-show-off" class="btn btn-danger" type="button"><span data-icon="eteindre" data-stroke="2.4"></span>Tout éteindre</button>
+      </div>
+
+      <!-- La scène : fronton, rideaux, projecteurs (= LED de la carte), écran d'ombres, plaque -->
+      <div id="theatre" class="theatre">
+        <div class="valance"><span id="theatre-title">Théâtre d'ombre</span></div>
+        <div id="spots" class="spots" aria-label="Projecteurs : les LED de la carte"></div>
+        <div class="scene">
+          <div class="camera-slot camera-slot-stage"></div>
+          <div class="plaque">
+            <span class="stage-caption">Sur scène</span>
+            <span id="stage-name" class="stage-name" aria-live="assertive">personne</span>
+          </div>
+        </div>
+        <div class="curtain curtain-left" aria-hidden="true"></div>
+        <div class="curtain curtain-right" aria-hidden="true"></div>
+        <p id="curtain-hint" class="curtain-hint"><span data-icon="pleinecran" data-size="22"></span>Cliquez sur « Lancer le spectacle » pour ouvrir le rideau</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <button id="btn-cablage-footer" class="link-button" type="button"><span data-icon="led" data-size="18"></span>Câblage des LED</button>
+    <a href="diagnostic.html" target="_blank" rel="noopener"><span data-icon="diagnostic" data-size="18"></span>Diagnostic du poste</a>
+    <button id="btn-teacher" class="link-button" type="button"><span data-icon="prof" data-size="18"></span>Mode professeur</button>
+  </footer>
+
+  <!-- ===== Démarrage : page d'accueil ===== -->
+  <dialog id="start-dialog" class="start-page">
+    <div class="start-grid">
+      <div class="start-illustration" aria-hidden="true">
+        <div class="start-screen">
+          <svg class="sil sil-sorciere" viewBox="0 0 100 140"><polygon points="28,140 42,78 32,74 54,6 62,74 54,78 72,140"/></svg>
+          <svg class="sil sil-loup" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100"/></svg>
+          <svg class="sil sil-roi" viewBox="0 0 100 160"><path d="M30 160V76h6V52l8 10 6-14 6 14 8-10v24h6v84z"/></svg>
+        </div>
+      </div>
+      <div class="start-form">
+        <h1>Théâtre d'ombre augmenté</h1>
+        <p class="start-sub">Apprenez à une IA à reconnaître vos personnages, puis faites réagir les lumières de la scène.</p>
+        <p class="start-label">Écrivez les prénoms de l'équipe (ils servent à nommer votre fichier) :</p>
+        <div class="start-names">
+          <input class="team-name" type="text" maxlength="20" placeholder="Prénom 1" aria-label="Prénom 1" autocomplete="off">
+          <input class="team-name" type="text" maxlength="20" placeholder="Prénom 2" aria-label="Prénom 2" autocomplete="off">
+          <input class="team-name" type="text" maxlength="20" placeholder="Prénom 3" aria-label="Prénom 3" autocomplete="off">
+        </div>
+        <p id="start-error" class="form-error" role="alert"></p>
+        <div class="start-choices">
+          <button class="btn btn-primary btn-big" type="button" data-start="new"><span data-icon="ajouter" data-size="22"></span>Nouveau projet</button>
+          <button class="btn btn-secondary btn-big" type="button" data-start="open"><span data-icon="ouvrir"></span>Ouvrir notre projet (.json)</button>
+        </div>
+        <div id="start-resume" class="start-card" hidden>
+          <span class="start-card-icon" data-icon="enregistrer" data-size="24"></span>
+          <div>
+            <b>Reprendre le dernier travail</b> <small id="start-resume-detail"></small>
+            <p>Le dernier travail est une copie de secours gardée sur cet ordinateur : elle ne remplace pas votre fichier.</p>
+          </div>
+          <button class="btn btn-neutral" type="button" data-start="resume">Reprendre</button>
+        </div>
+        <div class="start-card">
+          <span class="start-card-icon" data-icon="led" data-size="24"></span>
+          <div>
+            <b>Matériel : brancher les LED</b>
+            <p>Avant de connecter la carte, vérifiez le câblage (<span class="cablage-pins">broches 9, 10, 11, 12</span>).</p>
+          </div>
+          <button id="btn-start-cablage" class="btn btn-neutral" type="button">Voir le câblage</button>
+        </div>
+        <button id="start-close" class="btn btn-neutral" type="button" hidden>Fermer</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===== Connexion de la carte : rappel du câblage d'abord ===== -->
+  <dialog id="connect-dialog" class="dialog dialog-small">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="carte" data-size="24"></span>
+      <h2 id="connect-title">Connecter la carte</h2>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div class="dialog-body">
+      <div id="connect-before">
+        <p><b>Avant de brancher : vérifiez le câblage.</b> Chaque LED sur sa broche, toutes les pattes courtes (−) sur GND.</p>
+        <ul id="connect-pins" class="pin-list"></ul>
+      </div>
+      <p id="connect-connected" hidden>La carte est connectée. Pour la débrancher : <b>Tout éteindre</b>, puis <b>Déconnecter</b>, puis le câble USB.</p>
+    </div>
+    <div class="dialog-foot">
+      <button id="btn-connect-cablage" class="btn btn-secondary" type="button"><span data-icon="led"></span>Voir le câblage</button>
+      <span class="spacer"></span>
+      <button id="btn-connect" class="btn btn-primary" type="button"><span data-icon="carte"></span>Connecter la carte</button>
+    </div>
+  </dialog>
+
+  <!-- ===== Câblage des LED : panneau à droite ===== -->
+  <dialog id="cablage-dialog" class="side-panel">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="led" data-size="24"></span>
+      <h2>Câblage des LED</h2>
+      <span class="spacer"></span>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div class="dialog-body">
+      <table class="pins-table">
+        <thead><tr><th>LED</th><th>Broche de l'Arduino</th></tr></thead>
+        <tbody id="cablage-pins"></tbody>
+      </table>
+      <p>Dans le bloc « allumer la LED broche … », choisissez le <b>numéro de broche</b> où votre LED est branchée.</p>
+      <figure class="cablage-figure">
+        <img src="img/cablage-schema.png" alt="Schéma : chaque broche reliée à la patte longue (+) d'une LED, les pattes courtes (−) sur le rail moins de la breadboard, un fil noir du rail moins vers GND." loading="lazy">
+        <figcaption>Broche → patte longue (+). Patte courte (−) → rail − de la breadboard. Un seul fil noir du rail − vers GND.</figcaption>
+      </figure>
+      <div class="note note-danger">
+        <span data-icon="attention"></span>
+        <div>
+          <b>Sécurité</b>
+          <ul>
+            <li>Jamais rien sur les broches <b>0 et 1</b> : elles servent au câble USB.</li>
+            <li>On câble <b>câble USB débranché</b>, puis on fait vérifier par le professeur.</li>
+            <li>Fin de séance : <b>Tout éteindre → Déconnecter → débrancher le câble USB</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-foot">
+      <a class="link-icon" href="cablage.html" target="_blank" rel="noopener"><span data-icon="telecharger"></span>Version imprimable (avec photo du montage)</a>
+      <span class="spacer"></span>
+      <button class="btn btn-primary" type="button" data-close>J'ai compris</button>
+    </div>
+  </dialog>
+
+  <!-- ===== Sons : panneau à droite ===== -->
+  <dialog id="sounds-dialog" class="side-panel side-panel-narrow">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="son" data-size="24"></span>
+      <h2>Sons</h2>
+      <span class="spacer"></span>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div class="dialog-body">
+      <label class="sound-drop-zone" for="sound-file">Déposez ici vos fichiers <b>mp3</b> ou <b>wav</b>, ou cliquez pour les choisir.</label>
+      <ul id="sound-list" class="sound-list"></ul>
+    </div>
+  </dialog>
+
+  <!-- ===== Changer les prénoms ===== -->
+  <dialog id="team-dialog" class="dialog dialog-small">
+    <form id="team-form">
+      <div class="dialog-head">
+        <span class="dialog-icon" data-icon="equipe" data-size="24"></span>
+        <h2>Prénoms de l'équipe</h2>
+        <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+      </div>
+      <div class="dialog-body start-names">
+        <input class="team-edit" type="text" maxlength="20" placeholder="Prénom 1" aria-label="Prénom 1" autocomplete="off">
+        <input class="team-edit" type="text" maxlength="20" placeholder="Prénom 2" aria-label="Prénom 2" autocomplete="off">
+        <input class="team-edit" type="text" maxlength="20" placeholder="Prénom 3" aria-label="Prénom 3" autocomplete="off">
+      </div>
+      <div class="dialog-foot">
+        <span class="spacer"></span>
+        <button class="btn btn-primary" type="submit">Valider</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ===== Mode professeur ===== -->
+  <dialog id="teacher-code-dialog" class="dialog dialog-small">
+    <form id="teacher-code-form">
+      <div class="dialog-head">
+        <span class="dialog-icon" data-icon="prof" data-size="24"></span>
+        <h2>Mode professeur</h2>
+        <button id="teacher-code-cancel" class="icon-btn dialog-close" type="button" aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+      </div>
+      <div class="dialog-body">
+        <label class="field">Code <input id="teacher-code" type="password" autocomplete="off" inputmode="numeric"></label>
+        <p id="teacher-code-error" class="form-error" role="alert"></p>
+      </div>
+      <div class="dialog-foot">
+        <span class="spacer"></span>
+        <button class="btn btn-primary" type="submit">Entrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="teacher-dialog" class="dialog dialog-teacher">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="prof" data-size="24"></span>
+      <h2>Réglages du professeur</h2>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div class="dialog-body teacher-grid">
+      <label for="teacher-level">Niveau des blocs</label>
+      <select id="teacher-level">
+        <option value="1">1 · Premiers pas</option>
+        <option value="2">2 · Boucles et conditions</option>
+        <option value="3">3 · Code Arduino (programme du niveau 2 + C++)</option>
+      </select>
+      <span class="label">Changement de niveau</span>
+      <label class="check-line"><input id="teacher-lock" type="checkbox"><span class="check-box" data-icon="ok" data-size="18" data-stroke="3"></span>Verrouiller le niveau (les élèves ne peuvent pas le changer)</label>
+      <label for="teacher-threshold">Seuil de confiance</label>
+      <span class="range-line"><input id="teacher-threshold" type="range" min="50" max="95" step="5"> <strong id="teacher-threshold-value"></strong></span>
+      <label for="teacher-stable">Images de suite avant « je vois »<small>plus haut = plus stable, mais plus lent</small></label>
+      <input id="teacher-stable" type="number" min="1" max="20" step="1">
+      <span class="label">Broches des LED<small>4 au maximum · ~ = intensité réglable</small></span>
+      <div id="teacher-pins" class="teacher-pins"></div>
+    </div>
+    <div class="dialog-body">
+      <p class="note"><span data-icon="info"></span><span>Ces réglages s'appliquent au projet ouvert et deviennent ceux de cet ordinateur pour les nouveaux projets.
+        Pour tous les postes : modifier <code>config.js</code> sur le site.</span></p>
+    </div>
+    <div class="dialog-foot">
+      <button id="teacher-apply" class="btn btn-primary" type="button">Appliquer</button>
+      <button id="teacher-reset" class="btn btn-secondary" type="button">Revenir à config.js</button>
+      <span class="spacer"></span>
+      <button id="teacher-close" class="btn btn-neutral" type="button">Fermer</button>
+    </div>
+  </dialog>
+
+  <!-- ===== Guide « Que faire ? » : panneau à droite, non bloquant ===== -->
+  <dialog id="guide-panel" class="side-panel side-panel-narrow guide-panel" aria-labelledby="guide-title">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="ok" data-size="24"></span>
+      <h2 id="guide-title">Que faire ?</h2>
+      <span class="spacer"></span>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div class="guide-progress" aria-hidden="true"><span id="guide-progress"></span></div>
+    <div class="dialog-body">
+      <div id="guide-current" class="guide-current"></div>
+      <details id="guide-all" class="guide-all">
+        <summary>Voir toutes les étapes<span class="chev" data-icon="chevron" data-size="18"></span></summary>
+        <ol id="guide-steps" class="guide-steps"></ol>
+      </details>
+    </div>
+  </dialog>
+
+  <!-- ===== Aide : panneau à droite ===== -->
+  <dialog id="help-dialog" class="side-panel">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="aide" data-size="24"></span>
+      <h2 id="help-title">Aide</h2>
+      <span class="spacer"></span>
+      <div id="help-tabs" class="segments help-tabs" role="tablist" hidden></div>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div id="help-body" class="dialog-body help-body"></div>
+    <div class="dialog-foot">
+      <a class="link-icon" href="comprendre-ia.html" target="_blank" rel="noopener"><span data-icon="cours"></span>Comprendre comment l'IA reconnaît les personnages</a>
+      <span class="spacer"></span>
+      <button class="btn btn-primary" type="button" data-close>J'ai compris</button>
+    </div>
+  </dialog>
+
+  <!-- Bibliothèques embarquées (aucun CDN) -->
+  <script src="vendor/blockly/blockly_compressed.js"></script>
+  <script src="vendor/blockly/blocks_compressed.js"></script>
+  <script src="vendor/blockly/javascript_compressed.js"></script>
+  <script src="vendor/blockly/fr.js"></script>
+  <script src="vendor/js-interpreter.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
