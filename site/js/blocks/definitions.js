@@ -35,6 +35,7 @@ export function makeTheme(Blockly) {
 }
 
 // ctx.characters() -> [{ id, name }] ; ctx.sounds() -> [{ id, name }] ; ctx.ledPins() -> [9, 10, …]
+// ctx.ledColorName(pin) -> « rouge »… (facultatif) : la liste des broches montre la couleur de la LED.
 export function defineBlocks(Blockly, ctx) {
   // Liste déroulante qui se met à jour (personnages, sons). Si l'élément choisi a été
   // supprimé, il reste affiché « (supprimé) » pour que l'élève le voie.
@@ -56,7 +57,11 @@ export function defineBlocks(Blockly, ctx) {
   // Broches proposées : celles choisies par le professeur (4 au maximum).
   // Une broche hors de la liste (projet ancien, réglage changé) reste visible et utilisable.
   const pinMenu = function () {
-    const items = (ctx.ledPins?.() ?? PINS).map((p) => [String(p), String(p)]);
+    const label = (p) => {
+      const nom = ctx.ledColorName?.(p);
+      return nom ? `${p} · ${nom}` : String(p);
+    };
+    const items = (ctx.ledPins?.() ?? PINS).map((p) => [label(p), String(p)]);
     const current = this.getValue?.();
     if (current && !items.some(([, v]) => v === current)) items.push([`${current} (non prévue)`, current]);
     return items;

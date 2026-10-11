@@ -998,34 +998,6 @@ textarea.cn-field { resize: vertical; line-height: 1.4; }
   .cn-client { grid-template-columns: 1fr; }
 }
 
-/* Impression du carnet (ou « Enregistrer au format PDF ») : le carnet seul, sans les commandes du site. */
-@media print {
-  body.is-printing-carnet { background: #fff; }
-  body.is-printing-carnet > :not(main),
-  body.is-printing-carnet main > :not(#screen-carnet),
-  body.is-printing-carnet .cn-nav,
-  body.is-printing-carnet .cn-photo-add,
-  body.is-printing-carnet .cn-photo-del { display: none !important; }
-  body.is-printing-carnet main { padding: 0; }
-  body.is-printing-carnet #screen-carnet { display: block !important; }
-  body.is-printing-carnet .cn-layout { display: block; max-width: none; }
-  body.is-printing-carnet .cn-doc { display: block; }
-  body.is-printing-carnet .cn-etape { box-shadow: none; break-before: page; margin-bottom: 12px; }
-  body.is-printing-carnet .cn-entete { break-before: auto; }
-  body.is-printing-carnet .cn-etape-head,
-  body.is-printing-carnet .cn-code,
-  body.is-printing-carnet .cn-chaine-nom,
-  body.is-printing-carnet .cn-sous-n,
-  body.is-printing-carnet .cn-check,
-  body.is-printing-carnet .cn-cadre { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-  body.is-printing-carnet .cn-field { border-color: #999; }
-  body.is-printing-carnet .cn-photo img { height: 220px; }
-  body.is-printing-carnet tr,
-  body.is-printing-carnet .cn-maillon,
-  body.is-printing-carnet .cn-photo,
-  body.is-printing-carnet .cn-check,
-  body.is-printing-carnet .cn-valide { break-inside: avoid; }
-}
 
 /* --- Classe (accueil), ranger le projet, choisir son équipe ---------------------------- */
 .start-class-row { display: flex; align-items: center; gap: 12px; }
@@ -1041,3 +1013,26 @@ textarea.cn-field { resize: vertical; line-height: 1.4; }
 .teams-item svg { grid-row: span 2; color: var(--bleu); }
 .teams-item small { color: var(--texte-doux); }
 .camera-parking { position: fixed; left: -10000px; top: 0; width: 640px; opacity: 0; pointer-events: none; }
+
+/* --- Carnet : badges vers les écrans, liens, cotes, LED ------------------------------------ */
+.cn-go {
+  display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-family: var(--police);
+  background: var(--bleu-pale); color: var(--bleu); border-color: var(--bleu);
+}
+.cn-go:hover, .cn-go:focus-visible { background: var(--bleu); color: #fff; }
+.cn-go svg { transform: rotate(-90deg); }
+.cn-lien { justify-self: start; }
+.cn-field[data-trop="true"] { border-color: var(--orange); background: var(--orange-clair); }
+.cn-leds td { min-width: 140px; }
+.cn-led-choix { display: flex; align-items: center; gap: 8px; }
+.cn-led-choix .cn-led { flex: none; margin: 0; }
+
+/* Onglet ou pastille à utiliser : clignote au survol d'un badge du carnet. */
+@keyframes cn-clignote {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 0 4px var(--or); }
+}
+.is-hint { animation: cn-clignote .7s ease-in-out infinite; outline: 2px solid var(--or); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .is-hint { animation: none; }
+}

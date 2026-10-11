@@ -140,3 +140,22 @@
   .pe-eval { grid-template-columns: 1fr; }
   .prof-actions .btn { padding: 0 10px; }
 }
+
+/* Notation à l'endroit corrigé : panneau « À noter ici » */
+.pp {
+  display: grid; gap: 8px; margin-top: 8px; padding: 14px 16px;
+  border: 2px solid var(--or); border-radius: var(--rayon); background: #FFF8E6;
+}
+.pp h3 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 1.125rem; }
+.pp h3 small { color: var(--texte-doux); font: 600 .9375rem var(--police); }
+.pp .pv { background: var(--carte); }
+.pp .pv[data-ok="true"] { background: var(--vert-clair); }
+.pp .pg:last-child { border-bottom: 0; padding-bottom: 0; }
+.pe-note-badge {
+  display: inline-flex; align-items: baseline; gap: 6px; min-height: 44px; padding: 6px 14px;
+  border: 2px solid var(--or); border-radius: 999px; background: #FFF8E6; color: var(--texte);
+  font: 1rem var(--police); cursor: pointer;
+}
+.pe-note-badge b { font: 700 1.375rem var(--police-titre); }
+.pe-note-badge small { color: var(--texte-doux); }
+.pe-note-badge em { font-style: normal; color: var(--vert); font-weight: 700; margin-left: 4px; }

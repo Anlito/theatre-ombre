@@ -8,6 +8,7 @@ import { MODEL_ID } from '../vision.js';
 import { normalizeSettings } from '../settings.js';
 
 const BACKUP_EVERY_MS = 60_000;
+const AUTOSAVE_AFTER_MS = 4_000; // enregistrement automatique : 4 s après la dernière modification
 
 import { icon } from '../icons.js';
 
@@ -27,8 +28,50 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     if (state.loading) return;
     state.dirty = true;
     state.changedSinceBackup = true;
+    state.version = (state.version ?? 0) + 1;
     renderTeam();
+    scheduleAutoSave();
   };
+
+  // --- Enregistrement automatique -----------------------------------------------------------
+  // Une fois le dossier de l'équipe choisi, le fichier est réécrit tout seul après chaque modification
+  // (quelques secondes plus tard, pour ne pas écrire à chaque photo). « Enregistrer » reste possible.
+  let autoTimer = null;
+  let autoBusy = false;
+  function scheduleAutoSave() {
+    if (!state.handle) return;
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(autoSave, AUTOSAVE_AFTER_MS);
+  }
+  async function autoSave() {
+    if (!state.handle || !state.dirty) return;
+    if (autoBusy) return scheduleAutoSave();
+    autoBusy = true;
+    const version = state.version;
+    try {
+      const w = await state.handle.createWritable();
+      await w.write(JSON.stringify(await collect()));
+      await w.close();
+      if (state.version === version) state.dirty = false; // sinon : une modification est arrivée pendant l'écriture
+      else scheduleAutoSave();
+      state.savedOnce = true;
+      renderTeam();
+      refreshValidations();
+    } catch {
+      state.handle = null;
+      state.teamDir = null;
+      showMessage('L’enregistrement automatique n’a pas pu écrire dans votre dossier. Menu de l’équipe → « Enregistrer » pour choisir de nouveau le dossier THEATRE IA.');
+    } finally {
+      autoBusy = false;
+    }
+  }
+  // Onglet caché ou fermé : on enregistre tout de suite ce qui ne l'est pas encore.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden' && state.dirty && state.handle) {
+      clearTimeout(autoTimer);
+      autoSave();
+    }
+  });
   training.onChange(touch);
   sounds.onChange(touch);
   program.workspace.addChangeListener((e) => {
@@ -414,7 +457,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     $('team-names').textContent = state.team.length ? state.team.join(', ') : 'Équipe sans nom';
     const unsaved = unsavedWork();
     const saved = !unsaved && hasWork();
-    $('save-state').innerHTML = unsaved ? 'non enregistré' : saved ? icon('ok', { size: 18 }) + 'enregistré' : '';
+    $('save-state').innerHTML = unsaved ? (state.handle ? 'enregistrement…' : 'non enregistré') : saved ? icon('ok', { size: 18 }) + 'enregistré' : '';
     $('save-state').dataset.dirty = String(unsaved);
     $('save-state').hidden = !unsaved && !saved;
     onTeamChange();

@@ -67,7 +67,7 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 - [ ] « Choisir le dossier THEATRE IA » → dossier réseau `3B › COMMUN › TECHNOLOGIE › THEATRE IA` → autoriser la modification :
   le dossier `LEA - TOM` est créé avec `LEA_TOM_theatre_ombre.json` dedans (vérifier dans l'explorateur).
   (Si le navigateur refuse le dossier réseau : noter le message exact.)
-- [ ] Ctrl+S ensuite : « Projet enregistré » sans fenêtre ; la date du fichier change.
+- [ ] Modifier le carnet sans rien cliquer : « enregistrement… » puis « enregistré » ; la date du fichier change (enregistrement automatique).
 - [ ] Fermer le navigateur, rouvrir le site → « Ouvrir notre projet » : personnages, photos, blocs et sons
   retrouvés, la reconnaissance marche **sans reprendre de photo**.
 - [ ] Fermer l'onglet sans enregistrer, rouvrir → la carte « Reprendre le dernier travail » de l'accueil propose le travail.
@@ -111,17 +111,21 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 
 - [ ] Bouton **Carnet** : la commande, la route et les 5 étapes s'affichent ; la colonne de gauche mène à chaque étape.
 - [ ] Taper dans un tableau, cocher une case : l'avancement (ex. 4/10) se met à jour ; l'équipe passe en « non enregistré ».
-- [ ] Étape 3 : les personnages, leur nombre de photos et « Reconnu ? » se remplissent seuls ; la couleur des LED suit « Ce que la carte a reçu ».
+- [ ] Étape 3 : les personnages, leur nombre de photos et « Reconnu ? » se remplissent seuls.
+- [ ] 3.1 : choisir couleur et broche des 2 LED → la lueur à l'écran et les blocs (« 9 · rouge ») suivent.
+- [ ] Survoler « Site · 1 Entraîner » : l'onglet Entraîner clignote ; cliquer : on y va. « Tutoriel de câblage » ouvre le câblage.
+- [ ] Taper 12 dans une cote du dessin : la case passe en orange.
 - [ ] **Ajouter une photo** → poser une feuille A4 devant la webcam → « Prendre la photo » → « Garder » : la feuille est lisible.
 - [ ] Même chose avec « Choisir un fichier… » (photo prise au téléphone).
 - [ ] Enregistrer, fermer l'onglet, rouvrir le projet : tout le carnet est retrouvé (textes, cases, photos).
-- [ ] **Imprimer / PDF** → « Enregistrer au format PDF » : le carnet seul, lisible, une étape par page.
 
 ## 13. Outil professeur
 
 - [ ] `professeur.html` → « Ouvrir le dossier d'une classe » → `3B › … › THEATRE IA` → autoriser : toutes les équipes apparaissent, classe reconnue.
 - [ ] Une équipe → onglet **Carnet** : identique à ce que voient les élèves ; **IA et programme** : vignettes et blocs ; **Personnages 3D** : STL visibles et tournables, dimensions justes.
-- [ ] **Valider** l'étape 1 → `validations.json` apparaît dans le dossier de l'équipe ; côté élève, ouvrir le projet : le ◆ est validé dans le carnet.
+- [ ] Onglet Carnet : sous l'étape 1, panneau « À noter ici » → **Valider** et choisir un niveau D1 : la note en haut change, la page ne bouge pas.
+- [ ] `validations.json` apparaît dans le dossier de l'équipe ; côté élève, ouvrir le projet : le ◆ est validé dans le carnet.
+- [ ] Onglet **Bilan** : récapitulatif des 7 livrables, bonus / malus, commentaire.
 - [ ] Noter D1 à D7, ajouter un bonus avec motif : la note et la mention se calculent ; la vue de la classe affiche les couleurs.
 - [ ] **Exporter (Excel)** : le .csv s'ouvre dans Excel, accents et virgules corrects, une ligne par élève.
 - [ ] **Sauvegarder** dans son dossier personnel, fermer, « Importer une sauvegarde » sur un autre poste : les notes sont retrouvées.

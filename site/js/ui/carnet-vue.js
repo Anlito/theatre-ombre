@@ -7,29 +7,42 @@
 //   readOnly   : true dans l'outil professeur
 //   validations: { v1: { date }, … } données par le professeur (◆)
 //   live       : ce que le site sait en direct (personnages, couleurs des LED, reconnaissance)
-//                { characters: [{ id, name, photos }], ledPins, ledColor(pin) -> { nom, hex }, reconnus: Set }
+//                { characters: [{ id, name, photos }], ledPins, ledColor(pin) -> 'rouge' | 'jaune' | 'vert' | 'bleu', reconnus: Set }
 // Renvoie { refreshLive(live), refreshProgress(), refreshPhotos(id), refreshTeam(team) }.
 // Les modifications appellent onChange(carnet) ; les boutons photo appellent onAddPhoto(id) / onRemovePhoto(id, photoId).
+// Les badges « Site · 1 Entraîner »… et les liens appellent onGoto(ecran) au clic, onHint(ecran, true|false) au survol.
+// Le tableau des LED appelle onLed(broche, couleur) quand l'équipe choisit une couleur ou une broche.
 
 import { COMMANDE, CLIENT, MODE_EMPLOI, OUTILS, ETAPES, VALIDATIONS } from '../carnet-contenu.js';
 import { avancement, MAX_PHOTOS } from '../carnet.js';
 import { icon } from '../icons.js';
+import { LED_COLORS } from '../led-colors.js';
 import { teamFolderName } from '../team-folder.js';
 import { fileName } from '../project.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const teamHtml = (team) => (team.length ? team.map(esc).join(', ') : '<i>(menu de l’équipe)</i>');
+// Valeur au-delà de la cote maximale (« 12 », « 10,5 ») ?
+const trop = (v, max) => {
+  const n = parseFloat(String(v ?? '').replace(',', '.'));
+  return Number.isFinite(n) && n > max;
+};
 const fmtDate = (d) => new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
 
-export function renderCarnet(root, { carnet, team = [], readOnly = false, validations = {}, live = null, onChange = () => {}, onAddPhoto = () => {}, onRemovePhoto = () => {} }) {
+export function renderCarnet(root, {
+  carnet, team = [], readOnly = false, validations = {}, live = null,
+  onChange = () => {}, onAddPhoto = () => {}, onRemovePhoto = () => {}, onGoto = () => {}, onHint = () => {}, onLed = () => {},
+}) {
   const dis = readOnly ? ' disabled' : '';
   let liveData = live;
 
-  const champ = (id, { lignes = 1, nombre = false, label = '', placeholder = '' } = {}) => {
+  const champ = (id, { lignes = 1, nombre = false, max = 0, label = '', placeholder = '' } = {}) => {
     const v = esc(carnet.champs[id]);
     const aria = label ? ` aria-label="${esc(label)}"` : '';
     if (lignes > 1) return `<textarea class="cn-field" data-champ="${id}" rows="${lignes}"${aria}${dis}>${v}</textarea>`;
-    return `<input class="cn-field" data-champ="${id}" type="text"${nombre ? ' inputmode="decimal"' : ''} value="${v}" maxlength="${nombre ? 8 : 200}" placeholder="${esc(placeholder)}"${aria}${dis}>`;
+    // Cote limitée (10 cm, 100 mm) : la case passe en orange si elle dépasse.
+    const lim = max ? ` data-max="${max}" data-trop="${trop(carnet.champs[id], max)}" title="${max} au maximum"` : '';
+    return `<input class="cn-field" data-champ="${id}" type="text"${nombre ? ' inputmode="decimal"' : ''} value="${v}" maxlength="${nombre ? 8 : 200}" placeholder="${esc(placeholder)}"${lim}${aria}${dis}>`;
   };
   const caseACocher = (id, html) =>
     `<label class="cn-check"><input type="checkbox" data-case="${id}"${carnet.cases[id] ? ' checked' : ''}${dis}><span>${html}</span></label>`;
@@ -49,7 +62,9 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
       <div class="cn-sous${b.facultatif ? ' is-facultatif' : ''}">
         <span class="cn-sous-n">${b.n}</span>
         <h4>${b.t}</h4>
-        <span class="cn-outil">${esc(b.outil)}</span>
+        ${b.ecran && !readOnly
+          ? `<button type="button" class="cn-outil cn-go" data-ecran="${b.ecran}" title="Y aller">${esc(b.outil)}${icon('chevron', { size: 14, stroke: 3 })}</button>`
+          : `<span class="cn-outil">${esc(b.outil)}</span>`}
         ${b.aide ? `<p class="cn-aide">${b.aide}</p>` : ''}
       </div>`,
     cadre: (b) => `<div class="cn-cadre" data-ton="${b.ton ?? 'info'}">${b.html}</div>`,
@@ -61,13 +76,17 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
           const fixes = Array.isArray(ligne) ? ligne : [`<b>${esc(ligne)}</b>`];
           let k = 0;
           const cells = b.colonnes.map((c) =>
-            c.fixe ? `<td class="cn-fixe">${fixes[k++] ?? ''}</td>` : `<td>${champ(`${b.id}.${i}.${c.id}`, { nombre: c.nombre, label: `${c.t}, ligne ${i + 1}` })}</td>`,
+            c.fixe ? `<td class="cn-fixe">${fixes[k++] ?? ''}</td>` : `<td>${champ(`${b.id}.${i}.${c.id}`, { nombre: c.nombre, max: c.max, label: `${c.t}, ligne ${i + 1}` })}</td>`,
           );
           return `<tr>${cells.join('')}</tr>`;
         })
         .join('');
       return `<div class="cn-table-wrap"><table class="cn-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>`;
     },
+    lien: (b) =>
+      readOnly
+        ? `<a class="btn btn-secondary cn-lien" href="cablage.html" target="_blank" rel="noopener">${icon('led')}${b.t}</a>`
+        : `<button type="button" class="btn btn-secondary cn-lien" data-ecran="${b.ecran}">${icon('led')}${b.t}</button>`,
     check: (b) => caseACocher(b.id, b.t),
     valide: (b) => valide(b.id, b.t),
     texte: (b) => `<label class="cn-texte"><span>${b.t}</span>${champ(b.id, { lignes: b.lignes, label: b.t })}</label>`,
@@ -145,25 +164,29 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
   }
 
   function ledsHtml(n) {
-    const pins = liveData?.ledPins?.slice(0, n) ?? [9, 10].slice(0, n);
+    const pinsPossibles = liveData?.ledPins ?? [9, 10, 11, 12];
     const names = liveData?.characters?.map((c) => c.name) ?? [];
-    const rows = pins
-      .map((pin, i) => {
-        const id = `leds.${i}.perso`;
-        const val = carnet.champs[id] ?? '';
-        const color = liveData?.ledColor?.(pin);
-        const couleur = color
-          ? `<span class="cn-led" style="--led:${color.hex}"></span>${esc(color.nom)}`
-          : esc(carnet.champs[`leds.${i}.couleur`] ?? '—');
-        const options = [...new Set([...names, ...(val ? [val] : [])])];
-        const select = `<select class="cn-field" data-champ="${id}" aria-label="Personnage de la LED ${i + 1}"${dis}>
-            <option value="">— choisir —</option>
-            ${options.map((nm) => `<option${nm === val ? ' selected' : ''}>${esc(nm)}</option>`).join('')}
-          </select>`;
-        return `<tr><td class="cn-fixe"><b>LED ${i + 1}</b> (broche ${pin})</td><td class="cn-fixe">${couleur}</td><td>${select}</td></tr>`;
-      })
-      .join('');
-    return `<table class="cn-table"><thead><tr><th>LED</th><th>Couleur choisie <small>(site)</small></th><th>Personnage associé</th></tr></thead><tbody>${rows}</tbody></table>`;
+    const rows = Array.from({ length: n }, (_, i) => {
+      const broche = Number(carnet.champs[`leds.${i}.broche`]) || pinsPossibles[i] || 9;
+      const couleur = liveData?.ledColor?.(broche) ?? carnet.champs[`leds.${i}.couleur`] ?? '';
+      const c = LED_COLORS[couleur];
+      const perso = carnet.champs[`leds.${i}.perso`] ?? '';
+      const persos = [...new Set([...names, ...(perso ? [perso] : [])])];
+      const selBroche = `<select class="cn-field" data-led-broche="${i}" aria-label="Broche de la LED ${i + 1}"${dis}>
+          ${[...new Set([...pinsPossibles, broche])].map((p) => `<option value="${p}"${p === broche ? ' selected' : ''}>broche ${p}</option>`).join('')}
+        </select>`;
+      const selCouleur = `<div class="cn-led-choix"><span class="cn-led" style="--led:${c?.hex ?? 'transparent'}"></span>
+          <select class="cn-field" data-led-couleur="${i}" aria-label="Couleur de la LED ${i + 1}"${dis}>
+            ${c ? '' : '<option value="">— choisir —</option>'}
+            ${Object.entries(LED_COLORS).map(([k, v]) => `<option value="${k}"${k === couleur ? ' selected' : ''}>${v.nom}</option>`).join('')}
+          </select></div>`;
+      const selPerso = `<select class="cn-field" data-champ="leds.${i}.perso" aria-label="Personnage de la LED ${i + 1}"${dis}>
+          <option value="">— choisir —</option>
+          ${persos.map((nm) => `<option${nm === perso ? ' selected' : ''}>${esc(nm)}</option>`).join('')}
+        </select>`;
+      return `<tr><td class="cn-fixe"><b>LED ${i + 1}</b></td><td>${selCouleur}</td><td>${selBroche}</td><td>${selPerso}</td></tr>`;
+    }).join('');
+    return `<table class="cn-table cn-leds"><thead><tr><th>LED</th><th>Couleur</th><th>Broche de l’Arduino</th><th>Personnage associé</th></tr></thead><tbody>${rows}</tbody></table>`;
   }
 
   function iaHtml() {
@@ -259,6 +282,7 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
         const v = t.value;
         if (v.trim()) carnet.champs[t.dataset.champ] = v.slice(0, 1000);
         else delete carnet.champs[t.dataset.champ];
+        if (t.dataset.max) t.dataset.trop = String(trop(v, Number(t.dataset.max)));
       } else if (t.dataset.classe !== undefined) {
         carnet.classe = t.value.slice(0, 20);
       } else return;
@@ -273,13 +297,42 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
         for (const other of root.querySelectorAll(`[data-case="${t.dataset.case}"]`)) other.checked = t.checked;
       } else if (t.dataset.choix) {
         carnet.choix[t.dataset.choix] = t.value;
+      } else if (t.dataset.ledBroche !== undefined || t.dataset.ledCouleur !== undefined) {
+        // LED i : on retient sa broche et sa couleur ; le site prend cette couleur pour cette broche.
+        const i = t.dataset.ledBroche ?? t.dataset.ledCouleur;
+        const row = t.closest('tr');
+        const broche = row.querySelector('[data-led-broche]').value;
+        const couleur = row.querySelector('[data-led-couleur]').value;
+        carnet.champs[`leds.${i}.broche`] = broche;
+        if (couleur) carnet.champs[`leds.${i}.couleur`] = couleur;
+        if (t.dataset.ledBroche !== undefined) {
+          // Nouvelle broche : la couleur choisie la suit.
+          if (couleur) onLed(Number(broche), couleur);
+        } else if (couleur) onLed(Number(broche), couleur);
+        row.querySelector('.cn-led').style.setProperty('--led', LED_COLORS[couleur]?.hex ?? 'transparent');
       } else if (t.tagName === 'SELECT' && t.dataset.champ) {
         if (t.value) carnet.champs[t.dataset.champ] = t.value;
         else delete carnet.champs[t.dataset.champ];
       } else return;
       changed();
     });
+    // Badges « Site · 1 Entraîner »… : au survol, l'onglet à utiliser clignote ; au clic, on y va.
+    let hinted = null;
+    const hint = (ecran) => {
+      if (hinted === ecran) return;
+      if (hinted) onHint(hinted, false);
+      hinted = ecran;
+      if (ecran) onHint(ecran, true);
+    };
+    root.addEventListener('mouseover', (e) => hint(e.target.closest('[data-ecran]')?.dataset.ecran ?? null));
+    root.addEventListener('mouseleave', () => hint(null));
+    root.addEventListener('focusin', (e) => hint(e.target.closest('[data-ecran]')?.dataset.ecran ?? null));
     root.addEventListener('click', (e) => {
+      const go = e.target.closest('[data-ecran]');
+      if (go) {
+        hint(null);
+        return onGoto(go.dataset.ecran);
+      }
       const add = e.target.closest('[data-photo-add]');
       if (add) return onAddPhoto(add.dataset.photoAdd);
       const del = e.target.closest('[data-photo-del]');

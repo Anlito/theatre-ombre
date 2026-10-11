@@ -61,7 +61,6 @@ const AIDES = {
       <li><b>Photos</b> : « Ajouter une photo », posez la feuille bien à plat devant la webcam, puis « Prendre la photo ».</li>
       <li>Les losanges <b>◆</b> sont validés par le professeur : vous ne pouvez pas les cocher.</li>
       <li>Le carnet est <b>enregistré avec le projet</b> : pensez à « Enregistrer » à la fin de la séance.</li>
-      <li>« Imprimer / PDF » : choisissez « Enregistrer au format PDF » pour en faire un fichier.</li>
     </ol>`,
 };
 

@@ -28,7 +28,7 @@ const state = {
   classeur: null, // évaluation (evaluation.js)
   equipes: [], // lues dans le dossier (scan.js)
   courante: 0,
-  onglet: 'evaluation',
+  onglet: 'carnet',
   niveauProg: 1,
   nettoyer: [], // vues 3D, espaces de blocs, URL d'images à libérer en changeant d'écran
 };
@@ -230,12 +230,74 @@ function vueClasse() {
 // Vue d'une équipe
 // =================================================================================================
 const ONGLETS = [
-  ['evaluation', 'Évaluation', 'prof'],
   ['carnet', 'Carnet', 'cours'],
   ['ia', 'IA et programme', 'ia'],
   ['stl', 'Personnages 3D', 'personnage'],
   ['fichiers', 'Photos et fichiers', 'photo'],
+  ['bilan', 'Bilan', 'prof'],
 ];
+
+// Notation à l'endroit où l'on regarde le travail : chaque onglet (et chaque étape du carnet)
+// montre les validations ◆ et les livrables qui s'y rapportent. L'onglet Bilan reprend tout.
+const PANNEAUX = {
+  e1: { t: 'Étape 1 · dessins', l: ['D1'], v: ['v1'] },
+  e2: { t: 'Étape 2 · modélisation', l: ['D2'], v: ['v2'] },
+  e3: { t: 'Étape 3 · câblage, IA et programme', l: ['D3', 'D4'], v: ['v3a', 'v3b'] },
+  e4: { t: 'Étape 4 · chaînes et carnet', l: ['D5'], v: ['v4'] },
+  e5: { t: 'Étape 5 · histoire et oral', l: ['D6'], v: ['v5'] },
+  ia: { t: 'IA et programme', l: ['D4'], v: ['v3b'] },
+  stl: { t: 'Personnages 3D', l: ['D2'], v: ['v2'] },
+  fichiers: { t: 'Dessins et câblage', l: ['D1', 'D3'], v: ['v1', 'v3a'] },
+};
+
+function validationHtml(ev, v) {
+  const ok = ev.validations[v.id];
+  return `<div class="pv" data-ok="${!!ok}">
+    <span class="pv-n">Étape ${v.etape}</span>
+    <span class="pv-t"><b>◆ ${esc(v.t)}</b>${ok ? `<small>Validé le ${fmtDate(ok.date, true)}</small>` : ''}</span>
+    <button class="btn ${ok ? 'btn-neutral' : 'btn-primary'}" type="button" data-action="valider" data-v="${v.id}">${ok ? 'Annuler' : `${icon('ok', { size: 18 })}Valider`}</button>
+  </div>`;
+}
+
+// ind : indices (indices.js), ou null pour ne montrer que les niveaux (Bilan).
+function livrableHtml(ev, l, ind) {
+  const cur = ev.niveaux[l.id];
+  const liste = ind?.[l.id] ?? [];
+  return `<div class="pg">
+    <div class="pg-t"><b>${l.id} · ${esc(l.t)}</b><small>${esc(l.competence)}</small></div>
+    <div class="pg-niv" role="radiogroup" aria-label="${esc(l.id)} ${esc(l.t)}">
+      ${E.NIVEAUX.map((n) => `<button type="button" role="radio" class="niv-btn" data-niv="${n.v}" aria-checked="${cur === n.v}" data-action="niveau" data-l="${l.id}" data-v="${n.v}">${n.t}</button>`).join('')}
+    </div>
+    ${liste.length ? `<ul class="pg-ind">${liste.map((x) => `<li data-ok="${x.ok}">${x.ok === true ? icon('ok', { size: 16, stroke: 3 }) : x.ok === false ? icon('fermer', { size: 16, stroke: 3 }) : icon('info', { size: 16 })}${esc(x.t)}</li>`).join('')}</ul>` : ''}
+  </div>`;
+}
+
+function panneauHtml(eq, ev, cle) {
+  const P = PANNEAUX[cle];
+  const C = state.classeur;
+  const ind = indices(eq, ev.validations);
+  return `<aside class="pp" data-pp="${cle}">
+    <h3>${icon('prof', { size: 20 })}À noter ici <small>${esc(P.t)}</small></h3>
+    ${P.v.map((id) => validationHtml(ev, VALIDATIONS.find((x) => x.id === id))).join('')}
+    ${P.l.map((id) => livrableHtml(ev, C.livrables.find((x) => x.id === id), ind)).join('')}
+  </aside>`;
+}
+
+function noteHtml(ev) {
+  const note = E.noteEquipe(state.classeur, ev);
+  const p = E.progression(state.classeur, ev);
+  return `<button id="pe-note" class="pe-note-badge" type="button" data-onglet="bilan" title="Voir le bilan">
+    <span>Note</span><b>${fmtNote(note)}</b><small>/20</small><em>${E.mention(note) || `${p.faits}/${p.total} livrables notés`}</em>
+  </button>`;
+}
+
+// Après une note ou une validation : on met à jour les panneaux et la note, sans redessiner l'onglet.
+function majPanneaux() {
+  const eq = state.equipes[state.courante];
+  const ev = state.classeur.equipes[eq.dossier];
+  for (const el of main.querySelectorAll('[data-pp]')) el.outerHTML = panneauHtml(eq, ev, el.dataset.pp);
+  $('pe-note').outerHTML = noteHtml(ev);
+}
 
 function vueEquipe(i, onglet = state.onglet) {
   nettoyer();
@@ -254,6 +316,7 @@ function vueEquipe(i, onglet = state.onglet) {
           <p>${esc(ev.eleves.join(', ') || 'élèves inconnus')}${eq.fichier ? ` · projet enregistré le ${fmtDate(eq.fichier.date, true)}` : ' · pas de projet'}</p>
         </div>
         <span class="spacer"></span>
+        ${noteHtml(ev)}
         <button class="icon-btn" type="button" data-action="prec" ${i === 0 ? 'disabled' : ''} aria-label="Équipe précédente" title="Équipe précédente">${icon('chevron', { size: 20 })}</button>
         <span class="pe-pos">${i + 1} / ${n}</span>
         <button class="icon-btn pe-suiv" type="button" data-action="suiv" ${i === n - 1 ? 'disabled' : ''} aria-label="Équipe suivante" title="Équipe suivante">${icon('chevron', { size: 20 })}</button>
@@ -265,32 +328,15 @@ function vueEquipe(i, onglet = state.onglet) {
     </section>`;
   const box = $('pe-contenu');
   if (eq.erreur) box.insertAdjacentHTML('beforebegin', `<p class="form-error">${esc(eq.erreur)}</p>`);
-  ({ evaluation: ongletEvaluation, carnet: ongletCarnet, ia: ongletIa, stl: ongletStl, fichiers: ongletFichiers })[onglet](box, eq, ev);
+  ({ bilan: ongletBilan, carnet: ongletCarnet, ia: ongletIa, stl: ongletStl, fichiers: ongletFichiers })[onglet](box, eq, ev);
+  // Panneau de notation en bas des onglets IA, 3D et fichiers (le carnet en a un par étape).
+  if (PANNEAUX[onglet]) box.insertAdjacentHTML('beforeend', panneauHtml(eq, ev, onglet));
 }
 
-// --- Évaluation : validations ◆, grille D1–D7, élèves ---------------------------------------------
-function ongletEvaluation(box, eq, ev) {
+// --- Bilan : note, élèves (bonus / malus), commentaire, toutes les validations et tous les livrables ----
+function ongletBilan(box, eq, ev) {
   const C = state.classeur;
-  const ind = indices(eq, ev.validations);
   const note = E.noteEquipe(C, ev);
-  const valides = VALIDATIONS.map((v) => {
-    const ok = ev.validations[v.id];
-    return `<div class="pv" data-ok="${!!ok}">
-      <span class="pv-n">Étape ${v.etape}</span>
-      <span class="pv-t"><b>◆ ${esc(v.t)}</b>${ok ? `<small>Validé le ${fmtDate(ok.date, true)}</small>` : ''}</span>
-      <button class="btn ${ok ? 'btn-neutral' : 'btn-primary'}" type="button" data-action="valider" data-v="${v.id}">${ok ? 'Annuler' : `${icon('ok', { size: 18 })}Valider`}</button>
-    </div>`;
-  }).join('');
-  const grille = C.livrables.map((l) => {
-    const cur = ev.niveaux[l.id];
-    return `<div class="pg">
-      <div class="pg-t"><b>${l.id} · ${esc(l.t)}</b><small>${esc(l.competence)}</small></div>
-      <div class="pg-niv" role="radiogroup" aria-label="${esc(l.id)} ${esc(l.t)}">
-        ${E.NIVEAUX.map((n) => `<button type="button" role="radio" class="niv-btn" data-niv="${n.v}" aria-checked="${cur === n.v}" data-action="niveau" data-l="${l.id}" data-v="${n.v}">${n.t}</button>`).join('')}
-      </div>
-      <ul class="pg-ind">${(ind[l.id] ?? []).map((x) => `<li data-ok="${x.ok}">${x.ok === true ? icon('ok', { size: 16, stroke: 3 }) : x.ok === false ? icon('fermer', { size: 16, stroke: 3 }) : icon('info', { size: 16 })}${esc(x.t)}</li>`).join('')}</ul>
-    </div>`;
-  }).join('');
   const eleves = ev.eleves.map((el) => {
     const n = E.noteEleve(C, ev, el);
     return `<tr>
@@ -308,23 +354,24 @@ function ongletEvaluation(box, eq, ev) {
     <div class="pe-eval">
       <div class="pe-col">
         <section class="pe-carte">
-          <h3>Validations ◆ du carnet</h3>
-          <p class="pc-aide">Une validation est écrite dans le dossier de l'équipe (validations.json) : les élèves la voient dans leur carnet à la prochaine ouverture ou au prochain enregistrement.</p>
-          ${valides}
-        </section>
-        <section class="pe-carte">
-          <h3>Élèves : bonus / malus</h3>
+          <div class="pe-note">
+            <div><span>Note de l'équipe</span><b>${fmtNote(note)}<small>/20</small></b><em>${E.mention(note)}</em></div>
+            <p class="pc-aide">Moyenne des livrables notés × 5 (Non atteint = 1 · En cours = 2 · Atteint = 3 · Dépassé = 4).</p>
+          </div>
           <table class="cn-table pe-eleves"><thead><tr><th>Élève</th><th>Bonus / malus</th><th>Motif</th><th>Note /20</th></tr></thead><tbody>${eleves || '<tr><td colspan="4">Aucun élève (prénoms absents du projet).</td></tr>'}</tbody></table>
           <p class="pc-aide">Note de l'élève = note de l'équipe + bonus ou malus (par demi-points), entre 0 et 20.</p>
+          <label class="cn-texte"><span>Commentaire</span><textarea class="cn-field" rows="3" data-commentaire maxlength="2000">${esc(ev.commentaire)}</textarea></label>
+        </section>
+        <section class="pe-carte">
+          <h3>Validations ◆ du carnet</h3>
+          ${VALIDATIONS.map((v) => validationHtml(ev, v)).join('')}
+          <p class="pc-aide">Écrites dans le dossier de l'équipe (validations.json) : les élèves les voient dans leur carnet.</p>
         </section>
       </div>
       <section class="pe-carte pe-grille">
-        <div class="pe-note">
-          <div><span>Note de l'équipe</span><b>${fmtNote(note)}<small>/20</small></b><em>${E.mention(note)}</em></div>
-          <p class="pc-aide">Moyenne des livrables notés × 5 (Non atteint = 1 · En cours = 2 · Atteint = 3 · Dépassé = 4).</p>
-        </div>
-        ${grille}
-        <label class="cn-texte"><span>Commentaire</span><textarea class="cn-field" rows="3" data-commentaire maxlength="2000">${esc(ev.commentaire)}</textarea></label>
+        <h3>Livrables D1 à D7</h3>
+        <p class="pc-aide">Les indices de chaque livrable sont dans l'onglet où il se corrige (Carnet, IA et programme, Personnages 3D, Photos).</p>
+        ${C.livrables.map((l) => livrableHtml(ev, l, l.id === 'D7' ? indices(eq, ev.validations) : null)).join('')}
       </section>
     </div>`;
 }
@@ -357,10 +404,11 @@ function ongletCarnet(box, eq, ev) {
     live: {
       characters: p.categories.filter((c) => !c.background).map((c) => ({ id: c.id, name: c.name, photos: c.examples.length })),
       ledPins: pins,
-      ledColor: (pin) => LED_COLORS[colors[pin]] ?? null,
+      ledColor: (pin) => colors[pin] ?? null,
       reconnus: new Set(p.carnet.auto.reconnus),
     },
   });
+  for (const n of [1, 2, 3, 4, 5]) box.querySelector(`#cn-etape-${n}`)?.insertAdjacentHTML('beforeend', panneauHtml(eq, ev, `e${n}`));
 }
 
 // --- IA (personnages, photos) et programme en blocs (lecture seule) ---------------------------------
@@ -399,10 +447,16 @@ function ongletIa(box, eq) {
     characters: persos.filter((c) => !c.background).map((c) => ({ id: c.id, name: c.name })),
     sounds: [...BUILTIN_SOUNDS, ...p.sounds].map((s) => ({ id: s.id, name: s.name })),
     ledPins: p.settings.ledPins,
+    ledColorName: (pin) => LED_COLORS[normalizeLedColors(p.ledColors, p.settings.ledPins)[pin]]?.nom,
   };
   const { Blockly } = window;
   if (!blocsDefinis) {
-    defineBlocks(Blockly, { characters: () => blocsCtx.characters, sounds: () => blocsCtx.sounds, ledPins: () => blocsCtx.ledPins });
+    defineBlocks(Blockly, {
+      characters: () => blocsCtx.characters,
+      sounds: () => blocsCtx.sounds,
+      ledPins: () => blocsCtx.ledPins,
+      ledColorName: (pin) => blocsCtx.ledColorName?.(pin),
+    });
     blocsDefinis = true;
   }
   const ws = Blockly.inject($('pi-blockly'), {
@@ -506,7 +560,7 @@ main.addEventListener('click', async (e) => {
     return d && ouvrir(d.handle);
   }
   if (a === 'importer') return importer();
-  if (a === 'equipe') return vueEquipe(Number(b.dataset.i), 'evaluation');
+  if (a === 'equipe') return vueEquipe(Number(b.dataset.i), 'carnet');
   if (a === 'classe') return vueClasse();
   if (a === 'prec') return vueEquipe(state.courante - 1);
   if (a === 'suiv') return vueEquipe(state.courante + 1);
@@ -522,30 +576,39 @@ main.addEventListener('click', async (e) => {
     if (ev.validations[id]) delete ev.validations[id];
     else ev.validations[id] = { date: Date.now() };
     garder();
-    const ok = await ecrireValidations(eq, ev);
-    vueEquipe(state.courante, 'evaluation');
-    if (ok) showMessage(`Validations envoyées dans le dossier « ${eq.dossier} ».`, 'ok');
+    // Écrite aussitôt dans le dossier de l'équipe ; « Validé le … » suffit comme confirmation
+    // (un bandeau en haut ferait sauter la page). En cas d'échec, ecrireValidations prévient.
+    await ecrireValidations(eq, ev);
+    apresNotation({ carnet: true });
   } else if (a === 'niveau') {
     const v = Number(b.dataset.v);
     if (ev.niveaux[b.dataset.l] === v) delete ev.niveaux[b.dataset.l]; // second clic : on retire la note
     else ev.niveaux[b.dataset.l] = v;
     garder();
-    vueEquipe(state.courante, 'evaluation');
+    apresNotation();
   } else if (a === 'bonus') {
     const el = b.dataset.el;
     const v = Math.round(((ev.bonus[el] ?? 0) + Number(b.dataset.d)) * 2) / 2;
     if (v) ev.bonus[el] = v;
     else delete ev.bonus[el];
     garder();
-    vueEquipe(state.courante, 'evaluation');
+    vueEquipe(state.courante, 'bilan');
   }
 });
+
+function apresNotation({ carnet = false } = {}) {
+  if (state.onglet === 'bilan' || (carnet && state.onglet === 'carnet')) {
+    const y = window.scrollY;
+    vueEquipe(state.courante);
+    window.scrollTo(0, y);
+  } else majPanneaux();
+}
 
 main.addEventListener('keydown', (e) => {
   const row = e.target.closest('tr[data-action="equipe"]');
   if (row && (e.key === 'Enter' || e.key === ' ')) {
     e.preventDefault();
-    vueEquipe(Number(row.dataset.i), 'evaluation');
+    vueEquipe(Number(row.dataset.i), 'carnet');
   }
 });
 
@@ -559,7 +622,7 @@ main.addEventListener('change', (e) => {
     if (Number.isFinite(v) && v) ev.bonus[t.dataset.bonus] = Math.max(-20, Math.min(20, v));
     else delete ev.bonus[t.dataset.bonus];
     garder();
-    vueEquipe(state.courante, 'evaluation');
+    vueEquipe(state.courante, 'bilan');
   }
 });
 main.addEventListener('input', (e) => {

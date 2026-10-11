@@ -146,3 +146,14 @@ test('indices pour noter : ce que l’outil constate dans le dossier de l’équ
   const zm = indices(equipes[2]);
   assert.equal(zm.D4[0].ok, false, 'aucun personnage');
 });
+
+test('indices : dimensions des dessins (≤ 10 cm) et des modèles (≤ 100 mm) notées dans le carnet', () => {
+  const carnet = { ...emptyCarnet(), champs: { 'dessins.0.nom': 'Loup', 'dessins.0.hauteur': '9,5', 'dessins.0.largeur': '7', 'dessins.1.hauteur': '12', 'dessins.1.largeur': '6', 'modeles.0.hauteur': '95', 'modeles.0.largeur': '70' } };
+  const ind = indices({ projet: { carnet, categories: [], blocks: null }, stls: [], images: [] });
+  assert.deepEqual(ind.D1.slice(0, 2), [
+    { t: 'Loup : 9,5 × 7 cm (10 × 10 cm maximum)', ok: true },
+    { t: 'Personnage 2 : 12 × 6 cm (10 × 10 cm maximum)', ok: false },
+  ]);
+  assert.deepEqual(ind.D2.find((x) => x.t.startsWith('Loup')), { t: 'Loup : 95 × 70 mm (100 × 100 mm maximum)', ok: true });
+  assert.equal(ind.D2.find((x) => x.t.startsWith('Personnage 2')).t, 'Personnage 2 : dimensions non notées');
+});

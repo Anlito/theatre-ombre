@@ -19,6 +19,7 @@ const COLLAPSE_KEY = 'theatre-ombre.webcam-reduite';
 
 export function setupProgramScreen({
   training, sounds, board, link, live, settings, showMessage, hideMessage,
+  ledColors = null,
   getTeam = () => [],
   onLevelChange = () => {}, // le niveau a changé (pour marquer le projet « modifié »)
 }) {
@@ -30,6 +31,7 @@ export function setupProgramScreen({
     characters: () => training.characters.map((c) => ({ id: c.id, name: c.name })),
     sounds: () => sounds.sounds.map((s) => ({ id: s.id, name: s.name })),
     ledPins: () => settings.ledPins,
+    ledColorName: (pin) => ledColors?.name(pin),
   });
   defineGenerators(javascriptGenerator, Order, { characterName: (id) => training.get(id)?.name ?? '' });
 
@@ -43,6 +45,19 @@ export function setupProgramScreen({
     grid: { spacing: 20, length: 2, colour: '#D9CCB6', snap: true },
     zoom: { controls: true, wheel: false, startScale: 1.0 },
     move: { scrollbars: true, drag: true, wheel: true },
+  });
+  // Couleur d'une LED changée : « 9 · rouge » devient « 9 · bleue » sur les blocs déjà posés.
+  ledColors?.onChange(() => {
+    for (const block of workspace.getAllBlocks(false)) {
+      const field = block.getField('PIN');
+      if (!field) continue;
+      try {
+        field.selectedOption = field.getOptions(false).find(([, v]) => v === field.getValue()) ?? field.selectedOption;
+        field.forceRerender();
+      } catch {
+        /* rien de grave : le texte se mettra à jour au prochain clic */
+      }
+    }
   });
   // Catégorie « Variables » : blocs avec valeurs déjà écrites (définir … à 0, ajouter 1 à …).
   workspace.registerToolboxCategoryCallback(VARIABLES_CATEGORY, (ws) =>

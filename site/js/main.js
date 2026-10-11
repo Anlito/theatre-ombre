@@ -169,7 +169,7 @@ const cablage = setupCablage({ settings, ledColors });
 const moveCameraPanel = setupCameraPanel({ camera, training, live, settings, board, ledColors });
 const train = setupTrainScreen({ training, live, camera, showMessage });
 program = setupProgramScreen({
-  training, sounds, board, link, live, settings, camera, showMessage, hideMessage,
+  training, sounds, board, link, live, settings, camera, showMessage, hideMessage, ledColors,
   getTeam: () => projects?.state.team ?? [],
   onLevelChange: () => projects?.touch(),
 });
@@ -183,6 +183,8 @@ const carnet = setupCarnetScreen({
   getTeam: () => projects?.state.team ?? [],
   isVisible: () => currentStep === 'carnet',
   onChange: () => projects?.touch(),
+  // Badges et liens du carnet : écran du site, câblage, connexion de la carte.
+  onGoto: (ecran) => (ecran === 'cablage' ? cablage.open() : ecran === 'carte' ? openConnect() : goTo(ecran)),
 });
 setupHelp({ settings, getStep: () => currentStep });
 goTo('carnet'); // le carnet est la feuille de route de l'équipe : c'est le premier écran

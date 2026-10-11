@@ -21,12 +21,16 @@ Le bouton **Carnet** (à droite des étapes 1 · 2 · 3) ouvre le document « é
 dans le site : la commande du client, la route, puis les 5 étapes (Dessiner, Modéliser, Réaliser, Comprendre, Présenter)
 avec leurs tableaux, cases à cocher, chaînes d'information et d'énergie, histoire et préparation de l'oral.
 
-- **Rempli en partie par le site** : nombre de photos et reconnaissance de chaque personnage, couleur des LED,
-  personnage de chaque LED (proposé d'après le programme du niveau 1).
+- **Rempli en partie par le site** : nombre de photos et reconnaissance de chaque personnage ; personnage de chaque LED
+  (proposé d'après le programme du niveau 1).
+- **LED (3.1)** : l'équipe choisit la **couleur** (rouge, jaune, verte, bleue) et la **broche** (celles du professeur, 9 à 12)
+  de ses 2 LED. Ce choix règle le site : lueur des LED à l'écran, et liste des broches des blocs (« 9 · rouge »).
+- **Badges « Site · 1 Entraîner »…** : au survol, l'onglet à utiliser clignote ; au clic, on y va (Entraîner, Programmer,
+  Spectacle, connexion de la carte). Les étapes de câblage ont un bouton vers le **tutoriel de câblage**.
+- **Cotes** : une hauteur ou une largeur au-delà de 10 cm (dessin) ou 100 mm (modèle) passe en orange.
 - **Photos** (dessins A4, câblage) : prises avec la webcam ou choisies dans un fichier, réduites (environ 200 à 400 Ko).
 - **◆ Validations** : données par le professeur (outil professeur), affichées dans le carnet ; les élèves ne peuvent pas les cocher.
 - **Enregistré dans le fichier de l'équipe** (`PRENOM_PRENOM_theatre_ombre.json`), avec l'IA et les blocs.
-- **Imprimer / PDF** : le carnet seul, une étape par page.
 - Les textes du carnet sont dans `site/js/carnet-contenu.js` (à modifier là si le document papier change).
 
 ## Outil professeur (suivi et notation)
@@ -39,13 +43,17 @@ avec leurs tableaux, cases à cocher, chaînes d'information et d'énergie, hist
 2. **Vue de la classe** : une ligne par équipe : avancement du carnet (5 étapes), validations ◆, personnages de l'IA,
    STL, niveaux D1 à D7, note et mention. « Actualiser » relit les derniers enregistrements des élèves.
 3. **Fiche d'une équipe** (onglets) :
-   - **Évaluation** : les 6 validations ◆ (écrites aussitôt dans `validations.json` du dossier de l'équipe ; les élèves les voient
-     dans leur carnet à la prochaine ouverture ou au prochain enregistrement) ; la grille **D1 à D7** en 4 niveaux
-     (Non atteint · En cours · Atteint · Dépassé), avec sous chaque livrable des **indices** constatés par l'outil
-     (photos, STL conformes, personnages reconnus, chaînes justes d'après le corrigé…) ; commentaire ;
-     **bonus / malus par élève** avec son motif.
-   - **Carnet** (lecture seule), **IA et programme** (personnages, vignettes, programme en blocs niveau 1 et 2),
-     **Personnages 3D** (vue 3D des STL, taille ≤ 100 × 100 mm et épaisseur 2 mm vérifiées), **Photos et fichiers**.
+   - **On note là où l'on corrige** : chaque onglet a un panneau **« À noter ici »** avec les validations ◆ et les livrables
+     qui s'y rapportent, en 4 niveaux (Non atteint · En cours · Atteint · Dépassé), et des **indices** constatés par l'outil :
+     - **Carnet** (lecture seule) : un panneau à la fin de chaque étape (1 : D1 · 2 : D2 · 3 : D3 et D4 · 4 : D5 · 5 : D6) ;
+       dimensions des dessins (≤ 10 cm) et des modèles (≤ 100 mm), chaînes justes d'après le corrigé… ;
+     - **IA et programme** (D4) : personnages, vignettes, programme en blocs niveau 1 et 2 ;
+     - **Personnages 3D** (D2) : vue 3D des STL, taille ≤ 100 × 100 mm et épaisseur 2 mm vérifiées ;
+     - **Photos et fichiers** (D1, D3).
+   - **Bilan** : note de l'équipe, **bonus / malus par élève** avec son motif, commentaire, toutes les validations ◆
+     et les 7 livrables (dont D7, investissement). La note reste affichée en haut de la fiche.
+   - Les validations ◆ sont écrites aussitôt dans `validations.json` du dossier de l'équipe ; les élèves les voient dans
+     leur carnet à la prochaine ouverture ou au prochain enregistrement.
 4. **Note de l'équipe** = moyenne des livrables notés × 5 ; mentions : < 10 À approfondir · 10 à 12,9 Satisfaisant ·
    13 à 16,9 Bien · ≥ 17 Très bien. Note de l'élève = note de l'équipe + bonus / malus, entre 0 et 20.
 5. **Exporter (Excel)** : un fichier .csv, une ligne par élève, niveaux écrits comme dans Pronote
@@ -172,7 +180,9 @@ Le code professeur évite les changements par erreur ; ce n'est pas une vraie s�
 - **Première chose après « Nouveau projet » : ranger le projet.** La fenêtre « Ranger votre projet » fait choisir le dossier
   `3B › COMMUN › TECHNOLOGIE › THEATRE IA` ; le site y crée le dossier de l'équipe (`LEA - TOM`, sans accents)
   et y enregistre `LEA_TOM_theatre_ombre.json`. Le navigateur demande l'autorisation de modifier les fichiers : répondre oui.
-- **Enregistrer** (menu équipe, ou Ctrl+S) écrit ensuite toujours dans ce fichier, sans rien demander.
+- **Enregistrement automatique** : une fois le dossier choisi, le projet est réécrit tout seul 4 secondes après chaque
+  modification (et quand on quitte l'onglet). La pastille de l'équipe indique « enregistrement… » puis « enregistré ».
+  « Enregistrer » (menu équipe, ou Ctrl+S) reste possible.
 - **Ouvrir notre projet** : choisir `THEATRE IA` puis cliquer sur son équipe dans la liste (ou choisir directement son dossier).
 - Le professeur dépose `validations.json` dans chaque dossier d'équipe (outil professeur) : les ◆ apparaissent dans le carnet.
 - Navigateur sans choix de dossier : le fichier est téléchargé, à ranger à la main.

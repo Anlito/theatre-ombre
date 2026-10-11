@@ -9,7 +9,7 @@ import { icon } from '../icons.js';
 const PHOTO_MAX_PX = 1600; // côté le plus long : assez pour lire une feuille A4, environ 200 à 400 Ko
 const PHOTO_QUALITY = 0.82;
 
-export function setupCarnetScreen({ camera, training, live, link, board, program, settings, ledColors, getTeam, isVisible, onChange, showMessage }) {
+export function setupCarnetScreen({ camera, training, live, link, board, program, settings, ledColors, getTeam, isVisible, onChange, showMessage, onGoto = () => {} }) {
   const root = document.getElementById('carnet-root');
   let carnet = emptyCarnet();
   let validations = {}; // ◆ du professeur (validations.json du dossier de l'équipe)
@@ -22,7 +22,7 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
     return {
       characters: training.categories.filter((c) => !c.background).map((c) => ({ id: c.id, name: c.name, photos: c.examples.length })),
       ledPins: settings.ledPins,
-      ledColor: (pin) => ({ nom: ledColors.name(pin), hex: ledColors.hex(pin) }),
+      ledColor: (pin) => ledColors.get(pin),
       reconnus: new Set(carnet.auto.reconnus),
     };
   }
@@ -32,7 +32,8 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
     const names = Object.fromEntries(training.categories.map((c) => [c.id, c.name]));
     const parBroche = ledsDuProgramme(program.saveBlocks()?.parNiveau?.[1], (id) => names[id]);
     let changedAny = false;
-    settings.ledPins.slice(0, 2).forEach((pin, i) => {
+    [0, 1].forEach((i) => {
+      const pin = brocheLed(i);
       const id = `leds.${i}.perso`;
       if (!carnet.champs[id] && parBroche[pin]) {
         carnet.champs[id] = parBroche[pin];
@@ -40,6 +41,21 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
       }
     });
     if (changedAny) changed();
+  }
+
+  // Broche de la LED i : choisie dans le carnet, sinon celle prévue par le professeur.
+  const brocheLed = (i) => Number(carnet.champs[`leds.${i}.broche`]) || settings.ledPins[i] || 9;
+
+  // Le carnet garde la broche et la couleur de chaque LED (lues par l'outil professeur) :
+  // la couleur vient du site (« Ce que la carte a reçu » ou le tableau du carnet, c'est la même).
+  function avecLeds(c) {
+    const champs = { ...c.champs };
+    [0, 1].forEach((i) => {
+      const pin = brocheLed(i);
+      champs[`leds.${i}.broche`] = String(pin);
+      champs[`leds.${i}.couleur`] = ledColors.get(pin);
+    });
+    return { ...c, champs };
   }
 
   live.on('vu', ({ id }) => {
@@ -66,6 +82,9 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
       validations,
       live: liveData(),
       onChange: changed,
+      onGoto,
+      onHint: (ecran, on) => hintTarget(ecran)?.classList.toggle('is-hint', on),
+      onLed: (pin, couleur) => ledColors.set(pin, couleur),
       onAddPhoto: (id) => photos.open(id),
       onRemovePhoto: (id, photoId) => {
         if (!confirm('Supprimer cette photo ?')) return;
@@ -76,6 +95,13 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
         changed();
       },
     });
+  }
+
+  // Ce qui clignote au survol d'un badge du carnet.
+  function hintTarget(ecran) {
+    if (ecran === 'carte') return document.getElementById('pill-board');
+    if (ecran === 'cablage') return document.getElementById('btn-cablage-menu')?.closest('.menu')?.querySelector('.menu-btn');
+    return document.querySelector(`.step[data-step="${ecran}"]`);
   }
 
   // --- Photos : webcam (feuille A4 posée devant) ou fichier ------------------------------------
@@ -91,22 +117,11 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
     showMessage,
   });
 
-  // --- Imprimer (ou « Enregistrer au format PDF ») ---------------------------------------------
-  document.getElementById('btn-carnet-print').addEventListener('click', () => {
-    document.body.classList.add('is-printing-carnet');
-    // Les <details> et zones de texte s'impriment en entier.
-    for (const t of root.querySelectorAll('textarea')) t.style.height = `${t.scrollHeight + 4}px`;
-    setTimeout(() => {
-      window.print();
-      document.body.classList.remove('is-printing-carnet');
-    }, 50);
-  });
-
   return {
     show: render,
     // Prénoms changés : seulement la ligne des prénoms (redessiner tout ferait perdre la saisie en cours).
     refreshTeam: () => view?.refreshTeam(getTeam()),
-    get: () => carnet,
+    get: () => avecLeds(carnet),
     replace(next) {
       carnet = normalizeCarnet(next);
       validations = {};
