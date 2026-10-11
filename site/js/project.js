@@ -2,11 +2,13 @@
 //   - l'équipe (prénoms), les réglages ;
 //   - les personnages et leurs exemples : « empreintes » MobileNet + petite vignette
 //     (on retrouve l'IA entraînée sans reprendre de photos) ;
-//   - les blocs ; les sons ajoutés par les élèves (s'ils ne sont pas trop lourds).
+//   - les blocs ; les sons ajoutés par les élèves (s'ils ne sont pas trop lourds) ;
+//   - le carnet de projet (textes, cases cochées, photos des dessins et du câblage).
 // Ce fichier ne touche pas à la page : il sert au site ET aux tests.
 
 import { normalizeSettings } from './settings.js';
 import { BACKGROUND_ID, BACKGROUND_NAME } from './training.js';
+import { normalizeCarnet } from './carnet.js';
 
 export const FORMAT = 'theatre-ombre';
 export const VERSION = 1;
@@ -14,7 +16,7 @@ export const MAX_SOUNDS_BYTES = 5 * 1024 * 1024; // au-delà, on ne garde que le
 
 // --- Écriture -------------------------------------------------------------------------
 // sounds : [{ id, name, mime, bytes: Uint8Array }] (sons des élèves seulement)
-export function serialize({ team = [], settings, categories, blocks, sounds = [], modelId, ledColors = {} }) {
+export function serialize({ team = [], settings, categories, blocks, sounds = [], modelId, ledColors = {}, carnet = null }) {
   const total = sounds.reduce((n, s) => n + (s.bytes?.length ?? 0), 0);
   const keepAudio = total <= MAX_SOUNDS_BYTES;
   return {
@@ -39,6 +41,7 @@ export function serialize({ team = [], settings, categories, blocks, sounds = []
       data: keepAudio && s.bytes ? bytesToBase64(s.bytes) : null,
     })),
     sonsTropLourds: keepAudio ? undefined : true,
+    carnet: carnet ?? undefined, // carnet de projet (textes, cases, photos) : voir carnet.js
   };
 }
 
@@ -97,6 +100,7 @@ export function parse(text, { modelId } = {}) {
       categories,
       blocks: data.blocs ?? null,
       sounds,
+      carnet: normalizeCarnet(data.carnet),
       savedAt: data.enregistre ?? null,
     },
   };

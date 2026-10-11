@@ -23,6 +23,7 @@ import { hydrateIcons, icon } from './icons.js';
 import { LedColors } from './led-colors.js';
 import { setupGuide } from './ui/guide.js';
 import { setupFirmwareDialog } from './ui/firmware.js';
+import { setupCarnetScreen } from './ui/carnet.js';
 
 const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
@@ -159,6 +160,7 @@ function goTo(step) {
   moveCameraPanel(step);
   camera.video.play().catch(() => {});
   if (step === 'programmer') program?.resize();
+  if (step === 'carnet') carnet?.show();
 }
 for (const b of document.querySelectorAll('.step')) b.addEventListener('click', () => goTo(b.dataset.step));
 
@@ -176,6 +178,12 @@ const spectacle = setupSpectacle({
   onStart: () => program.runtime.running || program.start(),
   getTeam: () => projects?.state.team ?? [],
 });
+const carnet = setupCarnetScreen({
+  camera, training, live, link, board, program, settings, ledColors, showMessage,
+  getTeam: () => projects?.state.team ?? [],
+  isVisible: () => currentStep === 'carnet',
+  onChange: () => projects?.touch(),
+});
 setupHelp({ settings, getStep: () => currentStep });
 goTo('entrainer');
 
@@ -187,8 +195,11 @@ function onSettingsChanged() {
   cablage.render();
 }
 projects = setupProjects({
-  training, sounds, settings, program, ledColors, onSettingsChanged, showMessage, hideMessage,
-  onTeamChange: () => spectacle.renderTitle(),
+  training, sounds, settings, program, ledColors, carnet, onSettingsChanged, showMessage, hideMessage,
+  onTeamChange: () => {
+    spectacle.renderTitle();
+    carnet.refreshTeam();
+  },
 });
 setupTeacherMode({ settings, onSettingsChanged, showMessage });
 const guide = setupGuide({ camera, training, link, live, board, program, projects, settings, train, cablage, openConnect, goTo });

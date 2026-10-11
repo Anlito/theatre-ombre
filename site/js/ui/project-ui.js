@@ -10,7 +10,7 @@ const BACKUP_EVERY_MS = 60_000;
 
 import { icon } from '../icons.js';
 
-export function setupProjects({ training, sounds, settings, program, ledColors, onSettingsChanged, showMessage, hideMessage, onTeamChange = () => {} }) {
+export function setupProjects({ training, sounds, settings, program, ledColors, carnet, onSettingsChanged, showMessage, hideMessage, onTeamChange = () => {} }) {
   const $ = (id) => document.getElementById(id);
   const state = {
     team: [],
@@ -38,6 +38,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
   function hasWork() {
     if (training.categories.some((c) => !c.background || c.examples.length > 0)) return true;
     if (sounds.sounds.some((snd) => !snd.builtin)) return true;
+    if (carnet.hasWork()) return true;
     const programs = Object.values(program.saveBlocks().parNiveau ?? {});
     return programs.some((json) => {
       const blocks = json?.blocks?.blocks ?? [];
@@ -68,6 +69,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       sounds: await sounds.studentSounds(),
       modelId: MODEL_ID,
       ledColors: ledColors.toJSON(),
+      carnet: carnet.get(),
     });
   }
 
@@ -85,6 +87,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       training.replaceAll(project.categories);
       sounds.replaceStudentSounds(project.sounds);
       program.loadBlocks(project.blocks); // après personnages et sons : les listes des blocs les connaissent
+      carnet.replace(project.carnet);
       state.team = team ?? (project.team.length ? project.team : state.team);
     } finally {
       state.loading = false;
@@ -95,7 +98,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
   }
 
   function emptyProject() {
-    return { settings: { ...settings }, categories: [], sounds: [], blocks: null, team: [], ledColors: {} };
+    return { settings: { ...settings }, categories: [], sounds: [], blocks: null, team: [], ledColors: {}, carnet: null };
   }
 
   // --- Enregistrer ---------------------------------------------------------------------------

@@ -77,6 +77,10 @@
       <button class="step" data-step="spectacle" type="button">
         <span class="step-num">3</span> Spectacle
       </button>
+      <span class="step-gap" aria-hidden="true"></span>
+      <button class="step step-carnet" data-step="carnet" type="button" title="Le document de projet de l'équipe : à remplir à chaque étape">
+        <span class="step-num" data-icon="cours" data-size="16" data-stroke="2.2"></span> Carnet
+      </button>
     </div>
     <span class="spacer"></span>
 
@@ -98,6 +102,11 @@
       </div>
       <button id="btn-run" class="btn btn-go" type="button">Démarrer</button>
       <span id="run-state" class="run-state" data-running="false"></span>
+    </div>
+
+    <div class="screen-actions" data-for="carnet">
+      <span class="carnet-hint">Le carnet est enregistré avec le projet de l'équipe.</span>
+      <button id="btn-carnet-print" class="btn btn-secondary" type="button"><span data-icon="telecharger"></span>Imprimer / PDF</button>
     </div>
 
     <div class="screen-actions" data-for="spectacle">
@@ -245,6 +254,11 @@
         <div class="curtain curtain-right" aria-hidden="true"></div>
         <p id="curtain-hint" class="curtain-hint"><span data-icon="pleinecran" data-size="22"></span>Cliquez sur « Lancer le spectacle » pour ouvrir le rideau</p>
       </div>
+    </section>
+
+    <!-- ===== Carnet de projet ===== -->
+    <section id="screen-carnet" class="screen" data-screen="carnet" hidden>
+      <div id="carnet-root" class="carnet-root"></div>
     </section>
   </main>
 

@@ -103,6 +103,16 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 - [ ] Niveau 3 : la webcam est réduite en bande d’état ; « Agrandir la webcam » la rouvre (choix mémorisé par niveau).
 - [ ] Au vidéoprojecteur : textes, pastilles et boutons lisibles depuis le fond de la salle.
 
+## 12. Carnet de projet
+
+- [ ] Bouton **Carnet** : la commande, la route et les 5 étapes s'affichent ; la colonne de gauche mène à chaque étape.
+- [ ] Taper dans un tableau, cocher une case : l'avancement (ex. 4/10) se met à jour ; l'équipe passe en « non enregistré ».
+- [ ] Étape 3 : les personnages, leur nombre de photos et « Reconnu ? » se remplissent seuls ; la couleur des LED suit « Ce que la carte a reçu ».
+- [ ] **Ajouter une photo** → poser une feuille A4 devant la webcam → « Prendre la photo » → « Garder » : la feuille est lisible.
+- [ ] Même chose avec « Choisir un fichier… » (photo prise au téléphone).
+- [ ] Enregistrer, fermer l'onglet, rouvrir le projet : tout le carnet est retrouvé (textes, cases, photos).
+- [ ] **Imprimer / PDF** → « Enregistrer au format PDF » : le carnet seul, lisible, une étape par page.
+
 ## Bilan
 
 - Problèmes constatés : ……………………………………………………………

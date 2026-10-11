@@ -15,6 +15,20 @@ photos de chaque personnage, reconnaissance vérifiée, câblage et couleurs des
 avec « C’est fait »), carte connectée, programme écrit, programme testé, projet enregistré, spectacle lancé.
 La carte s’ouvre seule au premier projet ; on la ferme avec ✕ et on la rouvre avec le bouton.
 
+## Carnet de projet
+
+Le bouton **Carnet** (à droite des étapes 1 · 2 · 3) ouvre le document « étapes du projet » de l'équipe, à remplir
+dans le site : la commande du client, la route, puis les 5 étapes (Dessiner, Modéliser, Réaliser, Comprendre, Présenter)
+avec leurs tableaux, cases à cocher, chaînes d'information et d'énergie, histoire et préparation de l'oral.
+
+- **Rempli en partie par le site** : nombre de photos et reconnaissance de chaque personnage, couleur des LED,
+  personnage de chaque LED (proposé d'après le programme du niveau 1).
+- **Photos** (dessins A4, câblage) : prises avec la webcam ou choisies dans un fichier, réduites (environ 200 à 400 Ko).
+- **◆ Validations** : données par le professeur (outil professeur), affichées dans le carnet ; les élèves ne peuvent pas les cocher.
+- **Enregistré dans le fichier de l'équipe** (`PRENOM_PRENOM_theatre_ombre.json`), avec l'IA et les blocs.
+- **Imprimer / PDF** : le carnet seul, une étape par page.
+- Les textes du carnet sont dans `site/js/carnet-contenu.js` (à modifier là si le document papier change).
+
 ## Les niveaux de programmation
 
 Le niveau se choisit **en haut de l'écran Programmer** (« Niveau : 1 · Premiers pas | 2 · Boucles et conditions | 3 · Code Arduino »),
