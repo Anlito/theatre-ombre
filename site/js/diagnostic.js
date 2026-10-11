@@ -52,9 +52,9 @@ const isChromium = !!navigator.userAgentData?.brands?.some((b) => /Chrom|Edge/.t
 addCheck('navigateur', isChromium, 'Navigateur Chrome ou Edge',
   isChromium ? browserName() : 'Ouvrez cette page avec Google Chrome ou Microsoft Edge.');
 addCheck('https', window.isSecureContext, 'Site sécurisé (https ou localhost)',
-  window.isSecureContext ? location.origin : 'La webcam et la carte refusent de fonctionner en http simple.');
+  window.isSecureContext ? location.origin : 'La webcam et la carte programmable refusent de fonctionner en http simple.');
 const serial = serialSupport();
-addCheck('web-serial', serial.ok, 'Web Serial (parler à la carte)',
+addCheck('web-serial', serial.ok, 'Web Serial (parler à la carte programmable)',
   serial.ok ? '' : serial.error + ' Si le navigateur est bien Chrome/Edge, Web Serial est peut-être bloqué par une règle du service informatique.');
 addCheck('camera-api', !!navigator.mediaDevices?.getUserMedia, 'Accès webcam possible');
 const gl = document.createElement('canvas').getContext('webgl2') || document.createElement('canvas').getContext('webgl');
@@ -62,7 +62,7 @@ addCheck('webgl', !!gl, 'Accélération graphique (WebGL)',
   gl ? '' : "L'IA marchera, mais plus lentement (sans carte graphique).");
 addCheck('webcam', null, 'Image de la webcam', 'Cliquez sur « Tester la webcam ».');
 addCheck('ia', null, "Chargement de l'IA", 'Cliquez sur « Charger l’IA ».');
-addCheck('carte', null, 'Carte Arduino', 'Cliquez sur « Connecter l’Arduino ».');
+addCheck('carte', null, 'Carte programmable (Arduino)', 'Cliquez sur « Connecter l’Arduino ».');
 
 // 2. Webcam ----------------------------------------------------------------------------
 $('btn-cam').addEventListener('click', async () => {
@@ -126,14 +126,14 @@ function loadScript(src) {
 
 // 4. Carte ------------------------------------------------------------------------------
 $('pin').append(...PINS.map((p) => new Option(`${p}`, p)));
-$('pin').value = '13'; // LED intégrée à la carte
+$('pin').value = '13'; // LED intégrée à la carte programmable
 const link = new SerialLink();
 link.subscribe(({ state, error }) => {
   const on = link.connected;
   for (const id of ['btn-on', 'btn-off', 'btn-alloff']) $(id).disabled = !on;
   $('btn-connect').innerHTML = icon('carte') + (on ? 'Déconnecter' : "Connecter l'Arduino");
-  if (state === 'connectee') addCheck('carte', true, 'Carte Arduino', 'La carte répond (PONG v1).');
-  if (error) addCheck('carte', false, 'Carte Arduino', error);
+  if (state === 'connectee') addCheck('carte', true, 'Carte programmable (Arduino)', 'La carte programmable répond (PONG v1).');
+  if (error) addCheck('carte', false, 'Carte programmable (Arduino)', error);
 });
 
 // Carte sans le bon programme : on propose de l'installer depuis cette page.
@@ -141,11 +141,11 @@ const firmware = setupFirmwareDialog({ link, showMessage: (t) => ($('board-msg')
 
 $('btn-connect').addEventListener('click', async () => {
   if (link.connected) return link.disconnect();
-  if (!serial.ok) return addCheck('carte', false, 'Carte Arduino', serial.error);
+  if (!serial.ok) return addCheck('carte', false, 'Carte programmable (Arduino)', serial.error);
   const port = await WebSerialTransport.choosePort();
   if (!port) {
-    return addCheck('carte', false, 'Carte Arduino',
-      "Aucune carte choisie. Si la liste était vide : câble USB, ou pilote CH340 manquant sur ce poste (droits administrateur nécessaires pour l'installer).");
+    return addCheck('carte', false, 'Carte programmable (Arduino)',
+      "Aucune carte programmable choisie. Si la liste était vide : câble USB, ou pilote CH340 manquant sur ce poste (droits administrateur nécessaires pour l'installer).");
   }
   $('board-msg').textContent = 'Connexion… (2 secondes)';
   const r = await link.connect(new WebSerialTransport(port));

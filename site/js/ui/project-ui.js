@@ -457,7 +457,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     $('team-names').textContent = state.team.length ? state.team.join(', ') : 'Équipe sans nom';
     const unsaved = unsavedWork();
     const saved = !unsaved && hasWork();
-    $('save-state').innerHTML = unsaved ? (state.handle ? 'enregistrement…' : 'non enregistré') : saved ? icon('ok', { size: 18 }) + 'enregistré' : '';
+    $('save-state').innerHTML = unsaved ? (state.handle ? 'enregistrement…' : 'non enregistré') : saved ? icon('ok', { size: 18, label: 'enregistré' }) + '<span class="save-word">enregistré</span>' : '';
     $('save-state').dataset.dirty = String(unsaved);
     $('save-state').hidden = !unsaved && !saved;
     onTeamChange();

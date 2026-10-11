@@ -117,7 +117,7 @@ export function setupProgramScreen({
   function report(r) {
     if (r.ok) return;
     if (r.offline) {
-      if (!warnedOffline) showMessage("La carte n'est pas connectée : les LED ne s'allumeront pas. Clique sur la pastille « Carte · Connecter », en haut.", 'info');
+      if (!warnedOffline) showMessage("La carte programmable n'est pas connectée : les LED ne s'allumeront pas. Clique sur la pastille « Carte programmable · Connecter », en haut.", 'info');
       warnedOffline = true;
     } else showMessage(r.error);
   }

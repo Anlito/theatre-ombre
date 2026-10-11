@@ -105,7 +105,7 @@ export function defineBlocks(Blockly, ctx) {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(COLOURS.led);
-        this.setTooltip('Allume la LED branchée sur cette broche de la carte (2 à 13).');
+        this.setTooltip('Allume la LED branchée sur cette broche de la carte programmable (2 à 13).');
       },
     },
     eteindre_led: {
@@ -116,7 +116,7 @@ export function defineBlocks(Blockly, ctx) {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(COLOURS.led);
-        this.setTooltip('Éteint la LED branchée sur cette broche de la carte.');
+        this.setTooltip('Éteint la LED branchée sur cette broche de la carte programmable.');
       },
     },
     jouer_son: {

@@ -85,7 +85,7 @@ Au niveau 3, le panneau « Code C++ » se met à jour à chaque modification ; u
 un clic sur une ligne sélectionne son bloc. Boutons « Copier le code » et « Télécharger le fichier .ino ».
 Ce code est une **traduction pédagogique** : en classe, c'est toujours le programme en blocs qui s'exécute
 (« en direct »). Pour un essai « autonome », on téléverse le .ino avec l'IDE Arduino et on tape le nom d'un
-personnage dans le Moniteur série (la carte n'a pas de webcam) ; au retour dans l'outil, « Carte · Connecter »
+personnage dans le Moniteur série (la carte n'a pas de webcam) ; au retour dans l'outil, « Carte programmable · Connecter »
 propose de réinstaller le programme du Théâtre d'ombre.
 
 Au niveau 2, une zone **Messages** (bloc « écrire ») et une zone **Variables** s'affichent sous les blocs,
@@ -136,7 +136,7 @@ patte courte (−) de chaque LED ── rail − de la breadboard ── un fil 
 ## Le programme de la carte : installé par le site
 
 La carte doit contenir le programme fixe `theatre_ombre.ino` (il traduit les ordres du site : « allume la broche 9 »…).
-**Le site l'installe lui-même** : si la carte a servi à un autre projet (mBlock, IDE Arduino…), « Carte · Connecter »
+**Le site l'installe lui-même** : si la carte a servi à un autre projet (mBlock, IDE Arduino…), « Carte programmable · Connecter »
 ouvre la fenêtre **« Installer le programme sur la carte »** ; un clic, environ 3 secondes (un peu plus sur une
 Nano « Old Bootloader »), puis la carte se connecte. Rien à installer sur l'ordinateur, aucun serveur :
 le programme déjà compilé est rangé dans le site (`site/firmware/theatre_ombre.hex`), et le site parle au

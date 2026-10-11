@@ -6,7 +6,7 @@ import { WebSerialTransport } from '../serial.js';
 import { icon } from '../icons.js';
 
 const PHASES = {
-  connexion: 'Préparation de la carte…',
+  connexion: 'Préparation de la carte programmable…',
   ecriture: 'Écriture du programme…',
   verification: 'Vérification…',
   fin: 'Programme installé !',
@@ -20,12 +20,12 @@ export function setupFirmwareDialog({ link, showMessage = () => {}, hideMessage 
   dialog.innerHTML = `
     <div class="dialog-head">
       <span class="dialog-icon">${icon('carte', { size: 24 })}</span>
-      <h2 id="firmware-title">Installer le programme sur la carte</h2>
+      <h2 id="firmware-title">Installer le programme sur la carte programmable</h2>
       <span class="spacer"></span>
       <button class="icon-btn dialog-close" type="button" data-fw-close aria-label="Fermer" title="Fermer">${icon('fermer')}</button>
     </div>
     <div class="dialog-body">
-      <p>Cette carte n'a pas le programme du Théâtre d'ombre : elle a sans doute servi à <b>un autre projet</b>
+      <p>Cette carte programmable n'a pas le programme du Théâtre d'ombre : elle a sans doute servi à <b>un autre projet</b>
         (mBlock, IDE Arduino…).</p>
       <p>Le site peut l'installer maintenant : <b>quelques secondes</b>, rien à installer sur l'ordinateur.
         Pendant l'installation, <b>ne débranchez pas le câble USB</b>.</p>
@@ -87,12 +87,12 @@ export function setupFirmwareDialog({ link, showMessage = () => {}, hideMessage 
       install.innerHTML = `${icon('telecharger')}Réessayer`;
       return;
     }
-    setStatus('Programme installé ! Connexion à la carte…', 'ok');
+    setStatus('Programme installé ! Connexion à la carte programmable…', 'ok');
     await new Promise((r) => setTimeout(r, 400));
     dialog.close();
-    showMessage('Programme installé. Connexion à la carte… (2 secondes)', 'info');
+    showMessage('Programme installé. Connexion à la carte programmable… (2 secondes)', 'info');
     const r = await link.connect(new WebSerialTransport(port));
-    if (r.ok) showMessage('Programme installé : la carte est prête.', 'ok');
+    if (r.ok) showMessage('Programme installé : la carte programmable est prête.', 'ok');
     onConnected(r);
   });
 

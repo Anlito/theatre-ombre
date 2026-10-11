@@ -35,6 +35,7 @@ const safe = (p, fallback = null) => p.catch(() => fallback);
 
 export const garderClasseur = (c) => safe(run('classeurs', 'readwrite', (s) => s.put(c, c.classe)), false);
 export const lireClasseur = (classe) => safe(run('classeurs', 'readonly', (s) => s.get(classe)));
+export const tousLesClasseurs = async () => (await safe(run('classeurs', 'readonly', (s) => s.getAll()), [])) ?? [];
 export const garderDossier = (classe, handle) => safe(run('dossiers', 'readwrite', (s) => s.put({ classe, handle, date: Date.now() }, classe)), false);
 
 // [{ classe, handle, date }] du plus récent au plus ancien.

@@ -28,7 +28,7 @@ const LEXIQUE = `
     <dt>Catégorie</dt><dd>Un personnage que l'IA doit reconnaître (ex. « Loup »). « Fond vide » = personne.</dd>
     <dt>Exemple</dt><dd>Une photo donnée à l'IA pour qu'elle apprenne une catégorie.</dd>
     <dt>Confiance</dt><dd>À quel point l'IA est sûre d'elle, en %. 100 % = certaine.</dd>
-    <dt>Broche</dt><dd>Une des prises numérotées de la carte Arduino (2 à 13) où l'on branche une LED.</dd>
+    <dt>Broche</dt><dd>Une des prises numérotées de la carte programmable (Arduino) (2 à 13) où l'on branche une LED.</dd>
   </dl>`;
 
 const AIDES = {
@@ -52,7 +52,7 @@ const AIDES = {
       <li>Le nom du personnage reconnu s'affiche sur la plaque ; les projecteurs montrent les LED allumées.</li>
       <li>Le bouton rouge « <b>Tout éteindre</b> » arrête tout, à tout moment.</li>
     </ol>
-    <p>Fin de séance : <b>Tout éteindre</b>, puis déconnecter la carte, puis débrancher le câble USB.</p>`,
+    <p>Fin de séance : <b>Tout éteindre</b>, puis déconnecter la carte programmable, puis débrancher le câble USB.</p>`,
   carnet: `
     <h3>Carnet de projet</h3>
     <ol class="help-steps">
@@ -68,7 +68,7 @@ const NIVEAUX = {
   1: `
     <h3>Niveau 1 · Premiers pas</h3>
     <ol class="help-steps">
-      <li>Cliquez sur la pastille « <b>Carte · Connecter</b> », en haut, vérifiez le câblage, puis choisissez la carte dans la liste.</li>
+      <li>Cliquez sur la pastille « <b>Carte programmable · Connecter</b> », en haut, vérifiez le câblage, puis choisissez la carte programmable dans la liste.</li>
       <li>Glissez un bloc ${M.quandVois} et accrochez des actions dessous, comme ${M.allumer} ou ${M.son}.</li>
       <li>Dans « allumer la LED », choisissez la <b>broche</b> où votre LED est branchée (bouton « Câblage des LED »).</li>
       <li>Avec ${M.quandPlus}, éteignez la LED quand le personnage quitte l'écran.</li>
@@ -90,12 +90,12 @@ const NIVEAUX = {
   3: `
     <h3>Niveau 3 · Code Arduino</h3>
     <p>Le panneau de droite montre le <b>code C++</b> de votre programme du niveau 2 : c'est une <b>traduction</b>,
-      pour comprendre ce que la carte exécuterait. En classe, c'est <b>le programme en blocs</b> qui s'exécute, dans le navigateur.</p>
+      pour comprendre ce que la carte programmable exécuterait. En classe, c'est <b>le programme en blocs</b> qui s'exécute, dans le navigateur.</p>
     <ul class="help-list">
       ${item(M.allumer, '<code>digitalWrite(9, HIGH);</code>')}
       ${item(M.attendre, '<code>delay(1000);</code> (en millisecondes)')}
       ${item(M.si, '<code>if (…) { … } else { … }</code>')}
-      ${item(M.toujours, 'la fonction <code>loop()</code>, que la carte répète sans arrêt')}
+      ${item(M.toujours, 'la fonction <code>loop()</code>, que la carte programmable répète sans arrêt')}
       ${item(M.variables, '<code>int passages = 0;</code>')}
     </ul>
     <p><b>Cliquez sur un bloc</b> : ses lignes s'éclairent dans le code. <b>Cliquez sur une ligne</b> : son bloc est sélectionné.</p>

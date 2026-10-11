@@ -107,7 +107,7 @@ async function accueil() {
     </section>`;
 }
 
-async function ouvrir(handle = null) {
+async function ouvrir(handle = null, classe = '') {
   let dir = handle;
   if (dir) {
     try {
@@ -123,10 +123,32 @@ async function ouvrir(handle = null) {
       return;
     }
   }
-  await charger(dir);
+  await charger(dir, { classe });
 }
 
-async function charger(dir, { garderVue = false } = {}) {
+// Classe d'un dossier, sans la redemander : dossier déjà ouvert, classe écrite dans les carnets,
+// ou évaluation (importée ou gardée sur cet ordinateur) qui contient les mêmes équipes.
+async function classeDuDossier(dir, equipes) {
+  for (const d of await S.dossiersConnus()) {
+    try {
+      if (await d.handle.isSameEntry(dir)) return d.classe;
+    } catch {
+      /* dossier connu devenu inaccessible */
+    }
+  }
+  const desCarnets = classeDesEquipes(equipes);
+  if (desCarnets) return desCarnets;
+  const noms = new Set(equipes.map((e) => e.dossier));
+  let meilleure = null;
+  let communs = 0;
+  for (const c of await S.tousLesClasseurs()) {
+    const n = Object.keys(c.equipes ?? {}).filter((d) => noms.has(d)).length;
+    if (n > communs || (n === communs && n > 0 && c.maj > meilleure.maj)) [meilleure, communs] = [c, n];
+  }
+  return meilleure?.classe ?? '';
+}
+
+async function charger(dir, { garderVue = false, classe: classeConnue = '' } = {}) {
   main.innerHTML = `<p class="prof-attente">${icon('vider', { size: 22 })} Lecture du dossier « ${esc(dir.name)} »…</p>`;
   let lecture;
   try {
@@ -148,7 +170,7 @@ async function charger(dir, { garderVue = false } = {}) {
       }
     }
   }
-  let classe = state.classeur && garderVue ? state.classeur.classe : classeDesEquipes(lecture.equipes);
+  let classe = state.classeur && garderVue ? state.classeur.classe : classeConnue || (await classeDuDossier(dir, lecture.equipes));
   if (!classe) classe = (prompt('Quelle est cette classe ? (ex. 3B)', '') ?? '').trim().toUpperCase();
   if (!classe) return accueil();
 
@@ -557,7 +579,7 @@ main.addEventListener('click', async (e) => {
   if (a === 'ouvrir') return ouvrir();
   if (a === 'rouvrir') {
     const d = (await S.dossiersConnus()).find((x) => x.classe === b.dataset.classe);
-    return d && ouvrir(d.handle);
+    return d && ouvrir(d.handle, d.classe);
   }
   if (a === 'importer') return importer();
   if (a === 'equipe') return vueEquipe(Number(b.dataset.i), 'carnet');

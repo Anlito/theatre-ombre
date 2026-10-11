@@ -28,12 +28,12 @@ const STK = {
 
 export const FLASH_MSG = {
   noBootloader:
-    "La carte ne se laisse pas programmer. Débranche et rebranche le câble USB, puis réessaie. " +
+    "La carte programmable ne se laisse pas programmer. Débranche et rebranche le câble USB, puis réessaie. " +
     'Si ça recommence, demande au professeur de téléverser theatre_ombre.ino avec l’IDE Arduino.',
-  wrongChip: "Cette carte n'est pas une Arduino Uno ou Nano : impossible d'y installer le programme.",
+  wrongChip: "Cette carte programmable n'est pas une Arduino Uno ou Nano : impossible d'y installer le programme.",
   verifyFailed: "L'installation n'a pas été vérifiée correctement. Réessaie (sans débrancher le câble).",
   portBusy:
-    'La carte est déjà utilisée par un autre programme (IDE Arduino, mBlock, autre onglet…). Ferme-le, puis réessaie.',
+    'La carte programmable est déjà utilisée par un autre programme (IDE Arduino, mBlock, autre onglet…). Ferme-le, puis réessaie.',
   badFile: 'Le fichier du programme est introuvable ou abîmé. Recharge la page, puis réessaie.',
 };
 
@@ -241,7 +241,7 @@ export async function flashFirmware(port, image, { onProgress = () => {}, bauds 
       onProgress({ phase: 'verification', fraction: (i + 1) / pages });
     }
 
-    await s.command([STK.LEAVE_PROGMODE]); // la carte démarre le nouveau programme
+    await s.command([STK.LEAVE_PROGMODE]); // la carte programmable démarre le nouveau programme
     onProgress({ phase: 'fin', fraction: 1 });
     return { ok: true, baudRate };
   } catch (e) {

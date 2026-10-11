@@ -52,7 +52,7 @@ function makeGenerator(Blockly) {
     return `delay((${s}) * 1000);  // attendre (en millisecondes)\n`;
   };
   f.jouer_son = (b) =>
-    `Serial.println(${cstr('SON:' + gen.ctx.soundName(b.getFieldValue('SON')))});  // le son est joué par l'ordinateur : la carte le lui demande\n`;
+    `Serial.println(${cstr('SON:' + gen.ctx.soundName(b.getFieldValue('SON')))});  // le son est joué par l'ordinateur : la carte programmable le lui demande\n`;
   f.arreter_sons = () => `Serial.println("SON:STOP");  // demande à l'ordinateur d'arrêter les sons\n`;
   f.tout_eteindre = () => {
     gen.state.helpers.add('toutEteindre');
@@ -222,7 +222,7 @@ export function generateArduino(Blockly, workspace, ctx) {
     '//',
     "//  ATTENTION : c'est une TRADUCTION pour comprendre. En classe, c'est le",
     '//  programme en blocs qui s\'exécute, dans le navigateur ("en direct").',
-    "//  La carte n'a pas de webcam : la reconnaissance se fait sur l'ordinateur,",
+    "//  La carte programmable n'a pas de webcam : la reconnaissance se fait sur l'ordinateur,",
     '//  qui lui envoie le nom du personnage par le câble USB (une ligne de texte).',
     '// ======================================================================',
     '',
@@ -245,19 +245,19 @@ export function generateArduino(Blockly, workspace, ctx) {
   if (h.has('jeVois')) out.push('', '// Vrai si le personnage reconnu est celui demandé.', 'bool jeVois(String nom) {', '  ecouter();', '  return personnage == nom;', '}');
   if (h.has('personnageVu')) out.push('', 'String personnageVu() {', '  ecouter();', '  return personnage;', '}');
   if (h.has('confiance')) {
-    out.push('', "// Simplifié : la carte ne reçoit que le nom, pas la confiance calculée par l'IA.", 'int confiance(String nom) {', '  ecouter();', '  return (personnage == nom) ? 100 : 0;', '}');
+    out.push('', "// Simplifié : la carte programmable ne reçoit que le nom, pas la confiance calculée par l'IA.", 'int confiance(String nom) {', '  ecouter();', '  return (personnage == nom) ? 100 : 0;', '}');
   }
   if (h.has('toutEteindre')) {
     out.push('', '// Éteint toutes les LED et demande à l\'ordinateur d\'arrêter les sons.', 'void toutEteindre() {');
     for (const p of pins) out.push(`  digitalWrite(${p}, LOW);`);
     out.push('  Serial.println("SON:STOP");', '}');
   }
-  out.push('', '// setup() : exécuté une seule fois, au démarrage de la carte.', 'void setup() {', '  Serial.begin(115200);  // même vitesse que l\'ordinateur');
+  out.push('', '// setup() : exécuté une seule fois, au démarrage de la carte programmable.', 'void setup() {', '  Serial.begin(115200);  // même vitesse que l\'ordinateur');
   for (const p of pins) out.push(`  pinMode(${p}, OUTPUT);  // broche ${p} : sortie (LED)`);
   if (h.has('random')) out.push('  randomSeed(analogRead(A0));  // pour des nombres vraiment aléatoires');
   const text = (parts) => parts.join('').replace(/\n$/, '');
   if (setupParts.length) out.push(indent(text(setupParts)));
-  out.push('}', '', '// loop() : répétée sans arrêt, tant que la carte est alimentée.', 'void loop() {', "  ecouter();  // lit le nom du personnage envoyé par l'ordinateur");
+  out.push('}', '', '// loop() : répétée sans arrêt, tant que la carte programmable est alimentée.', 'void loop() {', "  ecouter();  // lit le nom du personnage envoyé par l'ordinateur");
   if (seeParts.length || unseeParts.length) {
     out.push('  if (personnage != personnagePrecedent) {  // le personnage a changé');
     if (unseeParts.length) out.push(indent(text(unseeParts), 2));

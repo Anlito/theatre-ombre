@@ -1036,3 +1036,10 @@ textarea.cn-field { resize: vertical; line-height: 1.4; }
 @media (prefers-reduced-motion: reduce) {
   .is-hint { animation: none; }
 }
+
+/* Bande du haut sur 1366 px : « Carte programmable · Connecter » + prénoms longs + Tout éteindre doivent tenir. */
+@media (max-width: 1400px) {
+  .guide-btn .guide-label { display: none; }
+  .team-names { max-width: 150px; }
+  .save-word { display: none; }
+}

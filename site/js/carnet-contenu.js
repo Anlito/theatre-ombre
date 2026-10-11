@@ -139,8 +139,8 @@ export const ETAPES = [
     n: 3,
     verbe: 'Réaliser',
     titre: 'Former l’IA, câbler et programmer',
-    sousTitre: 'sur ce site, avec la carte',
-    outil: 'Site + carte',
+    sousTitre: 'sur ce site, avec la carte programmable',
+    outil: 'Site + carte programmable',
     route: '◆ Câblage validé, puis démo devant le professeur',
     blocs: [
       { type: 'cadre', html: '<b>Objectif :</b> un personnage passe devant la webcam → <b>l’IA le reconnaît</b> → <b>sa LED s’allume</b>, sans toucher à l’ordinateur.' },
@@ -179,20 +179,20 @@ export const ETAPES = [
         ],
       },
       { type: 'lien', ecran: 'cablage', t: 'Ouvrir le tutoriel de câblage (schéma et photo)' },
-      { type: 'photos', id: 'cablage', t: 'Photo du câblage', aide: 'Montrez la carte et les LED à la webcam, ou choisissez une photo déjà prise.', max: 2 },
+      { type: 'photos', id: 'cablage', t: 'Photo du câblage', aide: 'Montrez la carte programmable et les LED à la webcam, ou choisissez une photo déjà prise.', max: 2 },
       { type: 'check', id: 'e3.cablage', t: 'Noir ou marron sur −, fil de couleur sur la bonne broche' },
       { type: 'valide', id: 'v3a', t: 'Montage validé par le professeur avant de brancher l’USB' },
 
-      { type: 'sous', n: '3.4', t: 'Connecter la carte', outil: 'Site · Carte', ecran: 'carte', aide: 'Bouton <b>« Que faire ? »</b> (étapes 6 et 7)' },
+      { type: 'sous', n: '3.4', t: 'Connecter la carte programmable', outil: 'Site · Carte programmable', ecran: 'carte', aide: 'Bouton <b>« Que faire ? »</b> (étapes 6 et 7)' },
       {
         type: 'consignes',
         items: [
           'Vérifiez le câblage (<b>tutoriel de câblage</b>), puis branchez l’<b>USB</b>.',
-          'Cliquez sur <b>« Carte · Connecter »</b> et choisissez la carte dans la liste.',
+          'Cliquez sur <b>« Carte programmable · Connecter »</b> et choisissez la carte programmable dans la liste.',
         ],
       },
       { type: 'lien', ecran: 'cablage', t: 'Revoir le tutoriel de câblage' },
-      { type: 'check', id: 'e3.pastilles', t: 'Les pastilles <b>Carte</b>, <b>Webcam</b> et <b>IA</b> sont vertes' },
+      { type: 'check', id: 'e3.pastilles', t: 'Les pastilles <b>Carte programmable</b>, <b>Webcam</b> et <b>IA</b> sont vertes' },
 
       { type: 'sous', n: '3.5', t: 'Programmer en blocs', outil: 'Site · 2 Programmer', ecran: 'programmer', aide: 'Aide <b>?</b> → « Niveau 1 · Premiers pas » · <b>« Que faire ? »</b> (étapes 8 et 9)' },
       {
@@ -251,7 +251,7 @@ export const ETAPES = [
         nom: 'Info',
         cases: [
           { id: 'chaine.acquerir', t: 'Acquérir', def: 'Un <b>capteur</b> détecte ou mesure quelque chose.', ex: 'Portail : la cellule voit la voiture' },
-          { id: 'chaine.traiter', t: 'Traiter', def: 'Un <b>programme</b> analyse l’information et <b>décide</b>.', ex: 'Portail : la carte décide d’ouvrir' },
+          { id: 'chaine.traiter', t: 'Traiter', def: 'Un <b>programme</b> analyse l’information et <b>décide</b>.', ex: 'Portail : la carte programmable décide d’ouvrir' },
           { id: 'chaine.communiquer', t: 'Communiquer', def: 'Il <b>envoie l’ordre</b> à la chaîne d’énergie.', ex: 'Portail : le signal part vers le moteur' },
         ],
       },
@@ -320,7 +320,7 @@ export const ETAPES = [
           'Racontez l’histoire en présentant les personnages devant la webcam, <b>sans toucher à l’ordinateur</b>.',
         ],
       },
-      { type: 'cadre', ton: 'attention', html: '<b>Fin de séance :</b> <b>1.</b> « Tout éteindre » → <b>2.</b> « Déconnecter » la carte → <b>3.</b> débrancher l’USB.' },
+      { type: 'cadre', ton: 'attention', html: '<b>Fin de séance :</b> <b>1.</b> « Tout éteindre » → <b>2.</b> « Déconnecter » la carte programmable → <b>3.</b> débrancher l’USB.' },
 
       { type: 'sous', n: '5.3', t: 'Préparer l’oral de 2 minutes', outil: 'Oral · 2 minutes' },
       {

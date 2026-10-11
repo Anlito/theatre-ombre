@@ -49,8 +49,8 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 ## 5 bis. Carte venant d'un autre projet (installation depuis le site)
 
 - [ ] Téléverser un autre programme sur la carte (ex. *Fichier → Exemples → Basics → Blink*, ou un projet mBlock), fermer l'IDE / mBlock.
-- [ ] Dans l'outil : **Carte · Connecter** → la fenêtre « Installer le programme sur la carte » s'ouvre.
-- [ ] **Installer le programme** : la barre avance, puis « Programme installé : la carte est prête » et la pastille Carte passe au vert (moins de 10 s).
+- [ ] Dans l'outil : **Carte programmable · Connecter** → la fenêtre « Installer le programme sur la carte » s'ouvre.
+- [ ] **Installer le programme** : la barre avance, puis « Programme installé : la carte est prête » et la pastille Carte programmable passe au vert (moins de 10 s).
 - [ ] Une LED du programme s'allume bien ensuite.
 - [ ] Même essai depuis `diagnostic.html`.
 - [ ] (Nano clone) Même essai avec une Nano « Old Bootloader » : l'installation réussit aussi (un peu plus longue).
@@ -92,7 +92,7 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 - [ ] Cliquer sur un bloc : ses lignes s'éclairent ; cliquer sur une ligne : son bloc est sélectionné.
 - [ ] « Télécharger le fichier .ino » puis l'ouvrir dans l'IDE Arduino : **Vérifier** réussit (Uno et Nano).
 - [ ] Essai autonome (facultatif) : téléverser, taper `Loup` dans le Moniteur série → la LED s'allume.
-  Puis **Carte · Connecter → Installer le programme** et vérifier que l'outil reparle à la carte.
+  Puis **Carte programmable · Connecter → Installer le programme** et vérifier que l'outil reparle à la carte.
 
 ## 10. Mode professeur
 
@@ -102,7 +102,7 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 ## 11. Interface (charte Claude Design)
 
 - [ ] En 1366 × 768 : la barre du haut tient sur une ligne, l’écran Entraîner (4 personnages) ne défile pas.
-- [ ] Pastille « Carte · Connecter » : le rappel du câblage s’affiche, puis « Connecter la carte » ouvre la liste des ports.
+- [ ] Pastille « Carte programmable · Connecter » : le rappel du câblage s’affiche, puis « Connecter la carte » ouvre la liste des ports.
 - [ ] « Câblage des LED » (écran Programmer, menu « ? », accueil, pied de page) : panneau avec les broches réglées.
 - [ ] Niveau 3 : la webcam est réduite en bande d’état ; « Agrandir la webcam » la rouvre (choix mémorisé par niveau).
 - [ ] Au vidéoprojecteur : textes, pastilles et boutons lisibles depuis le fond de la salle.

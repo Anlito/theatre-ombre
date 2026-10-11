@@ -13,9 +13,9 @@
   <header class="band1">
     <img class="logo" src="img/logo.svg" alt="Théâtre d'ombre augmenté" width="36" height="36">
     <div class="status" aria-label="État du système">
-      <button class="pill" id="pill-board" type="button" data-state="off" title="Connecter la carte Arduino">
+      <button class="pill" id="pill-board" type="button" data-state="off" title="Connecter la carte programmable (Arduino)">
         <span class="pill-icon" data-icon="carte" data-size="18" data-stroke="2.2"></span>
-        <b class="pill-label">Carte</b><span class="pill-word">Connecter</span>
+        <b class="pill-label">Carte programmable</b><span class="pill-word">Connecter</span>
       </button>
       <span class="pill" id="pill-camera" data-state="off">
         <span class="pill-icon" data-icon="webcam" data-size="18" data-stroke="2.2"></span>
@@ -29,7 +29,7 @@
     <span class="spacer"></span>
 
     <button id="guide-btn" class="menu-btn guide-btn" type="button" aria-controls="guide-panel" title="Que faire maintenant ? Les étapes dans l'ordre">
-      <span data-icon="ok"></span><b>Que faire ?</b><span id="guide-count" class="guide-count">0/11</span>
+      <span data-icon="ok"></span><b class="guide-label">Que faire ?</b><span id="guide-count" class="guide-count">0/11</span>
     </button>
 
     <div class="menu team-menu">
@@ -158,7 +158,7 @@
         <video id="strip-video" class="strip-video" autoplay muted playsinline aria-hidden="true"></video>
         <p id="strip-seen" class="strip-seen"></p>
         <span class="strip-sep"></span>
-        <span class="strip-title">Ce que la carte a reçu</span>
+        <span class="strip-title">Ce que la carte programmable a reçu</span>
         <div id="strip-leds" class="strip-leds"></div>
         <span class="spacer"></span>
         <button id="btn-strip-sons" class="btn btn-neutral" type="button"><span data-icon="son"></span><span class="label">Sons</span></button>
@@ -172,12 +172,12 @@
           <div class="camera-slot"></div>
           <div class="side-sep"></div>
           <div class="leds-head">
-            <h3>Ce que la carte a reçu</h3>
+            <h3>Ce que la carte programmable a reçu</h3>
             <button id="btn-cablage" class="btn btn-secondary btn-cablage" type="button" title="Où brancher les LED (broches 9, 10, 11, 12)">
               <span data-icon="led"></span>Câblage des LED
             </button>
           </div>
-          <div class="board-panel" id="board-panel" aria-label="Broches de la carte"></div>
+          <div class="board-panel" id="board-panel" aria-label="Broches de la carte programmable"></div>
           <div id="sound-drop" class="sound-line" title="Déposez ici des fichiers mp3 ou wav">
             <button id="btn-sounds" class="sound-open" type="button">
               <span data-icon="son"></span><b>Sons</b> · <span id="sound-summary" class="sound-summary"></span>
@@ -201,14 +201,14 @@
               <ol id="cpp-code" class="cpp-code"></ol>
               <details class="cpp-explain">
                 <summary><span data-icon="aide" data-size="18"></span>« En direct » ou « autonome » : quelle différence ?<span class="chev" data-icon="chevron" data-size="18"></span></summary>
-                <p><strong>En direct</strong> (ce que fait l'outil) : la carte garde son programme fixe et <em>obéit à l'ordinateur</em>,
+                <p><strong>En direct</strong> (ce que fait l'outil) : la carte programmable garde son programme fixe et <em>obéit à l'ordinateur</em>,
                   qui lui envoie des ordres par le câble. Le câble doit rester branché ; si on le débranche, tout s'éteint.</p>
-                <p><strong>Autonome</strong> : on téléverse ce code dans la carte avec l'IDE Arduino. La carte
+                <p><strong>Autonome</strong> : on téléverse ce code dans la carte programmable avec l'IDE Arduino. La carte programmable
                   <em>garde le programme en mémoire</em> et l'exécute seule, même après un redémarrage.
                   Mais elle n'a pas de webcam : pour l'essayer, ouvrez le Moniteur série (115200 bauds) et tapez le nom
                   d'un personnage, par exemple <code>Loup</code>.</p>
-                <p>Après un essai autonome, cliquez sur « Carte · Connecter » : l'outil propose de réinstaller
-                  son programme sur la carte (quelques secondes).</p>
+                <p>Après un essai autonome, cliquez sur « Carte programmable · Connecter » : l'outil propose de réinstaller
+                  son programme sur la carte programmable (quelques secondes).</p>
               </details>
             </aside>
           </div>
@@ -232,7 +232,7 @@
       <div class="stage-bar only-fullscreen">
         <h2>3. Spectacle</h2>
         <span class="spacer"></span>
-        <span id="stage-board-pill" class="pill" data-state="off"><span class="pill-icon" data-icon="carte" data-size="18" data-stroke="2.2"></span><b class="pill-label">Carte</b><span class="pill-word">à connecter</span></span>
+        <span id="stage-board-pill" class="pill" data-state="off"><span class="pill-icon" data-icon="carte" data-size="18" data-stroke="2.2"></span><b class="pill-label">Carte programmable</b><span class="pill-word">à connecter</span></span>
         <button id="btn-show-video-fs" class="btn btn-dark" type="button"><span data-icon="masquer"></span><span class="label">Masquer l'image</span></button>
         <button id="btn-show-exit" class="btn btn-dark" type="button"><span data-icon="pleinecran"></span>Quitter le plein écran</button>
         <button id="btn-show-off" class="btn btn-danger" type="button"><span data-icon="eteindre" data-stroke="2.4"></span>Tout éteindre</button>
@@ -241,7 +241,7 @@
       <!-- La scène : fronton, rideaux, projecteurs (= LED de la carte), écran d'ombres, plaque -->
       <div id="theatre" class="theatre">
         <div class="valance"><span id="theatre-title">Théâtre d'ombre</span></div>
-        <div id="spots" class="spots" aria-label="Projecteurs : les LED de la carte"></div>
+        <div id="spots" class="spots" aria-label="Projecteurs : les LED de la carte programmable"></div>
         <div class="scene">
           <div class="camera-slot camera-slot-stage"></div>
           <div class="plaque">
@@ -306,7 +306,7 @@
           <span class="start-card-icon" data-icon="led" data-size="24"></span>
           <div>
             <b>Matériel : brancher les LED</b>
-            <p>Avant de connecter la carte, vérifiez le câblage (<span class="cablage-pins">broches 9, 10, 11, 12</span>).</p>
+            <p>Avant de connecter la carte programmable, vérifiez le câblage (<span class="cablage-pins">broches 9, 10, 11, 12</span>).</p>
           </div>
           <button id="btn-start-cablage" class="btn btn-neutral" type="button">Voir le câblage</button>
         </div>
@@ -356,7 +356,7 @@
   <dialog id="connect-dialog" class="dialog dialog-small">
     <div class="dialog-head">
       <span class="dialog-icon" data-icon="carte" data-size="24"></span>
-      <h2 id="connect-title">Connecter la carte</h2>
+      <h2 id="connect-title">Connecter la carte programmable</h2>
       <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
     </div>
     <div class="dialog-body">
@@ -364,12 +364,12 @@
         <p><b>Avant de brancher : vérifiez le câblage.</b> Chaque LED sur sa broche, toutes les pattes courtes (−) sur GND.</p>
         <ul id="connect-pins" class="pin-list"></ul>
       </div>
-      <p id="connect-connected" hidden>La carte est connectée. Pour la débrancher : <b>Tout éteindre</b>, puis <b>Déconnecter</b>, puis le câble USB.</p>
+      <p id="connect-connected" hidden>La carte programmable est connectée. Pour la débrancher : <b>Tout éteindre</b>, puis <b>Déconnecter</b>, puis le câble USB.</p>
     </div>
     <div class="dialog-foot">
       <button id="btn-connect-cablage" class="btn btn-secondary" type="button"><span data-icon="led"></span>Voir le câblage</button>
       <span class="spacer"></span>
-      <button id="btn-connect" class="btn btn-primary" type="button"><span data-icon="carte"></span>Connecter la carte</button>
+      <button id="btn-connect" class="btn btn-primary" type="button"><span data-icon="carte"></span>Connecter la carte programmable</button>
     </div>
   </dialog>
 

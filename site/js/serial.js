@@ -6,23 +6,23 @@
 import * as P from './protocol.js';
 import { SimulatedBoard } from './simulated-board.js';
 
-export const BOOT_DELAY_MS = 2000; // la carte redémarre quand on ouvre le port
+export const BOOT_DELAY_MS = 2000; // la carte programmable redémarre quand on ouvre le port
 export const PING_EVERY_MS = 1000;
 export const REPLY_TIMEOUT_MS = 1000;
 export const SILENT_AFTER_MS = 3500; // pas de PONG depuis ce temps -> carte muette
 
 export const MSG = {
-  noSerial: "Ce navigateur ne peut pas parler à la carte : ouvre le site avec Chrome ou Edge.",
-  notSecure: "Le site doit être ouvert en https:// pour parler à la carte et utiliser la webcam.",
-  noPortChosen: "Aucune carte choisie. Vérifie le câble USB, puis clique sur « Connecter l'Arduino ».",
+  noSerial: "Ce navigateur ne peut pas parler à la carte programmable : ouvre le site avec Chrome ou Edge.",
+  notSecure: "Le site doit être ouvert en https:// pour parler à la carte programmable et utiliser la webcam.",
+  noPortChosen: "Aucune carte programmable choisie. Vérifie le câble USB, puis clique sur « Connecter l'Arduino ».",
   portBusy:
-    "La carte est déjà utilisée par un autre programme (IDE Arduino, autre onglet…). Ferme-le, puis réessaie.",
-  openFailed: "Impossible d'ouvrir la carte. Débranche et rebranche le câble USB, puis réessaie.",
+    "La carte programmable est déjà utilisée par un autre programme (IDE Arduino, autre onglet…). Ferme-le, puis réessaie.",
+  openFailed: "Impossible d'ouvrir la carte programmable. Débranche et rebranche le câble USB, puis réessaie.",
   noPong:
-    "La carte n'a pas le programme du Théâtre d'ombre (elle a sans doute servi à un autre projet). Clique sur « Carte · Connecter » pour l'installer.",
-  badVersion: "Le programme de la carte n'est pas à jour. Clique sur « Carte · Connecter » pour installer le bon programme.",
-  unplugged: 'La carte a été débranchée. Rebranche le câble USB, puis clique sur « Connecter l’Arduino ».',
-  silent: 'La carte ne répond plus. Vérifie le câble USB.',
+    "La carte programmable n'a pas le programme du Théâtre d'ombre (elle a sans doute servi à un autre projet). Clique sur « Carte programmable · Connecter » pour l'installer.",
+  badVersion: "Le programme de la carte programmable n'est pas à jour. Clique sur « Carte programmable · Connecter » pour installer le bon programme.",
+  unplugged: 'La carte programmable a été débranchée. Rebranche le câble USB, puis clique sur « Connecter l’Arduino ».',
+  silent: 'La carte programmable ne répond plus. Vérifie le câble USB.',
 };
 
 export function serialSupport() {
@@ -180,11 +180,11 @@ export class SerialLink {
 
   async command(built) {
     if (!built.ok) return built;
-    if (!this.connected) return { ok: false, error: "La carte n'est pas connectée.", offline: true };
+    if (!this.connected) return { ok: false, error: "La carte programmable n'est pas connectée.", offline: true };
     const r = await this.send(built.line);
     if (r.type === 'ok') return { ok: true };
-    if (r.type === 'err' && r.code === 'PIN') return { ok: false, error: 'La carte refuse cette broche.' };
-    if (r.type === 'err') return { ok: false, error: "La carte n'a pas compris l'ordre." };
+    if (r.type === 'err' && r.code === 'PIN') return { ok: false, error: 'La carte programmable refuse cette broche.' };
+    if (r.type === 'err') return { ok: false, error: "La carte programmable n'a pas compris l'ordre." };
     return { ok: false, error: MSG.silent };
   }
 
@@ -291,7 +291,7 @@ export class SimulatedTransport {
     this.onClose = () => {};
     this.splitter = new P.LineSplitter();
     this.timer = null;
-    this.mute = false; // pour simuler une carte sans le bon programme
+    this.mute = false; // pour simuler une carte programmable sans le bon programme
   }
   async open() {
     this.timer = setInterval(() => this.board.tick(), 100);

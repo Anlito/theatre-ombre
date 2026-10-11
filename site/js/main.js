@@ -84,7 +84,7 @@ link.subscribe(({ state, error }) => {
   if (SIMULATED && state === 'connectee') [pillState, word] = ['neutral', 'simulée'];
   setPill('pill-board', pillState, word);
   setPill('stage-board-pill', pillState, word === 'Connecter' ? 'à connecter' : word);
-  $('pill-board').title = link.connected ? 'Carte connectée : cliquer pour la déconnecter' : 'Connecter la carte Arduino';
+  $('pill-board').title = link.connected ? 'Carte programmable connectée : cliquer pour la déconnecter' : 'Connecter la carte programmable (Arduino)';
   if (error) showMessage(error);
   else if (state === 'connectee') hideMessage();
 });
@@ -95,10 +95,10 @@ const connectDialog = $('connect-dialog');
 const firmware = setupFirmwareDialog({ link, showMessage, hideMessage });
 function openConnect() {
   const connected = link.connected;
-  $('connect-title').textContent = connected ? 'Carte connectée' : 'Connecter la carte';
+  $('connect-title').textContent = connected ? 'Carte programmable connectée' : 'Connecter la carte programmable';
   $('connect-before').hidden = connected;
   $('connect-connected').hidden = !connected;
-  $('btn-connect').innerHTML = icon('carte') + (connected ? 'Déconnecter' : 'Connecter la carte');
+  $('btn-connect').innerHTML = icon('carte') + (connected ? 'Déconnecter' : 'Connecter la carte programmable');
   $('btn-connect').className = connected ? 'btn btn-secondary' : 'btn btn-primary';
   cablage.render();
   connectDialog.showModal();
@@ -122,10 +122,10 @@ $('btn-connect').addEventListener('click', async () => {
   }
   const port = await WebSerialTransport.choosePort();
   if (!port) {
-    showMessage('Aucune carte choisie. Vérifie le câble USB, puis clique sur la pastille « Carte · Connecter ».', 'info');
+    showMessage('Aucune carte programmable choisie. Vérifie le câble USB, puis clique sur la pastille « Carte programmable · Connecter ».', 'info');
     return;
   }
-  showMessage('Connexion à la carte… (2 secondes, la carte redémarre)', 'info');
+  showMessage('Connexion à la carte programmable… (2 secondes, la carte programmable redémarre)', 'info');
   const r = await link.connect(new WebSerialTransport(port));
   if (r.needsFirmware) firmware.offer(port);
 });
@@ -262,7 +262,7 @@ ledColors.onChange(() => {
 
 // --- Vérification du navigateur au démarrage ------------------------------------------
 if (SIMULATED) {
-  showMessage('Mode démo : la carte est simulée. Les LED s’affichent à l’écran (étape 2).', 'info');
+  showMessage('Mode démo : la carte programmable est simulée. Les LED s’affichent à l’écran (étape 2).', 'info');
 } else {
   const support = serialSupport();
   if (!support.ok) showMessage(support.error);
