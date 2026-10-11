@@ -5,43 +5,7 @@ import assert from 'node:assert/strict';
 import {
   teamFolderName, isClassFolderName, isTeamFolderName, classPath, teamFolderIn, findProjectFile, listTeamFolders, writeProject, readValidations, normalizeValidations,
 } from '../site/js/team-folder.js';
-
-export class MemDir {
-  constructor(name) {
-    this.kind = 'directory';
-    this.name = name;
-    this.children = new Map();
-  }
-  async getDirectoryHandle(name, { create = false } = {}) {
-    if (!this.children.has(name)) {
-      if (!create) throw Object.assign(new Error('absent'), { name: 'NotFoundError' });
-      this.children.set(name, new MemDir(name));
-    }
-    return this.children.get(name);
-  }
-  async getFileHandle(name, { create = false } = {}) {
-    if (!this.children.has(name)) {
-      if (!create) throw Object.assign(new Error('absent'), { name: 'NotFoundError' });
-      this.children.set(name, new MemFile(name, ''));
-    }
-    return this.children.get(name);
-  }
-  async *values() {
-    yield* this.children.values();
-  }
-}
-export class MemFile {
-  constructor(name, text, lastModified = Date.now()) {
-    Object.assign(this, { kind: 'file', name, text, lastModified });
-  }
-  async getFile() {
-    return { name: this.name, lastModified: this.lastModified, text: async () => this.text };
-  }
-  async createWritable() {
-    let buf = '';
-    return { write: async (t) => (buf += t), close: async () => ((this.text = buf), (this.lastModified = Date.now())) };
-  }
-}
+import { MemDir, MemFile } from './mem-fs.js';
 
 test('nom du dossier de l’équipe : prénoms en majuscules, sans accents', () => {
   assert.equal(teamFolderName(['Léa', 'Tom']), 'LEA - TOM');

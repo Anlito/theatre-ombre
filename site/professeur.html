@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Théâtre d'ombre · Professeur</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/prof.css">
+  <script type="importmap">{ "imports": { "three": "./vendor/three/build/three.module.js" } }</script>
+</head>
+<body class="prof">
+
+  <header class="band1">
+    <img class="logo" src="img/logo.svg" alt="" width="36" height="36">
+    <h1 class="prof-titre">Théâtre d'ombre <span>· Professeur</span></h1>
+    <span id="prof-classe" class="prof-classe" hidden></span>
+    <span class="spacer"></span>
+    <div id="prof-actions" class="prof-actions" hidden>
+      <button id="btn-rescan" class="btn btn-band" type="button" title="Relire le dossier de la classe (nouveaux enregistrements des élèves)"><span data-icon="vider"></span>Actualiser</button>
+      <button id="btn-save-eval" class="btn btn-band" type="button" title="Enregistrer l'évaluation dans un fichier (dans VOTRE dossier, pas celui des élèves)"><span data-icon="enregistrer"></span>Sauvegarder</button>
+      <button id="btn-export" class="btn btn-band" type="button" title="Une ligne par élève, pour Excel ou Pronote"><span data-icon="telecharger"></span>Exporter (Excel)</button>
+      <button id="btn-home" class="btn btn-band" type="button"><span data-icon="ouvrir"></span>Autre classe</button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" role="alert" hidden>
+    <span class="banner-icon" data-icon="info"></span>
+    <span id="banner-text"></span>
+    <button id="banner-close" class="banner-close icon-btn" type="button" aria-label="Fermer le message" title="Fermer"><span data-icon="fermer"></span></button>
+  </div>
+
+  <main id="prof-main" class="prof-main"></main>
+
+  <script src="vendor/blockly/blockly_compressed.js"></script>
+  <script src="vendor/blockly/blocks_compressed.js"></script>
+  <script src="vendor/blockly/fr.js"></script>
+  <script type="module" src="js/prof/main.js"></script>
+</body>
+</html>

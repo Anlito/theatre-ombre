@@ -21,6 +21,12 @@ const copies = [
   ['@tensorflow-models/mobilenet/dist/mobilenet.min.js', 'mobilenet.min.js'],
   ['js-interpreter/lib/js-interpreter.min.js', 'js-interpreter.min.js'],
   ['js-interpreter/LICENSE', 'LICENCES/js-interpreter.txt'],
+  // three.js : vue 3D des fichiers STL dans l'outil professeur (professeur.html).
+  ['three/build/three.module.js', 'three/build/three.module.js'],
+  ['three/build/three.core.js', 'three/build/three.core.js'],
+  ['three/examples/jsm/loaders/STLLoader.js', 'three/jsm/STLLoader.js'],
+  ['three/examples/jsm/controls/OrbitControls.js', 'three/jsm/OrbitControls.js'],
+  ['three/LICENSE', 'LICENCES/three.txt'],
 ];
 
 for (const [from, to] of copies) {

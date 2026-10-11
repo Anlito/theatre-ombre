@@ -29,6 +29,32 @@ avec leurs tableaux, cases à cocher, chaînes d'information et d'énergie, hist
 - **Imprimer / PDF** : le carnet seul, une étape par page.
 - Les textes du carnet sont dans `site/js/carnet-contenu.js` (à modifier là si le document papier change).
 
+## Outil professeur (suivi et notation)
+
+**Adresse : <https://anlito.github.io/theatre-ombre/professeur.html>** (Chrome ou Edge ; lien aussi dans le mode professeur du site).
+
+1. **Ouvrir le dossier d'une classe** : choisir `3B › COMMUN › TECHNOLOGIE › THEATRE IA` et autoriser la modification
+   (elle sert uniquement à écrire les validations). L'outil lit le dossier de chaque équipe : projet et carnet, fichiers STL,
+   images, PDF. La classe est reconnue d'après les carnets. « Rouvrir 3B » rouvre ensuite le dossier d'un clic.
+2. **Vue de la classe** : une ligne par équipe : avancement du carnet (5 étapes), validations ◆, personnages de l'IA,
+   STL, niveaux D1 à D7, note et mention. « Actualiser » relit les derniers enregistrements des élèves.
+3. **Fiche d'une équipe** (onglets) :
+   - **Évaluation** : les 6 validations ◆ (écrites aussitôt dans `validations.json` du dossier de l'équipe ; les élèves les voient
+     dans leur carnet à la prochaine ouverture ou au prochain enregistrement) ; la grille **D1 à D7** en 4 niveaux
+     (Non atteint · En cours · Atteint · Dépassé), avec sous chaque livrable des **indices** constatés par l'outil
+     (photos, STL conformes, personnages reconnus, chaînes justes d'après le corrigé…) ; commentaire ;
+     **bonus / malus par élève** avec son motif.
+   - **Carnet** (lecture seule), **IA et programme** (personnages, vignettes, programme en blocs niveau 1 et 2),
+     **Personnages 3D** (vue 3D des STL, taille ≤ 100 × 100 mm et épaisseur 2 mm vérifiées), **Photos et fichiers**.
+4. **Note de l'équipe** = moyenne des livrables notés × 5 ; mentions : < 10 À approfondir · 10 à 12,9 Satisfaisant ·
+   13 à 16,9 Bien · ≥ 17 Très bien. Note de l'élève = note de l'équipe + bonus / malus, entre 0 et 20.
+5. **Exporter (Excel)** : un fichier .csv, une ligne par élève, niveaux écrits comme dans Pronote
+   (Non atteint, Partiellement atteint, Atteint, Dépassé).
+6. **Sauvegarder** : l'évaluation est gardée dans le navigateur de l'ordinateur, mais le fichier de sauvegarde est la vraie copie :
+   à ranger dans **votre** dossier personnel (jamais dans celui des élèves). « Importer une sauvegarde » la reprend sur un autre poste.
+
+Les fichiers des élèves ne sont jamais modifiés : seul `validations.json` est écrit dans chaque dossier d'équipe.
+
 ## Les niveaux de programmation
 
 Le niveau se choisit **en haut de l'écran Programmer** (« Niveau : 1 · Premiers pas | 2 · Boucles et conditions | 3 · Code Arduino »),
