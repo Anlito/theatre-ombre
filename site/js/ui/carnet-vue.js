@@ -14,6 +14,8 @@
 import { COMMANDE, CLIENT, MODE_EMPLOI, OUTILS, ETAPES, VALIDATIONS } from '../carnet-contenu.js';
 import { avancement, MAX_PHOTOS } from '../carnet.js';
 import { icon } from '../icons.js';
+import { teamFolderName } from '../team-folder.js';
+import { fileName } from '../project.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const teamHtml = (team) => (team.length ? team.map(esc).join(', ') : '<i>(menu de l’équipe)</i>');
@@ -209,7 +211,14 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
     </section>`,
   ).join('');
 
-  root.innerHTML = `
+  // Chemins et noms de fichiers à la classe et aux prénoms de l'équipe.
+  const perso = (html) =>
+    html
+      .replaceAll('{classe}', esc(carnet.classe.trim().toUpperCase() || '3X'))
+      .replaceAll('{dossier}', esc(team.length ? teamFolderName(team) : 'PRENOM - PRENOM'))
+      .replaceAll('{prenoms}', esc(team.length ? fileName(team).replace(/_theatre_ombre.json$/, '') : 'PRENOM_PRENOM'));
+
+  root.innerHTML = perso(`
     <div class="cn-layout">
       <nav class="cn-nav" aria-label="Étapes du carnet">
         <a href="#cn-debut" data-goto="0" class="cn-nav-item"><span class="cn-nav-n">${icon('cours', { size: 18 })}</span><span>Le projet</span></a>
@@ -240,7 +249,7 @@ export function renderCarnet(root, { carnet, team = [], readOnly = false, valida
         </section>
         ${etapes}
       </div>
-    </div>`;
+    </div>`);
 
   // --- Modifications -----------------------------------------------------------------------------
   if (!readOnly) {

@@ -141,9 +141,15 @@ Le code professeur évite les changements par erreur ; ce n'est pas une vraie s�
 
 ## Projets des élèves
 
-- Au démarrage (page d'accueil) : prénoms, puis **Nouveau projet**, **Ouvrir notre projet** ou **Reprendre** le dernier travail.
-- **Enregistrer** (menu équipe en haut, ou Ctrl+S) : Chrome/Edge proposent de choisir le dossier de l'équipe ;
-  nom proposé `PRENOM_PRENOM_theatre_ombre.json`. Si ce n'est pas possible, le fichier est téléchargé.
+- Au démarrage (page d'accueil) : prénoms **et classe** (obligatoires), puis **Nouveau projet**, **Ouvrir notre projet**
+  ou **Reprendre** le dernier travail. Le premier écran est le **Carnet** (feuille de route), puis 1 Entraîner, 2 Programmer, 3 Spectacle.
+- **Première chose après « Nouveau projet » : ranger le projet.** La fenêtre « Ranger votre projet » fait choisir le dossier
+  `3B › COMMUN › TECHNOLOGIE › THEATRE IA` ; le site y crée le dossier de l'équipe (`LEA - TOM`, sans accents)
+  et y enregistre `LEA_TOM_theatre_ombre.json`. Le navigateur demande l'autorisation de modifier les fichiers : répondre oui.
+- **Enregistrer** (menu équipe, ou Ctrl+S) écrit ensuite toujours dans ce fichier, sans rien demander.
+- **Ouvrir notre projet** : choisir `THEATRE IA` puis cliquer sur son équipe dans la liste (ou choisir directement son dossier).
+- Le professeur dépose `validations.json` dans chaque dossier d'équipe (outil professeur) : les ◆ apparaissent dans le carnet.
+- Navigateur sans choix de dossier : le fichier est téléchargé, à ranger à la main.
 - Le fichier contient les blocs, les personnages, l'IA entraînée (sans reprendre de photos),
   les réglages et les sons ajoutés (jusqu'à 5 Mo ; au-delà, seuls les noms sont gardés).
 - Une **copie de secours** est faite chaque minute dans le navigateur du poste.

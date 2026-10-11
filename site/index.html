@@ -7,7 +7,7 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-step="entrainer" data-niveau="1" class="is-start">
+<body data-step="carnet" data-niveau="1" class="is-start">
 
   <!-- ===== Bande 1 : logo, états, équipe, aide, Tout éteindre (toujours visible) ===== -->
   <header class="band1">
@@ -66,7 +66,11 @@
   <!-- ===== Bande 2 : étapes + commandes de l'écran affiché ===== -->
   <nav class="band2" aria-label="Étapes">
     <div class="steps">
-      <button class="step" data-step="entrainer" type="button" aria-current="step">
+      <button class="step step-carnet" data-step="carnet" type="button" aria-current="step" title="Votre feuille de route : à remplir à chaque étape">
+        <span class="step-num" data-icon="cours" data-size="16" data-stroke="2.2"></span> Carnet
+      </button>
+      <span class="step-gap" aria-hidden="true"></span>
+      <button class="step" data-step="entrainer" type="button">
         <span class="step-num">1</span> Entraîner
       </button>
       <span class="step-sep" data-icon="chevron" data-size="18" data-stroke="2.4"></span>
@@ -76,10 +80,6 @@
       <span class="step-sep" data-icon="chevron" data-size="18" data-stroke="2.4"></span>
       <button class="step" data-step="spectacle" type="button">
         <span class="step-num">3</span> Spectacle
-      </button>
-      <span class="step-gap" aria-hidden="true"></span>
-      <button class="step step-carnet" data-step="carnet" type="button" title="Le document de projet de l'équipe : à remplir à chaque étape">
-        <span class="step-num" data-icon="cours" data-size="16" data-stroke="2.2"></span> Carnet
       </button>
     </div>
     <span class="spacer"></span>
@@ -281,16 +281,19 @@
       <div class="start-form">
         <h1>Théâtre d'ombre augmenté</h1>
         <p class="start-sub">Apprenez à une IA à reconnaître vos personnages, puis faites réagir les lumières de la scène.</p>
-        <p class="start-label">Écrivez les prénoms de l'équipe (ils servent à nommer votre fichier) :</p>
+        <p class="start-label">Écrivez les prénoms de l'équipe (ils servent à nommer votre dossier) :</p>
         <div class="start-names">
           <input class="team-name" type="text" maxlength="20" placeholder="Prénom 1" aria-label="Prénom 1" autocomplete="off">
           <input class="team-name" type="text" maxlength="20" placeholder="Prénom 2" aria-label="Prénom 2" autocomplete="off">
           <input class="team-name" type="text" maxlength="20" placeholder="Prénom 3" aria-label="Prénom 3" autocomplete="off">
         </div>
+        <label class="start-label start-class-row" for="start-class">Votre classe :
+          <input id="start-class" class="start-class" type="text" maxlength="10" placeholder="ex. 3B" autocomplete="off">
+        </label>
         <p id="start-error" class="form-error" role="alert"></p>
         <div class="start-choices">
           <button class="btn btn-primary btn-big" type="button" data-start="new"><span data-icon="ajouter" data-size="22"></span>Nouveau projet</button>
-          <button class="btn btn-secondary btn-big" type="button" data-start="open"><span data-icon="ouvrir"></span>Ouvrir notre projet (.json)</button>
+          <button class="btn btn-secondary btn-big" type="button" data-start="open"><span data-icon="ouvrir"></span>Ouvrir notre projet</button>
         </div>
         <div id="start-resume" class="start-card" hidden>
           <span class="start-card-icon" data-icon="enregistrer" data-size="24"></span>
@@ -310,6 +313,43 @@
         </div>
         <button id="start-close" class="btn btn-neutral" type="button" hidden>Fermer</button>
       </div>
+    </div>
+  </dialog>
+
+  <!-- ===== Ranger le projet : dossier THEATRE IA › dossier de l'équipe ===== -->
+  <dialog id="folder-dialog" class="dialog dialog-small" aria-labelledby="folder-title">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="enregistrer" data-size="24"></span>
+      <h2 id="folder-title">Ranger votre projet</h2>
+    </div>
+    <div class="dialog-body">
+      <p><b>Première chose à faire : enregistrer votre projet sur le serveur.</b></p>
+      <ol class="folder-steps">
+        <li>Cliquez sur <b>« Choisir le dossier THEATRE IA »</b>.</li>
+        <li>Allez dans <b id="folder-path">3X › COMMUN › TECHNOLOGIE › THEATRE IA</b>, puis <b>« Sélectionner le dossier »</b>.</li>
+        <li>Le navigateur demande s'il peut modifier les fichiers : répondez <b>oui (« Modifier les fichiers »)</b>.</li>
+      </ol>
+      <p>Le site crée votre dossier <b id="folder-team">PRENOM - PRENOM</b> et y range <b id="folder-file">fichier.json</b>.
+        Ensuite, <b>« Enregistrer »</b> (Ctrl+S) écrit toujours au même endroit.</p>
+      <p id="folder-error" class="form-error" role="alert"></p>
+    </div>
+    <div class="dialog-foot">
+      <button class="btn btn-neutral" type="button" data-folder-later>Plus tard</button>
+      <span class="spacer"></span>
+      <button id="btn-folder-choose" class="btn btn-primary" type="button"><span data-icon="ouvrir"></span>Choisir le dossier THEATRE IA</button>
+    </div>
+  </dialog>
+
+  <!-- ===== Ouvrir : plusieurs équipes dans THEATRE IA ===== -->
+  <dialog id="teams-dialog" class="dialog dialog-small" aria-labelledby="teams-title">
+    <div class="dialog-head">
+      <span class="dialog-icon" data-icon="equipe" data-size="24"></span>
+      <h2 id="teams-title">Quel est votre projet ?</h2>
+      <button class="icon-btn dialog-close" type="button" data-close aria-label="Fermer" title="Fermer"><span data-icon="fermer"></span></button>
+    </div>
+    <div class="dialog-body">
+      <p>Projets trouvés dans « THEATRE IA » : cliquez sur celui de votre équipe.</p>
+      <div id="teams-list" class="teams-list"></div>
     </div>
   </dialog>
 

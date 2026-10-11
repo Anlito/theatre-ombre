@@ -62,8 +62,12 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 
 ## 7. Sauvegarde et reprise (tous jalons)
 
-- [ ] Menu équipe (en haut) → Enregistrer, dans le **dossier réseau de l'équipe** : nom `PRENOM_PRENOM_theatre_ombre.json` proposé.
-  (Si le navigateur refuse : le fichier arrive dans Téléchargements → noter le comportement.)
+- [ ] Accueil : « Nouveau projet » sans classe → message « Écrivez votre classe ». Avec la classe → le Carnet s'affiche
+  et la fenêtre « Ranger votre projet » s'ouvre.
+- [ ] « Choisir le dossier THEATRE IA » → dossier réseau `3B › COMMUN › TECHNOLOGIE › THEATRE IA` → autoriser la modification :
+  le dossier `LEA - TOM` est créé avec `LEA_TOM_theatre_ombre.json` dedans (vérifier dans l'explorateur).
+  (Si le navigateur refuse le dossier réseau : noter le message exact.)
+- [ ] Ctrl+S ensuite : « Projet enregistré » sans fenêtre ; la date du fichier change.
 - [ ] Fermer le navigateur, rouvrir le site → « Ouvrir notre projet » : personnages, photos, blocs et sons
   retrouvés, la reconnaissance marche **sans reprendre de photo**.
 - [ ] Fermer l'onglet sans enregistrer, rouvrir → la carte « Reprendre le dernier travail » de l'accueil propose le travail.

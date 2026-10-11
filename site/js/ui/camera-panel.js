@@ -142,9 +142,15 @@ export function setupCameraPanel({ camera, training, live, settings, board, ledC
   renderStripLeds();
 
   // Place le panneau dans l'écran affiché.
+  // Écran sans webcam (Carnet) : le panneau est rangé hors de la vue, la webcam continue de tourner
+  // (l'IA reconnaît toujours : le carnet note les personnages reconnus).
+  const parking = document.createElement('div');
+  parking.className = 'camera-parking';
+  parking.setAttribute('aria-hidden', 'true');
+  document.body.append(parking);
   return function moveTo(screenId) {
-    const slot = document.querySelector(`#screen-${screenId} .camera-slot`);
-    if (slot && $('camera-panel').parentElement !== slot) slot.append($('camera-panel'));
+    const slot = document.querySelector(`#screen-${screenId} .camera-slot`) ?? parking;
+    if ($('camera-panel').parentElement !== slot) slot.append($('camera-panel'));
     renderStripLeds();
   };
 }

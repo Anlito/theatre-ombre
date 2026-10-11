@@ -1,6 +1,8 @@
 // Contenu du carnet de projet : le document élève « étapes du projet » (5 étapes), décrit bloc par bloc.
 // Le même contenu sert à l'écran « Carnet » des élèves, à l'impression et à l'outil professeur.
 // Pour modifier un texte du carnet, c'est ici (le HTML simple est permis : <b>, <i>).
+// {classe}, {dossier} et {prenoms} sont remplacés par la classe et les prénoms de l'équipe
+// (« 3B », « LEA - TOM », « LEA_TOM »).
 //
 // Types de blocs :
 //   sous      : en-tête d'une sous-étape (3.1, 3.2…) avec l'outil et l'aide
@@ -38,10 +40,10 @@ export const MODE_EMPLOI =
   'Cochez la case avant de passer à la suite. ◆ = le professeur valide.';
 
 export const OUTILS = [
-  ['<b>Tinkercad</b> + « Tuto Tinkercad.html »', 'Dans <b>4X › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>'],
+  ['<b>Tinkercad</b> + « Tuto Tinkercad.html »', 'Dans <b>{classe} › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>'],
   ['<b>Site</b> Théâtre d’ombre augmenté', '<b>anlito.github.io/theatre-ombre</b> (Chrome ou Edge) : c’est ce site'],
   ['<b>Aide du site</b>', 'Entraîner l’IA, câblage, LED : tout est dans le site, bouton <b>?</b> en haut.'],
-  ['<b>Dossier de l’équipe</b>', '<b>4X › COMMUN › TECHNOLOGIE › THEATRE IA › PRENOM - PRENOM</b>'],
+  ['<b>Dossier de l’équipe</b>', '<b>{classe} › COMMUN › TECHNOLOGIE › THEATRE IA › {dossier}</b>'],
 ];
 
 // Validations ◆ du professeur (données dans l'outil professeur).
@@ -105,16 +107,16 @@ export const ETAPES = [
     outil: 'Tinkercad',
     route: '◆ Modèles validés avant impression 3D',
     blocs: [
-      { type: 'cadre', html: '<b>Tutoriel :</b> fichier <b>« Tuto Tinkercad.html »</b>, dans <b>4X › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>' },
+      { type: 'cadre', html: '<b>Tutoriel :</b> fichier <b>« Tuto Tinkercad.html »</b>, dans <b>{classe} › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>' },
       { type: 'cadre', ton: 'attention', html: '<b>À respecter :</b> <b>100 mm × 100 mm maximum</b> (1 cm = 10 mm) et <b>2 mm d’épaisseur</b>.' },
       {
         type: 'consignes',
         items: [
-          'Ouvrez <b>Tinkercad</b> et créez un <b>nouveau design</b>, nommé <b>PRENOM_PRENOM_personnage1</b>.',
+          'Ouvrez <b>Tinkercad</b> et créez un <b>nouveau design</b>, nommé <b>{prenoms}_personnage1</b>.',
           'Construisez la silhouette en suivant le tuto, d’après <b>votre dessin</b>.',
           '<b>Groupez</b> les formes en <b>un seul objet</b> et réglez l’épaisseur à <b>2 mm</b>.',
           '<b>Enregistrez</b>. Recommencez pour le 2<sup>e</sup> personnage.',
-          'Exportez chaque personnage en <b>.STL</b> et rangez-le dans le dossier de l’équipe : <b>PRENOM_PRENOM_Perso1.stl</b>, <b>PRENOM_PRENOM_Perso2.stl</b>.',
+          'Exportez chaque personnage en <b>.STL</b> et rangez-le dans le dossier de l’équipe : <b>{prenoms}_Perso1.stl</b>, <b>{prenoms}_Perso2.stl</b>.',
         ],
       },
       {
@@ -216,8 +218,8 @@ export const ETAPES = [
       {
         type: 'consignes',
         items: [
-          'Menu de l’équipe → <b>« Enregistrer »</b> (ou Ctrl + S), dans <b>4X › COMMUN › TECHNOLOGIE › THEATRE IA › PRENOM - PRENOM</b>.',
-          'Nom du fichier : <b>PRENOM_PRENOM_theatre_ombre.json</b>. Le carnet est enregistré dans ce fichier.',
+          'Menu de l’équipe → <b>« Enregistrer »</b> (ou Ctrl + S), dans <b>{classe} › COMMUN › TECHNOLOGIE › THEATRE IA › {dossier}</b>.',
+          'Nom du fichier : <b>{prenoms}_theatre_ombre.json</b>. Le carnet est enregistré dans ce fichier.',
         ],
       },
       { type: 'check', id: 'e3.enregistre', t: 'Fichier enregistré dans mon dossier d’équipe' },

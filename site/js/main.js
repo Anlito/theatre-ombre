@@ -45,7 +45,7 @@ const live = new Live({ camera, training, settings });
 const sounds = new SoundBank();
 let program = null; // écran Programmer (créé plus bas)
 let projects = null; // enregistrement des projets (créé plus bas)
-let currentStep = 'entrainer';
+let currentStep = 'carnet';
 
 // Les autres modules (programme, sons…) écoutent « tout-eteindre » pour s'arrêter.
 export const bus = new EventTarget();
@@ -185,7 +185,7 @@ const carnet = setupCarnetScreen({
   onChange: () => projects?.touch(),
 });
 setupHelp({ settings, getStep: () => currentStep });
-goTo('entrainer');
+goTo('carnet'); // le carnet est la feuille de route de l'équipe : c'est le premier écran
 
 // Réglages modifiés (mode professeur ou projet rechargé) : on met à jour les écrans.
 function onSettingsChanged() {
@@ -196,6 +196,7 @@ function onSettingsChanged() {
 }
 projects = setupProjects({
   training, sounds, settings, program, ledColors, carnet, onSettingsChanged, showMessage, hideMessage,
+  onNewProject: () => goTo('carnet'),
   onTeamChange: () => {
     spectacle.renderTitle();
     carnet.refreshTeam();

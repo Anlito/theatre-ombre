@@ -135,14 +135,6 @@ export function setupGuide({ camera, training, link, live, board, program, proje
   $('guide-btn').addEventListener('click', () => (panel.open ? panel.close() : open()));
   panel.querySelector('[data-close]').addEventListener('click', () => panel.close());
 
-  // À la première ouverture d'un projet, le guide s'affiche tout seul.
-  let shownOnce = false;
-  $('start-dialog').addEventListener('close', () => {
-    if (!shownOnce) {
-      shownOnce = true;
-      open();
-    }
-  });
   update();
   return { open, update };
 }

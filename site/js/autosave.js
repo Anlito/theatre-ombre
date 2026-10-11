@@ -47,3 +47,21 @@ export async function loadBackup() {
     return null;
   }
 }
+
+// Dossier de l'équipe et fichier du projet (handles du navigateur), pour « Reprendre » :
+// le navigateur redemandera l'autorisation d'y écrire.
+export async function saveFolder(handles) {
+  try {
+    await run('readwrite', (s) => s.put(handles, 'dossier'));
+  } catch {
+    /* pas grave : il faudra rechoisir le dossier */
+  }
+}
+
+export async function loadFolder() {
+  try {
+    return (await run('readonly', (s) => s.get('dossier'))) ?? null;
+  } catch {
+    return null;
+  }
+}

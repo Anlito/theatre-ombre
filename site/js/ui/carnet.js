@@ -12,6 +12,7 @@ const PHOTO_QUALITY = 0.82;
 export function setupCarnetScreen({ camera, training, live, link, board, program, settings, ledColors, getTeam, isVisible, onChange, showMessage }) {
   const root = document.getElementById('carnet-root');
   let carnet = emptyCarnet();
+  let validations = {}; // ◆ du professeur (validations.json du dossier de l'équipe)
   let view = null;
 
   const changed = () => onChange();
@@ -62,6 +63,7 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
     view = renderCarnet(root, {
       carnet,
       team: getTeam(),
+      validations,
       live: liveData(),
       onChange: changed,
       onAddPhoto: (id) => photos.open(id),
@@ -107,6 +109,11 @@ export function setupCarnetScreen({ camera, training, live, link, board, program
     get: () => carnet,
     replace(next) {
       carnet = normalizeCarnet(next);
+      validations = {};
+      if (isVisible()) render();
+    },
+    setValidations(next) {
+      validations = next ?? {};
       if (isVisible()) render();
     },
     hasWork: () =>

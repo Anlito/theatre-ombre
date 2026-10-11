@@ -1026,3 +1026,18 @@ textarea.cn-field { resize: vertical; line-height: 1.4; }
   body.is-printing-carnet .cn-check,
   body.is-printing-carnet .cn-valide { break-inside: avoid; }
 }
+
+/* --- Classe (accueil), ranger le projet, choisir son équipe ---------------------------- */
+.start-class-row { display: flex; align-items: center; gap: 12px; }
+.start-class { width: 140px; min-height: 48px; }
+.folder-steps { margin: 0 0 8px; padding-left: 1.4em; display: grid; gap: 6px; }
+#folder-dialog .dialog-body b[id] { color: var(--bleu); }
+.teams-list { display: grid; gap: 8px; max-height: 50vh; overflow-y: auto; }
+.teams-item {
+  display: grid; grid-template-columns: 24px 1fr; align-items: center; gap: 2px 10px; padding: 10px 14px; text-align: left;
+  border: 1px solid var(--bord); border-radius: var(--rayon-petit); background: var(--carte); color: var(--texte); font: 1rem var(--police); cursor: pointer;
+}
+.teams-item:hover { border-color: var(--bleu); background: var(--bleu-pale); }
+.teams-item svg { grid-row: span 2; color: var(--bleu); }
+.teams-item small { color: var(--texte-doux); }
+.camera-parking { position: fixed; left: -10000px; top: 0; width: 640px; opacity: 0; pointer-events: none; }

@@ -2,7 +2,8 @@
 // copie de secours automatique et « Reprendre mon dernier travail ».
 
 import { serialize, parse, fileName } from '../project.js';
-import { saveBackup, loadBackup } from '../autosave.js';
+import { saveBackup, loadBackup, saveFolder, loadFolder } from '../autosave.js';
+import { teamFolderName, classPath, isClassFolderName, isTeamFolderName, teamFolderIn, findProjectFile, listTeamFolders, writeProject, readValidations } from '../team-folder.js';
 import { MODEL_ID } from '../vision.js';
 import { normalizeSettings } from '../settings.js';
 
@@ -10,11 +11,12 @@ const BACKUP_EVERY_MS = 60_000;
 
 import { icon } from '../icons.js';
 
-export function setupProjects({ training, sounds, settings, program, ledColors, carnet, onSettingsChanged, showMessage, hideMessage, onTeamChange = () => {} }) {
+export function setupProjects({ training, sounds, settings, program, ledColors, carnet, onSettingsChanged, showMessage, hideMessage, onTeamChange = () => {}, onNewProject = () => {} }) {
   const $ = (id) => document.getElementById(id);
   const state = {
     team: [],
-    handle: null, // fichier choisi avec le sélecteur du navigateur (Chrome / Edge)
+    handle: null, // fichier du projet, dans le dossier de l'équipe (Chrome / Edge)
+    teamDir: null, // dossier de l'équipe : THEATRE IA › LEA - TOM
     dirty: false, // modifications non enregistrées dans le fichier
     changedSinceBackup: false,
     loading: false,
@@ -102,29 +104,75 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
   }
 
   // --- Enregistrer ---------------------------------------------------------------------------
-  async function save({ saveAs = false } = {}) {
-    const text = JSON.stringify(await collect());
-    const name = fileName(state.team);
-    if ('showSaveFilePicker' in window) {
-      try {
-        if (!state.handle || saveAs) {
-          state.handle = await window.showSaveFilePicker({
-            suggestedName: name,
-            types: [{ description: "Projet Théâtre d'ombre", accept: { 'application/json': ['.json'] } }],
-          });
-        }
-        const w = await state.handle.createWritable();
-        await w.write(text);
-        await w.close();
-        return saved(state.handle.name);
-      } catch (e) {
-        if (e.name === 'AbortError') return; // l'élève a annulé
-        state.handle = null;
-        // Dossier réseau refusé par le navigateur… : on télécharge le fichier à la place.
-      }
+  // Le projet est rangé dans « 3B › COMMUN › TECHNOLOGIE › THEATRE IA › LEA - TOM ».
+  // Premier enregistrement : fenêtre « Ranger votre projet » (choix du dossier THEATRE IA) ;
+  // ensuite, on écrit toujours dans le même fichier, sans rien demander.
+  async function save() {
+    if (!state.handle) {
+      if ('showDirectoryPicker' in window) return openFolderDialog();
+      const text = JSON.stringify(await collect());
+      const name = fileName(state.team);
+      download(text, name);
+      return saved(name, true);
     }
-    download(text, name);
-    saved(name, true);
+    try {
+      const w = await state.handle.createWritable();
+      await w.write(JSON.stringify(await collect()));
+      await w.close();
+      saved(`${state.teamDir?.name ? state.teamDir.name + ' › ' : ''}${state.handle.name}`);
+      refreshValidations();
+    } catch {
+      // Autorisation retirée, dossier réseau indisponible… : on redemande le dossier.
+      state.handle = null;
+      state.teamDir = null;
+      openFolderDialog('Le dossier n’est plus accessible : choisissez de nouveau le dossier THEATRE IA.');
+    }
+  }
+
+  const folderDialog = $('folder-dialog');
+  function openFolderDialog(error = '') {
+    $('folder-path').textContent = classPath(carnet.get().classe);
+    $('folder-team').textContent = teamFolderName(state.team);
+    $('folder-file').textContent = fileName(state.team);
+    $('folder-error').textContent = error;
+    if (!folderDialog.open) folderDialog.showModal();
+  }
+  folderDialog.querySelector('[data-folder-later]').addEventListener('click', () => {
+    folderDialog.close();
+    showMessage('Pensez à ranger votre projet : menu de l’équipe → « Enregistrer ».', 'info');
+  });
+  folderDialog.addEventListener('cancel', (e) => e.preventDefault()); // on choisit « Plus tard » ou le dossier
+  $('btn-folder-choose').addEventListener('click', async () => {
+    if (await chooseFolderAndSave()) folderDialog.close();
+  });
+
+  async function chooseFolderAndSave() {
+    let dir;
+    try {
+      dir = await window.showDirectoryPicker({ id: 'theatre-ia', mode: 'readwrite' });
+    } catch (e) {
+      if (e.name !== 'AbortError') $('folder-error').textContent = 'Ce dossier ne peut pas être choisi. Choisissez le dossier THEATRE IA de votre classe.';
+      return false;
+    }
+    if (!isClassFolderName(dir.name) && !isTeamFolderName(dir.name, state.team)) {
+      const ok = confirm(`Le dossier choisi s’appelle « ${dir.name} ».\nIl faut choisir « THEATRE IA » (${classPath(carnet.get().classe)}).\n\nContinuer quand même ?`);
+      if (!ok) return false;
+    }
+    try {
+      const teamDir = await teamFolderIn(dir, state.team);
+      const existing = await findProjectFile(teamDir);
+      if (existing && !confirm(`Le dossier « ${teamDir.name} » contient déjà un projet (« ${existing.handle.name} »).\nLe remplacer par celui-ci ?`)) return false;
+      const handle = await writeProject(teamDir, state.team, JSON.stringify(await collect()));
+      state.handle = handle;
+      state.teamDir = teamDir;
+      saveFolder({ teamDir, handle, team: state.team });
+      saved(`${teamDir.name} › ${handle.name}`);
+      refreshValidations();
+      return true;
+    } catch {
+      $('folder-error').textContent = 'Impossible d’écrire dans ce dossier. Vérifiez que vous avez choisi le dossier de votre classe, puis réessayez.';
+      return false;
+    }
   }
 
   function saved(name, downloaded = false) {
@@ -133,7 +181,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     renderTeam();
     showMessage(
       downloaded
-        ? `Projet téléchargé : « ${name} ». Range-le dans le dossier de ton équipe (dossier Téléchargements).`
+        ? `Projet téléchargé : « ${name} ». Rangez-le dans ${classPath(carnet.get().classe)} › ${teamFolderName(state.team)}.`
         : `Projet enregistré : « ${name} ».`,
       'ok',
     );
@@ -149,42 +197,98 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     setTimeout(() => URL.revokeObjectURL(url), 10_000);
   }
 
+  // Validations ◆ du professeur (fichier validations.json du dossier de l'équipe).
+  async function refreshValidations() {
+    if (state.teamDir) carnet.setValidations(await readValidations(state.teamDir));
+  }
+
   // --- Ouvrir -----------------------------------------------------------------------------------
-  async function pickFile() {
-    if ('showOpenFilePicker' in window) {
-      try {
-        const [handle] = await window.showOpenFilePicker({
-          types: [{ description: "Projet Théâtre d'ombre", accept: { 'application/json': ['.json'] } }],
-        });
-        return { file: await handle.getFile(), handle };
-      } catch (e) {
-        if (e.name === 'AbortError') return null;
-      }
+  // On choisit le dossier THEATRE IA (puis son équipe dans la liste) ou directement le dossier de l'équipe.
+  async function openFile() {
+    if (!('showDirectoryPicker' in window)) return openFileClassic();
+    let dir;
+    try {
+      dir = await window.showDirectoryPicker({ id: 'theatre-ia', mode: 'readwrite' });
+    } catch (e) {
+      return e.name === 'AbortError' ? false : openFileClassic();
     }
-    // Repli : sélecteur de fichier classique.
+    const here = await findProjectFile(dir);
+    if (here) return openFrom(dir, here);
+    const teams = await listTeamFolders(dir);
+    if (!teams.length) {
+      showMessage(`Aucun projet dans « ${dir.name} ». Choisissez le dossier THEATRE IA de votre classe, ou le dossier à vos prénoms.`);
+      return false;
+    }
+    const pick = teams.length === 1 ? teams[0] : await chooseTeam(teams);
+    return pick ? openFrom(pick.dir, pick) : false;
+  }
+
+  function chooseTeam(teams) {
+    const dialog = $('teams-dialog');
+    const list = $('teams-list');
     return new Promise((resolve) => {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.json,application/json';
-      input.onchange = () => resolve(input.files[0] ? { file: input.files[0], handle: null } : null);
-      input.click();
+      let chosen = null;
+      list.replaceChildren(
+        ...teams.map((t) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'teams-item';
+          b.innerHTML = `${icon('equipe', { size: 20 })}<b></b><small></small>`;
+          b.querySelector('b').textContent = t.name;
+          b.querySelector('small').textContent = `enregistré le ${new Date(t.file.lastModified).toLocaleString('fr-FR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}`;
+          b.addEventListener('click', () => {
+            chosen = t;
+            dialog.close();
+          });
+          return b;
+        }),
+      );
+      dialog.addEventListener('close', () => resolve(chosen), { once: true });
+      dialog.showModal();
     });
   }
 
-  async function openFile() {
-    const picked = await pickFile();
-    if (!picked) return false;
-    const r = parse(await picked.file.text(), { modelId: MODEL_ID });
+  async function openFrom(teamDir, { handle, file }) {
+    const r = parse(await file.text(), { modelId: MODEL_ID });
     if (!r.ok) {
       showMessage(r.error);
       return false;
     }
     apply(r.project, { team: r.project.team.length ? r.project.team : state.team });
-    state.handle = picked.handle;
+    state.handle = handle;
+    state.teamDir = teamDir;
     state.savedOnce = true; // ce projet existe déjà dans un fichier
+    saveFolder({ teamDir, handle, team: state.team });
     renderTeam();
-    reportLoaded(r, picked.file.name);
+    refreshValidations();
+    reportLoaded(r, `${teamDir.name} › ${file.name}`);
     return true;
+  }
+
+  // Navigateur sans choix de dossier : sélecteur de fichier classique (on enregistrera par téléchargement).
+  function openFileClassic() {
+    return new Promise((resolve) => {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json,application/json';
+      input.onchange = async () => {
+        const file = input.files[0];
+        if (!file) return resolve(false);
+        const r = parse(await file.text(), { modelId: MODEL_ID });
+        if (!r.ok) {
+          showMessage(r.error);
+          return resolve(false);
+        }
+        apply(r.project, { team: r.project.team.length ? r.project.team : state.team });
+        state.handle = null;
+        state.teamDir = null;
+        state.savedOnce = true;
+        renderTeam();
+        reportLoaded(r, file.name);
+        resolve(true);
+      };
+      input.click();
+    });
   }
 
   function reportLoaded(r, name) {
@@ -212,11 +316,26 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     }
     apply(r.project);
     state.handle = null;
+    state.teamDir = null;
+    const folder = await loadFolder();
+    if (folder?.handle && sameTeam(folder.team, state.team)) {
+      try {
+        if ((await folder.handle.requestPermission({ mode: 'readwrite' })) === 'granted') {
+          state.handle = folder.handle;
+          state.teamDir = folder.teamDir;
+          refreshValidations();
+        }
+      } catch {
+        /* il faudra rechoisir le dossier */
+      }
+    }
     state.dirty = true; // la copie de secours n'est pas le fichier : il faut enregistrer
     renderTeam();
     showMessage('Dernier travail repris. Pensez à cliquer sur « 💾 Enregistrer » pour le ranger dans votre dossier.', 'info');
     return true;
   }
+
+  const sameTeam = (a = [], b = []) => a.join('|') === b.join('|');
 
   // --- Fenêtre de démarrage ------------------------------------------------------------------------
   const dialog = $('start-dialog');
@@ -224,6 +343,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
 
   async function showStart({ firstTime = false } = {}) {
     names.forEach((input, i) => (input.value = state.team[i] ?? ''));
+    $('start-class').value = carnet.get().classe ?? '';
     $('start-close').hidden = firstTime;
     const b = await loadBackup();
     const resume = $('start-resume');
@@ -257,17 +377,24 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     const action = e.target.closest('[data-start]')?.dataset.start;
     if (!action) return;
     const team = readTeam();
+    const classe = $('start-class').value.trim().toUpperCase();
     if (action === 'new' && team.length === 0) {
-      $('start-error').textContent = 'Écrivez au moins un prénom (il sert à nommer votre fichier).';
+      $('start-error').textContent = 'Écrivez au moins un prénom (il sert à nommer votre dossier).';
       names[0].focus();
+      return;
+    }
+    if (action === 'new' && !classe) {
+      $('start-error').textContent = 'Écrivez votre classe (ex. 3B) : elle indique où ranger votre projet.';
+      $('start-class').focus();
       return;
     }
     if (!(await confirmLoseWork())) return;
     let ok = true;
     if (action === 'new') {
       state.team = team;
-      apply(emptyProject(), { team });
+      apply({ ...emptyProject(), carnet: { classe } }, { team });
       state.handle = null;
+      state.teamDir = null;
       hideMessage();
     } else if (action === 'open') {
       if (team.length) state.team = team;
@@ -276,6 +403,10 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       ok = await resumeBackup();
     }
     if (ok) dialog.close();
+    if (ok && action === 'new') {
+      onNewProject();
+      openFolderDialog(); // première chose : ranger le projet dans THEATRE IA
+    }
   });
 
   // --- Barre « équipe » et boutons ------------------------------------------------------------------
@@ -302,7 +433,8 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     const team = teamInputs.map((i) => i.value.trim()).filter(Boolean);
     if (!team.length) return teamInputs[0].focus();
     state.team = team;
-    state.handle = null; // nouveau nom de fichier proposé au prochain enregistrement
+    state.handle = null; // nouveau dossier et nouveau nom de fichier au prochain enregistrement
+    state.teamDir = null;
     touch();
     teamDialog.close();
   });
