@@ -17,7 +17,8 @@ import { COMMANDE, CLIENT, MODE_EMPLOI, OUTILS, ETAPES, VALIDATIONS } from '../c
 import { avancement, MAX_PHOTOS } from '../carnet.js';
 import { icon } from '../icons.js';
 import { LED_COLORS } from '../led-colors.js';
-import { teamFolderName } from '../team-folder.js';
+import { teamFolderName, classPath } from '../team-folder.js';
+import { cheminClasse } from '../college.js';
 import { fileName } from '../project.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
@@ -237,6 +238,7 @@ export function renderCarnet(root, {
   // Chemins et noms de fichiers à la classe et aux prénoms de l'équipe.
   const perso = (html) =>
     html
+      .replaceAll('{chemin}', esc(classPath(carnet.classe, cheminClasse())))
       .replaceAll('{classe}', esc(carnet.classe.trim().toUpperCase() || '3X'))
       .replaceAll('{dossier}', esc(team.length ? teamFolderName(team) : 'PRENOM - PRENOM'))
       .replaceAll('{prenoms}', esc(team.length ? fileName(team).replace(/_theatre_ombre.json$/, '') : 'PRENOM_PRENOM'));

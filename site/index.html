@@ -287,7 +287,7 @@
           <input class="team-name" type="text" maxlength="20" placeholder="Prénom 3" aria-label="Prénom 3" autocomplete="off">
         </div>
         <label class="start-label start-class-row" for="start-class">Votre classe :
-          <input id="start-class" class="start-class" type="text" maxlength="10" placeholder="ex. 3B" autocomplete="off">
+          <select id="start-class" class="start-class"><option value="">Choisissez</option></select>
         </label>
         <p id="start-error" class="form-error" role="alert"></p>
         <div class="start-choices">
@@ -540,6 +540,10 @@
   <script src="vendor/blockly/javascript_compressed.js"></script>
   <script src="vendor/blockly/fr.js"></script>
   <script src="vendor/js-interpreter.min.js"></script>
+  <!-- Réglages du collège (liste des classes, chemin des dossiers) : copie de secours, puis version en ligne -->
+  <script src="vendor/labo-blocs/college.js"></script>
+  <script src="college.js"></script>
+  <script>LaboBlocs.chargerCollegeEnLigne();</script>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

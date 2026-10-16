@@ -28,8 +28,19 @@ export const isTeamFolderName = (name, team) => sameFolder(name, teamFolderName(
 const sameFolder = (a, b) => plain(a).replace(/[^A-Z0-9]+/g, '') === plain(b).replace(/[^A-Z0-9]+/g, '');
 
 // Chemin à montrer aux élèves : « 3B › COMMUN › TECHNOLOGIE › THEATRE IA ».
-export function classPath(classe) {
-  return `${classe?.trim() ? plain(classe).trim() : '3X'} › COMMUN › TECHNOLOGIE › ${CLASS_FOLDER}`;
+// cheminClasse vient des réglages du collège (ex. ['Bureau', 'Classe', '{classe}', 'COMMUN', 'TECHNOLOGIE']).
+export const CHEMIN_CLASSE_DEFAUT = ['{classe}', 'COMMUN', 'TECHNOLOGIE'];
+export function classPath(classe, cheminClasse = CHEMIN_CLASSE_DEFAUT) {
+  const c = classe?.trim() ? plain(classe).trim() : '3X';
+  return [...(cheminClasse?.length ? cheminClasse : CHEMIN_CLASSE_DEFAUT), CLASS_FOLDER].map((p) => p.replace('{classe}', c)).join(' › ');
+}
+
+// Dossier choisi par les élèves : « projet » (THEATRE IA : le site y crée le dossier de l'équipe),
+// « equipe » (le dossier à leurs prénoms : refusé, le site le crée lui-même) ou « autre ».
+export function folderKind(name, team) {
+  if (isTeamFolderName(name, team)) return 'equipe';
+  if (isClassFolderName(name)) return 'projet';
+  return 'autre';
 }
 
 // Dossier choisi -> dossier de l'équipe (créé s'il n'existe pas).

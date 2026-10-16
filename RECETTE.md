@@ -62,11 +62,14 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 
 ## 7. Sauvegarde et reprise (tous jalons)
 
-- [ ] Accueil : « Nouveau projet » sans classe → message « Écrivez votre classe ». Avec la classe → le Carnet s'affiche
+- [ ] Accueil : la liste « Votre classe » montre les classes de 3e des réglages du collège (Labo Blocs).
+  « Nouveau projet » sans classe → message « Choisissez votre classe ». Avec la classe → le Carnet s'affiche
   et la fenêtre « Ranger votre projet » s'ouvre.
 - [ ] « Choisir le dossier THEATRE IA » → dossier réseau `3B › COMMUN › TECHNOLOGIE › THEATRE IA` → autoriser la modification :
   le dossier `LEA - TOM` est créé avec `LEA_TOM_theatre_ombre.json` dedans (vérifier dans l'explorateur).
   (Si le navigateur refuse le dossier réseau : noter le message exact.)
+- [ ] Choisir directement le dossier `LEA - TOM` → message : le site le crée lui-même, choisir le dossier qui le contient.
+  Choisir un autre dossier (ex. TECHNOLOGIE) → la question propose de créer `LEA - TOM` dedans ou d'en choisir un autre.
 - [ ] Modifier le carnet sans rien cliquer : « enregistrement… » puis « enregistré » ; la date du fichier change (enregistrement automatique).
 - [ ] Fermer le navigateur, rouvrir le site → « Ouvrir notre projet » : personnages, photos, blocs et sons
   retrouvés, la reconnaissance marche **sans reprendre de photo**.

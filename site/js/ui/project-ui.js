@@ -3,8 +3,9 @@
 
 import { serialize, parse, fileName } from '../project.js';
 import { saveBackup, loadBackup, saveFolder, loadFolder } from '../autosave.js';
-import { teamFolderName, classPath, isClassFolderName, isTeamFolderName, teamFolderIn, findProjectFile, listTeamFolders, writeProject, readValidations } from '../team-folder.js';
+import { teamFolderName, classPath, folderKind, CLASS_FOLDER, teamFolderIn, findProjectFile, listTeamFolders, writeProject, readValidations } from '../team-folder.js';
 import { MODEL_ID } from '../vision.js';
+import { classesProposees, cheminClasse, surCollege } from '../college.js';
 import { normalizeSettings } from '../settings.js';
 
 const BACKUP_EVERY_MS = 60_000;
@@ -174,7 +175,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
 
   const folderDialog = $('folder-dialog');
   function openFolderDialog(error = '') {
-    $('folder-path').textContent = classPath(carnet.get().classe);
+    $('folder-path').textContent = classPath(carnet.get().classe, cheminClasse());
     $('folder-team').textContent = teamFolderName(state.team);
     $('folder-file').textContent = fileName(state.team);
     $('folder-error').textContent = error;
@@ -197,8 +198,15 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       if (e.name !== 'AbortError') $('folder-error').textContent = 'Ce dossier ne peut pas être choisi. Choisissez le dossier THEATRE IA de votre classe.';
       return false;
     }
-    if (!isClassFolderName(dir.name) && !isTeamFolderName(dir.name, state.team)) {
-      const ok = confirm(`Le dossier choisi s’appelle « ${dir.name} ».\nIl faut choisir « THEATRE IA » (${classPath(carnet.get().classe)}).\n\nContinuer quand même ?`);
+    // Le dossier de l'équipe est toujours créé par le site : les élèves choisissent le dossier THEATRE IA.
+    const equipe = teamFolderName(state.team);
+    const sorte = folderKind(dir.name, state.team);
+    if (sorte === 'equipe') {
+      $('folder-error').textContent = `Vous avez choisi « ${dir.name} », le dossier de votre équipe : le site le crée lui-même. Choisissez le dossier qui le contient, « ${CLASS_FOLDER} ».`;
+      return false;
+    }
+    if (sorte === 'autre') {
+      const ok = confirm(`Le dossier choisi s’appelle « ${dir.name} ».\nLe dossier attendu est « ${CLASS_FOLDER} » (${classPath(carnet.get().classe, cheminClasse())}).\n\nOK : créer le dossier « ${equipe} » dedans.\nAnnuler : choisir un autre dossier.`);
       if (!ok) return false;
     }
     try {
@@ -224,7 +232,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
     renderTeam();
     showMessage(
       downloaded
-        ? `Projet téléchargé : « ${name} ». Rangez-le dans ${classPath(carnet.get().classe)} › ${teamFolderName(state.team)}.`
+        ? `Projet téléchargé : « ${name} ». Rangez-le dans ${classPath(carnet.get().classe, cheminClasse())} › ${teamFolderName(state.team)}.`
         : `Projet enregistré : « ${name} ».`,
       'ok',
     );
@@ -384,9 +392,23 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
   const dialog = $('start-dialog');
   const names = [...dialog.querySelectorAll('.team-name')];
 
+  // Classes des réglages du collège ; une classe d'un ancien projet absente de la liste reste proposée.
+  function renderClasses(choisie = $('start-class').value) {
+    const liste = classesProposees();
+    if (choisie && !liste.includes(choisie)) liste.push(choisie);
+    const select = $('start-class');
+    select.replaceChildren(new Option('Choisissez', ''), ...liste.map((c) => new Option(c, c)));
+    select.value = choisie || '';
+  }
+  renderClasses('');
+  surCollege(() => {
+    renderClasses();
+    if (folderDialog.open) $('folder-path').textContent = classPath(carnet.get().classe, cheminClasse());
+  });
+
   async function showStart({ firstTime = false } = {}) {
     names.forEach((input, i) => (input.value = state.team[i] ?? ''));
-    $('start-class').value = carnet.get().classe ?? '';
+    renderClasses((carnet.get().classe ?? '').trim().toUpperCase());
     $('start-close').hidden = firstTime;
     const b = await loadBackup();
     const resume = $('start-resume');
@@ -427,7 +449,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       return;
     }
     if (action === 'new' && !classe) {
-      $('start-error').textContent = 'Écrivez votre classe (ex. 3B) : elle indique où ranger votre projet.';
+      $('start-error').textContent = 'Choisissez votre classe : elle indique où ranger votre projet.';
       $('start-class').focus();
       return;
     }

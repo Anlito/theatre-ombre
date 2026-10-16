@@ -23,6 +23,9 @@ jobs:
       url: ${{ steps.deploiement.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      # Copie de secours des réglages du collège (classes, chemin) : la dernière version publiée par Labo Blocs.
+      - name: Mettre à jour les réglages du collège
+        run: curl -fsSL https://anlito.github.io/labo-blocs/site/college.js -o /tmp/college.js && grep -q definirCollege /tmp/college.js && cp /tmp/college.js site/college.js || echo "Réglages du collège injoignables : la copie du dépôt est gardée."
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
