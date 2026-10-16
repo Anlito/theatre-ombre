@@ -177,7 +177,7 @@ Le code professeur évite les changements par erreur ; ce n'est pas une vraie s�
 
 - Au démarrage (page d'accueil) : prénoms **et classe** (obligatoires ; la classe se choisit dans la liste des
   **réglages du collège**, communs à tous les outils et modifiés dans l'accueil de Labo Blocs, « Réglages du collège » :
-  seules les classes de 3e sont proposées, toutes les classes s'il n'y en a aucune de 3e). Le site lit sa copie de secours
+  seules les classes de 4e et de 3e sont proposées, toutes les classes s'il n'y en a aucune). Le site lit sa copie de secours
   `site/college.js` (rafraîchie à chaque publication), puis la version en ligne si internet répond. Ensuite **Nouveau projet**, **Ouvrir notre projet**
   ou **Reprendre** le dernier travail. Le premier écran est le **Carnet** (feuille de route), puis 1 Entraîner, 2 Programmer, 3 Spectacle.
 - **Première chose après « Nouveau projet » : ranger le projet.** La fenêtre « Ranger votre projet » fait choisir le dossier

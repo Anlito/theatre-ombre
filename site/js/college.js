@@ -3,12 +3,12 @@
 // Labo Blocs (« Réglages du collège »). Le site lit d'abord sa copie de secours (site/college.js), puis la
 // version en ligne si internet répond (simple lecture : rien n'est envoyé). Voir vendor/labo-blocs/college.js.
 
-// Le théâtre d'ombre est un projet de 3e : seules les classes de 3e sont proposées.
-export const NIVEAUX = ['3'];
+// Le théâtre d'ombre est un projet de 4e et de 3e : seules les classes de ces niveaux sont proposées.
+export const NIVEAUX = ['4', '3'];
 
 const labo = () => window.LaboBlocs || {};
 
-// Classes proposées à l'accueil (toutes les classes si les réglages n'en ont aucune de 3e).
+// Classes proposées à l'accueil (toutes les classes si les réglages n'en ont aucune de 4e ni de 3e).
 export function classesProposees() {
   const c = labo().college;
   if (!c || !labo().classesDuCollege) return [];

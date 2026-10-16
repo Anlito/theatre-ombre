@@ -62,7 +62,7 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 
 ## 7. Sauvegarde et reprise (tous jalons)
 
-- [ ] Accueil : la liste « Votre classe » montre les classes de 3e des réglages du collège (Labo Blocs).
+- [ ] Accueil : la liste « Votre classe » montre les classes de 4e et de 3e des réglages du collège (Labo Blocs).
   « Nouveau projet » sans classe → message « Choisissez votre classe ». Avec la classe → le Carnet s'affiche
   et la fenêtre « Ranger votre projet » s'ouvre.
 - [ ] « Choisir le dossier THEATRE IA » → dossier réseau `3B › COMMUN › TECHNOLOGIE › THEATRE IA` → autoriser la modification :
