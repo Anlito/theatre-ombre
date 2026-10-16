@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  teamFolderName, isClassFolderName, isTeamFolderName, classPath, teamFolderIn, findProjectFile, listTeamFolders, writeProject, readValidations, normalizeValidations,
+  teamFolderName, isClassFolderName, isTeamFolderName, classPath, folderKind, teamFolderIn, findProjectFile, listTeamFolders, writeProject, readValidations, normalizeValidations,
 } from '../site/js/team-folder.js';
 import { MemDir, MemFile } from './mem-fs.js';
 
@@ -56,4 +56,13 @@ test('validations ◆ du professeur : lues dans validations.json, absentes ou ab
   dir.children.set('validations.json', new MemFile('validations.json', 'pas du json'));
   assert.deepEqual(await readValidations(dir), {});
   assert.deepEqual(normalizeValidations({ validations: { v1: { date: 1 } } }), {}, 'format attendu');
+});
+
+test('chemin des réglages du collège et dossier choisi par les élèves', () => {
+  assert.equal(classPath('3b', ['Bureau', 'Classe', '{classe}', 'COMMUN', 'TECHNOLOGIE']), 'Bureau › Classe › 3B › COMMUN › TECHNOLOGIE › THEATRE IA');
+  assert.equal(classPath('3B', []), '3B › COMMUN › TECHNOLOGIE › THEATRE IA');
+  const team = ['Léa', 'Tom'];
+  assert.equal(folderKind('THEATRE IA', team), 'projet');
+  assert.equal(folderKind('LEA - TOM', team), 'equipe');
+  assert.equal(folderKind('TECHNOLOGIE', team), 'autre');
 });

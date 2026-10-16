@@ -44,7 +44,7 @@ export const OUTILS = [
   ['<b>Tinkercad</b> + « Tuto Tinkercad.html »', 'Dans <b>{classe} › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>'],
   ['<b>Site</b> Théâtre d’ombre augmenté', '<b>anlito.github.io/theatre-ombre</b> (Chrome ou Edge) : c’est ce site'],
   ['<b>Aide du site</b>', 'Entraîner l’IA, câblage, LED : tout est dans le site, bouton <b>?</b> en haut.'],
-  ['<b>Dossier de l’équipe</b>', '<b>{classe} › COMMUN › TECHNOLOGIE › THEATRE IA › {dossier}</b>'],
+  ['<b>Dossier de l’équipe</b>', '<b>{chemin} › {dossier}</b>'],
 ];
 
 // Validations ◆ du professeur (données dans l'outil professeur).
@@ -221,7 +221,7 @@ export const ETAPES = [
       {
         type: 'consignes',
         items: [
-          'Menu de l’équipe → <b>« Enregistrer »</b> (ou Ctrl + S), dans <b>{classe} › COMMUN › TECHNOLOGIE › THEATRE IA › {dossier}</b>.',
+          'Menu de l’équipe → <b>« Enregistrer »</b> (ou Ctrl + S), dans <b>{chemin} › {dossier}</b>.',
           'Nom du fichier : <b>{prenoms}_theatre_ombre.json</b>. Le carnet est enregistré dans ce fichier.',
         ],
       },
