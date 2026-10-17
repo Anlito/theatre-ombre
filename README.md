@@ -185,7 +185,8 @@ Le code professeur évite les changements par erreur ; ce n'est pas une vraie s�
   et y enregistre `LEA_TOM_theatre_ombre.json`. Le navigateur demande l'autorisation de modifier les fichiers : répondre oui.
   Le dossier de l'équipe est **toujours créé par le site** : si les élèves choisissent eux-mêmes le dossier `LEA - TOM`,
   le site leur demande le dossier qui le contient ; un autre dossier → « créer `LEA - TOM` dedans » ou en choisir un autre.
-  Le début du chemin affiché vient des réglages du collège.
+  Le début du chemin affiché vient des réglages du collège. Un groupe (3D1) range son dossier dans celui de sa
+  classe : `Bureau › Classe › 3D › COMMUN › TECHNOLOGIE › 3D1 › THEATRE IA`.
 - **Enregistrement automatique** : une fois le dossier choisi, le projet est réécrit tout seul 4 secondes après chaque
   modification (et quand on quitte l'onglet). La pastille de l'équipe indique « enregistrement… » puis « enregistré ».
   « Enregistrer » (menu équipe, ou Ctrl+S) reste possible.

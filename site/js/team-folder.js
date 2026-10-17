@@ -30,9 +30,13 @@ const sameFolder = (a, b) => plain(a).replace(/[^A-Z0-9]+/g, '') === plain(b).re
 // Chemin à montrer aux élèves : « 3B › COMMUN › TECHNOLOGIE › THEATRE IA ».
 // cheminClasse vient des réglages du collège (ex. ['Bureau', 'Classe', '{classe}', 'COMMUN', 'TECHNOLOGIE']).
 export const CHEMIN_CLASSE_DEFAUT = ['{classe}', 'COMMUN', 'TECHNOLOGIE'];
+// Groupes : 3D1 est un groupe de la classe 3D ; son dossier est au bout du chemin de la classe
+// (Bureau › Classe › 3D › COMMUN › TECHNOLOGIE › 3D1 › THEATRE IA).
 export function classPath(classe, cheminClasse = CHEMIN_CLASSE_DEFAUT) {
   const c = classe?.trim() ? plain(classe).trim() : '3X';
-  return [...(cheminClasse?.length ? cheminClasse : CHEMIN_CLASSE_DEFAUT), CLASS_FOLDER].map((p) => p.replace('{classe}', c)).join(' › ');
+  const groupe = c.match(/^(\d+\s*[A-Z]+)\s*\d+$/);
+  const dossiers = (cheminClasse?.length ? cheminClasse : CHEMIN_CLASSE_DEFAUT).map((p) => p.replace('{classe}', groupe ? groupe[1] : c));
+  return [...dossiers, ...(groupe ? [c] : []), CLASS_FOLDER].join(' › ');
 }
 
 // Dossier choisi par les élèves : « projet » (THEATRE IA : le site y crée le dossier de l'équipe),
