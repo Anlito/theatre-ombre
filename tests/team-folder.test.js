@@ -61,6 +61,8 @@ test('validations ◆ du professeur : lues dans validations.json, absentes ou ab
 test('chemin des réglages du collège et dossier choisi par les élèves', () => {
   assert.equal(classPath('3b', ['Bureau', 'Classe', '{classe}', 'COMMUN', 'TECHNOLOGIE']), 'Bureau › Classe › 3B › COMMUN › TECHNOLOGIE › THEATRE IA');
   assert.equal(classPath('3B', []), '3B › COMMUN › TECHNOLOGIE › THEATRE IA');
+  // Groupe : 3D1 est dans la classe 3D
+  assert.equal(classPath('3D1', ['Bureau', 'Classe', '{classe}', 'COMMUN', 'TECHNOLOGIE']), 'Bureau › Classe › 3D › COMMUN › TECHNOLOGIE › 3D1 › THEATRE IA');
   const team = ['Léa', 'Tom'];
   assert.equal(folderKind('THEATRE IA', team), 'projet');
   assert.equal(folderKind('LEA - TOM', team), 'equipe');
