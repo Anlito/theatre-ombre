@@ -34,7 +34,8 @@ export function indices(equipe, validations = {}) {
   const persos = (p?.categories ?? []).filter((x) => !x.background);
   const fond = (p?.categories ?? []).find((x) => x.background);
   const stlOk = equipe.stls.filter((f) => f.analyse && (({ tailleOk, epaisseurOk }) => tailleOk && epaisseurOk)(controlerStl(f.analyse.dims)));
-  const programmes = Object.values(p?.blocks?.parNiveau ?? {}).filter((x) => (x?.blocks?.blocks?.length ?? 0) > 0);
+  const minimumPhotos=p?.programmation?10:15;
+  const programmes = (p?.programmation ? Object.values(p.programmation.exercices||{}).map(e=>e.programme) : Object.values(p?.blocks?.parNiveau ?? {})).filter((x) => (x?.blocks?.blocks?.length ?? 0) > 0);
   const corrige = c ? corrigerComposants(c) : [];
   const justes = corrige.filter((x) => x.juste).length;
   const total = c ? avancementGlobal(c).reduce((s, e) => ({ f: s.f + e.faits, t: s.t + e.total }), { f: 0, t: 0 }) : null;
@@ -50,8 +51,8 @@ export function indices(equipe, validations = {}) {
     ],
     D3: [photos('cablage', 'Câblage'), { t: c?.auto?.carte ? 'Carte connectée au site' : 'Carte jamais connectée', ok: !!c?.auto?.carte }, v('v3a', 'Montage validé')],
     D4: [
-      { t: `Personnages : ${persos.length} (${persos.map((x) => `${x.name} ${x.examples.length} photos`).join(', ') || '—'})`, ok: persos.length >= 2 && persos.every((x) => x.examples.length >= 15) },
-      { t: `Fond vide : ${fond?.examples.length ?? 0} photos`, ok: (fond?.examples.length ?? 0) >= 15 },
+      { t: `Personnages : ${persos.length} (${persos.map((x) => `${x.name} ${x.examples.length} photos`).join(', ') || '—'})`, ok: persos.length >= 2 && persos.every((x) => x.examples.length >= minimumPhotos) },
+      { t: `Fond vide : ${fond?.examples.length ?? 0} photos`, ok: (fond?.examples.length ?? 0) >= minimumPhotos },
       { t: `Reconnus par l'IA : ${c?.auto?.reconnus?.join(', ') || 'aucun'}`, ok: (c?.auto?.reconnus?.length ?? 0) >= 2 },
       { t: c?.auto?.programmeTeste ? 'Programme testé (une LED s’est allumée)' : 'Programme jamais testé', ok: !!c?.auto?.programmeTeste },
       { t: `Programmes écrits : ${programmes.length ? programmes.length : 'aucun'}`, ok: programmes.length > 0 },

@@ -16,7 +16,7 @@ export const MAX_SOUNDS_BYTES = 5 * 1024 * 1024; // au-delà, on ne garde que le
 
 // --- Écriture -------------------------------------------------------------------------
 // sounds : [{ id, name, mime, bytes: Uint8Array }] (sons des élèves seulement)
-export function serialize({ team = [], settings, categories, blocks, sounds = [], modelId, ledColors = {}, carnet = null }) {
+export function serialize({ team = [], settings, categories, blocks, sounds = [], modelId, ledColors = {}, carnet = null, programmation = null }) {
   const total = sounds.reduce((n, s) => n + (s.bytes?.length ?? 0), 0);
   const keepAudio = total <= MAX_SOUNDS_BYTES;
   return {
@@ -34,6 +34,7 @@ export function serialize({ team = [], settings, categories, blocks, sounds = []
       exemples: c.examples.map((e) => ({ id: e.id, f: floatsToBase64(e.features), v: e.thumb })),
     })),
     blocs: blocks,
+    programmation: programmation ?? undefined,
     sons: sounds.map((s) => ({
       id: s.id,
       nom: s.name,
@@ -99,6 +100,7 @@ export function parse(text, { modelId } = {}) {
       ledColors: data.couleursLed && typeof data.couleursLed === 'object' ? { ...data.couleursLed } : {},
       categories,
       blocks: data.blocs ?? null,
+      programmation: data.programmation ?? null,
       sounds,
       carnet: normalizeCarnet(data.carnet),
       savedAt: data.enregistre ?? null,

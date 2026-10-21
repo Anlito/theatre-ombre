@@ -75,11 +75,11 @@
       </button>
       <span class="step-sep" data-icon="chevron" data-size="18" data-stroke="2.4"></span>
       <button class="step" data-step="programmer" type="button">
-        <span class="step-num">2</span> Programmer
+        <span class="step-num">2</span> IA et programmation
       </button>
       <span class="step-sep" data-icon="chevron" data-size="18" data-stroke="2.4"></span>
       <button class="step" data-step="spectacle" type="button">
-        <span class="step-num">3</span> Spectacle
+        <span class="step-num">3</span> Programme final
       </button>
     </div>
     <span class="spacer"></span>
@@ -534,9 +534,20 @@
     </div>
   </dialog>
 
+  <link rel="stylesheet" href="https://anlito.github.io/labo-blocs/module/labo-blocs.css">
+  <style>
+    #parcours-labo[hidden]{display:none!important}
+    body .band2 #level-switch,body .band2 #btn-run,body #guide-btn,body #pill-camera,body #pill-model,body #pill-board,body .status{display:none!important}
+    body .step[data-step="entrainer"]{display:none}
+    #parcours-labo{box-sizing:border-box;height:100vh;min-height:0}
+  </style>
   <!-- Blockly central et bibliothèques propres au Théâtre -->
-  <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/theatre/charger.js" data-module="true"></script>
+  <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/blockly/blockly_compressed.js"></script>
+  <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/blockly/fr.js"></script>
   <!-- Réglages du collège (liste des classes, chemin des dossiers) : copie de secours, puis version en ligne -->
+  <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/labo-blocs-noyau.js"></script>
+  <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/labo-blocs-interface.js"></script>
+  <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/parcours/theatre-ombre/parcours.js"></script>
   <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/interface/college.js"></script>
   <script type="application/x-atelier" data-src="college.js"></script>
   <script type="application/x-atelier">LaboBlocs.chargerCollegeEnLigne();</script>

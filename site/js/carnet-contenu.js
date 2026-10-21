@@ -155,18 +155,18 @@ export const ETAPES = [
       },
       { type: 'leds', n: 2 },
 
-      { type: 'sous', n: '3.2', t: 'Entraîner l’IA', outil: 'Site · 1 Entraîner', ecran: 'entrainer', aide: 'Aide <b>?</b> → « 1. Entraîner l’IA » · <b>« Que faire ? »</b> (étapes 1 à 5)' },
+      { type: 'sous', n: '3.2', t: 'Entraîner l’IA', outil: 'Site · IA et programmation', ecran: 'entrainer', aide: 'Parcours Labo Blocs · exercices 1 et 2' },
       {
         type: 'consignes',
         items: [
-          '<b>« Activer la webcam »</b>, face à l’écran du théâtre.',
-          '<b>Fond vide :</b> sans personnage, gardez <b>« Ajouter des photos »</b> appuyé (15 photos minimum).',
-          '<b>« Nouveau personnage »</b> : un nom par silhouette, puis <b>15 photos minimum</b> de chacun en la bougeant un peu.',
+          'Ouvrez <b>« IA et programmation »</b>, puis les exercices 1 et 2. Dans « Caméra et IA », cliquez sur <b>« Allumer la caméra »</b>.',
+          '<b>Fond vide :</b> ajoutez au moins 10 photos à l’étiquette <b>« Rien »</b>, sans personnage.',
+          '<b>« Nouvelle étiquette »</b> : un nom par personnage ; ajoutez au moins <b>10 photos</b> de chacun en variant sa position.',
           '<b>Testez :</b> chaque nom s’affiche en vert, et l’écran vide ne déclenche rien.',
         ],
       },
       { type: 'ia' },
-      { type: 'check', id: 'e3.ia', t: 'La pastille <b>IA</b> est verte et chaque personnage est reconnu' },
+      { type: 'check', id: 'e3.ia', t: 'Les deux personnages sont reconnus par l’IA et le fond vide ne les déclenche pas' },
 
       { type: 'sous', n: '3.3', t: 'Câbler les LED', outil: 'Câblage', ecran: 'cablage', aide: 'Tutoriel : schéma et photo du montage (bouton ci-dessous)' },
       { type: 'cadre', ton: 'attention', html: '<b>Sécurité :</b> câblez avec le <b>câble USB débranché</b>. Jamais sur les broches <b>0 et 1</b>.' },
@@ -183,31 +183,31 @@ export const ETAPES = [
       { type: 'check', id: 'e3.cablage', t: 'Noir ou marron sur −, fil de couleur sur la bonne broche' },
       { type: 'valide', id: 'v3a', t: 'Montage validé par le professeur avant de brancher l’USB' },
 
-      { type: 'sous', n: '3.4', t: 'Connecter la carte programmable', outil: 'Site · Carte programmable', ecran: 'carte', aide: 'Bouton <b>« Que faire ? »</b> (étapes 6 et 7)' },
+      { type: 'sous', n: '3.4', t: 'Connecter la carte programmable', outil: 'Site · Carte programmable', ecran: 'carte', aide: 'Parcours Labo Blocs · exercice 3 · mode En direct' },
       {
         type: 'consignes',
         items: [
           'Vérifiez le câblage (<b>tutoriel de câblage</b>), puis branchez l’<b>USB</b>.',
-          'Cliquez sur <b>« Carte programmable · Connecter »</b> et choisissez la carte programmable dans la liste.',
+          'Dans l’exercice 3, choisissez <b>« En direct »</b>, puis connectez l’Arduino depuis le panneau. Installez le programme de carte Labo Blocs si nécessaire.',
         ],
       },
       { type: 'lien', ecran: 'cablage', t: 'Revoir le tutoriel de câblage' },
-      { type: 'check', id: 'e3.pastilles', t: 'Les pastilles <b>Carte programmable</b>, <b>Webcam</b> et <b>IA</b> sont vertes' },
+      { type: 'check', id: 'e3.pastilles', t: 'La LED réelle répond au programme en mode En direct' },
 
-      { type: 'sous', n: '3.5', t: 'Programmer en blocs', outil: 'Site · 2 Programmer', ecran: 'programmer', aide: 'Aide <b>?</b> → « Niveau 1 · Premiers pas » · <b>« Que faire ? »</b> (étapes 8 et 9)' },
+      { type: 'sous', n: '3.5', t: 'Programmer en blocs', outil: 'Site · IA et programmation', ecran: 'programmer', aide: 'Parcours Labo Blocs · exercices 4 et 5' },
       {
         type: 'consignes',
         items: [
-          'Cliquez sur <b>« 2 Programmer »</b>, puis <b>« 1 · Premiers pas »</b>.',
-          'Bloc <b>« quand je vois [personnage] »</b> (Événements), puis dessous <b>« allumer la LED broche [n°] »</b> : la liste montre la couleur de chaque broche (ex. « 9 · rouge »).',
-          'Ajoutez <b>« quand je ne vois plus… »</b> puis <b>« éteindre la LED… »</b>. Faites de même pour l’autre personnage.',
-          '<b>« Démarrer »</b> : passez un personnage devant la webcam, sa LED s’allume.',
+          'Dans <b>« IA et programmation »</b>, réalisez les exercices 4 et 5.',
+          'Utilisez les blocs de la caméra et des LED : la première étiquette commande <b>D9</b>, la deuxième <b>D10</b>.',
+          'Avec le fond vide, éteignez les deux LED. Testez aussi un changement direct de personnage.',
+          'Cliquez sur <b>« Vérifier »</b>, puis testez le montage et les personnages avec <b>« En direct »</b> et <b>« Lancer »</b>.',
         ],
       },
       { type: 'check', id: 'e3.programme', t: 'La bonne LED s’allume pour chaque personnage' },
       { type: 'valide', id: 'v3b', t: 'Démo fonctionnelle devant le professeur' },
 
-      { type: 'sous', n: '3.6', t: 'Pour aller plus loin (facultatif)', outil: 'Site · 2 Programmer', ecran: 'programmer', aide: 'Aide <b>?</b> → « Niveau 2 » et « Niveau 3 »', facultatif: true },
+      { type: 'sous', n: '3.6', t: 'Pour aller plus loin (facultatif)', outil: 'Site · IA et programmation', ecran: 'programmer', aide: 'Aide <b>?</b> → « Niveau 2 » et « Niveau 3 »', facultatif: true },
       {
         type: 'consignes',
         items: [
@@ -217,7 +217,7 @@ export const ETAPES = [
       },
       { type: 'code', id: 'cpp', facultatif: true },
 
-      { type: 'sous', n: '3.7', t: 'Enregistrer le projet', outil: 'Site', aide: '<b>À refaire à chaque fin de séance</b> · <b>« Que faire ? »</b> (étape 10)' },
+      { type: 'sous', n: '3.7', t: 'Enregistrer le projet', outil: 'Site', aide: '<b>À refaire à chaque fin de séance</b> · bouton Enregistrer du parcours ou menu de l’équipe' },
       {
         type: 'consignes',
         items: [
@@ -312,11 +312,11 @@ export const ETAPES = [
       },
       { type: 'texte', id: 'histoire.resume', t: 'Résumé en 3-4 phrases', lignes: 4 },
 
-      { type: 'sous', n: '5.2', t: 'Répéter avec le spectacle', outil: 'Site · 3 Spectacle', ecran: 'spectacle', aide: 'Aide <b>?</b> → « 3. Spectacle » · <b>« Que faire ? »</b> (étape 11)' },
+      { type: 'sous', n: '5.2', t: 'Répéter avec le spectacle', outil: 'Site · Programme final', ecran: 'spectacle', aide: 'Parcours Labo Blocs · exercice 6 · programme final' },
       {
         type: 'consignes',
         items: [
-          '<b>« 3 Spectacle »</b>, puis <b>« Lancer le spectacle »</b>.',
+          'Ouvrez <b>« Programme final »</b> (exercice 6), puis <b>« En direct »</b> et <b>« Lancer »</b>.',
           'Racontez l’histoire en présentant les personnages devant la webcam, <b>sans toucher à l’ordinateur</b>.',
         ],
       },

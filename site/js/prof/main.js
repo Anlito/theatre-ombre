@@ -441,6 +441,7 @@ let theme = null;
 function ongletIa(box, eq) {
   const p = eq.projet;
   if (!p) return (box.innerHTML = '<p class="cn-vide">Pas de projet dans ce dossier.</p>');
+  if(p.programmation)return ongletParcours(box,p);
   const persos = p.categories;
   const progs = p.blocks?.parNiveau ?? {};
   box.innerHTML = `
@@ -729,3 +730,28 @@ accueil();
 
 // Pour les essais automatiques.
 window.theatreProf = { state, E };
+
+
+// Les nouveaux fichiers sont relus avec les définitions communes, sans modifier le travail.
+function ongletParcours(box,p){
+  const A=window.LaboBlocs;
+  const parcours=A.parcoursDefinis.find(x=>x.id==='theatre-ombre');
+  const exercices=parcours.exercices;
+  const camera=p.programmation.camera||{etiquettes:[],exemples:{}};
+  box.innerHTML='<section class="pe-carte"><h3>Apprentissage de l’IA</h3><ul>'+['Rien',...(camera.etiquettes||[])].map(n=>'<li>'+esc(n)+' : '+(camera.exemples?.[n]?.length||0)+' photos</li>').join('')+'</ul></section><section class="pe-carte"><h3>Parcours de programmation Labo Blocs</h3><label>Exercice <select class="pi-exercices">'+exercices.map(e=>'<option value="'+esc(e.id)+'">'+esc(e.numero+' · '+e.titre)+' — '+esc(p.programmation.exercices[e.id]?.statut||'à faire')+'</option>').join('')+'</select></label><p class="pi-avancement"></p><div id="pi-blockly" class="pi-blockly"></div></section>';
+  A.etiquettesCamera=['Rien',...(camera.etiquettes||[])];
+  A.definirBlocs(window.Blockly);
+  let ws=null;
+  function montrer(){
+    ws?.dispose();
+    const zone=box.querySelector('#pi-blockly');zone.replaceChildren();
+    const id=box.querySelector('.pi-exercices').value,ex=p.programmation.exercices[id];
+    box.querySelector('.pi-avancement').textContent=(ex?.tentatives||0)+' tentative(s) · '+(ex?.historique?.length||0)+' trace(s) conservée(s)';
+    if(!ex?.programme){zone.textContent='Aucun programme enregistré pour cet exercice.';return;}
+    ws=Blockly.inject(zone,{readOnly:true,renderer:'zelos',theme:A.themeBlockly,media:'https://anlito.github.io/labo-blocs/module/blockly/media/',sounds:false,move:{scrollbars:true,drag:true,wheel:true},zoom:{controls:true,startScale:0.85}});
+    try{Blockly.serialization.workspaces.load(ex.programme,ws);ws.scrollCenter();}catch{zone.insertAdjacentHTML('beforeend','<p>Ce programme ne peut pas être affiché.</p>');}
+  }
+  box.querySelector('.pi-exercices').value=p.programmation.exerciceCourant||exercices[0].id;
+  box.querySelector('.pi-exercices').addEventListener('change',montrer);
+  state.nettoyer.push(()=>ws?.dispose());montrer();
+}

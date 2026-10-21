@@ -3,7 +3,6 @@
 import { SerialLink, WebSerialTransport, SimulatedTransport, serialSupport } from './serial.js';
 import { SimulatedBoard } from './simulated-board.js';
 import { Board, renderBoardPanel } from './board.js';
-import { setupHelp } from './ui/help.js';
 import { Camera } from './camera.js';
 import { Training } from './training.js';
 import { Live } from './live.js';
@@ -45,6 +44,7 @@ const live = new Live({ camera, training, settings });
 const sounds = new SoundBank();
 let program = null; // écran Programmer (créé plus bas)
 let projects = null; // enregistrement des projets (créé plus bas)
+let carnet = null;
 let currentStep = 'carnet';
 
 // Les autres modules (programme, sons…) écoutent « tout-eteindre » pour s'arrêter.
@@ -147,6 +147,9 @@ addEventListener('pagehide', () => {
 // --- Étapes ------------------------------------------------------------------------
 const STEPS = ['entrainer', 'programmer', 'spectacle'];
 function goTo(step) {
+  const final=step==='spectacle';
+  if (step==='entrainer'||final) step='programmer';
+  if (step!=='programmer') program?.leave();
   currentStep = step;
   document.body.dataset.step = step;
   for (const b of document.querySelectorAll('.step')) {
@@ -159,7 +162,7 @@ function goTo(step) {
   for (const s of document.querySelectorAll('.screen')) s.hidden = s.dataset.screen !== step;
   moveCameraPanel(step);
   camera.video.play().catch(() => {});
-  if (step === 'programmer') program?.resize();
+  if (step === 'programmer') { program?.resize(); if(final)program?.openFinal(); }
   if (step === 'carnet') carnet?.show();
 }
 for (const b of document.querySelectorAll('.step')) b.addEventListener('click', () => goTo(b.dataset.step));
@@ -172,21 +175,29 @@ program = setupProgramScreen({
   training, sounds, board, link, live, settings, camera, showMessage, hideMessage, ledColors,
   getTeam: () => projects?.state.team ?? [],
   onLevelChange: () => projects?.touch(),
+  getClass: () => carnet?.get().classe ?? '',
+  onReturn: () => goTo('carnet'),
+  onSave: () => projects?.save(),
+  isDirty: () => !!projects?.state.dirty,
 });
 const spectacle = setupSpectacle({
   training, live, board, settings, ledColors, allOff, showMessage,
   onStart: () => program.runtime.running || program.start(),
   getTeam: () => projects?.state.team ?? [],
 });
-const carnet = setupCarnetScreen({
+carnet = setupCarnetScreen({
   camera, training, live, link, board, program, settings, ledColors, showMessage,
   getTeam: () => projects?.state.team ?? [],
   isVisible: () => currentStep === 'carnet',
   onChange: () => projects?.touch(),
   // Badges et liens du carnet : écran du site, câblage, connexion de la carte.
-  onGoto: (ecran) => (ecran === 'cablage' ? cablage.open() : ecran === 'carte' ? openConnect() : goTo(ecran)),
+  onGoto: (ecran) => {
+    if(ecran==='cablage')return cablage.open();
+    goTo(ecran==='carte'?'programmer':ecran);
+    if(ecran==='carte')program.openExercise('theatre-03');
+  },
 });
-setupHelp({ settings, getStep: () => currentStep });
+$('btn-help').addEventListener('click',()=>goTo('programmer'));
 goTo('carnet'); // le carnet est la feuille de route de l'équipe : c'est le premier écran
 
 // Réglages modifiés (mode professeur ou projet rechargé) : on met à jour les écrans.
@@ -204,7 +215,8 @@ projects = setupProjects({
     carnet.refreshTeam();
   },
 });
-setupTeacherMode({ settings, onSettingsChanged, showMessage });
+$('btn-teacher').textContent='Modifier le parcours dans Labo Blocs';
+$('btn-teacher').addEventListener('click',()=>window.open('https://anlito.github.io/labo-blocs/site/editeur.html','_blank','noopener'));
 const guide = setupGuide({ camera, training, link, live, board, program, projects, settings, train, cablage, openConnect, goTo });
 projects.showStart({ firstTime: true });
 
@@ -238,8 +250,7 @@ async function startAI() {
     showMessage("L'IA n'a pas pu se charger (fichiers du site inaccessibles ?). Recharge la page ; si ça recommence, préviens le professeur.");
   }
 }
-camera.start();
-startAI();
+// L'IA et la webcam sont maintenant pilotées par le parcours commun.
 
 // --- Panneau des broches : état des LED + couleur choisie par l'équipe -------------------------
 function renderLeds() {

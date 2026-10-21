@@ -82,10 +82,12 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
   // Le bloc de départ posé par l'outil ne compte pas.
   const STARTERS = ['quand_je_vois', 'au_demarrage'];
   function hasWork() {
+    const progression=program.saveProgress();
+    if (progression.camera || Object.values(progression.exercices).some(e=>e.programme || e.tentatives)) return true;
     if (training.categories.some((c) => !c.background || c.examples.length > 0)) return true;
     if (sounds.sounds.some((snd) => !snd.builtin)) return true;
     if (carnet.hasWork()) return true;
-    const programs = Object.values(program.saveBlocks().parNiveau ?? {});
+    const programs = Object.values(program.saveBlocks()?.parNiveau ?? {});
     return programs.some((json) => {
       const blocks = json?.blocks?.blocks ?? [];
       const variables = json?.variables ?? [];
@@ -112,6 +114,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       settings: { ...settings },
       categories: training.categories,
       blocks: program.saveBlocks(),
+      programmation: program.saveProgress(),
       sounds: await sounds.studentSounds(),
       modelId: MODEL_ID,
       ledColors: ledColors.toJSON(),
@@ -133,6 +136,7 @@ export function setupProjects({ training, sounds, settings, program, ledColors, 
       training.replaceAll(project.categories);
       sounds.replaceStudentSounds(project.sounds);
       program.loadBlocks(project.blocks); // après personnages et sons : les listes des blocs les connaissent
+      program.loadProgress(project.programmation, project.categories);
       carnet.replace(project.carnet);
       state.team = team ?? (project.team.length ? project.team : state.team);
     } finally {

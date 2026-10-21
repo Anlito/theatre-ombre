@@ -199,7 +199,7 @@ export function renderCarnet(root, {
         const ok = reconnus.has(c.name);
         return `<tr>
           <td class="cn-fixe"><b>${esc(c.name)}</b></td>
-          <td class="cn-fixe cn-num" data-assez="${c.photos >= 15}">${c.photos}</td>
+          <td class="cn-fixe cn-num" data-assez="${c.photos >= 10}">${c.photos}</td>
           <td>${champ(`ia.${c.id}.varie`, { label: `Ce que nous avons varié pour ${c.name}`, placeholder: 'angle, distance, lumière…' })}</td>
           <td class="cn-fixe cn-reconnu" data-ok="${ok}">${ok ? icon('ok', { size: 18, stroke: 3 }) + 'oui' : 'pas encore'}</td>
         </tr>`;

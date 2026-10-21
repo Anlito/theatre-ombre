@@ -1,3 +1,42 @@
+# Parcours commun Labo Blocs — Théâtre d’ombre
+
+L’entrée **IA et programmation** ouvre les mêmes écrans, blocs, niveaux, caméra,
+simulateur et panneau Arduino que les autres projets Labo Blocs. L’ancien écran
+Entraîner/Programmer ne sert plus au parcours élève.
+
+Le parcours **Théâtre d’ombre augmenté** contient six exercices : fond vide,
+étiquettes de deux personnages, première LED, personnage → LED, deux éclairages,
+puis programme final. Les deux premiers vérifient les exemples enregistrés ; les
+quatre suivants vérifient le comportement des programmes dans le simulateur.
+Le montage, la reconnaissance réelle et la scène d’une minute sont à tester en classe.
+
+Pour le modifier : [éditeur de Labo Blocs](https://anlito.github.io/labo-blocs/site/editeur.html),
+puis choisir **Théâtre d’ombre augmenté**. Les consignes, blocs, composants, tests,
+exigences d’apprentissage et programme à reprendre se règlent dans cet éditeur.
+Publier le parcours dans Labo Blocs, puis recharger le Théâtre pour le récupérer.
+La source est parcours/theatre-ombre/parcours.js dans le dépôt Labo Blocs.
+
+Le Théâtre charge le module et le parcours en ligne, sans les copier dans son site.
+Le fichier de l’équipe garde le carnet et une rubrique programmation avec
+les six exercices et la caméra partagée. Les étiquettes et les exemples ne sont
+pas recommencés à chaque exercice ; l’exercice final reprend les blocs du 5.
+Le suivi professeur lit les six exercices et affiche leurs programmes en lecture seule.
+
+Les anciens fichiers restent lisibles : leurs blocs historiques sont conservés,
+et leurs exemples d’IA sont repris dans le nouveau parcours. Les blocs de l’ancien
+éditeur ne sont pas convertis automatiquement : l’équipe reconstruit son programme
+avec les blocs communs, sans effacer l’archive des anciens blocs.
+
+**Arduino :** utiliser le panneau **En direct** de Labo Blocs et son programme de carte.
+La webcam et l’IA restent dans l’ordinateur ; le câble USB est nécessaire pendant
+la scène. Une LED sur D9, une autre sur D10, avec résistances ou modules adaptés.
+Les sons personnels de l’ancien projet restent dans le fichier mais ne sont pas
+exécutés par le parcours commun ; l’option sonore du parcours utilise un buzzer.
+
+---
+
+## Documentation historique et outils du carnet
+
 ## Dépendances communes en ligne
 
 Toute la programmation vient de **Labo Blocs en ligne** : Blockly, blocs du Théâtre,
