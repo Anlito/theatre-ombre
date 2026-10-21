@@ -9,6 +9,10 @@
   etat.textContent = 'Connexion à Labo Blocs…';
   document.body.append(etat);
   const version = Date.now();
+  for(const lien of document.querySelectorAll('link[rel="stylesheet"]')) {
+    const url=new URL(lien.href,location.href);
+    if(url.origin==='https://anlito.github.io'&&url.pathname.startsWith('/labo-blocs/')){url.searchParams.set('v',version);lien.href=url.href;}
+  }
   function charger(url, module) {
     return new Promise((ok, ko) => {
       const s = document.createElement('script');
