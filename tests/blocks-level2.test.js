@@ -5,9 +5,9 @@ import assert from 'node:assert/strict';
 import * as Blockly from 'blockly';
 import { javascriptGenerator, Order } from 'blockly/javascript';
 import Interpreter from 'js-interpreter';
-import { defineBlocks, toolbox, NOBODY } from '../site/js/blocks/definitions.js';
-import { defineGenerators, compile } from '../site/js/blocks/generators.js';
-import { Runtime } from '../site/js/runtime.js';
+import { defineBlocks, toolbox, NOBODY } from '../.cache/labo-theatre/blocks/definitions.js';
+import { defineGenerators, compile } from '../.cache/labo-theatre/blocks/generators.js';
+import { Runtime } from '../.cache/labo-theatre/runtime.js';
 
 const characters = [
   { id: 'loup', name: 'Loup' },
@@ -272,7 +272,7 @@ test('arrêter la boucle (« quitter la boucle ») dans répéter indéfiniment'
 });
 
 test('catégorie Variables : « définir … à 0 » et « ajouter 1 à … » avec une valeur modifiable', async () => {
-  const { variablesFlyout, CREATE_VARIABLE_BUTTON } = await import('../site/js/blocks/definitions.js');
+  const { variablesFlyout, CREATE_VARIABLE_BUTTON } = await import('../.cache/labo-theatre/blocks/definitions.js');
   assert.deepEqual(variablesFlyout([]), [{ kind: 'button', text: '➕ Créer une variable', callbackKey: CREATE_VARIABLE_BUTTON }]);
   const items = variablesFlyout([{ id: 'v1', name: 'choix' }]);
   const set = items.find((i) => i.type === 'variables_set');

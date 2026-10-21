@@ -9,8 +9,8 @@ import { mkdtempSync, mkdirSync, writeFileSync, existsSync, readFileSync } from 
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import * as Blockly from 'blockly';
-import { defineBlocks } from '../site/js/blocks/definitions.js';
-import { generateArduino } from '../site/js/blocks/arduino.js';
+import { defineBlocks } from '../.cache/labo-theatre/blocks/definitions.js';
+import { generateArduino } from '../.cache/labo-theatre/blocks/arduino.js';
 import { PROGRAMMES, CHARACTERS, SOUNDS } from './programmes-types.js';
 import { parseHex } from '../site/js/flasher.js';
 

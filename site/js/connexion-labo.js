@@ -15,7 +15,7 @@
       let fini = false;
       const erreurScript = e => terminer(e.error || new Error(e.message));
       const terminer = erreur => { if (fini) return; fini = true; clearTimeout(timer); window.removeEventListener('error', erreurScript); erreur ? ko(erreur) : ok(); };
-      const timer = setTimeout(() => { s.remove(); terminer(new Error('Connexion trop lente.')); }, 15000);
+      const timer = setTimeout(() => { s.remove(); terminer(new Error('Connexion trop lente.')); }, 60000);
       s.onload = () => terminer();
       s.onerror = () => terminer(new Error('Fichier indisponible.'));
       window.addEventListener('error', erreurScript);
@@ -23,7 +23,9 @@
       if (u.origin === 'https://anlito.github.io') u.searchParams.set('v', version);
       s.src = u.href;
       s.async = false;
-      if (module) s.type = 'module';
+      // Un module peut attendre le manifeste et ses dépendances (top-level await).
+      // L'événement load d'une balise ne garantit pas la fin de cette initialisation.
+      if (module) { import(u.href).then(() => terminer(), terminer); return; }
       document.body.append(s);
     });
   }
@@ -47,3 +49,4 @@
     etat.append(texte, bouton);
   }
 })();
+

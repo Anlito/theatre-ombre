@@ -1,6 +1,25 @@
 ## Dépendances communes en ligne
 
-Blockly et la bibliothèque des réglages du collège viennent directement de Labo Blocs en ligne. Ces fichiers ne sont plus copiés dans le projet. Une connexion Internet est nécessaire pour les écrans de programmation ; les scènes, l’IA, les sons et les sauvegardes du Théâtre conservent leur fonctionnement propre.
+Toute la programmation vient de **Labo Blocs en ligne** : Blockly, blocs du Théâtre,
+éditeur des trois niveaux, exécution isolée et traduction Arduino. Le projet garde
+seulement des adaptateurs dans `site/js/ui/program.js` et `site/js/blocks/definitions.js`.
+Il n’embarque aucune copie du moteur ou de ses définitions de blocs.
+
+Pour modifier cette programmation, travailler dans
+[`labo-blocs/integrations/theatre`](https://github.com/Anlito/labo-blocs/tree/main/integrations/theatre),
+puis publier Labo Blocs. Le Théâtre récupère la nouvelle version à sa prochaine
+ouverture ou au rechargement de la page, sans avoir à republier le Théâtre.
+Une session en cours garde la même version pour ne pas mélanger les modules.
+
+La connexion Internet est nécessaire à l’ouverture des espaces élève et professeur.
+Si le module ne charge pas, un message propose Réessayer avant l’ouverture des fichiers.
+Les personnages, sons, réglages et sauvegardes restent gérés par le Théâtre, avec
+les identifiants des blocs existants pour relire les anciens programmes.
+
+`npm test` prépare une dépendance de test depuis le module central dans `.cache/`
+(jamais dans `site/`). Avant publication de modifications coordonnées, définir
+`LABO_THEATRE_SOURCE` vers le dossier `integrations/theatre` de Labo Blocs pour tester
+les deux projets ensemble.
 
 # Théâtre d'ombre augmenté
 
@@ -107,7 +126,7 @@ Exemple de programme « façon mBlock » :
 
 Direction « Papier & lanterne » conçue par Claude Design : fond crème, bande du haut sombre, titres en Georgia,
 icônes maison (aucun emoji), polices système uniquement, contrastes WCAG AA vérifiés. Les variables de couleur
-sont en tête de `site/css/style.css` ; les couleurs des catégories de blocs dans `site/js/blocks/definitions.js`.
+sont en tête de `site/css/style.css` ; les couleurs des catégories de blocs dans `integrations/theatre/blocks/definitions.js` du dépôt Labo Blocs.
 
 ## Matériel par poste
 
@@ -291,3 +310,4 @@ boucle infinie), l'IA hors webcam (KNN, seuil, stabilité) et la sauvegarde / re
 
 TensorFlow.js, MobileNet et JS-Interpreter : Apache 2.0 (voir `site/vendor/LICENCES/`).
 Sons de base : composés pour ce projet. Images de câblage : reprises du tutoriel mBlock de l'enseignant.
+

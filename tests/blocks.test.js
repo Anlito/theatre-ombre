@@ -4,9 +4,9 @@ import assert from 'node:assert/strict';
 import * as Blockly from 'blockly';
 import { javascriptGenerator, Order } from 'blockly/javascript';
 import Interpreter from 'js-interpreter';
-import { defineBlocks } from '../site/js/blocks/definitions.js';
-import { defineGenerators, compile } from '../site/js/blocks/generators.js';
-import { Runtime } from '../site/js/runtime.js';
+import { defineBlocks } from '../.cache/labo-theatre/blocks/definitions.js';
+import { defineGenerators, compile } from '../.cache/labo-theatre/blocks/generators.js';
+import { Runtime } from '../.cache/labo-theatre/runtime.js';
 
 const characters = [
   { id: 'loup', name: 'Loup' },

@@ -13,8 +13,6 @@ const MODEL_URL = 'https://tfhub.dev/google/imagenet/mobilenet_v2_050_224/classi
 const copies = [
   ['@tensorflow/tfjs/dist/tf.min.js', 'tf.min.js'],
   ['@tensorflow-models/mobilenet/dist/mobilenet.min.js', 'mobilenet.min.js'],
-  ['js-interpreter/lib/js-interpreter.min.js', 'js-interpreter.min.js'],
-  ['js-interpreter/LICENSE', 'LICENCES/js-interpreter.txt'],
   // three.js : vue 3D des fichiers STL dans l'outil professeur (professeur.html).
   ['three/build/three.module.js', 'three/build/three.module.js'],
   ['three/build/three.core.js', 'three/build/three.core.js'],
@@ -60,3 +58,4 @@ await writeFile(
   'TensorFlow.js (@tensorflow/tfjs) et @tensorflow-models/mobilenet — Google LLC.\n' +
     'Licence Apache 2.0 : https://www.apache.org/licenses/LICENSE-2.0\n',
 );
+
