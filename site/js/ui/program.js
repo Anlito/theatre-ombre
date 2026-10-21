@@ -37,7 +37,7 @@ export function setupProgramScreen({
 
   const workspace = Blockly.inject($('blockly'), {
     toolbox: toolbox(settings.level, settings.ledPins),
-    media: 'vendor/blockly/media/', // embarqué : pas de CDN
+    media: 'https://anlito.github.io/labo-blocs/module/blockly/media/', // source commune Labo Blocs
     renderer: 'zelos',
     theme: makeTheme(Blockly),
     trashcan: true,

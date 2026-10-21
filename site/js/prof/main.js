@@ -483,7 +483,7 @@ function ongletIa(box, eq) {
   }
   const ws = Blockly.inject($('pi-blockly'), {
     readOnly: true,
-    media: 'vendor/blockly/media/',
+    media: 'https://anlito.github.io/labo-blocs/module/blockly/media/',
     renderer: 'zelos',
     theme: (theme ??= makeTheme(Blockly)),
     sounds: false,

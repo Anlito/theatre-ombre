@@ -1,7 +1,7 @@
 // Réglages du collège, communs à tous les outils de la classe (Labo Blocs, distributeur, Concept Store…) :
 // la liste des classes et le chemin des dossiers de classe. Le professeur les modifie dans l'accueil de
 // Labo Blocs (« Réglages du collège »). Le site lit d'abord sa copie de secours (site/college.js), puis la
-// version en ligne si internet répond (simple lecture : rien n'est envoyé). Voir vendor/labo-blocs/college.js.
+// version en ligne si internet répond (simple lecture : rien n'est envoyé). Bibliothèque commune : https://anlito.github.io/labo-blocs/interface/college.js.
 
 // Le théâtre d'ombre est un projet de 4e et de 3e : seules les classes de ces niveaux sont proposées.
 export const NIVEAUX = ['4', '3'];

@@ -1,3 +1,7 @@
+## Dépendances communes en ligne
+
+Blockly et la bibliothèque des réglages du collège viennent directement de Labo Blocs en ligne. Ces fichiers ne sont plus copiés dans le projet. Une connexion Internet est nécessaire pour les écrans de programmation ; les scènes, l’IA, les sons et les sauvegardes du Théâtre conservent leur fonctionnement propre.
+
 # Théâtre d'ombre augmenté
 
 Outil web pour le cycle 4 : les élèves entraînent une IA à reconnaître leurs personnages
@@ -285,5 +289,5 @@ boucle infinie), l'IA hors webcam (KNN, seuil, stabilité) et la sauvegarde / re
 
 ## Licences
 
-Blockly, TensorFlow.js, MobileNet et JS-Interpreter : Apache 2.0 (voir `site/vendor/LICENCES/`).
+TensorFlow.js, MobileNet et JS-Interpreter : Apache 2.0 (voir `site/vendor/LICENCES/`).
 Sons de base : composés pour ce projet. Images de câblage : reprises du tutoriel mBlock de l'enseignant.

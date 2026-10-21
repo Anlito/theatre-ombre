@@ -1,4 +1,4 @@
-// Copie les bibliothèques dans site/vendor/ pour que le site n'utilise AUCUN CDN.
+// Bibliothèques propres au Théâtre ; Blockly est chargé depuis Labo Blocs en ligne.
 // À lancer une seule fois après « npm install » (ou après une mise à jour) : npm run vendor
 // Le dossier site/vendor/ est ensuite publié tel quel avec le site.
 
@@ -11,12 +11,6 @@ const MODEL_DIR = join(OUT, 'mobilenet_v2_050');
 const MODEL_URL = 'https://tfhub.dev/google/imagenet/mobilenet_v2_050_224/classification/2';
 
 const copies = [
-  ['blockly/blockly_compressed.js', 'blockly/blockly_compressed.js'],
-  ['blockly/blocks_compressed.js', 'blockly/blocks_compressed.js'],
-  ['blockly/javascript_compressed.js', 'blockly/javascript_compressed.js'],
-  ['blockly/msg/fr.js', 'blockly/fr.js'],
-  ['blockly/media', 'blockly/media'],
-  ['blockly/LICENSE', 'LICENCES/blockly.txt'],
   ['@tensorflow/tfjs/dist/tf.min.js', 'tf.min.js'],
   ['@tensorflow-models/mobilenet/dist/mobilenet.min.js', 'mobilenet.min.js'],
   ['js-interpreter/lib/js-interpreter.min.js', 'js-interpreter.min.js'],
