@@ -1,5 +1,12 @@
 # Parcours commun Labo Blocs — Théâtre d’ombre
 
+## Liste intégrée et exercices d’entraînement — 21 octobre 2026
+
+- L’onglet **IA et programmation** affiche les six exercices directement dans le site, avec progression, états verrouillés et bouton Continuer. Le détail d’un exercice s’ouvre en pleine page ; **Parcours** ramène à cette liste en conservant le travail.
+- Les deux premiers exercices se modifient et se publient dans Labo Blocs comme entraînements IA sans programmation : aucun bloc artificiel n’est nécessaire. « Rien » est l’étiquette automatique du fond vide ; il ne faut pas la recréer. Le parcours central 1.2.0 reprend la modification de titre publiée dans la version professeur 1.1.0.
+- Le Théâtre continue de charger les exercices et le moteur depuis Labo Blocs en ligne : publier dans l’éditeur central, attendre la fin de publication puis recharger le Théâtre. Aucune copie d’exercice n’est ajoutée dans ce dépôt.
+- Vérifications : 112 tests logiciels réussis (3 essais dépendant d’outils externes ignorés), construction de publication, essais Chrome de la liste sur ordinateur et mobile, ouverture en pleine page, capture de dix photos avec extraction de test, validation et conservation des données. Ces essais ne mesurent pas la précision réelle de l’IA et ne remplacent pas le test Arduino en classe.
+
 <!-- suivi-maintenance:debut -->
 ## État du projet et améliorations documentées — 21 octobre 2026
 

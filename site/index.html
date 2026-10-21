@@ -153,6 +153,8 @@
 
     <!-- ===== 2. Programmer ===== -->
     <section id="screen-programmer" class="screen" data-screen="programmer" hidden>
+      <div id="theatre-exercices" aria-label="Parcours IA et programmation"></div>
+      <div class="programmation-historique" hidden>
       <!-- Niveau 3 (ou webcam réduite) : bande d'état compacte -->
       <div id="cam-strip" class="cam-strip" hidden>
         <video id="strip-video" class="strip-video" autoplay muted playsinline aria-hidden="true"></video>
@@ -223,6 +225,7 @@
             <div id="variables" class="variables" role="tabpanel" hidden></div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
@@ -540,6 +543,17 @@
     body .band2 #level-switch,body .band2 #btn-run,body #guide-btn,body #pill-camera,body #pill-model,body #pill-board,body .status{display:none!important}
     body .step[data-step="entrainer"]{display:none}
     #parcours-labo{box-sizing:border-box;height:100vh;min-height:0}
+    .programmation-historique[hidden]{display:none!important}
+    #theatre-exercices{max-width:1080px;margin:1.25rem auto;padding:0 1rem}
+    #theatre-exercices .ecran-parcours{background:#fff;border:1px solid #d5dbea;border-top:4px solid #2547d0;border-radius:12px;height:auto}
+    #theatre-exercices .parcours-contenu{padding:1.5rem;gap:1rem}
+    #theatre-exercices .parcours-tete h1{font-size:1.5rem}
+    #theatre-exercices .parcours-tete p{font-size:1rem;line-height:1.5}
+    #theatre-exercices .parcours-grille{grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+    #theatre-exercices .carte-exercice{padding:.75rem;align-items:center;border-radius:10px}
+    #theatre-exercices .exercice-texte strong{font-size:1rem}
+    #theatre-exercices .exercice-etat{font-size:.85rem}
+    @media(max-width:680px){#theatre-exercices .parcours-grille{grid-template-columns:1fr}}
   </style>
   <!-- Blockly central et bibliothèques propres au Théâtre -->
   <script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/blockly/blockly_compressed.js"></script>

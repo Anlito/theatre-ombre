@@ -17,10 +17,11 @@ export function setupProgramScreen(o) {
     document.body.classList.toggle('parcours-ouvert',visible);
     for(const el of document.querySelectorAll('body > header, body > nav, body > main, body > footer'))el.inert=visible;
   }
-  const central=A.monterTheatre(hote,{parcours:paquet,media:'https://anlito.github.io/labo-blocs/module/blockly/media/',
+  const central=A.monterTheatre(hote,{parcours:paquet,listeHote:document.getElementById('theatre-exercices'),media:'https://anlito.github.io/labo-blocs/module/blockly/media/',
+    exerciceOuvert:()=>visibilite(true),parcoursAffiche:()=>visibilite(false),
     equipe:o.getTeam,classe:o.getClass,
     retour:()=>{visibilite(false);o.onReturn?.();},enregistrer:()=>o.onSave?.(),nonEnregistre:()=>o.isDirty?.(),
-    message:t=>{const ancien=hote.querySelector('.message-bref');if(ancien)ancien.remove();const p=document.createElement('p');p.className='message-bref';p.setAttribute('role','alert');p.textContent=t;hote.append(p);setTimeout(()=>p.remove(),7000);},
+    message:t=>{if(hote.hidden)return o.showMessage(t,'info');const ancien=hote.querySelector('.message-bref');if(ancien)ancien.remove();const p=document.createElement('p');p.className='message-bref';p.setAttribute('role','alert');p.textContent=t;hote.append(p);setTimeout(()=>p.remove(),7000);},
     modifie(){
       const c=central.session.donnees.programmation.camera;
       if(c){
@@ -44,7 +45,7 @@ export function setupProgramScreen(o) {
         A.noterCamera(central.session.donnees,{modele:'mobilenet_v2_050_224',etiquettes,exemples});
       }
     },
-    resize:()=>{visibilite(true);central.afficher();},openFinal:()=>central.final(),leave:()=>{central.quitter();visibilite(false);},
+    resize:()=>central.afficher(),openFinal:()=>central.final(),leave:()=>{central.quitter();visibilite(false);},
     applySettings(){o.settings.ledPins=broches();},
     openExercise:id=>central.ouvrir(id),
     isReady:()=>Object.values(central.preparer().exercices).some(e=>e.programme),
