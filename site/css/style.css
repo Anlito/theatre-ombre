@@ -445,14 +445,15 @@ body[data-niveau="3"] .code-row { grid-template-columns: minmax(0, 1fr) minmax(0
 }
 body:not([data-niveau="1"]) .blockly-area { height: calc(100vh - 2 * var(--bande) - 48px - 162px); min-height: 380px; }
 body[data-niveau="3"] .blockly-area { height: calc(100vh - 2 * var(--bande) - 48px - 162px - 76px); }
-.blocklyMainBackground { fill: var(--carte) !important; }
-.blocklyToolboxDiv, .blocklyToolbox { background: var(--gris-clair) !important; }
-.blocklyToolboxCategory, .blocklyTreeRow { min-height: 44px !important; display: flex !important; align-items: center; }
-.blocklyToolboxCategoryLabel, .blocklyTreeLabel { font: 1rem var(--police) !important; color: var(--texte) !important; }
-.blocklyToolboxCategoryIcon, .blocklyTreeIcon { display: none !important; }
-.blocklySelected > .blocklyPath { stroke: var(--texte) !important; stroke-width: 3px !important; filter: drop-shadow(0 0 3px var(--or)); }
-.bloc-incomplet > .blocklyPath { stroke: var(--rouge) !important; stroke-width: 4px !important; }
-.blocklyZoom > image, .blocklyTrash { opacity: .85; }
+/* Ancien éditeur de blocs du Théâtre seulement : la palette de Labo Blocs a ses propres styles. */
+.blockly-area .blocklyMainBackground { fill: var(--carte) !important; }
+.blockly-area .blocklyToolboxDiv, .blockly-area .blocklyToolbox { background: var(--gris-clair) !important; }
+.blockly-area .blocklyToolboxCategory, .blockly-area .blocklyTreeRow { min-height: 44px !important; display: flex !important; align-items: center; }
+.blockly-area .blocklyToolboxCategoryLabel, .blockly-area .blocklyTreeLabel { font: 1rem var(--police) !important; color: var(--texte) !important; }
+.blockly-area .blocklyToolboxCategoryIcon, .blockly-area .blocklyTreeIcon { display: none !important; }
+.blockly-area .blocklySelected > .blocklyPath { stroke: var(--texte) !important; stroke-width: 3px !important; filter: drop-shadow(0 0 3px var(--or)); }
+.blockly-area .bloc-incomplet > .blocklyPath { stroke: var(--rouge) !important; stroke-width: 4px !important; }
+.blockly-area .blocklyZoom > image, .blockly-area .blocklyTrash { opacity: .85; }
 
 /* Niveau 3 : code C++ */
 body:not([data-niveau="3"]) .only-level3 { display: none !important; }
