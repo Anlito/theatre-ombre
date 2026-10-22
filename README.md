@@ -1,5 +1,38 @@
 # Parcours commun Labo Blocs — Théâtre d’ombre
 
+## Outil professeur sur le modèle commun — 22 octobre 2026
+
+**Adresse : <https://anlito.github.io/theatre-ombre/prof.html>** (Chrome ou Edge). L’ancienne adresse `professeur.html` y renvoie.
+Même organisation que le distributeur, le labyrinthe et le Simon (brief `BRIEF-NOUVEAU-PROJET.md` d’atelier-cereales) :
+
+- **Accueil** : ouvrir le dossier `… › 3X › COMMUN › TECHNOLOGIE › THEATRE IA` (suivi en direct), reprendre le dernier dossier, importer des .json.
+- **Classe** : chiffres clés, alertes « équipe bloquée » (son, notification), tableau des 6 exercices (✓ ● ○, tentatives, ★), carnet x/N, note, dernière activité.
+- **Équipe** : onglets **Bilan · Programmation · Carnet de projet · Historique · Croquis et dessins**.
+- **Bandeau** : En direct, Barème, Excel, CSV, **Pronote**, Carnet de classe, Imprimer, Autre classe, Exercices.
+
+Ce qui reste propre au Théâtre :
+- **Note** = note évolutive du modèle commun (exercices 3 à 6 notés automatiquement ; les exercices 1 et 2 « entraîner l’IA »
+  ne le sont pas) **+ la grille D1 à D7**, évaluée à la main sur 4 niveaux (Non atteint · Partiellement atteint · Atteint ·
+  Dépassé). Un livrable pas encore évalué reste hors du total. Coefficients dans « Barème » (`site/donnees/notation.js`).
+- **On note là où l’on corrige** : panneau « À noter ici » à la fin de chaque étape du carnet (D1, D2, D3 et D4, D5, D6),
+  dans Programmation (D4, avec les personnages appris par l’IA) et dans Croquis et dessins (D1 · D2 · D3) ; D7 dans le Bilan.
+  Chaque panneau montre les **indices** constatés (dimensions, photos, STL conformes, personnages reconnus, chaînes…).
+- **Validations ◆** : écrites dans `validations.json` du dossier de l’équipe (droit d’écriture demandé au premier clic) ; les élèves les voient dans leur carnet.
+- **Croquis et dessins** : photo prise par le professeur (modèle commun), photos du carnet, **personnages 3D** (STL, contrôle 100 × 100 mm et 2 mm).
+- **Bilan** : bonus / malus par élève avec motif, commentaire d’équipe ; **Pronote** exporte une ligne par élève (D1 à D7 au vocabulaire Pronote, notes, mention).
+- Les évaluations de l’ancien outil professeur (D1 à D7, bonus, commentaires) sont reprises une fois, automatiquement.
+
+Organisation : `site/prof.html` ; fichiers communs repris du labyrinthe (`js/prof.js`, `js/prof-dessins.js`, `js/notes-prof.js`,
+`js/moteur/`, `css/atelier.css`, `css/prof.css`) ; propres au Théâtre : `donnees/` (projet, barème, livrables D1 à D7),
+`js/moteur/carnet.js` et `js/moteur/fichier-theatre.js` (le format des fichiers du Théâtre présenté au moteur commun),
+`js/prof-theatre.js` (carnet, indices, STL, validations), `css/prof-theatre.css` et `css/carnet-prof.css`
+(fabriqué par `npm run carnet-prof`). Correctif propre au Théâtre : l’avancement ne compte que les exercices notés
+(le calcul commun comptait aussi les exercices libres 1 et 2).
+
+Vérifications : 118 tests (dont 11 pour l’outil professeur, avec le vrai moteur Labo Blocs et le parcours en ligne) ;
+parcours complet dans Chrome avec une classe d’exemple (suivi, alerte, notes, validation écrite, bonus, exports Pronote et CSV),
+sans erreur. À vérifier en classe : le dossier réseau du collège (lecture en direct et écriture de validations.json).
+
 ## Liste intégrée et exercices d’entraînement — 21 octobre 2026
 
 - L’onglet **IA et programmation** affiche les six exercices directement dans le site, avec progression, états verrouillés et bouton Continuer. Le détail d’un exercice s’ouvre en pleine page ; **Parcours** ramène à cette liste en conservant le travail.

@@ -11,7 +11,8 @@
     "start": "node tools/serve.mjs",
     "sons": "node tools/make-sounds.mjs",
     "captures": "node tools/captures.mjs",
-    "firmware": "node tools/firmware.mjs"
+    "firmware": "node tools/firmware.mjs",
+    "carnet-prof": "node tools/carnet-prof-css.mjs"
   },
   "devDependencies": {
     "@breezystack/lamejs": "^1.2.7",

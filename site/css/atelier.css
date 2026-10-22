@@ -1,0 +1,176 @@
+/* Atelier du distributeur de céréales — d'après les maquettes Claude Design (écran 1366×768).
+   L'écran d'exercice est celui de Labo Blocs (vendor/labo-blocs/labo-blocs.css) : ici, l'accueil, le carnet et les pages
+   du professeur.
+   Toutes les tailles sont en rem : 1rem = 16 px à 1366×768 et jusqu'à 20 px en 1920×1080
+   (la taille racine est réglée par js/exercices.js). */
+
+:root {
+  --orange: #FAB22B;
+  --orange-survol: #F5A50F;
+  --bleu: #1A6E8E;
+  --bleu-fonce: #12506A;
+  --bleu-pale: #E6F1F5;
+  --consigne-fond: #FFF4DD;
+  --consigne-texte: #8A5300;
+  --consigne-bord: #F0D9A8;
+  --encre: #1F2A30;
+  --texte-2: #4F5D66;
+  --bord: #D5DEE3;
+  --fond: #F4F7F9;
+  --gris: #7C8B94;
+  --gris-bord: #B8C4CA;
+  --gris-fond: #EEF2F4;
+  --signal: #FFC400;
+  --police: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--fond);
+  color: var(--encre);
+  font: 400 0.9375rem/1.4 var(--police);
+  overflow: hidden;
+}
+button { font-family: var(--police); color: inherit; }
+button:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.icone { width: 1.375rem; height: 1.375rem; flex: none; display: block; }
+
+/* ---------- Dessins repris par le tutoriel de câblage (carte, distributeur, composants) ---------- */
+
+.carte-arduino { width: 100%; height: 100%; display: block; }
+
+.distributeur { width: 100%; height: auto; display: block; }
+
+.trappe { transition: transform 0.25s linear; }
+
+.composant {
+  display: flex; align-items: center; gap: 0.75rem; min-height: 3.75rem; padding: 0.375rem 0.625rem;
+  background: #FFFFFF; border: 2px solid var(--bord); border-left: 6px solid var(--famille); border-radius: 0.75rem;
+}
+
+.composant.survol { border-color: var(--bleu); border-left-color: var(--famille); box-shadow: 0 0 0 3px var(--signal); }
+
+.btn-aide {
+  display: flex; align-items: center; gap: 0.5rem; height: 3rem; padding: 0 1rem;
+  border: 2px solid var(--bord); border-radius: 0.625rem; background: #FFFFFF;
+  font-weight: 600; font-size: 1rem; cursor: pointer;
+}
+.btn-aide:hover { background: #EDF2F5; }
+.btn-aide .icone { stroke: var(--bleu) !important; }
+
+.btn-enregistrer { margin-left: auto; }
+
+/* ---------- Boutons et messages ---------- */
+
+.btn-principal, .btn-secondaire {
+  display: flex; align-items: center; gap: 0.5rem; height: 3rem; padding: 0 1rem;
+  border-radius: 0.625rem; font-weight: 700; font-size: 1rem; cursor: pointer;
+}
+.btn-principal { border: none; background: var(--bleu); color: #FFFFFF; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.22); }
+.btn-principal:hover { background: #17627F; }
+.btn-secondaire { border: 2px solid var(--bord); background: #FFFFFF; }
+.btn-secondaire:hover { background: #EDF2F5; }
+
+.message-bref {
+  position: absolute; left: 50%; bottom: 5rem; transform: translateX(-50%); z-index: 60;
+  background: var(--encre); color: #FFFFFF; padding: 0.625rem 1rem; border-radius: 0.625rem;
+  font-weight: 600; box-shadow: 0 10px 28px rgba(31, 42, 48, 0.25); max-width: 40rem;
+}
+.message-bref[hidden] { display: none; }
+
+/* ---------- Dialogues et listes d'exercices (carnet) ---------- */
+
+.dialogue-entete { display: flex; align-items: center; font-size: 1.125rem; }
+.dialogue-entete button { margin-left: auto; width: 2.75rem; height: 2.75rem; border: none; background: transparent; font-size: 1.5rem; cursor: pointer; border-radius: 0.5rem; }
+
+.liste-numero {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 2.25rem; height: 1.75rem;
+  border-radius: 999px; background: var(--bleu); color: #FFFFFF; font-size: 0.875rem; font-weight: 700;
+}
+
+/* Statut de chaque exercice (symbole + mot, jamais la couleur seule) */
+.liste-titre { flex: 1; min-width: 0; }
+.liste-statut { font-size: 0.8125rem; font-weight: 700; white-space: nowrap; color: var(--texte-2); }
+
+/* État de l'enregistrement, à côté du bouton */
+.etat-enregistrement { margin-left: auto; font-size: 0.875rem; color: var(--texte-2); white-space: nowrap; }
+.etat-enregistrement.a-faire { color: #8A5300; font-weight: 700; }
+.etat-enregistrement + .btn-enregistrer { margin-left: 0; }
+
+/* ---------- Accueil ---------- */
+
+.ecran-accueil[hidden], .ecran-exercice[hidden] { display: none; }
+.ecran-accueil {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+  background: linear-gradient(180deg, #FFF4DD 0, var(--fond) 40%);
+  overflow: auto; height: 100vh;
+}
+.accueil-carte {
+  width: min(46rem, 100%); background: #FFFFFF; border: 1px solid var(--bord); border-left: 8px solid var(--orange);
+  border-radius: 1rem; box-shadow: 0 12px 40px rgba(31, 42, 48, 0.12); padding: 1.5rem 1.75rem 1.75rem;
+}
+.accueil-titre { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.accueil-titre h1 { margin: 0; font-size: 1.375rem; }
+.accueil-titre p { margin: 0.125rem 0 0; color: var(--texte-2); }
+.accueil-panneau h2 { margin: 0 0 0.875rem; font-size: 1.1875rem; }
+.accueil-panneau[hidden] { display: none; }
+.accueil-choix { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+.grand-choix {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.375rem; padding: 1.125rem 1.25rem;
+  border: 2px solid var(--bord); border-radius: 0.875rem; background: #FFFFFF; cursor: pointer; text-align: left; min-height: 8rem;
+}
+.grand-choix:hover { border-color: var(--bleu); background: var(--bleu-pale); }
+.grand-choix .icone { width: 2.25rem; height: 2.25rem; stroke: var(--bleu) !important; }
+.grand-choix strong { font-size: 1.1875rem; }
+.grand-choix span { color: var(--texte-2); }
+.accueil-reprendre {
+  display: flex; align-items: center; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 0.875rem; padding: 0.875rem 1rem;
+  background: var(--bleu-pale); border-left: 6px solid var(--bleu); border-radius: 0.75rem;
+}
+.accueil-reprendre[hidden] { display: none; }
+.accueil-reprendre > div { display: flex; flex-direction: column; flex: 1; min-width: 14rem; }
+.reprendre-date { color: var(--texte-2); font-size: 0.875rem; }
+.btn-lien { border: none; background: none; color: var(--bleu-fonce); text-decoration: underline; cursor: pointer; font-size: 0.875rem; min-height: 2.75rem; }
+.champs-prenoms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.formulaire-equipe label { display: flex; flex-direction: column; gap: 0.25rem; font-weight: 600; }
+.formulaire-equipe input, .formulaire-equipe select {
+  height: 2.75rem; padding: 0 0.75rem; border: 2px solid var(--bord); border-radius: 0.625rem;
+  font: 400 1.0625rem var(--police); color: var(--encre); background: #FFFFFF;
+}
+.formulaire-equipe input:focus, .formulaire-equipe select:focus { outline: 3px solid var(--signal); outline-offset: 1px; border-color: var(--bleu); }
+.label-classe { margin-top: 0.875rem; width: 12rem; }
+.accueil-actions { display: flex; gap: 0.625rem; margin-top: 1.125rem; flex-wrap: wrap; }
+.accueil-actions .btn-principal .icone, .accueil-actions .btn-secondaire .icone { width: 1.25rem; height: 1.25rem; }
+.accueil-erreur {
+  margin: 0.875rem 0 0; padding: 0.625rem 0.875rem; border-radius: 0.625rem;
+  background: #FFF4DD; border-left: 6px solid var(--orange); color: #5B3A00; font-weight: 600;
+}
+.accueil-erreur[hidden] { display: none; }
+.chemin { display: flex; flex-wrap: wrap; align-items: center; gap: 0.375rem; margin: 0.5rem 0 0.875rem; }
+.chemin-dossier {
+  display: inline-flex; align-items: center; height: 2rem; padding: 0 0.625rem; border-radius: 0.5rem;
+  background: var(--fond); border: 1px solid var(--bord); font-weight: 600; font-size: 0.9375rem;
+}
+.chemin-dossier.cible { background: var(--consigne-fond); border: 2px solid var(--orange); box-shadow: 0 0 0 3px rgba(250, 178, 43, 0.25); }
+.chemin-dossier.equipe { gap: 0.375rem; background: #FFFFFF; border: 2px dashed var(--gris-bord); }
+.chemin-dossier .icone { width: 1.125rem; height: 1.125rem; }
+.dossier-etapes { margin: 0 0 0.75rem; padding-left: 1.375rem; line-height: 1.55; }
+.dossier-equipe-auto { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0 0 0.5rem; color: var(--texte-2); }
+.sans-acces-inline { display: none; }
+.sans-acces .sans-acces-inline { display: inline; }
+.sans-acces .avec-acces-inline { display: none; }
+.chemin-fleche { color: var(--texte-2); font-weight: 700; }
+.dossier-aide { color: var(--texte-2); }
+.sans-acces-texte { display: none; }
+.sans-acces .sans-acces-texte { display: block; }
+.sans-acces .avec-acces { display: none; }
+.avertissement { margin-top: 0.875rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: #FFF4DD; border-left: 6px solid var(--orange); }
+.avertissement p { margin: 0; }
+.avertissement .accueil-actions { margin-top: 0.75rem; }
+.confirmation { display: flex; gap: 0.75rem; align-items: flex-start; margin-top: 0.875rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: #E8F5E9; border-left: 6px solid #2E7D32; }
+.confirmation p { margin: 0; }
+.confirmation .icone { width: 1.75rem; height: 1.75rem; }
+

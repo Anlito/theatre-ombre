@@ -31,8 +31,11 @@ export function indices(equipe, validations = {}) {
       const ok = n(h) > 0 && n(l) > 0 && n(h) <= max && n(l) <= max;
       return { t: `${nom} : ${h ?? '?'} × ${l ?? '?'} ${unite} (${max} × ${max} ${unite} maximum)`, ok };
     });
-  const persos = (p?.categories ?? []).filter((x) => !x.background);
-  const fond = (p?.categories ?? []).find((x) => x.background);
+  // Personnages de l'IA : étiquettes de la caméra de Labo Blocs (« Rien » = fond vide), sinon l'ancien écran Entraîner.
+  const camera = p?.programmation?.camera;
+  const exemples = (nom) => ({ name: nom, examples: camera?.exemples?.[nom] ?? [] });
+  const persos = camera?.etiquettes ? camera.etiquettes.map(exemples) : (p?.categories ?? []).filter((x) => !x.background);
+  const fond = camera ? exemples('Rien') : (p?.categories ?? []).find((x) => x.background);
   const stlOk = equipe.stls.filter((f) => f.analyse && (({ tailleOk, epaisseurOk }) => tailleOk && epaisseurOk)(controlerStl(f.analyse.dims)));
   const minimumPhotos=p?.programmation?10:15;
   const programmes = (p?.programmation ? Object.values(p.programmation.exercices||{}).map(e=>e.programme) : Object.values(p?.blocks?.parNiveau ?? {})).filter((x) => (x?.blocks?.blocks?.length ?? 0) > 0);

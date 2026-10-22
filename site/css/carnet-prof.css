@@ -1,0 +1,253 @@
+/* Fichier fabriqué par tools/carnet-prof-css.mjs à partir de site/css/style.css : ne pas le modifier à la main. */
+/* Carnet des élèves affiché dans l’outil professeur, avec les couleurs du Théâtre limitées à sa zone. */
+.pe-carnet-theatre {
+  --fond: #F7F1E5;          
+  --carte: #FFFDF8;         
+  --texte: #1E1A16;
+  --texte-doux: #5C5247;    
+  --bord: #D9CCB6;
+  --gris-clair: #EFE7D8;
+  --nuit: #241E1A;          
+  --bleu: #1F4E99;          
+  --bleu-fonce: #163A73;
+  --bleu-pale: #EAF0FA;
+  --rouge: #B3261E;         
+  --rouge-fonce: #8C1D17;
+  --rouge-clair: #FBE4E1;
+  --vert: #2E6B30;          
+  --vert-clair: #E3F0DF;
+  --orange: #8A4F00;        
+  --orange-clair: #FBEBCB;
+  --velours: #8E1B24;
+  --velours-clair: #B42A35;
+  --velours-ombre: #4A0D13;
+  --or: #E9C46A;
+  --rayon: 10px;
+  --rayon-petit: 6px;
+  --ombre: 0 1px 0 var(--bord), 0 3px 8px rgba(60, 40, 20, .10);
+  --ombre-menu: 0 1px 0 var(--bord), 0 6px 16px rgba(60, 40, 20, .14);
+  --ombre-fenetre: 0 12px 40px rgba(0, 0, 0, .35);
+  --focus: 0 0 0 2px var(--fond), 0 0 0 5px var(--orange);
+  --police: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --police-titre: Georgia, "Times New Roman", serif;
+  --police-code: Consolas, "Courier New", monospace;
+  --hauteur-cible: 44px;
+  --bande: 60px;
+  font-size: 16px;
+  --bande: 0px;
+  color: var(--texte);
+  font-family: var(--police);
+}
+.cn-layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 20px; max-width: 1180px; margin: 0 auto; }
+.cn-nav { position: sticky; top: calc(var(--bande) * 2 + 16px); align-self: start; display: grid; gap: 4px; }
+.cn-nav-item {
+  display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 8px;
+  min-height: 44px; padding: 4px 10px; border-radius: var(--rayon-petit);
+  color: var(--texte); text-decoration: none; font-weight: 600;
+}
+.cn-nav-item:hover { background: var(--gris-clair); }
+.cn-nav-n {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid var(--texte-doux); font-weight: 700;
+}
+.cn-nav-prog, .cn-prog { font-size: .875rem; color: var(--texte-doux); font-variant-numeric: tabular-nums; }
+.cn-nav-prog[data-done="true"], .cn-prog[data-done="true"] { color: var(--vert); font-weight: 700; }
+.cn-doc { display: grid; gap: 20px; min-width: 0; }
+.cn-etape {
+  background: var(--carte); border: 1px solid var(--bord); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 20px 24px; display: grid; gap: 14px; scroll-margin-top: calc(var(--bande) * 2 + 16px);
+}
+.cn-etape h4 { margin: 6px 0 0; font: 700 1.0625rem var(--police); }
+.cn-kicker { margin: 0; color: var(--texte-doux); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; font-size: .8125rem; }
+.cn-entete h2 { margin: 0; font-size: 1.75rem; }
+.cn-ident { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: end; }
+.cn-ident > * { display: grid; gap: 4px; }
+.cn-ident span { color: var(--texte-doux); font-size: .875rem; font-weight: 600; }
+.cn-ident input { width: 140px; }
+.cn-client { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+.cn-client > div { display: grid; gap: 6px; align-content: start; }
+.cn-etape-head {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+  margin: -20px -24px 0; padding: 12px 24px; border-radius: var(--rayon) var(--rayon) 0 0;
+  background: var(--nuit); color: #fff;
+}
+.cn-etape-head h3 { margin: 0; font-size: 1.25rem; color: #fff; flex: 1; }
+.cn-verbe { color: var(--or); text-transform: uppercase; letter-spacing: .03em; }
+.cn-etape-n { font-weight: 700; color: var(--or); }
+.cn-etape-head .cn-outil { background: rgba(255, 255, 255, .12); color: #fff; border-color: transparent; }
+.cn-etape-head .cn-prog { color: #E8DCC6; }
+.cn-etape-head .cn-prog[data-done="true"] { color: #A6D49F; }
+.cn-etape h4.cn-etape-titre { font: 700 1.25rem var(--police-titre); }
+.cn-outil {
+  display: inline-block; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--bord);
+  font-size: .8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--texte-doux);
+}
+.cn-sous {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 12px;
+  margin-top: 10px; padding-top: 14px; border-top: 2px solid var(--gris-clair);
+}
+.cn-etape .cn-sous h4 { margin: 0; font-size: 1.125rem; }
+.cn-sous-n {
+  display: inline-grid; place-items: center; min-width: 40px; height: 32px; padding: 0 8px;
+  border-radius: var(--rayon-petit); background: var(--bleu); color: #fff; font-weight: 700;
+}
+.cn-sous.is-facultatif .cn-sous-n { background: var(--texte-doux); }
+.cn-aide { grid-column: 1 / -1; margin: 0; color: var(--texte-doux); font-size: .9375rem; }
+.cn-cadre { padding: 10px 14px; border-radius: var(--rayon-petit); background: var(--bleu-pale); border-left: 4px solid var(--bleu); }
+.cn-cadre[data-ton="attention"] { background: var(--orange-clair); border-left-color: var(--orange); }
+.cn-cadre[data-ton="cours"] { background: var(--vert-clair); border-left-color: var(--vert); }
+.cn-commande { font-size: 1.0625rem; }
+.cn-consignes { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; }
+.cn-table-wrap { overflow-x: auto; }
+.cn-table { width: 100%; border-collapse: collapse; }
+.cn-table th, .cn-table td { border: 1px solid var(--bord); padding: 6px 8px; text-align: left; vertical-align: middle; }
+.cn-table th { background: var(--gris-clair); font-weight: 700; font-size: .9375rem; }
+.cn-table th small { font-weight: 400; color: var(--texte-doux); }
+.cn-table td.cn-fixe small { display: block; color: var(--texte-doux); }
+.cn-table .cn-centre { text-align: center; }
+.cn-table input[type="checkbox"] { width: 24px; height: 24px; }
+.cn-field {
+  width: 100%; min-height: 40px; padding: 6px 10px; font: 1rem var(--police);
+  border: 1px solid var(--bord); border-radius: var(--rayon-petit); background: #fff; color: var(--texte);
+}
+textarea.cn-field { resize: vertical; line-height: 1.4; }
+.cn-field:disabled { background: var(--carte); color: var(--texte); opacity: 1; }
+.cn-route td a { color: var(--bleu); text-decoration: none; }
+.cn-route td a:hover { text-decoration: underline; }
+.cn-route-valide { font-size: 1.25rem; color: var(--texte-doux); }
+.cn-route-valide[data-ok="true"] { color: var(--vert); }
+.cn-table .cn-num { text-align: center; font-weight: 700; color: var(--orange); }
+.cn-num[data-assez="true"] { color: var(--vert); }
+.cn-reconnu { color: var(--texte-doux); white-space: nowrap; }
+.cn-reconnu[data-ok="true"] { color: var(--vert); font-weight: 700; }
+.cn-reconnu svg { vertical-align: -3px; margin-right: 4px; }
+.cn-led { display: inline-block; width: 16px; height: 16px; margin-right: 8px; border-radius: 50%; background: var(--led); vertical-align: -2px; box-shadow: 0 0 6px var(--led); }
+.cn-vide { margin: 0; color: var(--texte-doux); font-style: italic; }
+.cn-check { display: flex; align-items: flex-start; gap: 10px; min-height: 40px; padding: 8px 10px; border-radius: var(--rayon-petit); background: var(--fond); cursor: pointer; }
+.cn-check input { width: 24px; height: 24px; margin: 0; flex: none; }
+.cn-check:has(input:checked) { background: var(--vert-clair); }
+.cn-valide { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border: 2px dashed var(--bord); border-radius: var(--rayon-petit); }
+.cn-valide small { display: block; color: var(--texte-doux); }
+.cn-valide[data-valide="oui"] { border-style: solid; border-color: var(--vert); background: var(--vert-clair); color: var(--vert); }
+.cn-losange { font-size: 1.25rem; color: var(--orange); }
+.cn-valide[data-valide="oui"] .cn-losange { color: var(--vert); }
+.cn-texte { display: grid; gap: 4px; font-weight: 600; }
+.cn-code { margin: 0; padding: 14px 16px; border-radius: var(--rayon-petit); background: var(--nuit); color: #F3E9D7; font: 1rem/2 var(--police-code); overflow-x: auto; }
+.cn-code .cn-trou { display: inline-block; width: 9ch; min-height: 32px; padding: 2px 6px; font: inherit; }
+.cn-chaine { display: grid; gap: 8px; }
+.cn-chaine h4 { display: flex; align-items: center; gap: 10px; }
+.cn-lettre { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--nuit); color: var(--or); }
+.cn-chaine-row { display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr; align-items: stretch; gap: 8px; }
+.cn-chaine-nom {
+  writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; padding: 8px 4px;
+  border-radius: var(--rayon-petit); font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  background: var(--bleu); color: #fff;
+}
+.cn-chaine[data-lettre="B"] .cn-chaine-nom { background: var(--orange); }
+.cn-fleche { align-self: center; font-size: 1.5rem; color: var(--texte-doux); }
+.cn-maillon { display: grid; align-content: start; gap: 4px; padding: 10px 12px; border: 1px solid var(--bord); border-radius: var(--rayon-petit); background: var(--fond); }
+.cn-maillon > b { text-transform: uppercase; letter-spacing: .03em; }
+.cn-maillon p { margin: 0; font-size: .9375rem; }
+.cn-maillon .cn-ex { color: var(--texte-doux); }
+.cn-maillon label { display: grid; gap: 4px; margin-top: 4px; font-weight: 600; font-size: .9375rem; }
+.cn-choix-titre { margin: 6px 0 0; }
+.cn-radios { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.cn-radios label { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; cursor: pointer; }
+.cn-radios input { width: 20px; height: 20px; margin: 0; }
+.cn-choix .cn-field { margin-top: 4px; }
+.cn-photos { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--bord); border-radius: var(--rayon-petit); background: var(--fond); }
+.cn-photos-head small { display: block; color: var(--texte-doux); }
+.cn-photos-list { display: flex; flex-wrap: wrap; gap: 12px; }
+.cn-photo { position: relative; margin: 0; width: 220px; }
+.cn-photo img { display: block; width: 100%; height: 160px; object-fit: contain; background: #fff; border: 1px solid var(--bord); border-radius: var(--rayon-petit); }
+.cn-photo-del { position: absolute; top: 6px; right: 6px; background: var(--carte); }
+.cn-photo-add {
+  display: grid; place-items: center; align-content: center; gap: 6px; width: 220px; height: 160px;
+  border: 2px dashed var(--bleu); border-radius: var(--rayon-petit); background: var(--carte);
+  color: var(--bleu); font: 600 1rem var(--police); cursor: pointer;
+}
+.cn-photo-add:hover { background: var(--bleu-pale); }
+.cn-photo-dialog { width: min(760px, 95vw); }
+.cn-cam { position: relative; display: grid; place-items: center; aspect-ratio: 4 / 3; max-height: 60vh; background: var(--nuit); border-radius: var(--rayon-petit); overflow: hidden; }
+.cn-cam video, .cn-cam img { width: 100%; height: 100%; object-fit: contain; }
+.cn-cam-off { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 12px; color: #fff; }
+@media (max-width: 900px) {
+  .cn-layout { grid-template-columns: 1fr; }
+  .cn-nav { position: static; grid-auto-flow: column; overflow-x: auto; }
+  .cn-chaine-row { grid-template-columns: 1fr; }
+  .cn-chaine-nom { writing-mode: initial; transform: none; }
+  .cn-fleche { transform: rotate(90deg); justify-self: center; }
+  .cn-client { grid-template-columns: 1fr; }
+}
+.cn-go {
+  display: inline-flex; align-items: center; gap: 4px; cursor: pointer; font-family: var(--police);
+  background: var(--bleu-pale); color: var(--bleu); border-color: var(--bleu);
+}
+.cn-go:hover, .cn-go:focus-visible { background: var(--bleu); color: #fff; }
+.cn-go svg { transform: rotate(-90deg); }
+.cn-lien { justify-self: start; }
+.cn-field[data-trop="true"] { border-color: var(--orange); background: var(--orange-clair); }
+.cn-leds td { min-width: 140px; }
+.cn-led-choix { display: flex; align-items: center; gap: 8px; }
+.cn-led-choix .cn-led { flex: none; margin: 0; }
+@keyframes cn-clignote {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 0 4px var(--or); }
+}
+
+/* Outil professeur · ce qui est propre au Théâtre (charte commune : variables de css/atelier.css).
+   Recopié à la fin de css/carnet-prof.css par tools/carnet-prof-css.mjs. */
+
+/* Carnet de l'équipe dans l'onglet « Carnet de projet » */
+.pe-carnet-theatre { margin-top: 12px; }
+.pe-carnet-theatre .cn-nav { top: 76px; }
+.pe-carnet-theatre .cn-lien { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+
+/* Panneau « À noter ici » (fin d'une étape du carnet, onglets Programmation et Croquis) */
+.pt-panneau {
+  display: grid; gap: 10px; margin-top: 10px; padding: 14px 16px;
+  border: 2px solid var(--consigne-bord, #F0D9A8); border-radius: 10px; background: var(--consigne-fond, #FFF4DD);
+  color: var(--encre, #1F2A30); font-family: var(--police, 'Segoe UI', system-ui, sans-serif);
+}
+.pt-panneau h4 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 1.05rem; }
+.pt-valide { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: #fff; }
+.pt-valide[data-ok="true"] { background: #E3F0DF; }
+.pt-losange { color: var(--consigne-texte, #8A5300); font-size: 1.2rem; }
+.pt-valide[data-ok="true"] .pt-losange { color: #2E6B30; }
+.pt-valide-texte small { display: block; color: var(--texte-2, #4F5D66); }
+.pt-livrable { display: grid; gap: 6px; padding: 10px; border-radius: 8px; background: #fff; }
+.pt-livrable-titre small { display: block; color: var(--texte-2, #4F5D66); }
+.pt-livrable .note-maitrise { font-weight: 600; }
+.pt-indices { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: .95rem; color: var(--texte-2, #4F5D66); }
+.pt-indices li[data-ok="true"] { color: #2E6B30; }
+.pt-indices li[data-ok="false"] { color: #8A5300; } /* écart en ambre, jamais en rouge (règle commune) */
+
+/* Programmation : personnages appris par l'IA */
+.pt-perso { padding: 6px 0; }
+.pt-perso small { color: var(--texte-2, #4F5D66); }
+.pt-vignettes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pt-vignettes img { width: 72px; height: 54px; object-fit: cover; border-radius: 4px; border: 1px solid var(--bord, #D5DEE3); }
+.pt-blocs-ligne td { background: var(--gris-fond, #EEF2F4); }
+
+/* Croquis et dessins : photos du carnet, personnages 3D */
+.pt-photos { display: flex; flex-wrap: wrap; gap: 12px; }
+.pt-photos img { width: 240px; height: 170px; object-fit: contain; background: #fff; border: 1px solid var(--bord, #D5DEE3); border-radius: 6px; }
+.pt-stls { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.pt-stl h4 { margin: 0 0 6px; word-break: break-all; }
+.pt-stl-vue { height: 260px; border: 1px solid var(--bord, #D5DEE3); border-radius: 6px; overflow: hidden; background: #F7F1E5; }
+.pt-stl-vue canvas { display: block; cursor: grab; }
+
+/* Bilan : élèves (bonus / malus), commentaire */
+.pt-bonus { display: flex; align-items: center; gap: 4px; }
+.pt-bonus input { width: 64px; text-align: center; }
+.pt-eleves input[data-motif] { width: 100%; min-width: 220px; }
+.pt-commentaire { display: grid; gap: 4px; margin-top: 10px; font-weight: 600; }
+.pt-commentaire textarea { font: inherit; font-weight: 400; padding: 8px; border: 1px solid var(--gris-bord, #B8C4CA); border-radius: 6px; }
+
+@media print {
+  .pt-stl-vue, .pt-photos-prof { display: none; }
+}
+
+/* Bilan : le tableau des élèves prend toute la largeur */
+.pe-bilan > .pt-large { grid-column: 1 / -1; }
+.pt-commentaire textarea { width: 100%; box-sizing: border-box; }

@@ -25,4 +25,14 @@ if (process.env.LABO_THEATRE_SOURCE) {
   }
 }
 JSON.parse(await readFile(path.join(cible,'package.json'),'utf8'));
+// Moteur commun de l'outil professeur : moteur Labo Blocs et parcours du Théâtre (voir tools/dependances-tests.js).
+const commun = path.join(racine, '.cache/labo-blocs');
+await mkdir(commun, { recursive: true });
+// Scripts classiques (module.exports) : le dépôt est en modules ES, ce dossier non.
+await writeFile(path.join(commun, 'package.json'), '{ "type": "commonjs" }\n');
+for (const [url, fichier] of [['module/labo-blocs-noyau.js', 'labo-blocs-noyau.js'], ['parcours/theatre-ombre/parcours.js', 'theatre-ombre.js']]) {
+  const r = await fetch('https://anlito.github.io/labo-blocs/' + url, { cache: 'no-store', signal: AbortSignal.timeout(20000) });
+  if (!r.ok) throw new Error('Dépendance Labo Blocs indisponible : ' + url);
+  await writeFile(path.join(commun, fichier), await r.text());
+}
 console.log('Tests reliés à la programmation de Labo Blocs.');

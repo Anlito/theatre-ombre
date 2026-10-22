@@ -1,0 +1,56 @@
+/* Outil professeur · ce qui est propre au Théâtre (charte commune : variables de css/atelier.css).
+   Recopié à la fin de css/carnet-prof.css par tools/carnet-prof-css.mjs. */
+
+/* Carnet de l'équipe dans l'onglet « Carnet de projet » */
+.pe-carnet-theatre { margin-top: 12px; }
+.pe-carnet-theatre .cn-nav { top: 76px; }
+.pe-carnet-theatre .cn-lien { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+
+/* Panneau « À noter ici » (fin d'une étape du carnet, onglets Programmation et Croquis) */
+.pt-panneau {
+  display: grid; gap: 10px; margin-top: 10px; padding: 14px 16px;
+  border: 2px solid var(--consigne-bord, #F0D9A8); border-radius: 10px; background: var(--consigne-fond, #FFF4DD);
+  color: var(--encre, #1F2A30); font-family: var(--police, 'Segoe UI', system-ui, sans-serif);
+}
+.pt-panneau h4 { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 1.05rem; }
+.pt-valide { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: #fff; }
+.pt-valide[data-ok="true"] { background: #E3F0DF; }
+.pt-losange { color: var(--consigne-texte, #8A5300); font-size: 1.2rem; }
+.pt-valide[data-ok="true"] .pt-losange { color: #2E6B30; }
+.pt-valide-texte small { display: block; color: var(--texte-2, #4F5D66); }
+.pt-livrable { display: grid; gap: 6px; padding: 10px; border-radius: 8px; background: #fff; }
+.pt-livrable-titre small { display: block; color: var(--texte-2, #4F5D66); }
+.pt-livrable .note-maitrise { font-weight: 600; }
+.pt-indices { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-size: .95rem; color: var(--texte-2, #4F5D66); }
+.pt-indices li[data-ok="true"] { color: #2E6B30; }
+.pt-indices li[data-ok="false"] { color: #8A5300; } /* écart en ambre, jamais en rouge (règle commune) */
+
+/* Programmation : personnages appris par l'IA */
+.pt-perso { padding: 6px 0; }
+.pt-perso small { color: var(--texte-2, #4F5D66); }
+.pt-vignettes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pt-vignettes img { width: 72px; height: 54px; object-fit: cover; border-radius: 4px; border: 1px solid var(--bord, #D5DEE3); }
+.pt-blocs-ligne td { background: var(--gris-fond, #EEF2F4); }
+
+/* Croquis et dessins : photos du carnet, personnages 3D */
+.pt-photos { display: flex; flex-wrap: wrap; gap: 12px; }
+.pt-photos img { width: 240px; height: 170px; object-fit: contain; background: #fff; border: 1px solid var(--bord, #D5DEE3); border-radius: 6px; }
+.pt-stls { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.pt-stl h4 { margin: 0 0 6px; word-break: break-all; }
+.pt-stl-vue { height: 260px; border: 1px solid var(--bord, #D5DEE3); border-radius: 6px; overflow: hidden; background: #F7F1E5; }
+.pt-stl-vue canvas { display: block; cursor: grab; }
+
+/* Bilan : élèves (bonus / malus), commentaire */
+.pt-bonus { display: flex; align-items: center; gap: 4px; }
+.pt-bonus input { width: 64px; text-align: center; }
+.pt-eleves input[data-motif] { width: 100%; min-width: 220px; }
+.pt-commentaire { display: grid; gap: 4px; margin-top: 10px; font-weight: 600; }
+.pt-commentaire textarea { font: inherit; font-weight: 400; padding: 8px; border: 1px solid var(--gris-bord, #B8C4CA); border-radius: 6px; }
+
+@media print {
+  .pt-stl-vue, .pt-photos-prof { display: none; }
+}
+
+/* Bilan : le tableau des élèves prend toute la largeur */
+.pe-bilan > .pt-large { grid-column: 1 / -1; }
+.pt-commentaire textarea { width: 100%; box-sizing: border-box; }

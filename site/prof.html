@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Espace professeur — Théâtre d’ombre augmenté</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/atelier.css">
+<link rel="stylesheet" href="css/prof.css">
+<link rel="stylesheet" href="https://anlito.github.io/labo-blocs/module/labo-blocs.css">
+<link rel="stylesheet" href="css/carnet-prof.css">
+<!-- Vue 3D des fichiers STL (three.js, embarqué dans le site) -->
+<script type="importmap">{ "imports": { "three": "./vendor/three/build/three.module.js" } }</script>
+</head>
+<body class="page-prof">
+
+<!-- Bandeau : titre, classe suivie, actions -->
+<header class="pb-bande">
+  <img src="img/logo.svg" alt="" width="36" height="36">
+  <h1 class="pb-titre">Théâtre d’ombre <span>· Professeur</span></h1>
+  <span class="pb-classe" hidden></span>
+  <span class="pb-direct" hidden></span>
+  <span class="pb-espace"></span>
+  <div class="pb-actions" hidden>
+    <button type="button" class="pb-btn btn-actualiser" hidden data-ic="recommencer">Actualiser</button>
+    <button type="button" class="pb-btn btn-reglages" data-ic="reglages">Barème</button>
+    <button type="button" class="pb-btn btn-xlsx" data-ic="telecharger" title="Feuilles « Classe » et « Détail par exercice »">Excel</button>
+    <button type="button" class="pb-btn btn-csv" data-ic="telecharger">CSV</button>
+    <button type="button" class="pb-btn btn-pronote" data-ic="telecharger" title="Une ligne par élève : niveaux D1 à D7 (vocabulaire Pronote), note de l’équipe, bonus / malus, note de l’élève">Pronote</button>
+    <button type="button" class="pb-btn btn-carnet" data-ic="telecharger" title="Niveaux par compétence (Labo Blocs) à importer dans le Carnet de classe : projet › Notes › « Importer des résultats Labo Blocs »">Carnet de classe</button>
+    <button type="button" class="pb-btn btn-imprimer" data-ic="imprimer">Imprimer</button>
+    <button type="button" class="pb-btn btn-autre-classe" data-ic="dossier">Autre classe</button>
+  </div>
+  <button type="button" class="pb-btn pb-exercices" data-ic="livre" title="Version des exercices, mise à jour depuis Labo Blocs">Exercices</button>
+  <a class="pb-btn pb-atelier" href="index.html" target="_blank" rel="noopener" data-ic="oeil" title="Le site des élèves, dans un nouvel onglet">Site des élèves</a>
+</header>
+
+<main class="prof-contenu">
+
+  <!-- Accueil : choisir la classe -->
+  <section class="vue vue-accueil" aria-labelledby="titre-accueil">
+    <h2 id="titre-accueil">Suivre une classe</h2>
+    <p class="prof-intro">Ouvrez le dossier <strong>… › 3X (ou 4X) › COMMUN › TECHNOLOGIE › THEATRE IA</strong> d’une classe :
+      l’outil lit le fichier de chaque équipe (un dossier PRENOM - PRENOM par équipe) et le relit en direct pendant la séance.</p>
+    <p class="prof-alerte-navigateur" hidden>Ce navigateur ne peut pas ouvrir un dossier : utilisez <strong>Chrome</strong> ou <strong>Edge</strong>
+      pour le suivi en direct, ou importez les fichiers .json (tous sélectionnés d’un coup avec Ctrl+A).</p>
+    <div class="prof-cartes">
+      <button type="button" class="prof-carte btn-dossier-classe" hidden>
+        <span class="prof-carte-ic" data-ic="dossier"></span>
+        <strong>Ouvrir le dossier de la classe</strong>
+        <span>Suivi en direct : alertes quand une équipe est bloquée.</span>
+      </button>
+      <button type="button" class="prof-carte btn-reprendre-suivi" hidden>
+        <span class="prof-carte-ic" data-ic="recommencer"></span>
+        <strong>Reprendre : <span class="reprendre-dossier"></span></strong>
+        <span>Le dernier dossier suivi, en un clic.</span>
+      </button>
+      <label class="prof-carte">
+        <span class="prof-carte-ic" data-ic="importer"></span>
+        <strong>Importer des fichiers .json</strong>
+        <span>Une ou plusieurs sauvegardes d’équipes (sans suivi en direct).</span>
+        <input type="file" class="entree-fichiers" accept=".json,application/json" multiple hidden>
+      </label>
+    </div>
+    <div class="zone-depot" tabindex="0">Ou glissez ici les fichiers .json des équipes (n’importe où dans la page).</div>
+    <p class="prof-exercices"><span class="prof-exercices-version"></span>
+      <button type="button" class="btn-lien btn-ouvrir-mise-a-jour">Mettre à jour les exercices</button></p>
+    <ul class="prof-notes">
+      <li>Les fichiers sont lus dans ce navigateur : rien n’est envoyé ni enregistré sur le site.</li>
+      <li>La note réunit les exercices de programmation (travail enregistré : réussites, indices, vérifications ratées) et
+        votre grille D1 à D7, évaluée sur quatre niveaux dans l’onglet où chaque livrable se corrige : voir « Barème ».</li>
+      <li>Les fichiers des équipes ne sont jamais modifiés. Seuls sont écrits dans le dossier d’une équipe, quand vous le demandez :
+        <strong>validations.json</strong> (validations ◆, que les élèves voient dans leur carnet) et les photos prises dans « Croquis et dessins ».</li>
+    </ul>
+  </section>
+
+  <!-- Classe : résumé, alertes, tableau -->
+  <section class="vue vue-classe" aria-label="Classe" hidden>
+    <h2 class="titre-impression">Projet Théâtre d’ombre augmenté — <span class="titre-classe"></span></h2>
+    <div class="pc-resume"></div>
+
+    <section class="prof-alertes" aria-label="Alertes" hidden>
+      <h3 class="alertes-titre"></h3>
+      <ul class="alertes-liste"></ul>
+    </section>
+
+    <div class="prof-outils" role="group" aria-label="Filtres">
+      <label>Classe <select class="filtre-classe"></select></label>
+      <label>Trier par
+        <select class="tri">
+          <option value="equipe">équipe</option>
+          <option value="avancement">avancement</option>
+          <option value="activite">dernière activité</option>
+          <option value="note">note</option>
+        </select>
+      </label>
+      <label class="case"><input type="checkbox" class="filtre-bloquees"> Équipes bloquées seulement</label>
+      <span class="prof-outils-aide">Cliquez sur une équipe pour voir son travail.</span>
+    </div>
+
+    <div class="prof-tableau-zone"><table class="prof-tableau"></table></div>
+    <p class="prof-legende"></p>
+    <div class="prof-messages" aria-live="polite"></div>
+  </section>
+
+  <!-- Équipe : son travail, par onglets -->
+  <section class="vue vue-equipe" aria-label="Équipe" hidden>
+    <div class="pe-tete">
+      <button type="button" class="btn-secondaire btn-retour-classe" data-ic="retour">Classe</button>
+      <div class="pe-titre">
+        <h2 class="pe-noms"></h2>
+        <p class="pe-sous-titre"></p>
+      </div>
+      <span class="pe-note-badge"></span>
+      <span class="pb-espace"></span>
+      <button type="button" class="pe-nav btn-equipe-prec" aria-label="Équipe précédente" title="Équipe précédente" data-ic="retour"></button>
+      <span class="pe-pos"></span>
+      <button type="button" class="pe-nav btn-equipe-suiv" aria-label="Équipe suivante" title="Équipe suivante" data-ic="suivant"></button>
+    </div>
+    <nav class="pe-onglets" role="tablist" aria-label="Travail de l’équipe">
+      <button type="button" role="tab" data-onglet="bilan" data-ic="coche">Bilan</button>
+      <button type="button" role="tab" data-onglet="programmation" data-ic="lumiere">Programmation</button>
+      <button type="button" role="tab" data-onglet="carnet" data-ic="crayon">Carnet de projet</button>
+      <button type="button" role="tab" data-onglet="historique" data-ic="horloge">Historique</button>
+      <button type="button" role="tab" data-onglet="dessins" data-ic="camera">Croquis et dessins</button>
+    </nav>
+    <div class="pe-contenu"></div>
+  </section>
+
+  <!-- Exercices : version installée, mise à jour depuis Labo Blocs (en ligne ou par fichier), retour en arrière -->
+  <section class="vue vue-exercices" aria-labelledby="titre-exercices" hidden>
+    <div class="pe-tete">
+      <button type="button" class="btn-secondaire btn-retour-exercices" data-ic="retour">Retour</button>
+      <div class="pe-titre">
+        <h2 id="titre-exercices">Mettre à jour les exercices</h2>
+        <p class="pe-sous-titre">Moteur et exercices sont chargés directement depuis Labo Blocs en ligne. Une connexion Internet est nécessaire.</p>
+      </div>
+    </div>
+    <div class="mj-contenu" aria-live="polite"></div>
+  </section>
+</main>
+
+<!-- Barème et réglages -->
+<dialog class="dialogue-reglages" aria-labelledby="titre-reglages">
+  <div class="detail-entete">
+    <h2 id="titre-reglages">Barème et alertes</h2>
+    <button type="button" class="btn-fermer-reglages" aria-label="Fermer">×</button>
+  </div>
+  <div class="reglages-corps">
+    <section class="reglage-bloc reglage-suivi" hidden>
+      <h3>Suivi en direct</h3>
+      <div class="reglage-ligne">
+        <label>Relire le dossier toutes les
+          <select class="suivi-periode">
+            <option value="15">15 s</option>
+            <option value="30" selected>30 s</option>
+            <option value="60">1 min</option>
+            <option value="120">2 min</option>
+          </select>
+        </label>
+        <button type="button" class="btn-secondaire btn-suivi-pause">Mettre en pause</button>
+        <button type="button" class="btn-lien btn-suivi-arreter">Arrêter le suivi</button>
+      </div>
+      <p class="suivi-erreur" role="alert"></p>
+    </section>
+    <section class="reglage-bloc">
+      <h3>Alerte « bloqué »</h3>
+      <div class="reglage-ligne">
+        <label>Au moins <input type="number" class="seuil-tentatives" min="1" max="99" value="6"> tentatives</label>
+        <span>ou plus de</span>
+        <label><input type="number" class="seuil-minutes" min="1" max="240" value="10"> min sur un exercice non réussi</label>
+      </div>
+      <div class="reglage-ligne">
+        <label class="case"><input type="checkbox" class="alerte-son" checked> Son à chaque nouvelle alerte</label>
+        <button type="button" class="btn-secondaire btn-notifications">Activer les notifications</button>
+      </div>
+    </section>
+    <section class="reglage-bloc prof-bareme">
+      <h3>Barème de la note <span class="bareme-resume"></span></h3>
+      <p class="bareme-explication">Pour chaque exercice : <strong>réussi</strong> = tous ses points, moins des retenues d’autonomie
+        (indices ouverts et essais ratés <em>avant</em> la réussite) ; <strong>commencé sans réussir</strong> = une part des points ;
+        <strong>non commencé</strong> = 0. Les exercices 1 et 2 (entraîner l’IA) ne sont pas notés automatiquement : l’IA se juge avec D4.
+        Les choix et les niveaux sont conservés sur ce navigateur. Exportez une sauvegarde pour les retrouver sur un autre poste.</p>
+      <div class="bareme-reglages">
+        <label>Note sur <input type="number" data-b="sur" min="1" max="100" step="1"></label>
+        <label>Exercices attendus (les N premiers) <input type="number" data-b="objectif" min="1" max="20" step="1"></label>
+        <label>Réussi en avance (au-delà) <input type="number" data-b="avance" data-pourcent min="0" max="100" step="5"> %</label>
+        <label>Bonus par défi réussi (points) <input type="number" data-b="bonusDefi" min="0" max="20" step="0.5"></label>
+        <label>Commencé sans réussir <input type="number" data-b="participation" data-pourcent min="0" max="100" step="5"> %</label>
+        <label>Programmation · retenue par indice <input type="number" data-b="penaliteIndice" data-pourcent min="0" max="100" step="5"> %</label>
+        <label>Programmation · retenue maximale pour les indices <input type="number" data-b="penaliteIndiceMax" data-pourcent min="0" max="100" step="5"> %</label>
+        <label>Vérifications ratées sans retenue, par activité <input type="number" data-b="essaisGratuits" min="0" max="50" step="1"></label>
+        <label>Retenue par vérification ratée supplémentaire <input type="number" data-b="penaliteEchec" data-pourcent min="0" max="100" step="1"> %</label>
+        <label>Retenue maximale pour les vérifications ratées <input type="number" data-b="penaliteEchecMax" data-pourcent min="0" max="100" step="5"> %</label>
+        <label>Arrondi
+          <select data-b="arrondi"><option value="0.5">au demi-point</option><option value="0.25">au quart de point</option><option value="1">au point</option><option value="0">au centième</option></select>
+        </label>
+      </div>
+      <div class="bareme-exemple-carnet" aria-live="polite"></div>
+      <p class="bareme-titre-coefs">Cochez « Noter » pour choisir ce qui compte. Un coefficient nul signifie « Non noté ». Les livrables D1 à D7 se notent sur quatre niveaux (Non atteint · Partiellement atteint · Atteint · Dépassé), dans l’onglet où chacun se corrige ; un livrable pas encore évalué reste hors du total.</p>
+      <div class="bareme-coefs"></div>
+      <p class="evaluations-stockage" role="status"></p>
+      <div class="photos-actions"><button type="button" class="btn-secondaire btn-export-evaluations">Exporter mes évaluations</button><label class="btn-secondaire">Importer une sauvegarde<input class="import-evaluations" type="file" accept=".json,application/json" hidden></label></div>
+      <button type="button" class="btn-secondaire btn-bareme-fichier">Revenir au barème du fichier</button>
+    </section>
+  </div>
+</dialog>
+
+<!-- Théâtre : carnet, indices, STL, validations ◆ (module chargé en premier : il pose window.TheatreProf) -->
+<script type="application/x-atelier" data-src="js/prof-theatre.js" data-module="true"></script>
+<!-- Labo Blocs : moteur (lecture des sauvegardes, parcours) et dessin des blocs -->
+<script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/labo-blocs-noyau.js"></script>
+<script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/module/labo-blocs-interface.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/catalogue.js"></script>
+<script type="application/x-atelier" data-src="donnees/projet.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/carnet.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/progression.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/fichier-theatre.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/notation.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/classe.js"></script>
+<script type="application/x-atelier" data-src="js/moteur/xlsx.js"></script>
+<script type="application/x-atelier" data-src="https://anlito.github.io/labo-blocs/parcours/theatre-ombre/parcours.js"></script>
+<script type="application/x-atelier" data-src="js/parcours-source.js"></script>
+<script type="application/x-atelier" data-src="donnees/notation.js"></script>
+<script type="application/x-atelier" data-src="donnees/carnet.js"></script>
+<script type="application/x-atelier" data-src="js/icones.js"></script>
+<script type="application/x-atelier" data-src="js/prof-dessins.js"></script>
+<script type="application/x-atelier" data-src="js/notes-prof.js"></script>
+<script type="application/x-atelier" data-src="js/prof.js"></script>
+<script type="application/x-atelier" data-src="js/mise-a-jour.js"></script>
+<script src="js/connexion-labo.js"></script>
+</body>
+</html>

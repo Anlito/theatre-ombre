@@ -122,16 +122,17 @@ Poste : ………………  Date : ………………  Navigateur et version : �
 - [ ] Même chose avec « Choisir un fichier… » (photo prise au téléphone).
 - [ ] Enregistrer, fermer l'onglet, rouvrir le projet : tout le carnet est retrouvé (textes, cases, photos).
 
-## 13. Outil professeur
+## 13. Outil professeur (prof.html)
 
-- [ ] `professeur.html` → « Ouvrir le dossier d'une classe » → `3B › … › THEATRE IA` → autoriser : toutes les équipes apparaissent, classe reconnue.
-- [ ] Une équipe → onglet **Carnet** : identique à ce que voient les élèves ; **IA et programme** : vignettes et blocs ; **Personnages 3D** : STL visibles et tournables, dimensions justes.
-- [ ] Onglet Carnet : sous l'étape 1, panneau « À noter ici » → **Valider** et choisir un niveau D1 : la note en haut change, la page ne bouge pas.
-- [ ] `validations.json` apparaît dans le dossier de l'équipe ; côté élève, ouvrir le projet : le ◆ est validé dans le carnet.
-- [ ] Onglet **Bilan** : récapitulatif des 7 livrables, bonus / malus, commentaire.
-- [ ] Noter D1 à D7, ajouter un bonus avec motif : la note et la mention se calculent ; la vue de la classe affiche les couleurs.
-- [ ] **Exporter (Excel)** : le .csv s'ouvre dans Excel, accents et virgules corrects, une ligne par élève.
-- [ ] **Sauvegarder** dans son dossier personnel, fermer, « Importer une sauvegarde » sur un autre poste : les notes sont retrouvées.
+- [ ] `prof.html` → « Ouvrir le dossier de la classe » → `3B › … › THEATRE IA` : toutes les équipes apparaissent ; « En direct · lu à … » dans le bandeau.
+- [ ] Un élève vérifie un exercice : au plus tard 30 s après, sa ligne change (« ● vient d’avancer »). Une équipe à 6 tentatives : alerte « bloquée » avec un son.
+- [ ] Équipe → **Carnet de projet** : le carnet tel que les élèves le voient ; à la fin de l’étape 1, panneau « À noter ici » → **Valider** (autoriser l’écriture) et niveau D1 : la note en haut change.
+- [ ] `validations.json` apparaît dans le dossier de l’équipe ; côté élève, rouvrir le projet : le ◆ est validé dans le carnet.
+- [ ] **Programmation** : exercices, points, « Voir les blocs », personnages appris par l’IA, panneau D4.
+- [ ] **Croquis et dessins** : photo d’une feuille par la webcam enregistrée dans le dossier de l’équipe ; photos du carnet ; STL en 3D avec dimensions justes.
+- [ ] **Bilan** : validations, grille D1 à D7, bonus / malus avec motif, commentaire ; la note de chaque élève suit.
+- [ ] **Pronote** et **Excel** : les fichiers s’ouvrent dans Excel (accents, virgules), une ligne par élève pour Pronote.
+- [ ] Barème → « Exporter mes évaluations », puis « Importer une sauvegarde » sur un autre poste : niveaux, bonus et commentaires retrouvés.
 
 ## Bilan
 
