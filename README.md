@@ -1,5 +1,13 @@
 # Parcours commun Labo Blocs — Théâtre d’ombre
 
+## Présentation du projet à la classe — 3 novembre 2026
+
+**Adresse : <https://anlito.github.io/theatre-ombre/presentation.html>** (vidéoprojecteur ; ← → pour changer de diapositive, F pour le plein écran ;
+`#5` à la fin de l’adresse ouvre la diapositive 5). 13 diapositives : la commande et le cahier des charges, les missions,
+l’activité débranchée « Comment une IA apprend-elle ? », la notion de chaînes (exemple du portail : la réponse pour le
+théâtre reste à trouver à l’étape 4 du carnet), le matériel, la feuille de route en 5 étapes (◆), le site, l’évaluation
+(D1 à D7), la sécurité. Même fonctionnement que celle du Simon ; aucune ressource en ligne. Fichier : `site/presentation.html`.
+
 ## Outil professeur sur le modèle commun — 22 octobre 2026
 
 **Adresse : <https://anlito.github.io/theatre-ombre/prof.html>** (Chrome ou Edge). L’ancienne adresse `professeur.html` y renvoie.

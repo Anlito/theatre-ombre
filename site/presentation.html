@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Présentation du projet · Théâtre d’ombre augmenté</title>
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<style>
+/* Présentation du projet à la classe (vidéoprojecteur), à montrer en début de projet.
+   Même fonctionnement que celle du Simon : une scène 16:9 de 1600 × 900 mise à l'échelle de l'écran.
+   Touches : → ou espace = suivant, ← = précédent, Début / Fin, F = plein écran ; #5 dans l'adresse ouvre la diapo 5.
+   Charte du Théâtre (rideau rouge, or, silhouettes), réglée pour un vidéoprojecteur : fond très sombre, textes clairs,
+   34 px minimum sur la scène. Aucune ressource en ligne. */
+:root {
+  --nuit: #140E0B; --planche: #241A15; --planche-2: #33261F; --bord: #6B5546;
+  --texte: #FFF8EC; --discret: #EBDDC6;
+  --or: #F3D58A; --velours: #8E1B24; --velours-clair: #B42A35;
+  --rouge: #FF6B6B; --jaune: #FFD23F; --verte: #4ADE80; --bleue: #5AB8FF;
+  --accent: var(--or);
+  --titre: Georgia, 'Times New Roman', serif;
+  --lecture: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #000; color: var(--texte); font-family: var(--lecture); }
+
+.scene {
+  position: absolute; left: 50%; top: 50%; width: 1600px; height: 900px; transform-origin: 0 0; overflow: hidden;
+  background: radial-gradient(ellipse at 50% 0%, #2B1E17 0%, var(--nuit) 60%);
+}
+/* Lambrequin du théâtre : festons rouges en haut de chaque diapositive */
+.scene::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 26px; z-index: 6;
+  background: radial-gradient(circle at 20px -6px, var(--velours-clair) 18px, transparent 19px) 0 0 / 40px 26px repeat-x, var(--nuit);
+}
+
+/* ---------- Diapositives ---------- */
+.diapo { position: absolute; inset: 0; padding: 64px 90px 140px; display: none; flex-direction: column; justify-content: center; }
+.diapo.active { display: flex; animation: arrivee 0.35s ease-out both; }
+@keyframes arrivee { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.acte { font: 700 34px var(--lecture); color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 12px; display: flex; align-items: center; gap: 18px; }
+.acte::before { content: ''; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 22px var(--accent); }
+h1 { font: 700 72px/1.06 var(--titre); margin: 0 0 22px; max-width: 1400px; }
+h1 em { font-style: normal; color: var(--accent); }
+.chapeau { font-size: 38px; line-height: 1.3; color: var(--discret); margin: 0 0 30px; max-width: 1400px; }
+.chapeau strong { color: var(--or); }
+
+.carte { background: var(--planche); border: 2px solid var(--bord); border-radius: 18px; padding: 26px 30px 30px; border-top: 12px solid var(--c, var(--accent)); }
+.cartes { display: grid; grid-template-columns: repeat(var(--n, 3), 1fr); gap: 34px; }
+.carte .etiquette { display: block; font: 700 34px var(--lecture); color: var(--c, var(--accent)); margin-bottom: 10px; }
+.carte .grand { display: block; font: 700 48px/1.1 var(--titre); margin-bottom: 12px; }
+.carte p { margin: 0; font-size: 36px; line-height: 1.28; }
+.carte p strong { color: var(--or); }
+.bandeau { margin-top: 26px; display: flex; align-items: center; gap: 26px; padding: 16px 30px; border-radius: 16px; background: var(--planche-2); border-left: 12px solid var(--accent); font-size: 36px; line-height: 1.3; }
+.bandeau strong { color: var(--or); white-space: nowrap; font-family: var(--titre); font-size: 42px; }
+
+/* Petites LED en haut à droite : la couleur de la partie */
+.leds { position: absolute; top: 56px; right: 90px; display: flex; gap: 18px; z-index: 5; }
+.leds i { width: 30px; height: 30px; border-radius: 50%; background: #3A2E27; border: 3px solid #5A4A3F; }
+.leds i.on { border-color: transparent; box-shadow: 0 0 26px 6px currentColor; background: currentColor; }
+
+/* ---------- Scène du théâtre (diapositives de titre et de fin) ---------- */
+.titre { align-items: center; text-align: center; padding-top: 50px; }
+.titre .sur { font: 700 34px var(--lecture); letter-spacing: 0.24em; color: var(--discret); margin: 0 0 18px; text-transform: uppercase; }
+.titre h1 { font-size: 100px; margin: 0 0 10px; max-width: none; white-space: nowrap; }
+.titre .phrase { font: italic 44px/1.25 var(--titre); color: var(--or); margin: 0 0 30px; }
+.theatre { position: relative; width: 1100px; height: 330px; margin: 0 auto 30px; border-radius: 14px 14px 0 0; overflow: hidden; background: #1A110D; border: 10px solid #3A2A20; border-bottom: 0; }
+.ecran { position: absolute; inset: 40px 60px 0; background: radial-gradient(ellipse at 50% 40%, #FFF8E6 0%, #F3E2B8 55%, #D8BE86 100%); display: flex; align-items: flex-end; justify-content: space-around; padding: 0 70px; }
+.sil { fill: #1E1A16; display: block; }
+.sil-sorciere { width: 100px; height: 175px; }
+.sil-loup { width: 170px; height: 190px; }
+.sil-roi { width: 90px; height: 165px; }
+.projecteurs { position: absolute; top: 6px; left: 0; right: 0; display: flex; justify-content: center; gap: 120px; z-index: 3; }
+.projecteurs i { width: 30px; height: 30px; border-radius: 50%; color: var(--c); background: currentColor; box-shadow: 0 0 34px 10px currentColor; }
+.rideau { position: absolute; top: 0; bottom: 0; width: 52%; z-index: 4; background: repeating-linear-gradient(90deg, #4A0D13 0, #8E1B24 20px, #B42A35 36px, #8E1B24 52px, #4A0D13 72px); }
+.rideau-g { left: 0; transform: translateX(calc(-100% + 120px)); border-radius: 0 0 60% 0 / 0 0 14% 0; }
+.rideau-d { right: 0; transform: translateX(calc(100% - 120px)); border-radius: 0 0 0 60% / 0 0 0 14%; }
+/* Diapositive de fin : le rideau s'ouvre */
+.ouverture .rideau-g { animation: ouvrir-g 1.6s 0.4s ease-out both; }
+.ouverture .rideau-d { animation: ouvrir-d 1.6s 0.4s ease-out both; }
+@keyframes ouvrir-g { from { transform: none; border-radius: 0; } }
+@keyframes ouvrir-d { from { transform: none; border-radius: 0; } }
+.pastilles { display: flex; gap: 22px; justify-content: center; }
+.pastilles span { white-space: nowrap; padding: 10px 24px; border-radius: 999px; background: var(--planche-2); border: 2px solid var(--c); font-size: 34px; font-weight: 700; }
+.pastilles span::before { content: '●'; color: var(--c); margin-right: 12px; }
+
+/* ---------- Cahier des charges ---------- */
+.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.liste li { display: grid; grid-template-columns: 54px 1fr; align-items: center; gap: 18px; font-size: 38px; line-height: 1.25; }
+.liste li::before { content: ''; width: 46px; height: 46px; border-radius: 10px; border: 4px solid var(--c, var(--accent)); }
+
+/* ---------- Activité débranchée ---------- */
+.etapes { display: grid; grid-template-columns: repeat(var(--n, 2), 1fr); gap: 20px 30px; }
+.etapes .carte { padding: 18px 26px 20px; display: grid; grid-template-columns: 90px 1fr; gap: 6px 22px; align-items: start; border-top-width: 2px; border-left: 12px solid var(--c, var(--accent)); }
+.etapes .num { grid-row: span 2; font: 700 62px/1 var(--titre); color: var(--c, var(--accent)); }
+.etapes .grand { margin: 0; font-size: 42px; }
+.etapes p { font-size: 34px; color: var(--discret); }
+.materiel { display: flex; flex-wrap: wrap; gap: 14px 22px; margin-top: 22px; font-size: 34px; }
+.materiel b { color: var(--or); margin-right: 6px; }
+.materiel span { padding: 8px 20px; border-radius: 999px; background: var(--planche-2); }
+
+/* ---------- Chaînes d'information et d'énergie ---------- */
+.chaine { display: grid; grid-template-columns: 70px 1fr 50px 1fr 50px 1fr; align-items: stretch; gap: 0 10px; margin-bottom: 10px; }
+.chaine .nom { display: grid; place-items: center; border-radius: 14px; background: var(--c); color: #140E0B; font: 700 34px var(--lecture); text-transform: uppercase; letter-spacing: 0.08em; writing-mode: vertical-rl; transform: rotate(180deg); }
+.chaine .maillon { background: var(--planche); border: 2px solid var(--bord); border-radius: 14px; padding: 12px 22px 14px; }
+.chaine .verbe { font: 700 38px var(--lecture); color: var(--c); text-transform: uppercase; letter-spacing: 0.04em; }
+.chaine .ex { font-size: 34px; line-height: 1.22; color: var(--discret); margin-top: 6px; }
+.chaine .fleche { align-self: center; text-align: center; font-size: 48px; color: var(--discret); }
+.commande { text-align: center; font-size: 34px; color: var(--or); margin: 0 0 10px; }
+
+/* ---------- Feuille de route ---------- */
+.route { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+.route .carte { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+.route .num { font: 700 54px/1 var(--titre); color: var(--c); }
+.route .grand { font-size: 40px; margin: 0; }
+.route p { font-size: 34px; color: var(--discret); flex: 1; }
+.route .valide { font-size: 34px; color: var(--or); font-weight: 700; line-height: 1.2; }
+
+/* ---------- Évaluation ---------- */
+.livrables { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px 22px; margin-bottom: 22px; }
+.livrables div { background: var(--planche); border: 2px solid var(--bord); border-radius: 14px; padding: 12px 20px; font-size: 34px; font-weight: 700; line-height: 1.15; }
+.livrables b { display: block; font: 700 34px var(--lecture); color: var(--accent); margin-bottom: 4px; }
+.niveaux { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.niveaux span { text-align: center; padding: 14px 10px; border-radius: 12px; font-size: 34px; font-weight: 700; color: #140E0B; background: var(--c); }
+
+/* ---------- Outil ---------- */
+.adresse { align-self: flex-start; font: 700 58px var(--titre); color: var(--or); background: var(--planche-2); border: 3px solid var(--or); border-radius: 16px; padding: 12px 36px; margin: 0 0 26px; }
+.adresse small { display: block; font: 700 34px var(--lecture); color: var(--discret); margin-top: 6px; }
+
+/* ---------- Sécurité ---------- */
+.fin-seance { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 34px; font-weight: 700; }
+.fin-seance span { padding: 8px 18px; border-radius: 14px; background: var(--planche); border: 2px solid var(--bord); }
+.fin-seance i { font-style: normal; color: var(--or); font-size: 44px; }
+
+/* ---------- Barre du bas : progression et commandes ---------- */
+.barre { position: absolute; left: 90px; right: 90px; bottom: 44px; display: flex; align-items: center; gap: 24px; z-index: 7; }
+.compteur { font: 700 30px var(--lecture); color: var(--texte); min-width: 120px; font-variant-numeric: tabular-nums; }
+.segments { flex: 1; display: flex; gap: 8px; }
+.segments button { flex: 1; height: 16px; border: 0; padding: 0; border-radius: 8px; background: var(--planche-2); cursor: pointer; }
+.segments button.fait { background: #8C7461; }
+.segments button.ici { background: var(--accent); box-shadow: 0 0 14px var(--accent); }
+.fleche-btn { width: 62px; height: 62px; border-radius: 50%; border: 3px solid var(--bord); background: var(--planche); color: var(--texte); font-size: 30px; cursor: pointer; }
+.fleche-btn:disabled { opacity: 0.3; cursor: default; }
+button:focus-visible { outline: 5px solid var(--or); outline-offset: 5px; }
+.aide-touches { position: absolute; right: 90px; bottom: 8px; margin: 0; font: 700 20px var(--lecture); color: var(--discret); }
+
+@media (prefers-reduced-motion: reduce) {
+  .diapo.active, .ouverture .rideau-g, .ouverture .rideau-d { animation: none; }
+}
+@media print {
+  html, body { overflow: visible; height: auto; }
+  .barre, .aide-touches { display: none; }
+  .scene { position: relative; left: 0; top: 0; transform: none !important; height: auto; overflow: visible; }
+  .diapo { display: flex !important; position: relative; height: 900px; page-break-after: always; animation: none !important; }
+  @page { size: 1600px 900px; margin: 0; }
+}
+</style>
+</head>
+<body>
+<div class="scene" id="scene">
+  <div class="leds" id="leds" aria-hidden="true"><i data-c="rouge"></i><i data-c="jaune"></i><i data-c="verte"></i><i data-c="bleue"></i></div>
+
+  <!-- 1. Titre -->
+  <section class="diapo titre active" data-accent="or" aria-label="Théâtre d’ombre augmenté">
+    <p class="sur">Projet de technologie</p>
+    <h1>Théâtre d’ombre augmenté</h1>
+    <p class="phrase">Quand l’intelligence artificielle donne vie aux ombres.</p>
+    <div class="theatre" aria-hidden="true">
+      <div class="projecteurs"><i style="--c: var(--rouge)"></i><i style="--c: var(--jaune)"></i><i style="--c: var(--bleue)"></i></div>
+      <div class="ecran">
+        <svg class="sil sil-sorciere" viewBox="0 0 100 140"><polygon points="28,140 42,78 32,74 54,6 62,74 54,78 72,140"/></svg>
+        <svg class="sil sil-loup" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100"/></svg>
+        <svg class="sil sil-roi" viewBox="0 0 100 160"><path d="M30 160V76h6V52l8 10 6-14 6 14 8-10v24h6v84z"/></svg>
+      </div>
+      <div class="rideau rideau-g"></div><div class="rideau rideau-d"></div>
+    </div>
+    <div class="pastilles">
+      <span style="--c: var(--bleue)">Modélisation 3D</span>
+      <span style="--c: var(--rouge)">Arduino et LED</span>
+      <span style="--c: var(--verte)">IA par la webcam</span>
+      <span style="--c: var(--jaune)">Mise en scène</span>
+    </div>
+  </section>
+
+  <!-- 2. La commande -->
+  <section class="diapo" data-accent="rouge">
+    <p class="acte">Acte 1 · La commande</p>
+    <h1>Le <em>Théâtre des Lumières</em> a besoin de vous.</h1>
+    <p class="chapeau">« Nous souhaitons créer un mini théâtre d’ombres qui <strong>reconnaît nos personnages</strong> grâce à une caméra et une IA, et qui <strong>réagit avec des lumières</strong> pour raconter une courte histoire d’environ 1 minute. »</p>
+    <div class="cartes">
+      <div class="carte" style="--c: var(--verte)"><span class="etiquette">Reconnaître</span><p>La webcam et l’IA reconnaissent chaque personnage.</p></div>
+      <div class="carte" style="--c: var(--rouge)"><span class="etiquette">Réagir</span><p>Une LED de couleur différente s’allume pour chaque personnage.</p></div>
+      <div class="carte" style="--c: var(--jaune)"><span class="etiquette">Raconter</span><p>Une mise en scène d’environ <strong>1 minute</strong>.</p></div>
+    </div>
+  </section>
+
+  <!-- 3. Cahier des charges -->
+  <section class="diapo" data-accent="rouge">
+    <p class="acte">Acte 1 · Le cahier des charges</p>
+    <h1>Ce que le client <em>attend</em>.</h1>
+    <div class="cartes" style="--n: 2">
+      <div class="carte" style="--c: var(--rouge)">
+        <span class="etiquette">Le client attend</span>
+        <ul class="liste" style="--c: var(--rouge)">
+          <li>2 personnages reconnus par l’IA</li>
+          <li>Une LED différente par personnage</li>
+          <li>Une histoire d’environ 1 minute</li>
+        </ul>
+      </div>
+      <div class="carte" style="--c: var(--jaune)">
+        <span class="etiquette">Et aussi</span>
+        <ul class="liste" style="--c: var(--jaune)">
+          <li>Un système qui marche sans toucher à l’ordinateur</li>
+          <li>Des personnages dessinés, modélisés, imprimés en 3D</li>
+          <li>Un oral de 2 minutes pour présenter le projet</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Ce que vous allez apprendre -->
+  <section class="diapo" data-accent="jaune">
+    <p class="acte">Acte 2 · Vos missions</p>
+    <h1>Ce que vous allez <em>apprendre</em>.</h1>
+    <div class="cartes" style="--n: 4">
+      <div class="carte" style="--c: var(--bleue)"><span class="grand">Modélisation 3D</span><p>Dessiner, puis modéliser sur Tinkercad : <strong>10 × 10 cm</strong> maximum, <strong>2 mm</strong> d’épaisseur.</p></div>
+      <div class="carte" style="--c: var(--rouge)"><span class="grand">Électronique</span><p>Câbler <strong>2 LED</strong> sur la carte programmable : vous choisissez leur couleur et leur broche.</p></div>
+      <div class="carte" style="--c: var(--verte)"><span class="grand">Intelligence artificielle</span><p>Apprendre à une IA à reconnaître vos personnages avec la webcam, puis programmer en blocs.</p></div>
+      <div class="carte" style="--c: var(--jaune)"><span class="grand">Mise en scène</span><p>Écrire une histoire où chaque personnage déclenche sa lumière.</p></div>
+    </div>
+  </section>
+
+  <!-- 5. Activité débranchée -->
+  <section class="diapo" data-accent="verte">
+    <p class="acte">Activité débranchée</p>
+    <h1>Comment une IA <em>apprend</em>-elle ?</h1>
+    <div class="etapes">
+      <div class="carte" style="--c: var(--verte)"><span class="num">01</span><span class="grand">Premiers mots</span><p>Chaque groupe reçoit un paquet et donne 2 mots (forme, couleur), jamais le nom de l’objet !</p></div>
+      <div class="carte" style="--c: var(--bleue)"><span class="num">02</span><span class="grand">Premier test</span><p>Le professeur montre un objet : chaque groupe vote pour l’identifiant qui lui correspond le mieux.</p></div>
+      <div class="carte" style="--c: var(--jaune)"><span class="num">03</span><span class="grand">Plus de précision</span><p>Pas assez précis : chaque groupe donne 3 mots de plus.</p></div>
+      <div class="carte" style="--c: var(--rouge)"><span class="num">04</span><span class="grand">Deuxième test</span><p>Nouveau vote : les pourcentages progressent-ils ?</p></div>
+    </div>
+    <div class="materiel"><b>Matériel :</b><span>7 paquets de cartes (identifiants)</span><span>1 tableur par tour</span><span>Classe en îlots</span></div>
+  </section>
+
+  <!-- 6. Ce qu'on retient -->
+  <section class="diapo" data-accent="verte">
+    <p class="acte">Activité débranchée · ce qu’on retient</p>
+    <h1>Une IA apprend <em>par l’exemple</em>.</h1>
+    <div class="cartes">
+      <div class="carte" style="--c: var(--verte)"><span class="grand">Plus de précision</span><p>Avec 2 mots, les votes se dispersent ; avec 5 mots, les catégories sont claires.</p></div>
+      <div class="carte" style="--c: var(--bleue)"><span class="grand">Plus de données</span><p>Chaque exemple de plus rend le modèle plus solide.</p></div>
+      <div class="carte" style="--c: var(--rouge)"><span class="grand">Attention aux biais</span><p>Des exemples trop semblables (même angle, même lumière) trompent l’IA.</p></div>
+    </div>
+    <div class="bandeau"><strong>Dans votre projet</strong><span>au moins <strong>15 photos</strong> de chaque personnage, variées, et des photos du <strong>fond vide</strong>.</span></div>
+  </section>
+
+  <!-- 7. Notion clé : chaînes -->
+  <section class="diapo" data-accent="bleue">
+    <p class="acte">Notion clé · exemple : un portail automatique</p>
+    <h1><em>L’information</em> commande <em>l’énergie</em>.</h1>
+    <div class="chaine" style="--c: var(--bleue)">
+      <div class="nom">Info</div>
+      <div class="maillon"><div class="verbe">Acquérir</div><div class="ex">La cellule voit la voiture.</div></div><div class="fleche" aria-hidden="true">→</div>
+      <div class="maillon"><div class="verbe">Traiter</div><div class="ex">La carte décide d’ouvrir.</div></div><div class="fleche" aria-hidden="true">→</div>
+      <div class="maillon"><div class="verbe">Communiquer</div><div class="ex">L’ordre part vers le moteur.</div></div>
+    </div>
+    <p class="commande" aria-hidden="true">↓ l’ordre commande ↓</p>
+    <div class="chaine" style="--c: var(--jaune)">
+      <div class="nom">Énergie</div>
+      <div class="maillon"><div class="verbe">Alimenter</div><div class="ex">Le courant de la maison.</div></div><div class="fleche" aria-hidden="true">→</div>
+      <div class="maillon"><div class="verbe">Distribuer</div><div class="ex">Le relais donne le courant.</div></div><div class="fleche" aria-hidden="true">→</div>
+      <div class="maillon"><div class="verbe">Agir</div><div class="ex">Le moteur ouvre le portail.</div></div>
+    </div>
+    <div class="bandeau" style="margin-top: 14px"><strong>Et votre théâtre ?</strong><span>Webcam, IA, carte programmable, LED… à vous de les placer : étape 4 du carnet.</span></div>
+  </section>
+
+  <!-- 8. Le matériel -->
+  <section class="diapo" data-accent="bleue">
+    <p class="acte">Acte 3 · Le matériel</p>
+    <h1>Vos <em>outils</em>.</h1>
+    <div class="cartes" style="--n: 4">
+      <div class="carte" style="--c: var(--bleue)"><span class="grand">Tinkercad</span><p>Pour modéliser vos personnages, puis les imprimer en 3D. Un tutoriel vous guide.</p></div>
+      <div class="carte" style="--c: var(--rouge)"><span class="grand">Carte programmable</span><p>Une carte <strong>Arduino</strong>, 2 modules LED (résistance déjà intégrée) et un câble USB.</p></div>
+      <div class="carte" style="--c: var(--verte)"><span class="grand">Webcam</span><p>Elle filme l’écran du théâtre : c’est l’œil de l’IA.</p></div>
+      <div class="carte" style="--c: var(--jaune)"><span class="grand">Le site du projet</span><p>Carnet, IA, programmation et spectacle, au même endroit.</p></div>
+    </div>
+  </section>
+
+  <!-- 9. Feuille de route -->
+  <section class="diapo" data-accent="jaune">
+    <p class="acte">Feuille de route</p>
+    <h1>5 étapes, <em>dans l’ordre</em>.</h1>
+    <div class="route">
+      <div class="carte" style="--c: var(--rouge)"><span class="num">1</span><span class="grand">Dessiner</span><p>Vos 2 silhouettes sur papier A4, à taille réelle.</p><span class="valide">◆ Dessins validés</span></div>
+      <div class="carte" style="--c: var(--bleue)"><span class="num">2</span><span class="grand">Modéliser</span><p>Sur Tinkercad, puis export en STL.</p><span class="valide">◆ Avant impression</span></div>
+      <div class="carte" style="--c: var(--verte)"><span class="num">3</span><span class="grand">Réaliser</span><p>Entraîner l’IA, câbler, programmer.</p><span class="valide">◆ Câblage<br>◆ Démo</span></div>
+      <div class="carte" style="--c: var(--jaune)"><span class="num">4</span><span class="grand">Comprendre</span><p>Les chaînes d’information et d’énergie.</p><span class="valide">◆ Schéma validé</span></div>
+      <div class="carte" style="--c: var(--or)"><span class="num">5</span><span class="grand">Présenter</span><p>Votre histoire et un oral de 2 minutes.</p><span class="valide">◆ Oral présenté</span></div>
+    </div>
+    <div class="bandeau"><strong>◆</strong><span>= le professeur valide l’étape avant que vous passiez à la suite.</span></div>
+  </section>
+
+  <!-- 10. Le site -->
+  <section class="diapo" data-accent="or">
+    <p class="acte">Votre outil</p>
+    <h1>Tout se passe dans <em>le carnet de l’équipe</em>.</h1>
+    <p class="adresse">anlito.github.io/theatre-ombre<small>avec Chrome ou Edge</small></p>
+    <div class="cartes">
+      <div class="carte" style="--c: var(--or)"><span class="etiquette">Carnet</span><p>Votre feuille de route : vous le remplissez à chaque étape.</p></div>
+      <div class="carte" style="--c: var(--verte)"><span class="etiquette">IA et programmation</span><p>6 exercices, des photos de l’IA au programme final.</p></div>
+      <div class="carte" style="--c: var(--bleue)"><span class="etiquette">Enregistrer</span><p>Dans <strong>THEATRE IA</strong>, le dossier à vos prénoms : ensuite, c’est automatique.</p></div>
+    </div>
+  </section>
+
+  <!-- 11. Évaluation -->
+  <section class="diapo" data-accent="rouge">
+    <p class="acte">Les règles</p>
+    <h1>Équipes de <em>2 ou 3</em>. Ce qui est évalué :</h1>
+    <div class="livrables">
+      <div><b>D1</b>Dessins des personnages</div>
+      <div><b>D2</b>Modélisation 3D</div>
+      <div><b>D3</b>Câblage</div>
+      <div><b>D4</b>Programme et IA</div>
+      <div><b>D5</b>Carnet de projet</div>
+      <div><b>D6</b>Présentation orale</div>
+      <div><b>D7</b>Investissement du groupe</div>
+      <div><b>+</b>Exercices de programmation</div>
+    </div>
+    <div class="niveaux">
+      <span style="--c: #FF8A80">Non atteint</span>
+      <span style="--c: var(--jaune)">Partiellement atteint</span>
+      <span style="--c: #A6E3A1">Atteint</span>
+      <span style="--c: var(--verte)">Dépassé</span>
+    </div>
+  </section>
+
+  <!-- 12. Sécurité et fin de séance -->
+  <section class="diapo" data-accent="jaune">
+    <p class="acte">Sécurité</p>
+    <h1>Avant de brancher, <em>on vérifie</em>.</h1>
+    <div class="cartes">
+      <div class="carte" style="--c: var(--rouge)"><span class="grand">Câble débranché</span><p>On câble toujours avec le <strong>câble USB débranché</strong>.</p></div>
+      <div class="carte" style="--c: var(--jaune)"><span class="grand">Broches 0 et 1</span><p>Jamais : elles servent au câble USB.</p></div>
+      <div class="carte" style="--c: var(--verte)"><span class="grand">◆ Montage validé</span><p>Le professeur vérifie le câblage avant le branchement.</p></div>
+    </div>
+    <div class="bandeau" style="margin-top: 26px"><strong>Fin de séance</strong>
+      <div class="fin-seance"><span>Tout éteindre</span><i>→</i><span>Déconnecter</span><i>→</i><span>Débrancher l’USB</span><i>→</i><span>Projet enregistré</span></div>
+    </div>
+  </section>
+
+  <!-- 13. Fin : le rideau s'ouvre -->
+  <section class="diapo titre ouverture" data-accent="or" aria-label="Lever de rideau">
+    <p class="sur">Lever de rideau</p>
+    <div class="theatre" aria-hidden="true">
+      <div class="projecteurs"><i style="--c: var(--rouge)"></i><i style="--c: var(--verte)"></i><i style="--c: var(--bleue)"></i></div>
+      <div class="ecran">
+        <svg class="sil sil-roi" viewBox="0 0 100 160"><path d="M30 160V76h6V52l8 10 6-14 6 14 8-10v24h6v84z"/></svg>
+        <svg class="sil sil-loup" viewBox="0 0 100 100"><polygon points="20,100 31,56 47,46 52,22 60,36 68,18 71,44 88,50 75,58 88,100"/></svg>
+        <svg class="sil sil-sorciere" viewBox="0 0 100 140"><polygon points="28,140 42,78 32,74 54,6 62,74 54,78 72,140"/></svg>
+      </div>
+      <div class="rideau rideau-g"></div><div class="rideau rideau-d"></div>
+    </div>
+    <h1>À vous de <em>jouer</em> !</h1>
+  </section>
+
+  <nav class="barre" aria-label="Navigation">
+    <span class="compteur" id="compteur">01/13</span>
+    <button class="fleche-btn" id="precedent" type="button" aria-label="Diapositive précédente">◀</button>
+    <div class="segments" id="segments"></div>
+    <button class="fleche-btn" id="suivant" type="button" aria-label="Diapositive suivante">▶</button>
+  </nav>
+  <p class="aide-touches">← → : changer de diapositive · F : plein écran</p>
+</div>
+<script>
+(function () {
+  'use strict';
+  var scene = document.getElementById('scene');
+  var diapos = Array.prototype.slice.call(document.querySelectorAll('.diapo'));
+  var segments = document.getElementById('segments');
+  var compteur = document.getElementById('compteur');
+  var precedent = document.getElementById('precedent'), suivant = document.getElementById('suivant');
+  var couleurs = { rouge: '#FF6B6B', jaune: '#FFD23F', verte: '#4ADE80', bleue: '#5AB8FF', or: '#F3D58A' };
+  var ici = 0;
+  function deux(n) { return (n < 10 ? '0' : '') + n; }
+  // La scène de 1600 × 900 remplit l'écran sans déformer.
+  function ajuster() {
+    var e = Math.min(innerWidth / 1600, innerHeight / 900);
+    scene.style.transform = 'scale(' + e + ') translate(-50%, -50%)';
+  }
+  diapos.forEach(function (d, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Aller à la diapositive ' + (i + 1));
+    b.addEventListener('click', function () { aller(i); });
+    segments.appendChild(b);
+  });
+  function aller(i) {
+    if (i < 0 || i >= diapos.length) return;
+    diapos[ici].classList.remove('active');
+    ici = i;
+    var d = diapos[ici], accent = d.dataset.accent || 'or';
+    // Rejouer l'animation (rideau qui s'ouvre) à chaque arrivée sur la diapositive.
+    void d.offsetWidth;
+    d.classList.add('active');
+    document.documentElement.style.setProperty('--accent', couleurs[accent]);
+    // Petites LED en haut à droite : celle de la partie s'allume.
+    document.querySelectorAll('#leds i').forEach(function (l) {
+      l.classList.toggle('on', l.dataset.c === accent);
+      l.style.color = couleurs[l.dataset.c];
+    });
+    document.getElementById('leds').style.display = d.classList.contains('titre') ? 'none' : '';
+    Array.prototype.forEach.call(segments.children, function (b, n) {
+      b.classList.toggle('fait', n < ici); b.classList.toggle('ici', n === ici);
+      if (n === ici) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    compteur.textContent = deux(ici + 1) + '/' + deux(diapos.length);
+    precedent.disabled = ici === 0; suivant.disabled = ici === diapos.length - 1;
+    try { history.replaceState(null, '', '#' + (ici + 1)); } catch (e) { /* file:// */ }
+  }
+  precedent.addEventListener('click', function () { aller(ici - 1); });
+  suivant.addEventListener('click', function () { aller(ici + 1); });
+  addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && e.target === document.body)) { e.preventDefault(); aller(ici + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); aller(ici - 1); }
+    else if (e.key === 'Home') aller(0);
+    else if (e.key === 'End') aller(diapos.length - 1);
+    else if (e.key === 'f' || e.key === 'F') {
+      if (document.fullscreenElement) document.exitFullscreen(); else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+    }
+  });
+  addEventListener('resize', ajuster);
+  ajuster();
+  function depuisAdresse() { aller(Math.min(diapos.length, Math.max(1, parseInt(location.hash.slice(1), 10) || 1)) - 1); }
+  addEventListener('hashchange', depuisAdresse);
+  depuisAdresse();
+})();
+</script>
+</body>
+</html>
