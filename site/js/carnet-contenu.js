@@ -41,8 +41,8 @@ export const MODE_EMPLOI =
   'Cochez la case avant de passer à la suite. ◆ = le professeur valide.';
 
 export const OUTILS = [
-  ['<b>Tinkercad</b> + « Tuto Tinkercad.html »', 'Dans <b>{classe} › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>'],
-  ['<b>Site</b> Théâtre d’ombre augmenté', '<b>anlito.github.io/theatre-ombre</b> (Chrome ou Edge) : c’est ce site'],
+  ['<b>Tinkercad</b> + « Tuto Tinkercad.html »', 'Dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b>'],
+  ['<b>Site</b> Théâtre d’ombre augmenté', 'Raccourci dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b> (Chrome ou Edge) : c’est ce site'],
   ['<b>Aide du site</b>', 'Entraîner l’IA, câblage, LED : tout est dans le site, bouton <b>?</b> en haut.'],
   ['<b>Dossier de l’équipe</b>', '<b>{chemin} › {dossier}</b>'],
 ];
@@ -108,7 +108,7 @@ export const ETAPES = [
     outil: 'Tinkercad',
     route: '◆ Modèles validés avant impression 3D',
     blocs: [
-      { type: 'cadre', html: '<b>Tutoriel :</b> fichier <b>« Tuto Tinkercad.html »</b>, dans <b>{classe} › Matières › TECHNOLOGIE › Tableau › THEATRE IA</b>' },
+      { type: 'cadre', html: '<b>Tutoriel :</b> fichier <b>« Tuto Tinkercad.html »</b>, dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b>' },
       { type: 'cadre', ton: 'attention', html: '<b>À respecter :</b> <b>100 mm × 100 mm maximum</b> (1 cm = 10 mm) et <b>2 mm d’épaisseur</b>.' },
       {
         type: 'consignes',

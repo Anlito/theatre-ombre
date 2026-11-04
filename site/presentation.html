@@ -125,8 +125,9 @@ h1 em { font-style: normal; color: var(--accent); }
 .niveaux span { text-align: center; padding: 14px 10px; border-radius: 12px; font-size: 34px; font-weight: 700; color: #140E0B; background: var(--c); }
 
 /* ---------- Outil ---------- */
-.adresse { align-self: flex-start; font: 700 58px var(--titre); color: var(--or); background: var(--planche-2); border: 3px solid var(--or); border-radius: 16px; padding: 12px 36px; margin: 0 0 26px; }
-.adresse small { display: block; font: 700 34px var(--lecture); color: var(--discret); margin-top: 6px; }
+.adresse { align-self: flex-start; font: 700 44px/1.2 var(--titre); color: var(--or); background: var(--planche-2); border: 3px solid var(--or); border-radius: 16px; padding: 12px 36px; margin: 0 0 26px; }
+.adresse .chemin { white-space: nowrap; font-size: 34px; }
+.adresse small { display: block; font: 700 34px var(--lecture); color: var(--discret); margin: 4px 0; }
 
 /* ---------- Sécurité ---------- */
 .fin-seance { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; font-size: 34px; font-weight: 700; }
@@ -281,7 +282,7 @@ button:focus-visible { outline: 5px solid var(--or); outline-offset: 5px; }
     <p class="acte">Acte 3 · Le matériel</p>
     <h1>Vos <em>outils</em>.</h1>
     <div class="cartes" style="--n: 4">
-      <div class="carte" style="--c: var(--bleue)"><span class="grand">Tinkercad</span><p>Pour modéliser vos personnages, puis les imprimer en 3D. Un tutoriel vous guide.</p></div>
+      <div class="carte" style="--c: var(--bleue)"><span class="grand">Tinkercad</span><p>Pour modéliser vos personnages, puis les imprimer en 3D. Un tutoriel vous guide (dossier THEATRE IA du Tableau).</p></div>
       <div class="carte" style="--c: var(--rouge)"><span class="grand">Carte programmable</span><p>Une carte <strong>Arduino</strong>, 2 modules LED (résistance déjà intégrée) et un câble USB.</p></div>
       <div class="carte" style="--c: var(--verte)"><span class="grand">Webcam</span><p>Elle filme l’écran du théâtre : c’est l’œil de l’IA.</p></div>
       <div class="carte" style="--c: var(--jaune)"><span class="grand">Le site du projet</span><p>Carnet, IA, programmation et spectacle, au même endroit.</p></div>
@@ -305,8 +306,8 @@ button:focus-visible { outline: 5px solid var(--or); outline-offset: 5px; }
   <!-- 10. Le site -->
   <section class="diapo" data-accent="or">
     <p class="acte">Votre outil</p>
-    <h1>Tout se passe dans <em>le carnet de l’équipe</em>.</h1>
-    <p class="adresse">anlito.github.io/theatre-ombre<small>avec Chrome ou Edge</small></p>
+    <h1>Tout passe par <em>le carnet</em>.</h1>
+    <p class="adresse"><small>Les raccourcis des outils sont dans (le site s’ouvre avec Chrome ou Edge) :</small><span class="chemin">Classe › 4X › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</span></p>
     <div class="cartes">
       <div class="carte" style="--c: var(--or)"><span class="etiquette">Carnet</span><p>Votre feuille de route : vous le remplissez à chaque étape.</p></div>
       <div class="carte" style="--c: var(--verte)"><span class="etiquette">IA et programmation</span><p>6 exercices, des photos de l’IA au programme final.</p></div>
