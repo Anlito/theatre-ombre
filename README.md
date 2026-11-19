@@ -7,6 +7,9 @@
   et l’avancement suivent ; les réponses d’un personnage retiré restent dans le fichier. Outil professeur : les indices D1 à D4
   attendent autant de STL et de personnages reconnus. Parcours Labo Blocs 1.5.0 : l’exercice 6 propose aussi D11 et D12
   (3e et 4e étiquettes) ; ses tests vérifient toujours les deux premiers personnages.
+- **Câblage seulement pour le programme final** : les exercices 3, 4 et 5 se font dans le simulateur (parcours 1.6.0, mode « En direct »
+  retiré) ; l’exercice 6 demande de câbler, de faire valider le montage, puis de tester « En direct ». Carnet, étape 3 :
+  3.3 programmer dans le simulateur, 3.4 câbler (◆ v3a), 3.5 tester le programme final avec la carte (◆ v3b) ; mêmes identifiants qu’avant.
 - **Modélisation** : au choix Tinkercad (tuto du dossier THEATRE IA du Tableau) ou l’Atelier 3D (<https://anlito.github.io/atelier-3d/>).
 - **Filmer le spectacle** (`site/js/ui/film.js`) : bouton du bandeau du programme final. Scène dessinée image par image (prénoms,
   titre de l’histoire, webcam, un projecteur par LED de sa couleur, personnage reconnu, rideau qui s’ouvre et se ferme), enregistrée

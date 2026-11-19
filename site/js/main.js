@@ -196,7 +196,7 @@ carnet = setupCarnetScreen({
   onGoto: (ecran) => {
     if(ecran==='cablage')return cablage.open();
     goTo(ecran==='carte'?'programmer':ecran);
-    if(ecran==='carte')program.openExercise('theatre-03');
+    if(ecran==='carte')program.openExercise('theatre-06');
   },
 });
 // Programme final : « Filmer le spectacle », un petit film pour l'oral.

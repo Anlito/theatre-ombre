@@ -143,10 +143,10 @@ export const ETAPES = [
   {
     n: 3,
     verbe: 'Réaliser',
-    titre: 'Former l’IA, câbler et programmer',
+    titre: 'Former l’IA, programmer, puis câbler',
     sousTitre: 'sur ce site, avec la carte programmable',
     outil: 'Site + carte programmable',
-    route: '◆ Câblage validé, puis démo devant le professeur',
+    route: '◆ Câblage validé (programme final), puis démo devant le professeur',
     blocs: [
       { type: 'cadre', html: '<b>Objectif :</b> un personnage passe devant la webcam → <b>l’IA le reconnaît</b> → <b>sa LED s’allume</b>, sans toucher à l’ordinateur.' },
 
@@ -174,12 +174,25 @@ export const ETAPES = [
       { type: 'ia' },
       { type: 'check', id: 'e3.ia', t: 'Tous nos personnages sont reconnus par l’IA et le fond vide ne les déclenche pas' },
 
-      { type: 'sous', n: '3.3', t: 'Câbler les LED', outil: 'Câblage', ecran: 'cablage', aide: 'Tutoriel : schéma et photo du montage (bouton ci-dessous)' },
-      { type: 'cadre', ton: 'attention', html: '<b>Sécurité :</b> câblez avec le <b>câble USB débranché</b>. Jamais sur les broches <b>0 et 1</b>.' },
+      { type: 'sous', n: '3.3', t: 'Programmer en blocs, dans le simulateur', outil: 'Site · IA et programmation', ecran: 'programmer', aide: 'Parcours Labo Blocs · exercices 3, 4 et 5 · <b>pas de câblage</b>' },
       {
         type: 'consignes',
         items: [
-          'Les LED sont <b>déjà prêtes</b> (résistance intégrée).',
+          'Dans <b>« IA et programmation »</b>, réalisez les exercices 3, 4 et 5. <b>Pas besoin de la carte</b> : les LED s’allument à l’écran, dans le simulateur.',
+          'Utilisez les blocs de la caméra et des LED : la première étiquette commande <b>D9</b>, la deuxième <b>D10</b>.',
+          'Avec le fond vide, éteignez toutes les LED. Testez aussi un changement direct de personnage.',
+          'Cliquez sur <b>« Vérifier »</b>, puis sur <b>« Lancer »</b> avec la webcam allumée : montrez vos personnages et regardez les LED à l’écran.',
+        ],
+      },
+      { type: 'check', id: 'e3.programme', t: 'Dans le simulateur, la bonne LED s’allume pour chaque personnage' },
+
+      { type: 'sous', n: '3.4', t: 'Câbler les LED pour le programme final', outil: 'Câblage', ecran: 'cablage', aide: 'Seulement maintenant · tutoriel : schéma et photo du montage (bouton ci-dessous)' },
+      { type: 'cadre', ton: 'attention', html: '<b>Sécurité :</b> câblez avec le <b>câble USB débranché</b>. Jamais sur les broches <b>0 et 1</b>.' },
+      {
+        type: 'consignes',
+        parPerso: true,
+        items: [
+          'Les LED sont <b>déjà prêtes</b> (résistance intégrée) : il y en a <b>{n}</b>, une par personnage.',
           'Fil <b>noir ou marron</b> → borne <b>−</b> de chaque LED.',
           'Fil <b>de la couleur de la LED</b> → la <b>broche</b> de l’Arduino choisie en 3.1 (tableau des LED).',
         ],
@@ -189,29 +202,17 @@ export const ETAPES = [
       { type: 'check', id: 'e3.cablage', t: 'Noir ou marron sur −, fil de couleur sur la bonne broche' },
       { type: 'valide', id: 'v3a', t: 'Montage validé par le professeur avant de brancher l’USB' },
 
-      { type: 'sous', n: '3.4', t: 'Connecter la carte programmable', outil: 'Site · Carte programmable', ecran: 'carte', aide: 'Parcours Labo Blocs · exercice 3 · mode En direct' },
+      { type: 'sous', n: '3.5', t: 'Tester le programme final avec la carte', outil: 'Site · Programme final', ecran: 'carte', aide: 'Parcours Labo Blocs · exercice 6 · mode En direct' },
       {
         type: 'consignes',
         items: [
-          'Vérifiez le câblage (<b>tutoriel de câblage</b>), puis branchez l’<b>USB</b>.',
-          'Dans l’exercice 3, choisissez <b>« En direct »</b>, puis connectez l’Arduino depuis le panneau. Installez le programme de carte Labo Blocs si nécessaire.',
+          'Ouvrez le <b>programme final</b> (exercice 6) et vérifiez-le d’abord dans le simulateur.',
+          '<b>3 ou 4 personnages ?</b> La troisième étiquette commande <b>D11</b>, la quatrième <b>D12</b> : ajoutez-les dans le programme final.',
+          'Branchez l’<b>USB</b>, choisissez <b>« En direct »</b>, puis connectez l’Arduino depuis le panneau. Installez le programme de carte Labo Blocs si nécessaire.',
+          'Cliquez sur <b>« Lancer »</b> et présentez vos personnages : les vraies LED doivent s’allumer.',
         ],
       },
-      { type: 'lien', ecran: 'cablage', t: 'Revoir le tutoriel de câblage' },
-      { type: 'check', id: 'e3.pastilles', t: 'La LED réelle répond au programme en mode En direct' },
-
-      { type: 'sous', n: '3.5', t: 'Programmer en blocs', outil: 'Site · IA et programmation', ecran: 'programmer', aide: 'Parcours Labo Blocs · exercices 4 et 5' },
-      {
-        type: 'consignes',
-        items: [
-          'Dans <b>« IA et programmation »</b>, réalisez les exercices 4 et 5.',
-          'Utilisez les blocs de la caméra et des LED : la première étiquette commande <b>D9</b>, la deuxième <b>D10</b>.',
-          'Avec le fond vide, éteignez toutes les LED. Testez aussi un changement direct de personnage.',
-          '<b>3 ou 4 personnages ?</b> La troisième étiquette commande <b>D11</b>, la quatrième <b>D12</b> : ajoutez-les dans le programme final (exercice 6).',
-          'Cliquez sur <b>« Vérifier »</b>, puis testez le montage et les personnages avec <b>« En direct »</b> et <b>« Lancer »</b>.',
-        ],
-      },
-      { type: 'check', id: 'e3.programme', t: 'La bonne LED s’allume pour chaque personnage' },
+      { type: 'check', id: 'e3.pastilles', t: 'Les vraies LED répondent au programme final en mode En direct' },
       { type: 'valide', id: 'v3b', t: 'Démo fonctionnelle devant le professeur' },
 
       { type: 'sous', n: '3.6', t: 'Pour aller plus loin (facultatif)', outil: 'Site · IA et programmation', ecran: 'programmer', aide: 'Aide <b>?</b> → « Niveau 2 » et « Niveau 3 »', facultatif: true },
