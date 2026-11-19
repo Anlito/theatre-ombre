@@ -42,6 +42,7 @@ export const MODE_EMPLOI =
 
 export const OUTILS = [
   ['<b>Tinkercad</b> + « Tuto Tinkercad.html »', 'Dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b>'],
+  ['<b>ou <a href="https://anlito.github.io/atelier-3d/" target="_blank" rel="noopener">Atelier 3D</a></b>', 'Autre outil de modélisation 3D, au choix : il s’ouvre dans un nouvel onglet'],
   ['<b>Site</b> Théâtre d’ombre augmenté', 'Raccourci dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b> (Chrome ou Edge) : c’est ce site'],
   ['<b>Aide du site</b>', 'Entraîner l’IA, câblage, LED : tout est dans le site, bouton <b>?</b> en haut.'],
   ['<b>Dossier de l’équipe</b>', '<b>{chemin} › {dossier}</b>'],
@@ -104,17 +105,18 @@ export const ETAPES = [
     n: 2,
     verbe: 'Modéliser',
     titre: 'Modéliser mes 2 personnages',
-    sousTitre: 'sur Tinkercad',
-    outil: 'Tinkercad',
+    sousTitre: 'sur Tinkercad ou l’Atelier 3D',
+    outil: 'Tinkercad ou Atelier 3D',
     route: '◆ Modèles validés avant impression 3D',
     blocs: [
-      { type: 'cadre', html: '<b>Tutoriel :</b> fichier <b>« Tuto Tinkercad.html »</b>, dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b>' },
+      { type: 'cadre', html: '<b>Au choix :</b> <b>Tinkercad</b> avec son tutoriel (fichier <b>« Tuto Tinkercad.html »</b>, dans <b>Classe › {classe} › MATIÈRES › TECHNOLOGIE › TABLEAU › THEATRE IA</b>) ' +
+        'ou l’<b><a href="https://anlito.github.io/atelier-3d/" target="_blank" rel="noopener">Atelier 3D</a></b>.' },
       { type: 'cadre', ton: 'attention', html: '<b>À respecter :</b> <b>100 mm × 100 mm maximum</b> (1 cm = 10 mm) et <b>2 mm d’épaisseur</b>.' },
       {
         type: 'consignes',
         items: [
-          'Ouvrez <b>Tinkercad</b> et créez un <b>nouveau design</b>, nommé <b>{prenoms}_personnage1</b>.',
-          'Construisez la silhouette en suivant le tuto, d’après <b>votre dessin</b>.',
+          'Ouvrez <b>Tinkercad</b> ou l’<b>Atelier 3D</b> et créez un <b>nouveau modèle</b>, nommé <b>{prenoms}_personnage1</b>.',
+          'Construisez la silhouette d’après <b>votre dessin</b> (avec Tinkercad, suivez le tuto).',
           '<b>Groupez</b> les formes en <b>un seul objet</b> et réglez l’épaisseur à <b>2 mm</b>.',
           '<b>Enregistrez</b>. Recommencez pour le 2<sup>e</sup> personnage.',
           'Exportez chaque personnage en <b>.STL</b> et rangez-le dans le dossier de l’équipe : <b>{prenoms}_Perso1.stl</b>, <b>{prenoms}_Perso2.stl</b>.',
@@ -127,7 +129,7 @@ export const ETAPES = [
           { t: 'Personnage', fixe: true },
           { id: 'hauteur', t: 'Hauteur (mm)', nombre: true, max: 100 },
           { id: 'largeur', t: 'Largeur (mm)', nombre: true, max: 100 },
-          { id: 'design', t: 'Nom du design' },
+          { id: 'design', t: 'Nom du modèle' },
         ],
         lignes: ['1', '2'],
       },
