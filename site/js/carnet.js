@@ -8,16 +8,19 @@
 //   choix  : réponses à choix ('composants.webcam' -> 'info' | 'energie' | 'deux')
 //   photos : { dessins: [{ id, data, date }], cablage: [...] }  (JPEG réduits, en base64)
 //   auto   : ce que le site a constaté pendant les séances (reconnaissance, carte, programme testé)
+//   persos : nombre de personnages de l'équipe (2 par défaut, 4 au plus : une LED par personnage)
 
 import { ETAPES } from './carnet-contenu.js';
 
 export const MAX_TEXT = 1000;
 export const MAX_PHOTOS = 4;
+export const MIN_PERSOS = 2;
+export const MAX_PERSOS = 4; // autant que de LED possibles (4 couleurs, broches 9 à 12)
 const KEY = /^[\w.-]{1,80}$/;
 const PHOTO = /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/;
 
 export function emptyCarnet() {
-  return { classe: '', champs: {}, cases: {}, choix: {}, photos: {}, auto: { reconnus: [], carte: false, programmeTeste: false } };
+  return { classe: '', persos: MIN_PERSOS, champs: {}, cases: {}, choix: {}, photos: {}, auto: { reconnus: [], carte: false, programmeTeste: false } };
 }
 
 // Nettoie un carnet lu dans un fichier (fichier ancien, abîmé ou modifié à la main).
@@ -25,6 +28,7 @@ export function normalizeCarnet(raw) {
   const c = emptyCarnet();
   if (!raw || typeof raw !== 'object') return c;
   c.classe = typeof raw.classe === 'string' ? raw.classe.slice(0, 20) : '';
+  c.persos = nbPersos(raw);
   for (const [k, v] of entries(raw.champs)) if (typeof v === 'string' && v.trim()) c.champs[k] = v.slice(0, MAX_TEXT);
   for (const [k, v] of entries(raw.cases)) if (v === true) c.cases[k] = true;
   for (const [k, v] of entries(raw.choix)) if (typeof v === 'string' && /^[a-z]{1,20}$/.test(v)) c.choix[k] = v;
@@ -45,6 +49,21 @@ export function normalizeCarnet(raw) {
   return c;
 }
 
+// Nombre de personnages d'un carnet (les carnets d'avant cette option en ont 2).
+export function nbPersos(carnet) {
+  const n = Math.round(Number(carnet?.persos));
+  return Number.isFinite(n) ? Math.min(MAX_PERSOS, Math.max(MIN_PERSOS, n)) : MIN_PERSOS;
+}
+
+// Lignes d'un tableau du carnet : fixes, ou une par personnage (lignes: 'persos', libellé ligne(i) facultatif).
+export function lignesDe(b, carnet) {
+  if (b.lignes !== 'persos') return b.lignes;
+  return Array.from({ length: nbPersos(carnet) }, (_, i) => (b.ligne ? b.ligne(i + 1) : String(i + 1)));
+}
+
+// Nombre d'éléments d'un bloc (LED, photos) : fixe, ou un par personnage ('persos').
+export const combien = (v, carnet) => (v === 'persos' ? nbPersos(carnet) : v);
+
 function entries(obj) {
   return obj && typeof obj === 'object' ? Object.entries(obj).filter(([k]) => KEY.test(k)) : [];
 }
@@ -56,7 +75,7 @@ function cryptoId() {
 // --- Ce qui est attendu à chaque étape (pour l'avancement) -----------------------------------
 // Les blocs « facultatif » (3.6) ne comptent pas ; une sous-étape facultative entraîne ses blocs suivants
 // jusqu'à la sous-étape suivante.
-export function attendus(n) {
+export function attendus(n, carnet = null) {
   const etape = ETAPES.find((e) => e.n === n);
   if (!etape) return [];
   const out = [];
@@ -65,11 +84,11 @@ export function attendus(n) {
     if (b.type === 'sous') facultatif = !!b.facultatif;
     if (facultatif || b.facultatif) continue;
     if (b.type === 'tableau') {
-      b.lignes.forEach((_l, i) => b.colonnes.filter((c) => c.id).forEach((c) => out.push({ type: 'champ', id: `${b.id}.${i}.${c.id}` })));
+      lignesDe(b, carnet).forEach((_l, i) => b.colonnes.filter((c) => c.id).forEach((c) => out.push({ type: 'champ', id: `${b.id}.${i}.${c.id}` })));
     } else if (b.type === 'texte') out.push({ type: 'champ', id: b.id });
     else if (b.type === 'check') out.push({ type: 'case', id: b.id });
     else if (b.type === 'photos') out.push({ type: 'photo', id: b.id });
-    else if (b.type === 'leds') for (let i = 0; i < b.n; i++) out.push({ type: 'champ', id: `leds.${i}.perso` });
+    else if (b.type === 'leds') for (let i = 0; i < combien(b.n, carnet); i++) out.push({ type: 'champ', id: `leds.${i}.perso` });
     else if (b.type === 'chaine') b.cases.forEach((c) => out.push({ type: 'champ', id: c.id }));
     else if (b.type === 'choix') {
       b.lignes.forEach((l) => {
@@ -91,7 +110,7 @@ export function estFait(carnet, item) {
 
 // { faits, total } pour l'étape n.
 export function avancement(carnet, n) {
-  const items = attendus(n);
+  const items = attendus(n, carnet);
   return { faits: items.filter((it) => estFait(carnet, it)).length, total: items.length };
 }
 

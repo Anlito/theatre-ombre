@@ -93,6 +93,8 @@
 }
 .cn-sous.is-facultatif .cn-sous-n { background: var(--texte-doux); }
 .cn-aide { grid-column: 1 / -1; margin: 0; color: var(--texte-doux); font-size: .9375rem; }
+.cn-persos { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 14px; border-radius: var(--rayon-petit); border: 1px dashed var(--bleu); }
+.cn-persos small { flex-basis: 100%; color: var(--texte-doux); }
 .cn-cadre { padding: 10px 14px; border-radius: var(--rayon-petit); background: var(--bleu-pale); border-left: 4px solid var(--bleu); }
 .cn-cadre[data-ton="attention"] { background: var(--orange-clair); border-left-color: var(--orange); }
 .cn-cadre[data-ton="cours"] { background: var(--vert-clair); border-left-color: var(--vert); }

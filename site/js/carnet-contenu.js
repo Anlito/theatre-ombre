@@ -25,7 +25,7 @@ export const COMMANDE =
 
 export const CLIENT = {
   attend: [
-    { id: 'client.ia', t: '2 personnages reconnus par l’IA' },
+    { id: 'client.ia', t: '2 à 4 personnages reconnus par l’IA' },
     { id: 'client.led', t: 'Une LED différente par personnage' },
     { id: 'client.histoire', t: 'Une histoire d’environ 1 minute' },
   ],
@@ -62,16 +62,18 @@ export const ETAPES = [
   {
     n: 1,
     verbe: 'Dessiner',
-    titre: 'Dessiner mes 2 personnages',
+    titre: 'Dessiner nos personnages',
     sousTitre: 'sur papier, à taille réelle',
     outil: 'Papier',
     route: '◆ Dessins validés',
     blocs: [
       { type: 'cadre', html: '<b>Objectif :</b> une <b>silhouette pleine</b> par feuille A4, à <b>taille réelle</b>. <b>Taille maximale : 10 cm × 10 cm.</b>' },
+      { type: 'persos' },
       {
         type: 'consignes',
+        parPerso: true,
         items: [
-          '<b>Choisissez 2 personnages très différents</b> (un grand, un petit…).',
+          '<b>Choisissez {n} personnages très différents</b> (un grand, un petit…).',
           '<b>Astuce du calque :</b> affichez l’image du personnage sur l’écran (luminosité au maximum), posez la feuille A4 dessus et <b>repassez le contour</b>. Appuyez très légèrement sur l’écran.',
           '<b>Repassez au feutre noir</b> et <b>remplissez</b> la silhouette.',
           '<b>Simplifiez :</b> pas de détail fin, <b>toutes les parties reliées</b> entre elles.',
@@ -88,14 +90,15 @@ export const ETAPES = [
           { id: 'largeur', t: 'Largeur (cm)', nombre: true, max: 10 },
           { id: 'par', t: 'Dessiné par' },
         ],
-        lignes: ['1', '2'],
+        lignes: 'persos',
       },
       {
         type: 'photos',
         id: 'dessins',
-        t: 'Photo de vos 2 dessins',
+        t: 'Photo de vos {n} dessins',
+        parPerso: true,
         aide: 'Posez chaque feuille A4 bien à plat devant la webcam, ou choisissez une photo déjà prise.',
-        max: 2,
+        max: 'persos',
       },
       { type: 'check', id: 'e1.silhouettes', t: 'Silhouettes pleines, ≤ 10 cm × 10 cm, cotes et prénoms écrits' },
       { type: 'valide', id: 'v1', t: 'Rendre le dessin au professeur' },
@@ -104,7 +107,7 @@ export const ETAPES = [
   {
     n: 2,
     verbe: 'Modéliser',
-    titre: 'Modéliser mes 2 personnages',
+    titre: 'Modéliser nos personnages',
     sousTitre: 'sur Tinkercad ou l’Atelier 3D',
     outil: 'Tinkercad ou Atelier 3D',
     route: '◆ Modèles validés avant impression 3D',
@@ -118,8 +121,8 @@ export const ETAPES = [
           'Ouvrez <b>Tinkercad</b> ou l’<b>Atelier 3D</b> et créez un <b>nouveau modèle</b>, nommé <b>{prenoms}_personnage1</b>.',
           'Construisez la silhouette d’après <b>votre dessin</b> (avec Tinkercad, suivez le tuto).',
           '<b>Groupez</b> les formes en <b>un seul objet</b> et réglez l’épaisseur à <b>2 mm</b>.',
-          '<b>Enregistrez</b>. Recommencez pour le 2<sup>e</sup> personnage.',
-          'Exportez chaque personnage en <b>.STL</b> et rangez-le dans le dossier de l’équipe : <b>{prenoms}_Perso1.stl</b>, <b>{prenoms}_Perso2.stl</b>.',
+          '<b>Enregistrez</b>. Recommencez pour chacun des autres personnages.',
+          'Exportez chaque personnage en <b>.STL</b> et rangez-le dans le dossier de l’équipe : <b>{prenoms}_Perso1.stl</b>, <b>{prenoms}_Perso2.stl</b>…',
         ],
       },
       {
@@ -131,7 +134,7 @@ export const ETAPES = [
           { id: 'largeur', t: 'Largeur (mm)', nombre: true, max: 100 },
           { id: 'design', t: 'Nom du modèle' },
         ],
-        lignes: ['1', '2'],
+        lignes: 'persos',
       },
       { type: 'check', id: 'e2.modele', t: 'Un seul objet, ≤ 100 × 100 mm, 2 mm d’épaisseur, comme le dessin' },
       { type: 'valide', id: 'v2', t: 'Modèles validés avant impression 3D' },
@@ -147,15 +150,16 @@ export const ETAPES = [
     blocs: [
       { type: 'cadre', html: '<b>Objectif :</b> un personnage passe devant la webcam → <b>l’IA le reconnaît</b> → <b>sa LED s’allume</b>, sans toucher à l’ordinateur.' },
 
-      { type: 'sous', n: '3.1', t: 'Choisir 2 LED', outil: 'Carnet', aide: 'Couleurs possibles : <b>rouge</b>, <b>jaune</b>, <b>verte</b>, <b>bleue</b> · broches <b>9, 10, 11 ou 12</b>' },
+      { type: 'sous', n: '3.1', t: 'Choisir les LED', outil: 'Carnet', aide: 'Couleurs possibles : <b>rouge</b>, <b>jaune</b>, <b>verte</b>, <b>bleue</b> · broches <b>9, 10, 11 ou 12</b>' },
       {
         type: 'consignes',
+        parPerso: true,
         items: [
-          'Choisissez vos <b>2 LED</b> : leur <b>couleur</b> et la <b>broche</b> de l’Arduino où vous allez les brancher.',
+          'Choisissez vos <b>{n} LED</b> (une par personnage) : leur <b>couleur</b> et la <b>broche</b> de l’Arduino où vous allez les brancher.',
           'Remplissez le tableau : il règle aussi le site (la lueur des LED à l’écran prend vos couleurs). Choisissez le personnage de chaque LED.',
         ],
       },
-      { type: 'leds', n: 2 },
+      { type: 'leds', n: 'persos' },
 
       { type: 'sous', n: '3.2', t: 'Entraîner l’IA', outil: 'Site · IA et programmation', ecran: 'entrainer', aide: 'Parcours Labo Blocs · exercices 1 et 2' },
       {
@@ -168,7 +172,7 @@ export const ETAPES = [
         ],
       },
       { type: 'ia' },
-      { type: 'check', id: 'e3.ia', t: 'Les deux personnages sont reconnus par l’IA et le fond vide ne les déclenche pas' },
+      { type: 'check', id: 'e3.ia', t: 'Tous nos personnages sont reconnus par l’IA et le fond vide ne les déclenche pas' },
 
       { type: 'sous', n: '3.3', t: 'Câbler les LED', outil: 'Câblage', ecran: 'cablage', aide: 'Tutoriel : schéma et photo du montage (bouton ci-dessous)' },
       { type: 'cadre', ton: 'attention', html: '<b>Sécurité :</b> câblez avec le <b>câble USB débranché</b>. Jamais sur les broches <b>0 et 1</b>.' },
@@ -202,7 +206,8 @@ export const ETAPES = [
         items: [
           'Dans <b>« IA et programmation »</b>, réalisez les exercices 4 et 5.',
           'Utilisez les blocs de la caméra et des LED : la première étiquette commande <b>D9</b>, la deuxième <b>D10</b>.',
-          'Avec le fond vide, éteignez les deux LED. Testez aussi un changement direct de personnage.',
+          'Avec le fond vide, éteignez toutes les LED. Testez aussi un changement direct de personnage.',
+          '<b>3 ou 4 personnages ?</b> La troisième étiquette commande <b>D11</b>, la quatrième <b>D12</b> : ajoutez-les dans le programme final (exercice 6).',
           'Cliquez sur <b>« Vérifier »</b>, puis testez le montage et les personnages avec <b>« En direct »</b> et <b>« Lancer »</b>.',
         ],
       },
@@ -284,7 +289,7 @@ export const ETAPES = [
           { id: 'programme', t: 'Programme en blocs', role: 'Dit quelle LED allumer pour quel personnage' },
           { id: 'usb', t: 'Câble USB', role: 'Relie l’ordinateur à l’Arduino' },
           { id: 'arduino', t: 'Arduino UNO', role: 'Reçoit l’ordre et commande les LED' },
-          { id: 'led', t: 'LED 1 et LED 2', role: 'S’allument pour :', champ: 'composants.led.pour' },
+          { id: 'led', t: 'Les LED', role: 'S’allument pour :', champ: 'composants.led.pour' },
         ],
       },
       { type: 'texte', id: 'chaine.arduino', t: 'Pourquoi l’Arduino appartient-il aux deux chaînes ?', lignes: 3 },
@@ -310,7 +315,8 @@ export const ETAPES = [
           { id: 'nom', t: 'Nom' },
           { id: 'role', t: 'Rôle dans l’histoire' },
         ],
-        lignes: ['LED 1 · Personnage 1', 'LED 2 · Personnage 2'],
+        lignes: 'persos',
+        ligne: (i) => `LED ${i} · Personnage ${i}`,
       },
       { type: 'texte', id: 'histoire.resume', t: 'Résumé en 3-4 phrases', lignes: 4 },
 
@@ -336,7 +342,7 @@ export const ETAPES = [
         ],
         lignes: [
           ['<b>1. Présentation</b>', '15 s', 'Vos prénoms, ce que fait votre système.'],
-          ['<b>2. Notre histoire</b>', '60 s', 'Le titre, les 2 personnages, puis la <b>démo</b>.'],
+          ['<b>2. Notre histoire</b>', '60 s', 'Le titre, les personnages, puis la <b>démo</b>.'],
           ['<b>3. Ce que nous avons apprécié</b>', '15 s', 'Dessiner, modéliser, voir la LED s’allumer…'],
           ['<b>4. Ce que nous avons moins aimé</b>', '15 s', 'Une difficulté, et <b>comment vous l’avez réglée</b>.'],
           ['<b>5. Ce que nous retenons</b>', '15 s', 'L’IA apprend par exemples · l’information commande l’énergie · du dessin à l’objet.'],
@@ -348,7 +354,7 @@ export const ETAPES = [
           '<b>Conseils :</b> répartissez la parole · regardez le public · utilisez des mots-clés, ne lisez pas · testez le matériel avant. ' +
           'Pour démarrer : « Ce que j’ai le plus aimé, c’est… » · « Ce qui a été difficile, c’est… » · « Je retiens que… »',
       },
-      { type: 'check', id: 'e5.systeme', t: 'Les 2 personnages sont imprimés, l’IA les reconnaît, les LED s’allument' },
+      { type: 'check', id: 'e5.systeme', t: 'Nos personnages sont imprimés, l’IA les reconnaît, les LED s’allument' },
       { type: 'check', id: 'e5.histoire', t: 'L’histoire dure environ 1 minute, le projet est enregistré' },
       { type: 'valide', id: 'v5', t: 'Oral de 2 minutes présenté' },
     ],

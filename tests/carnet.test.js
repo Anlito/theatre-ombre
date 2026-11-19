@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ETAPES, VALIDATIONS, CLIENT } from '../site/js/carnet-contenu.js';
 import {
-  emptyCarnet, normalizeCarnet, attendus, avancement, avancementGlobal, corrigerComposants, noterAuto, ledsDuProgramme, MAX_PHOTOS,
+  emptyCarnet, normalizeCarnet, attendus, avancement, avancementGlobal, corrigerComposants, noterAuto, ledsDuProgramme, MAX_PHOTOS, nbPersos,
 } from '../site/js/carnet.js';
 import { serialize, parse } from '../site/js/project.js';
 import { normalizeSettings } from '../site/js/settings.js';
@@ -41,6 +41,20 @@ test('avancement : champs remplis, cases cochées, photo ajoutée', () => {
   c.photos.dessins = [{ id: 'a', data: PHOTO, date: 1 }];
   assert.deepEqual(avancement(c, 1), { faits: 3, total: 10 });
   assert.equal(avancementGlobal(c).length, 5);
+});
+
+test('2 personnages par défaut, jusqu’à 4 : tableaux, LED et avancement suivent', () => {
+  assert.equal(emptyCarnet().persos, 2);
+  assert.equal(nbPersos(normalizeCarnet({})), 2, 'un carnet d’avant cette option a 2 personnages');
+  assert.equal(nbPersos(normalizeCarnet({ persos: 9 })), 4, 'une LED par personnage : 4 au plus');
+  assert.equal(nbPersos(normalizeCarnet({ persos: 1 })), 2);
+  assert.equal(nbPersos(normalizeCarnet({ persos: 'x' })), 2);
+  const c = normalizeCarnet({ persos: 3 });
+  assert.deepEqual(avancement(c, 1), { faits: 0, total: 14 }, 'une ligne de plus dans le tableau des dessins');
+  const e3 = attendus(3, c).map((a) => a.id);
+  assert.ok(e3.includes('leds.2.perso') && !e3.includes('leds.3.perso'), 'une LED par personnage');
+  const e5 = attendus(5, c).map((a) => a.id);
+  assert.ok(e5.includes('histoire.perso.2.nom'));
 });
 
 test('un carnet lu dans un fichier est nettoyé (ancien fichier, valeurs fausses, photos en trop)', () => {

@@ -14,7 +14,7 @@
 // Le tableau des LED appelle onLed(broche, couleur) quand l'équipe choisit une couleur ou une broche.
 
 import { COMMANDE, CLIENT, MODE_EMPLOI, OUTILS, ETAPES, VALIDATIONS } from '../carnet-contenu.js';
-import { avancement, MAX_PHOTOS } from '../carnet.js';
+import { avancement, MAX_PHOTOS, MIN_PERSOS, MAX_PERSOS, nbPersos, lignesDe, combien } from '../carnet.js';
 import { icon } from '../icons.js';
 import { LED_COLORS } from '../led-colors.js';
 import { teamFolderName, classPath } from '../team-folder.js';
@@ -72,7 +72,7 @@ export function renderCarnet(root, {
     consignes: (b) => `<ol class="cn-consignes">${b.items.map((i) => `<li>${i}</li>`).join('')}</ol>`,
     tableau: (b) => {
       const head = b.colonnes.map((c) => `<th>${c.t}</th>`).join('');
-      const rows = b.lignes
+      const rows = lignesDe(b, carnet)
         .map((ligne, i) => {
           const fixes = Array.isArray(ligne) ? ligne : [`<b>${esc(ligne)}</b>`];
           let k = 0;
@@ -94,9 +94,17 @@ export function renderCarnet(root, {
     photos: (b) => `
       <div class="cn-photos" data-photos="${b.id}">
         <div class="cn-photos-head"><b>${b.t}</b>${b.aide && !readOnly ? `<small>${b.aide}</small>` : ''}</div>
-        <div class="cn-photos-list">${photosHtml(b.id, b.max)}</div>
+        <div class="cn-photos-list">${photosHtml(b.id, combien(b.max, carnet))}</div>
       </div>`,
-    leds: (b) => `<div class="cn-table-wrap" data-live="leds" data-n="${b.n}">${ledsHtml(b.n)}</div>`,
+    leds: (b) => `<div class="cn-table-wrap" data-live="leds">${ledsHtml(combien(b.n, carnet))}</div>`,
+    // Nombre de personnages de l'équipe : 2 par défaut, jusqu'à 4 (une LED par personnage).
+    persos: () => {
+      const n = nbPersos(carnet);
+      const btn = (d, t, ok) => `<button type="button" class="btn btn-secondary" data-persos="${d}"${ok ? '' : ' disabled'}>${t}</button>`;
+      return `<div class="cn-persos"><b>Nombre de personnages : <span data-persos-n>${n}</span></b>` +
+        (readOnly ? '' : btn(-1, '− Retirer', n > MIN_PERSOS) + btn(1, '+ Ajouter un personnage', n < MAX_PERSOS)) +
+        `<small>${MIN_PERSOS} au minimum, ${MAX_PERSOS} au maximum : chaque personnage a sa LED.</small></div>`;
+    },
     ia: () => `<div class="cn-table-wrap" data-live="ia">${iaHtml()}</div>`,
     code: (b) => {
       const trou = (n) => `<input class="cn-field cn-trou" data-champ="${b.id}.${n}" value="${esc(carnet.champs[`${b.id}.${n}`])}" maxlength="20" aria-label="Case ${n} du code"${dis}>`;
@@ -208,6 +216,15 @@ export function renderCarnet(root, {
     return `<table class="cn-table"><thead><tr><th>Personnage</th><th>Nb photos <small>(site)</small></th><th>Ce que j’ai varié (angle, lumière…)</th><th>Reconnu ? <small>(site)</small></th></tr></thead><tbody>${rows}</tbody></table>`;
   }
 
+  // Blocs qui dépendent du nombre de personnages : enveloppés pour être redessinés quand il change.
+  const parPerso = (b) => b.parPerso || b.type === 'persos' || b.lignes === 'persos' || b.n === 'persos' || b.max === 'persos';
+  const blocsPerso = [];
+  function bloc(b) {
+    if (!parPerso(b)) return BLOCS[b.type](b);
+    blocsPerso.push(b);
+    return `<div class="cn-par-perso" data-pp="${blocsPerso.length - 1}">${BLOCS[b.type](b)}</div>`;
+  }
+
   // --- Page ------------------------------------------------------------------------------------
   const route = ETAPES.map((e) => {
     const vals = VALIDATIONS.filter((v) => v.etape === e.n);
@@ -231,7 +248,7 @@ export function renderCarnet(root, {
         <span class="cn-prog" data-prog="${e.n}"></span>
       </header>
       <h4 class="cn-etape-titre">${e.n} · ${e.titre}</h4>
-      ${e.blocs.map((b) => BLOCS[b.type](b)).join('')}
+      ${e.blocs.map(bloc).join('')}
     </section>`,
   ).join('');
 
@@ -239,6 +256,7 @@ export function renderCarnet(root, {
   const perso = (html) =>
     html
       .replaceAll('{chemin}', esc(classPath(carnet.classe, cheminClasse())))
+      .replaceAll('{n}', String(nbPersos(carnet)))
       .replaceAll('{classe}', esc(carnet.classe.trim().toUpperCase() || '3X'))
       .replaceAll('{dossier}', esc(team.length ? teamFolderName(team) : 'PRENOM - PRENOM'))
       .replaceAll('{prenoms}', esc(team.length ? fileName(team).replace(/_theatre_ombre.json$/, '') : 'PRENOM_PRENOM'));
@@ -339,6 +357,14 @@ export function renderCarnet(root, {
       if (add) return onAddPhoto(add.dataset.photoAdd);
       const del = e.target.closest('[data-photo-del]');
       if (del) return onRemovePhoto(del.dataset.photoDel, del.dataset.photoId);
+      const persos = e.target.closest('[data-persos]');
+      if (persos) {
+        // Les réponses d'un personnage retiré restent dans le fichier : elles reviennent s'il est rajouté.
+        carnet.persos = Math.min(MAX_PERSOS, Math.max(MIN_PERSOS, nbPersos(carnet) + Number(persos.dataset.persos)));
+        redessinerPersos();
+        changed();
+        root.querySelector('[data-persos]:not([disabled])')?.focus();
+      }
     });
   }
   root.addEventListener('click', (e) => {
@@ -365,19 +391,23 @@ export function renderCarnet(root, {
     }
   }
 
+  function redessinerPersos() {
+    for (const el of root.querySelectorAll('[data-pp]')) el.innerHTML = perso(BLOCS[blocsPerso[el.dataset.pp].type](blocsPerso[el.dataset.pp]));
+  }
+
   function refreshLive(next) {
     liveData = next;
     const ia = root.querySelector('[data-live="ia"]');
     const leds = root.querySelector('[data-live="leds"]');
     // On ne redessine pas un tableau pendant que l'élève y écrit.
     if (ia && !ia.contains(document.activeElement)) ia.innerHTML = iaHtml();
-    if (leds && !leds.contains(document.activeElement)) leds.innerHTML = ledsHtml(Number(leds.dataset.n));
+    if (leds && !leds.contains(document.activeElement)) leds.innerHTML = ledsHtml(nbPersos(carnet));
   }
 
   function refreshPhotos(id) {
     const box = root.querySelector(`[data-photos="${id}"] .cn-photos-list`);
     const def = ETAPES.flatMap((e) => e.blocs).find((b) => b.type === 'photos' && b.id === id);
-    if (box) box.innerHTML = photosHtml(id, def?.max);
+    if (box) box.innerHTML = photosHtml(id, combien(def?.max, carnet));
   }
 
   function refreshTeam(next) {

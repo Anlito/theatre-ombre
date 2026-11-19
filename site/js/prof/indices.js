@@ -2,7 +2,7 @@
 // Ce ne sont que des aides : c'est le professeur qui choisit le niveau.
 // Ce fichier ne touche pas à la page : il sert à l'outil ET aux tests.
 
-import { avancement, avancementGlobal, corrigerComposants } from '../carnet.js';
+import { avancement, avancementGlobal, corrigerComposants, nbPersos } from '../carnet.js';
 import { controlerStl } from './stl.js';
 
 // equipe : { projet, stls (avec .analyse), images } ; validations : { v1: { date }… }
@@ -10,6 +10,7 @@ import { controlerStl } from './stl.js';
 export function indices(equipe, validations = {}) {
   const p = equipe.projet;
   const c = p?.carnet;
+  const nPersos = nbPersos(c); // 2 à 4 personnages, choisis par l'équipe dans son carnet
   const v = (id, t) => ({ t: `◆ ${t}`, ok: !!validations[id] });
   const etape = (n) => {
     if (!c) return { t: 'Pas de carnet', ok: false };
@@ -22,7 +23,7 @@ export function indices(equipe, validations = {}) {
   };
   // « Loup : 9 × 7 cm » : hauteur et largeur notées dans le carnet, comparées à la taille maximale.
   const cotes = (tableau, unite, max) =>
-    [0, 1].map((i) => {
+    Array.from({ length: nPersos }, (_, i) => {
       const nom = c?.champs?.[`${tableau}.${i}.nom`] || c?.champs?.[`dessins.${i}.nom`] || `Personnage ${i + 1}`;
       const h = c?.champs?.[`${tableau}.${i}.hauteur`];
       const l = c?.champs?.[`${tableau}.${i}.largeur`];
@@ -46,7 +47,7 @@ export function indices(equipe, validations = {}) {
   return {
     D1: [...cotes('dessins', 'cm', 10), photos('dessins', 'Dessins'), etape(1), v('v1', 'Dessins validés')],
     D2: [
-      { t: `Fichiers STL : ${equipe.stls.length}`, ok: equipe.stls.length >= 2 ? true : equipe.stls.length ? null : false },
+      { t: `Fichiers STL : ${equipe.stls.length}`, ok: equipe.stls.length >= nPersos ? true : equipe.stls.length ? null : false },
       { t: `STL conformes (≤ 100 mm, 2 mm) : ${stlOk.length}/${equipe.stls.length}`, ok: equipe.stls.length ? stlOk.length === equipe.stls.length : null },
       ...cotes('modeles', 'mm', 100),
       etape(2),
@@ -54,9 +55,9 @@ export function indices(equipe, validations = {}) {
     ],
     D3: [photos('cablage', 'Câblage'), { t: c?.auto?.carte ? 'Carte connectée au site' : 'Carte jamais connectée', ok: !!c?.auto?.carte }, v('v3a', 'Montage validé')],
     D4: [
-      { t: `Personnages : ${persos.length} (${persos.map((x) => `${x.name} ${x.examples.length} photos`).join(', ') || '—'})`, ok: persos.length >= 2 && persos.every((x) => x.examples.length >= minimumPhotos) },
+      { t: `Personnages : ${persos.length} (${persos.map((x) => `${x.name} ${x.examples.length} photos`).join(', ') || '—'})`, ok: persos.length >= nPersos && persos.every((x) => x.examples.length >= minimumPhotos) },
       { t: `Fond vide : ${fond?.examples.length ?? 0} photos`, ok: (fond?.examples.length ?? 0) >= minimumPhotos },
-      { t: `Reconnus par l'IA : ${c?.auto?.reconnus?.join(', ') || 'aucun'}`, ok: (c?.auto?.reconnus?.length ?? 0) >= 2 },
+      { t: `Reconnus par l'IA : ${c?.auto?.reconnus?.join(', ') || 'aucun'}`, ok: (c?.auto?.reconnus?.length ?? 0) >= nPersos },
       { t: c?.auto?.programmeTeste ? 'Programme testé (une LED s’est allumée)' : 'Programme jamais testé', ok: !!c?.auto?.programmeTeste },
       { t: `Programmes écrits : ${programmes.length ? programmes.length : 'aucun'}`, ok: programmes.length > 0 },
       v('v3b', 'Démo fonctionnelle'),
