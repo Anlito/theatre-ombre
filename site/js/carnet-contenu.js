@@ -326,6 +326,7 @@ export const ETAPES = [
         items: [
           'Ouvrez <b>« Programme final »</b> (exercice 6), puis <b>« En direct »</b> et <b>« Lancer »</b>.',
           'Racontez l’histoire en présentant les personnages devant la webcam, <b>sans toucher à l’ordinateur</b>.',
+          '<b>Un film pour l’oral :</b> bouton <b>« Filmer le spectacle »</b> en haut du programme final. Le film est rangé dans le dossier de l’équipe.',
         ],
       },
       { type: 'cadre', ton: 'attention', html: '<b>Fin de séance :</b> <b>1.</b> « Tout éteindre » → <b>2.</b> « Déconnecter » la carte programmable → <b>3.</b> débrancher l’USB.' },

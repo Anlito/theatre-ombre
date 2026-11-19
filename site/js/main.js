@@ -12,6 +12,8 @@ import * as vision from './vision.js';
 import { setupTrainScreen } from './ui/train.js';
 import { setupCameraPanel } from './ui/camera-panel.js';
 import { setupSpectacle } from './ui/spectacle.js';
+import { setupFilm } from './ui/film.js';
+import { nbPersos } from './carnet.js';
 import { SoundBank } from './sounds.js';
 import { setupProgramScreen } from './ui/program.js';
 import { setupProjects } from './ui/project-ui.js';
@@ -196,6 +198,14 @@ carnet = setupCarnetScreen({
     goTo(ecran==='carte'?'programmer':ecran);
     if(ecran==='carte')program.openExercise('theatre-03');
   },
+});
+// Programme final : « Filmer le spectacle », un petit film pour l'oral.
+setupFilm({
+  program, ledColors, showMessage,
+  getTeam: () => projects?.state.team ?? [],
+  getTitle: () => carnet?.get().champs['histoire.titre'] ?? '',
+  getPersos: () => nbPersos(carnet?.get()),
+  getTeamDir: () => projects?.state.teamDir ?? null,
 });
 $('btn-help').addEventListener('click',()=>goTo('programmer'));
 goTo('carnet'); // le carnet est la feuille de route de l'équipe : c'est le premier écran

@@ -1,5 +1,18 @@
 # Parcours commun Labo Blocs — Théâtre d’ombre
 
+## 2 à 4 personnages, Atelier 3D, film du spectacle — 19 novembre 2026
+
+- **Personnages** : 2 par défaut ; l’équipe peut en ajouter jusqu’à 4 (une LED par personnage, broches 9 à 12) avec le bouton
+  « + Ajouter un personnage » de l’étape 1 du carnet (`carnet.persos`). Les tableaux (dessins, modèles, LED, histoire), les photos
+  et l’avancement suivent ; les réponses d’un personnage retiré restent dans le fichier. Outil professeur : les indices D1 à D4
+  attendent autant de STL et de personnages reconnus. Parcours Labo Blocs 1.5.0 : l’exercice 6 propose aussi D11 et D12
+  (3e et 4e étiquettes) ; ses tests vérifient toujours les deux premiers personnages.
+- **Modélisation** : au choix Tinkercad (tuto du dossier THEATRE IA du Tableau) ou l’Atelier 3D (<https://anlito.github.io/atelier-3d/>).
+- **Filmer le spectacle** (`site/js/ui/film.js`) : bouton du bandeau du programme final. Scène dessinée image par image (prénoms,
+  titre de l’histoire, webcam, un projecteur par LED de sa couleur, personnage reconnu, rideau qui s’ouvre et se ferme), enregistrée
+  en MP4 (WebM si le navigateur ne sait pas), 3 minutes au plus, voix au micro facultative. Rangé dans le dossier de l’équipe
+  (`PRENOM_PRENOM_spectacle_14h32.mp4`), sinon téléchargé.
+
 ## Présentation du projet à la classe — 3 novembre 2026
 
 **Adresse : <https://anlito.github.io/theatre-ombre/presentation.html>** (vidéoprojecteur ; ← → pour changer de diapositive, F pour le plein écran ;

@@ -1047,3 +1047,15 @@ textarea.cn-field { resize: vertical; line-height: 1.4; }
   .team-names { max-width: 150px; }
   .save-word { display: none; }
 }
+
+/* « Filmer le spectacle » (programme final) */
+.btn-filmer svg { margin-right: 6px; vertical-align: -3px; }
+.film-dialog { width: min(1040px, 96vw); }
+.film-ecran { position: relative; border-radius: var(--rayon-petit); overflow: hidden; background: #140d0b; aspect-ratio: 16 / 9; }
+.film-ecran canvas, .film-ecran video { display: block; width: 100%; height: 100%; }
+.film-rec { position: absolute; top: 12px; right: 12px; display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(0, 0, 0, .65); color: #fff; font-weight: 700; }
+.film-rec span { width: 12px; height: 12px; border-radius: 50%; background: #E53935; animation: film-rec 1s steps(2) infinite; }
+@keyframes film-rec { 50% { opacity: .2; } }
+.film-etat { min-height: 1.4em; font-weight: 600; }
+.film-micro { display: flex; align-items: center; gap: 8px; }
+.film-espace { flex: 1; }

@@ -11,14 +11,15 @@ export function setupProgramScreen(o) {
   hote.id='parcours-labo';hote.hidden=true;
   hote.style.cssText='position:fixed;inset:0;z-index:1000;';
   document.body.append(hote);
-  const listeners=new Set();
+  const listeners=new Set(),surExercice=new Set();
+  const finalId=paquet.exercices.at(-1).id;
   let legacy=null;
   function visibilite(visible){
     document.body.classList.toggle('parcours-ouvert',visible);
     for(const el of document.querySelectorAll('body > header, body > nav, body > main, body > footer'))el.inert=visible;
   }
   const central=A.monterTheatre(hote,{parcours:paquet,listeHote:document.getElementById('theatre-exercices'),media:'https://anlito.github.io/labo-blocs/module/blockly/media/',
-    exerciceOuvert:()=>visibilite(true),parcoursAffiche:()=>visibilite(false),
+    exerciceOuvert:()=>{visibilite(true);setTimeout(()=>surExercice.forEach(f=>f()));},parcoursAffiche:()=>{visibilite(false);surExercice.forEach(f=>f());},
     equipe:o.getTeam,classe:o.getClass,
     retour:()=>{visibilite(false);o.onReturn?.();},enregistrer:()=>o.onSave?.(),nonEnregistre:()=>o.isDirty?.(),
     message:t=>{if(hote.hidden)return o.showMessage(t,'info');const ancien=hote.querySelector('.message-bref');if(ancien)ancien.remove();const p=document.createElement('p');p.className='message-bref';p.setAttribute('role','alert');p.textContent=t;hote.append(p);setTimeout(()=>p.remove(),7000);},
@@ -50,6 +51,16 @@ export function setupProgramScreen(o) {
     openExercise:id=>central.ouvrir(id),
     isReady:()=>Object.values(central.preparer().exercices).some(e=>e.programme),
     start(){hote.querySelector('.btn-lancer')?.click();},
-    stop:()=>central.ecran.arreter(),central,
+    stop:()=>central.ecran.arreter(),central,hote,
+    // Pour « Filmer le spectacle » : programme final ouvert, et ce qu'il fait en ce moment.
+    onExercice:f=>surExercice.add(f),
+    finalOuvert:()=>!hote.hidden&&central.ecran.etat.exercice?.id===finalId,
+    spectacle(){
+      const etat=central.ecran.etat,sim=etat.sim,video=hote.querySelector('.cam-video video');
+      const noms=['Rien',...(central.session.donnees.programmation?.camera?.etiquettes||[])];
+      const n=Math.round(Number(sim?.capteurs?.camera)||0);
+      const leds=(paquet.exercices.at(-1).composants||[]).filter(c=>c.type==='led').map(c=>({broche:Number(c.broche.replace('D','')),on:etat.mode!=='arrete'&&!!sim?.sorties?.[c.broche]}));
+      return {video,camera:!!video?.srcObject&&!video.closest('[hidden]'),enMarche:etat.mode!=='arrete',vu:n&&etat.mode!=='arrete'?noms[n]||'':'',leds};
+    },
   };
 }
