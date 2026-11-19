@@ -295,8 +295,13 @@ export function renderCarnet(root, {
     </div>`);
 
   // --- Modifications -----------------------------------------------------------------------------
+  // Le carnet est redessiné dans la même zone (projet ouvert, équipe changée) : les écouteurs du dessin précédent
+  // sont retirés, sinon un clic compterait deux fois (« + Ajouter un personnage » passerait de 2 à 4).
+  root.__carnetEcoute?.abort();
+  const ecoute = (root.__carnetEcoute = new AbortController());
+  const on = (type, fn) => root.addEventListener(type, fn, { signal: ecoute.signal });
   if (!readOnly) {
-    root.addEventListener('input', (e) => {
+    on('input', (e) => {
       const t = e.target;
       if (t.dataset.champ) {
         const v = t.value;
@@ -308,7 +313,7 @@ export function renderCarnet(root, {
       } else return;
       changed();
     });
-    root.addEventListener('change', (e) => {
+    on('change', (e) => {
       const t = e.target;
       if (t.dataset.case) {
         if (t.checked) carnet.cases[t.dataset.case] = true;
@@ -344,10 +349,10 @@ export function renderCarnet(root, {
       hinted = ecran;
       if (ecran) onHint(ecran, true);
     };
-    root.addEventListener('mouseover', (e) => hint(e.target.closest('[data-ecran]')?.dataset.ecran ?? null));
-    root.addEventListener('mouseleave', () => hint(null));
-    root.addEventListener('focusin', (e) => hint(e.target.closest('[data-ecran]')?.dataset.ecran ?? null));
-    root.addEventListener('click', (e) => {
+    on('mouseover', (e) => hint(e.target.closest('[data-ecran]')?.dataset.ecran ?? null));
+    on('mouseleave', () => hint(null));
+    on('focusin', (e) => hint(e.target.closest('[data-ecran]')?.dataset.ecran ?? null));
+    on('click', (e) => {
       const go = e.target.closest('[data-ecran]');
       if (go) {
         hint(null);
@@ -367,7 +372,7 @@ export function renderCarnet(root, {
       }
     });
   }
-  root.addEventListener('click', (e) => {
+  on('click', (e) => {
     const go = e.target.closest('[data-goto]');
     if (!go) return;
     e.preventDefault();
